@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class=''>
+<head>
+<title>N多种布局框架</title>
+<meta charset='UTF-8'>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+<meta content="yes" name="apple-mobile-web-app-capable" /> 
+<meta content="black" name="apple-mobile-web-app-status-bar-style" /> 
+<meta content="telephone=no" name="format-detection" /> 
+<meta content="email=no" name="format-detection" /><!--禁止Android中自动识别页面中的邮件地址--> 
+<style class="cp-pen-styles">
+body {
+  height: 100vh;
+  background-image: -webkit-linear-gradient(top, #6f130b, #c73923);
+  background-image: linear-gradient(top, #6f130b, #c73923);
+  text-align: center;
+  color: white;
+}
+
+section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  max-width: 70em;
+}
+
+.col {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+          flex: 1 1 0;
+  margin: .5rem;
+  background-color: rgba(240, 240, 240, 0.1);
+  border: 2px solid rgba(240, 240, 240, 0.3);
+  border-radius: 2px;
+}
+.col-6 {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2 2 calc(1rem + 4px);
+      -ms-flex: 2 2 calc(1rem + 4px);
+          flex: 2 2 calc(1rem + 4px);
+}
+.col-8 {
+  -webkit-box-flex: 4;
+  -webkit-flex: 4 4 calc(3rem + 12px);
+      -ms-flex: 4 4 calc(3rem + 12px);
+          flex: 4 4 calc(3rem + 12px);
+}
+</style></head><body>
+
+<main class="main">
+  <section>
+    <div class="col col-4">
+      <p>One Third</p>
+    </div>
+    <div class="col col-4">
+      <p>One Third</p>
+    </div>
+    <div class="col col-4">
+      <p>One Third</p>
+    </div>
+  </section>
+  <section>
+    <div class="col col-6">
+      <p>One Half</p>
+    </div>
+    <div class="col col-6">
+      <p>One Half</p>
+    </div>
+  </section>
+  <section>
+    <div class="col col-3">
+      <p>One Fourth</p>
+    </div>
+    <div class="col col-3">
+      <p>One Fourth</p>
+    </div>
+    <div class="col col-3">
+      <p>One Fourth</p>
+    </div>
+    <div class="col col-3">
+      <p>One Fourth</p>
+    </div>
+  </section>
+  <section>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+  </section>
+  <section>
+    <div class="col col-6">
+      <p>One Half</p>
+    </div>
+    <div class="col col-4">
+      <p>One Fourth</p>
+    </div>
+    <div class="col col-4">
+      <p>One Fourth</p>
+    </div>
+  </section>
+  <section>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+    <div class="col col-8">
+      <p>Two Thirds</p>
+    </div>
+    <div class="col col-2">
+      <p>One Sixth</p>
+    </div>
+  </section>
+</main>
+
+<br>
+
+</body></html>

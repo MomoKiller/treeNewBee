@@ -1,0 +1,72 @@
+//============================================学习Angularjs小结===================================//
+
+
+
+
+ng-app 指令定义一个 AngularJS 应用程序。
+ng-model 指令把元素值（比如输入域的值）绑定到应用程序。
+ng-bind 指令把应用程序数据绑定到 HTML 视图。
+
+
+一、
+
+
+
+二、
+
+三、
+
+四、
+
+
+
+//声明一个模块和控制器
+var app = angular.module('myApp',[]);
+app.factory('greeter',function(){
+	return {
+		greet: function(msg){
+			alert(msg);
+		}
+	}
+}).controller('MyController',function($scope, greeter){
+	$scope.sayHello = function(){
+		greeter.greet("Hello!");
+	}
+});
+
+
+//注册一个服务		将服务 作为一个angularjs依赖，注入到factory中
+var app = angular.module('myApp.services',[]);
+app.factory('githubService',function(){
+	//第一个服务
+	var serviceInstance = {};
+	return serviceInstance;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

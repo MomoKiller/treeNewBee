@@ -1,0 +1,296 @@
+//=======================================使用Eacharts开发项目经验总结===============================================//
+
+
+
+一、创建一个Eachart图表
+	1、引用对应的eacharts对应的js文件
+	 <script src="echarts-3.2.2/echarts-3.2.2.min.js"></script>
+	2、在页面编辑对应eacharts的控件
+	<div id="eachartsID"></div> 
+	 
+	2、eachart的常见创建方法
+	var myChart = echarts.init(document.getElementById('eachartsID'));         //对应的控件ID
+	var data=[
+	["互联网",{value:166,itemStyle:{
+	    normal:{
+	        color:'#0077C9'
+	    }
+	}
+	},{value:59,itemStyle:{
+	    normal:{
+	        color:'#00BAF7'
+	    }
+	}
+	}],
+	["语音",{value:135,itemStyle:{
+	    normal:{
+	        color:'#00BD5B'
+	    }
+	}
+	},{value:59,itemStyle:{
+	    normal:{
+	        color:'#00BAF7'
+	    }
+	}
+	}],
+	["GPRS",{value:129,itemStyle:{
+	    normal:{
+	        color:'#9FDA5A'
+	    }
+	}
+	},{value:59,itemStyle:{
+	    normal:{
+	        color:'#00BAF7'
+	    }
+	}
+	}],
+	["短信",{value:73,itemStyle:{
+	    normal:{
+	        color:'#FE8915'
+	    }
+	}
+	},{value:59,itemStyle:{
+	    normal:{
+	        color:'#00BAF7'
+	    }
+	}
+	}],
+	["传输",{value:86,itemStyle:{
+	    normal:{
+	        color:'#FED519'
+	    }
+	}
+	},{value:59,itemStyle:{
+	    normal:{
+	        color:'#00BAF7'
+	    }
+	}
+	}]
+	];
+	
+	option = {
+        title : {
+    	    x: 10,
+    	    y: 145,
+    	    //y: height,
+    	    text: '业务总数：123 '+'\n'+'告警数：20',
+    	    textStyle: {
+    			fontSize: 14,
+    			fontStyle: 'normal',
+    			fontWeight: 'normal'
+    			//fontWeight: 'bold'
+    	    }
+    	},
+         tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        xAxis: {
+            data: data.map(function (item) {
+                return item[0];
+            })
+        },
+        yAxis: {
+            splitLine: {
+                show: false
+            }
+        },
+        visualMap: {
+            x: 10,
+            y: 0,
+            borderWidth:1,
+            borderColor:"#BBBBBB",
+            backgroundColor:"#F7F7F7",
+            orient:'vertical',//更改图表显示格式
+            type:'piecewise',
+            categories: [
+                '互联网', '语音', 'GPRS', '短信',  '传输','告警'
+            ],
+            outOfRange: {
+            },
+            inRange: {
+                color:['#0077C9', '#00BD5B', '#9FDA5A', '#FE8915', '#FED519','#00BAF7']
+            }
+        },
+        grid: {
+	        width:'65%',
+	        height:'80%',
+	        x:170,
+	        y:10,
+	        borderWidth:1,
+            borderColor:"#BBBBBB",
+            backgroundColor:"#F7F7F7"
+        },
+        series: [{
+            name: '业务量',
+            type: 'bar',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            data: data.map(function (item) {
+                return item[1];
+            })
+        },{
+            name: '告警',
+            type: 'bar',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top'
+                }
+            },
+            data: data.map(function (item) {
+                return item[2];
+            })
+        }]
+    }
+	
+	 myChart.setOption(option);
+
+	 
+	 
+二、eacharts图的单击和双击事件
+	var timeFn = null;
+	myChart.on('click', function (params) {
+		//console.log(params);
+		clearTimeout(timeFn);
+		timeFn = setTimeout(function(){
+			getBar.addAlarmlWin(params.name);
+		},150);
+	});
+	
+	myChart.on('dblclick', function (params) {
+		clearTimeout(timeFn);
+		getBar.addDetailWin(params.name);
+	});
+
+三、动态创建eacharts图表
+	var option = {
+	    tooltip: {
+	        trigger: 'axis',
+	        formatter: "时间:{b}<br/>下载流量:{c0}GB<br/>上传流量:{c1}GB"
+	    },
+	    grid : {
+		    width:'85%',
+		    height:height,
+		    x:50,
+		    y:20
+	    },
+	    legend: { 
+	    },
+	    xAxis: [
+	        {
+	            type: 'category',
+	            boundaryGap: true,
+	            data: (function (){
+	                var now = new Date();
+	                var res = [];
+	                for(var len=0;len<12;len++) {
+	                    now = new Date();
+	                    now.setHours(now.getHours()-len);
+	                    res.unshift(now.format('MM-dd hh')+'点');
+	                }
+	                return res;
+	            })()
+	        }
+	    ],
+	    yAxis: [
+	        {
+	            type: 'value',
+	            scale: true,
+	            name: '',
+	            max: 10,
+	            min: 0,
+	            boundaryGap: [0.2, 0.2],
+	            axisLabel:{
+	            	formatter: '{value}GB'
+	            }
+	        }
+	    ],
+	    series: [
+	        {
+	            name:'下载流量',
+	            type:'line',
+	            smooth:true,
+                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+	            data:(function (){
+	                var res = [];
+	                var len = 0;
+	                while (len < 12) {
+	                    res.push((Math.random()*3.3 + 5).toFixed(1) - 0);
+	                    len++;
+	                }
+	                return res;
+	            })()
+	        },
+	        {
+	            name:'上传流量',
+	            type:'line',
+	            smooth:true,
+                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+	            data:(function (){
+	                var res = [];
+	                var len = 0;
+	                while (len < 12) {
+	                    res.push((Math.random()*2).toFixed(1) - 0);
+	                    len++;
+	                }
+	                return res;
+	            })()
+	        }
+	    ]
+	};
+function getBar3(){
+    var businissFlowChart = echarts.init(document.getElementById('businissFlowPanel'));         //对应的控件ID
+    var height=$('#ErlCenterPanel').height()*0.7;
+
+    businissFlowChart.setOption(option);                                               //添加对应的数据 option
+}
+
+
+
+
+
+var option = {
+	var params={};
+	params.tooltip=[{}];
+	params.grid=[{}];
+	params.legend=[{}];
+	params.xAxis=[{}];
+	params.yAxis=[{}];
+	params.series=[{}];
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

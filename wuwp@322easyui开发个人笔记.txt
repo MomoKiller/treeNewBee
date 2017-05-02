@@ -1199,3 +1199,9 @@ function () {
     document.getElementById("start_time").value = (new Date().addDays(-3)).format('yyyy-MM-dd hh:mm:ss');
 //时间格式为('2017-04-24') 的值 进行提前一天(减一天)的操作
 	(new Date(maxTime.replace(/-/g,"/")).addDays(-1)).format('yyyy-MM-dd hh:mm:ss') 	
+	
+五九、关于Google浏览器下 easyui-linkbutton 会产生向下偏移的修改方法
+	在css的style中添加 a.l-btn{vertical-align:middle;} 使按钮能够正常居中显示
+	
+	
+	

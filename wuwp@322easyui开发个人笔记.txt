@@ -714,7 +714,7 @@ case2£ºÈ»¶øÔÚÑ¡ÔñtableÖĞµÄµÚ¶ş£¬ÄËÖÁµÚÈıÁĞ...Ê±²»ÄÜÒÔ´ËÀàÍÆ£¬µ«¿ÉÒÔÓÃÒ»ÏÂ·½Ê½£¬Ç
 	table tr td:nth-child(3){
 		width: 10%;
 	}
-case3: table µ¥ĞĞË«ĞĞµÄÑùÊ½(¶¨ÒåÒ»¸ö¼òµ¥µÄtableÑùÊ½)
+case3: table µ¥ĞĞË«ĞĞµÄÑùÊ½(¶¨ÒåÒ»¸ö¼òµ¥µÄtableÑùÊ½)Ñ¡Ôñ±í¸ñµÄÆæÊıĞĞÅ¼ÊıĞĞ
 table, th , td  {
   border: 1px solid grey;
   border-collapse: collapse;

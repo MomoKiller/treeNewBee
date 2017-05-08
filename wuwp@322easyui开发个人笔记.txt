@@ -207,6 +207,7 @@ s += " 你的屏幕设置 "+ window.screen.deviceXDPI +" 像素/英寸";
 	$("#panelID").height((winHeight-49)/2-40);	
 	2、利用css的设值属性值方法 找到对应的属性在赋值	heightValue 为一个变量
 	$(".panelClass").css("height",heightValue);
+		?--->    $(".panelClass").css({"height",heightValue});
 	3、利用attr 转换值的方法给属性赋值。找对控件的属性值是关键：
 	$(".panelClass").attr("data-content", "电话:"+data.phone);
 	
@@ -541,6 +542,16 @@ website：http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html
 window.onresize = function(){
 	location.reload(false);		//当为true时重新获取数据加载页面 当为false时获取缓存并刷新页面
 }	
+//当前页面禁用 onresize 事件
+window.onresize = function(e){
+	if(e && e.preventDefault){
+		e.preventDefault();
+	}else{
+		window.event.returnValue = false;
+	}
+	return false;
+}
+
 
 
 二四、下面三个文件控制html或jsp页面不会出现乱码，且必须放在页面<head>标签中的最前面

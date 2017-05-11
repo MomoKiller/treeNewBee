@@ -184,8 +184,11 @@ body{
 	
 	
 
+//设置边框
+	border:1px solid #3a87ad;
 
 
+设置文本下划线
 
 
 

@@ -1214,5 +1214,10 @@ function () {
 五九、关于Google浏览器下 easyui-linkbutton 会产生向下偏移的修改方法
 	在css的style中添加 a.l-btn{vertical-align:middle;} 使按钮能够正常居中显示
 	
+
+六十、关于正则表达式的使用方法：
+	http://www.cnblogs.com/jiuban2391/p/6061542.html  
+	具体见  “正则表达式补充”  “正则表达式验证邮箱”
 	
+
 	

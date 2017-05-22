@@ -192,5 +192,12 @@ body{
 
 
 
+设置图片 在平面浮动
+<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;">
+<iframe style="width: 186px; height: 201px;" src="http://www.ecpic.com.cn/cpiccar/js/My97DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no">
+</iframe>
+</div>
+
+
 
 

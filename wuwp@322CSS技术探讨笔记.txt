@@ -193,11 +193,31 @@ body{
 
 
 设置图片 在平面浮动
-<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;">
-<iframe style="width: 186px; height: 201px;" src="http://www.ecpic.com.cn/cpiccar/js/My97DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no">
-</iframe>
-</div>
+#float-hint{
+    position: fixed;
+    right: 10px;
+    bottom: 20px;
+    z-index: 2000000000;
+    border-radius: 2px;
+}
+设置图片、区域在页面的相对位置
+#float-man{
+    position: absolute;
+    right: 517px;
+    top: 355px;
+    height: 140px;
+    width: 70px;
+}
 
+//设置图片、区块居中
+.center
+{
+margin:auto;
+width:70%;
+background-color:#b0e0e6;
+}
 
+//完整的css引用 必须包含的两个属性：href="" , rel="stylesheet".
+    <link href="../resources/css/online-consulting.css" rel="stylesheet">
 
 

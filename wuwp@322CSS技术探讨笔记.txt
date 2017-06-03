@@ -220,4 +220,29 @@ background-color:#b0e0e6;
 //完整的css引用 必须包含的两个属性：href="" , rel="stylesheet".
     <link href="../resources/css/online-consulting.css" rel="stylesheet">
 
+	
+//利用css3 实现页面动画效果
+.className{
+	width:0px;
+	-webkit-transition: width .5s;
+    -moz-transition: width .5s;
+    -ms-transition: width .5s;
+    -o-transition: width .5s;
+    transition: width .5s;
+}
+.className:hover{
+	width:100px;
+	-webkit-transition: width .5s;
+    -moz-transition: width .5s;
+    -ms-transition: width .5s;
+    -o-transition: width .5s;
+    transition: width .5s;
+}
+//以下是利用JS 方法实现css3动画效果
+$('.className').css{
+	"width":'10px',
+	"transition":'width .5s'
+}
+
+	
 

@@ -46,6 +46,12 @@ app.factory('githubService',function(){
 
 
 
+//ng对应的方法及引用
+$scope.save = function(){
+	/*     方法主体部分     */
+}
+//方法的引用
+在页面标签中 添加 ng-click="save()";
 
 
 

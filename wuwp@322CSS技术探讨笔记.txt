@@ -244,5 +244,82 @@ $('.className').css{
 	"transition":'width .5s'
 }
 
+
+
+
+
+
+/----start---- 设置半透明背景   
+.floor-us .con li {
+    position: relative;
+    width: 230px;
+    height: 308px;
+    float: left;
+    margin: 0 50px;
+    overflow: hidden;
+    background: rgba(255,255,255,.5);
+}
+//
+.floor-us .con li img{
+	height: 154px;
+	display: block;
+    opacity: 1;
+    margin: 40px auto 50px;
+    transition: margin 0.5s;
+}
+//添加css3 属性样式
+.floor-us .con li:hover img{
+	height: 154px;
+	display: block;
+	opacity: 1;
+	margin: 0px auto 0px;
+	transition: margin 0.5s;		//在0.5s内完成动画效果的转换
+}
+// 设置文本
+.floor-us .con li p {
+    height: 114px;
+    position: relative;
+    padding: 20px 18px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #666;
+    background-color: #fff;
+}
+/----end--------可以参考当前文件夹下  css3动画浮动效果0.5s.html------/
+
+
+/-----start----  关于css 的position 属性对应的功能
+absolute   	-> 	生成 绝 对定位的元素，相对于 static 定位以外的第一个父元素进行定位，
+				元素位置通过 left top right bottom 属性进行规定
+fixed		->	生成 绝 对定位的元素，相对于浏览器窗口进行定位
+				元素位置通过 left top right bottom 属性进行规定
+relative  	->  生成 相 对定位的元素，相对于其正常的位置进行定位
+				left: 20 会向元素的 left 位置添加 20 像素
+static 		-> 	默认值。没有定位，元素出现在正常的流中 （忽略 top bottom left right 或 z-index 声明）
+inherit		-> 	规定应该从父元素继承 position 属性的值
+/------end--------/
+
+
+
+
+// css3 伪类::before (在字体前方加 |)
+.new_about_company .list_t::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 16px;
+    margin-right: 15px;
+    background-color: #d23030;
+    position: relative;
+    bottom: -3px;
+}
+
+// css 控制 一行显示所有文字，多出的文字 自动加 ...
+.li { overflow:hidden;text-overflow:ellipsis; -o-text-overflow:ellipsis;white-space:nowrap;width:100%;}  
+
+// css 控制手机版 H5 不显示默认的选中框
+*:focus {outline: none;}
+
+
 	
 

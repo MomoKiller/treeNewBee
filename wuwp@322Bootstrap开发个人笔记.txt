@@ -254,6 +254,20 @@ DOCTYPE±êÇ©ÊÇÎªÁËÈÃä¯ÀÀÆ÷°´ÕÕw3cµÄÍ³Ò»¸ñÊ½¶ÔÒ³Ãæ½øĞĞ½âÎö¡£¶øÏîÄ¿Ò³ÃæÓĞhtmlÓëjspÒ
 </idv>
 
 			
+Ê®¶ş¡¢Ê±¼ä»ñÈ¡µÄ·½·¨ 
+		//»ñÈ¡ µ±Ç°Ê±¼ä + ÄãÏëÒªµÄÈÕÆÚ
+		function _getDateYear(addYear) {
+            var dd = new Date();
+            dd.setDate(dd.getYear()+addYear);//»ñÈ¡AddDayCountÄêºóµÄÈÕÆÚ
+			/*
+			dd.setDate(dd.getDate()+addYear);//»ñÈ¡AddDayCountÌìºóµÄÈÕÆÚ
+			ÔÂµÄÀàÍÆ  -- ²»ÏëĞ´ÔÚeasyuiÀïÃæÁË
+			*/
+            var y = dd.getFullYear();
+            var m = dd.getMonth()+1;//»ñÈ¡µ±Ç°ÔÂ·İµÄÈÕÆÚ
+            var d = dd.getDate();
+            return y+"Äê"+m+"ÔÂ"+d+"ÈÕ24Ê±";
+        }			
 			
 
 

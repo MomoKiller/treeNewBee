@@ -32,3 +32,15 @@ First()返回被选元素的首个元素（选中的元素有多个），last()则是对应最后一个元素。E
 Ajax
 jQuery是通过load(URL,data,callback)方法进行加载服务器数据，其中callback参数是可选的。
 $.get(URL,callback)从服务器上请求数据，URL是必选，callback是可选，用于请求成功后所执行的函数。
+
+
+//根据input 控件中的值 实时改变另一个值
+	使用的控件的 onkeyup 方法
+1、Html 控件中添加 onkeyup 事件：	
+<input type="text" name="card-num" id="card-num" onkeyup="onCardNumChange();" placeholder="请填写身份证号"/>
+2、JS中添加对应的数据获取方法：
+function onCardNumChange() {
+    var cardNum = $('#card-num').val();
+    var carBirth = cardNum.substr(6,4)+'-'+cardNum.substr(10,2)+'-'+cardNum.substr(12,2);
+    $('#car-birthday').val(carBirth);
+}

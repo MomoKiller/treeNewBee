@@ -438,6 +438,31 @@ if(arr=document.cookie.match(reg)) return unescape(arr[2]);
 else return null; 
 } 
 //alert(getCookie("userName"));
+function setCookie(name,value)
+      {
+          var Days = 30;
+          var exp = new Date();
+          exp.setTime(exp.getTime() + Days*24*60*60*1000);
+          document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+      }
+      function getCookie(c_name)
+      {
+          if (document.cookie.length>0)
+          {
+              c_start=document.cookie.indexOf(c_name + "=")
+              if (c_start!=-1)
+              {
+                  c_start=c_start + c_name.length+1
+                  c_end=document.cookie.indexOf(";",c_start)
+                  if (c_end==-1) c_end=document.cookie.length
+                  return unescape(document.cookie.substring(c_start,c_end))
+              }
+          }
+          return ""
+      }
+      setCookie("h5Location","www.baidu.com");
+      console.log(getCookie('h5Location'));
+
 
 十九、indexOf()函数 返回在 String 对象中第一次出现子字符串的字符位置。当未找到返回值时则返回 -1
 var str = "hello world!";
@@ -1219,5 +1244,13 @@ function () {
 	http://www.cnblogs.com/jiuban2391/p/6061542.html  
 	具体见  “正则表达式补充”  “正则表达式验证邮箱”
 	
-
+六一、匹配汉字的正则表达式	
+	var passwordReg	= /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+	
+六二、
+window.history.go(-1);  //返回上一页
+window.history.back();  //返回上一页
+//如果要强行刷新的话就是：window.history.back();location.reload();
+ 
+window.location.go(-1); //刷新上一页
 	

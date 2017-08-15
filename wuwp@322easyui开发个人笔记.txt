@@ -1253,4 +1253,58 @@ window.history.back();  //返回上一页
 //如果要强行刷新的话就是：window.history.back();location.reload();
  
 window.location.go(-1); //刷新上一页
+
+
+六三、
+//间隔时间段
+function getNewDay(dateTemp, days) {
+    var dateTemp = dateTemp.split("-");
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //转换为MM-DD-YYYY格式
+    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+    var rDate = new Date(millSeconds);
+    var year = rDate.getFullYear();
+    var month = rDate.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    var date = rDate.getDate();
+    if (date < 10) date = "0" + date;
+    return (year + "-" + month + "-" + date);
+}
+//当前时间
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+    return currentdate;
+}
 	
+六四、间隔时间段  第一个 时间段：2017-01-01 ，第二个参数：往后添加 N 天
+
+/* 不兼容火狐
+function getNewDay(dateTemp, days) {
+    var dateTemp = dateTemp.split("-");
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //转换为MM-DD-YYYY格式
+    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+    var rDate = new Date(millSeconds);
+    var year = rDate.getFullYear();
+    var month = rDate.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    var date = rDate.getDate();
+    if (date < 10) date = "0" + date;
+    return (year + "-" + month + "-" + date);
+}
+*/
+function getNewDay(date,days){
+    var d=new Date(date);
+    d.setDate(d.getDate()+days);
+    var m=d.getMonth()+1;
+    return d.getFullYear()+'-'+m+'-'+d.getDate();
+}	

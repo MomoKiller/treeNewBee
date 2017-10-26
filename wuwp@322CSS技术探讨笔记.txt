@@ -321,5 +321,7 @@ inherit		-> 	规定应该从父元素继承 position 属性的值
 *:focus {outline: none;}
 
 
-	
+
+// 各种箭头效果
+	http://blog.csdn.net/tangtang5963/article/details/51490107
 

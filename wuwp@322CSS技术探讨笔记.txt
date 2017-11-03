@@ -324,4 +324,31 @@ inherit		-> 	规定应该从父元素继承 position 属性的值
 
 // 各种箭头效果
 	http://blog.csdn.net/tangtang5963/article/details/51490107
+	
+	
+	
+//我的箭头啊，
+.address-holder::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #fee;
+    margin-top: -105px;
+    float: right;
+    margin-right: -1px;
+}
+
+.address-holder::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #999;
+    margin-top: -14px;
+    float: right;
+}	
 

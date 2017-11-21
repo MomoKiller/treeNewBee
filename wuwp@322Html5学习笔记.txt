@@ -31,4 +31,11 @@ http://www.pmcaff.com/article?id=2000000000008313
 
 
 
-
+·ÀÖ¹H5BODY ¹ö¶¯ÊÂ¼þ
+// ½ûÖ¹
+document.body.style.overflow = 'hidden';
+function _preventDefault(e) { e.preventDefault(); }
+window.addEventListener('touchmove', _preventDefault);
+// »Ö¸´
+document.body.style.overflow = 'auto';
+window.removeEventListener('touchmove', _preventDefault);

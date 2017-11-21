@@ -1308,3 +1308,52 @@ function getNewDay(date,days){
     var m=d.getMonth()+1;
     return d.getFullYear()+'-'+m+'-'+d.getDate();
 }	
+
+六五、throw 声明
+var x=prompt("请输入 0 至 10 之间的数：","")
+try
+{ 
+if(x>10) 
+  throw "Err1" 
+else if(x<0)
+  throw "Err2"
+else if(isNaN(x))
+  throw "Err3"
+} 
+catch(er)
+{
+if(er=="Err1") 
+  alert("错误！该值太大！")
+if(er == "Err2") 
+  alert("错误！该值太小！") 
+if(er == "Err3") 
+  alert("错误！该值不是数字！") 
+}
+
+
+六六、onerror 事件--监听错误事件
+onerror=handleErr
+var txt=""
+
+function handleErr(msg,url,l)
+{
+txt="本页中存在错误。\n\n"
+txt+="错误：" + msg + "\n"
+txt+="URL: " + url + "\n"
+txt+="行：" + l + "\n\n"
+txt+="点击“确定”继续。\n\n"
+alert(txt)
+return true
+}
+
+function message()
+{
+adddlert("Welcome guest!")		//定义错误方法触发onerror 事件--监听错误事件
+}
+
+mseeage();
+
+六七、获取data-param 中的值
+
+
+

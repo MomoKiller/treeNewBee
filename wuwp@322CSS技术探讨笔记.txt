@@ -352,3 +352,34 @@ inherit		-> 	规定应该从父元素继承 position 属性的值
     float: right;
 }	
 
+
+
+//CSS 实现隐藏滚动条同时又可以滚动
+.element::-webkit-scrollbar {display:none}
+
+如果要兼容 PC 其他浏览器（IE、Firefox 等），国外一位才人 John Kurlak 也研究出了一种办法。在容器外面再嵌套一层 overflow:hidden 内部内容再限制尺寸和外部嵌套层一样，就变相隐藏了。
+<div class="outer-container">
+     <div class="inner-container">
+        <div class="content">
+            ......
+        </div>
+     </div>
+ </div>
+.outer-container,.content {
+    width: 200px; height: 200px;
+}
+.outer-container {
+    position: relative;
+    overflow: hidden;
+}
+.inner-container {
+    position: absolute; left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+ /* for Chrome */
+.inner-container::-webkit-scrollbar {
+    display: none;
+}
+

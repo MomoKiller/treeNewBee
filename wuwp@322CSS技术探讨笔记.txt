@@ -384,3 +384,12 @@ inherit		-> 	规定应该从父元素继承 position 属性的值
     display: none;
 }
 
+
+//css3  实现浮动图片 会放大的效果
+.pane-module .module-pic:hover img {
+    transition: all .3s ease-out .1s;
+    transform: matrix(1.05,0,0,1.05,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+

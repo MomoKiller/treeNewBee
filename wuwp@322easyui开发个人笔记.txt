@@ -1354,6 +1354,59 @@ adddlert("Welcome guest!")		//定义错误方法触发onerror 事件--监听错误事件
 mseeage();
 
 六七、获取data-param 中的值
+$(selecter).getDate('param');
+$(selecter).attr('data-param');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

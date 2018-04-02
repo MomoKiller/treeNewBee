@@ -406,3 +406,9 @@ p{
     backface-visibility: hidden;
 }
 
+//h5页面Input 选中后出险黄色边框
+input{
+	border: 0;
+	outline: none;
+}
+

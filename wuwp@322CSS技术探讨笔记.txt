@@ -412,3 +412,8 @@ input{
 	outline: none;
 }
 
+//webkit-ÄÚºËä¯ÀÀÆ÷±³¾°ÑÕÉ«½¥±ä
+div{
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(blue), color-stop(0.5, green), to(red));
+}
+

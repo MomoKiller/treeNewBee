@@ -1358,7 +1358,17 @@ $(selecter).getDate('param');
 $(selecter).attr('data-param');
 
 
-
+六八、获取浏览器参数方法的两个方法
+getQueryString: function (name) {		//获取浏览器参数1      
+	var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+	var result = window.location.search.substr(1).match(reg);
+	return result?decodeURIComponent(result[2]):null;
+},		
+getQueryString: function (name) {		//获取浏览器参数2
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null) return unescape(r[2]); return null;
+},		
 
 
 

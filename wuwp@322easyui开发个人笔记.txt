@@ -1027,7 +1027,7 @@ nowDate.setDate(nowDate - 30);
 nowDate.setDate();
 
 
-五四、下拉控件 进行实时刷新功能
+五四、下拉控件 进行实时刷新功能		//周期性运行
 	<select class="easyui-combobox" id="state" name="state" style="width:auto;">
 		<option value="30">30秒</option>
 		<option value="60">1分钟</option>
@@ -1348,7 +1348,7 @@ return true
 
 function message()
 {
-adddlert("Welcome guest!")		//定义错误方法触发onerror 事件--监听错误事件
+	adddlert("Welcome guest!")		//定义错误方法触发onerror 事件--监听错误事件
 }
 
 mseeage();
@@ -1370,6 +1370,46 @@ getQueryString: function (name) {		//获取浏览器参数2
 	if (r != null) return unescape(r[2]); return null;
 },		
 
+
+
+六九、substitute() 方法加载表格
+1、新建页面模板
+var trTpl       =  '<tr>'
+	+ '<td>{listId}</td>'
+	+ '<td>{listNumber}</td>'
+	+ '<td>{listName}</td>'
+	+ '<td>{boxSell}</td>'
+	+ '<td>{minPrice}</td>'
+	+ '<td>{storeName}</td>'
+	+ '<td>{listingState}</td>'
+	+ '<td>{storage}</td>'
+	+ '</tr>';
+2、新建数据模板
+var trArr   = {
+	'listId':       data[i].listId,
+	'listNumber':   data[i].listNumber,
+	'listName':     data[i].listName,
+	'boxSell':      $boxSell[data[i].boxSell],
+	'minPrice':     data[i].minPrice,
+	'storeName':    data[i].storeName,
+	'listingState': $listState[data[i].listingState],
+	'storage':      data[i].storage
+};
+3、页面模板加载数据模板---用subsititute替换页面模板中的数据
+$.each(data, function (i) {
+	var trArr   = {
+		'listId':       data[i].listId,
+		'listNumber':   data[i].listNumber,
+		'listName':     data[i].listName,
+		'boxSell':      $boxSell[data[i].boxSell],
+		'minPrice':     data[i].minPrice,
+		'storeName':    data[i].storeName,
+		'listingState': $listState[data[i].listingState],
+		'storage':      data[i].storage
+	};
+	hisHtml     += trTpl.substitute(trArr);
+});
+//---------hisHtml---为最终的页面元素
 
 
 

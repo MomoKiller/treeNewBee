@@ -8,7 +8,7 @@ http://www.cnblogs.com/dushao/p/6004883.html
 JS排序算法总结：
 一、冒泡排序算法
 function bubbleSort(arr) {
-    var len = arr.length;
+    var len = arr.length;		
     for (var i = 0; i < len; i++) {
         for (var j = 0; j < len - 1 - i; j++) {
             if (arr[j] > arr[j+1]) {        //相邻元素两两对比

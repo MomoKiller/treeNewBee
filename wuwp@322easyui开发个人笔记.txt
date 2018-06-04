@@ -359,12 +359,12 @@ case: http://ju.outofmemory.cn/entry/100681
     	            pageLength: 10,//首次加载的数据条数
     	            searching: false,//搜索
     	            ordering: false,//排序操作在服务端进行，所以可以关了
-    	             ajax: {//类似jquery的ajax参数，基本都可以用。
+    	            ajax: {//类似jquery的ajax参数，基本都可以用。
     	                type: "get",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
     	                url: url,
     	                dataSrc: "rows",//默认data，也可以写其他的，格式化table的时候取里面的数据
     	                data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
-    	                 var param = getSearchParam();
+    	                var param = getSearchParam();
     	                console.log(param);
     	                    param.start = d.start;//开始的序号
     	                    param.length = d.length;//要取的数据的
@@ -1369,7 +1369,20 @@ getQueryString: function (name) {		//获取浏览器参数2
 	var r = window.location.search.substr(1).match(reg);
 	if (r != null) return unescape(r[2]); return null;
 },		
-
+/*var r = window.location.search.substr(1);
+    var arr=r.split('&');
+    var map={};
+    var value;
+    for(var i=0;i<arr.length;i++){
+        var k=arr[i].split('=')[0];
+        var v=arr[i].split('=')[1];
+        map[k]=v;
+        if(k==name)
+            value=v;
+    }
+    if(!name)
+        return map;
+    return value;*/
 
 
 六九、substitute() 方法加载表格

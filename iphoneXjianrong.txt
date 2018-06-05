@@ -1,0 +1,87 @@
+1. 如果想全屏覆盖，html里面请使用
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+
+ps:我的实际项目里，只在手机qq 里面去访问页面时候 出现底部灰色安全区域块，可以说现在大部分公司页面都没有做兼容，包括百度，美团，京东...
+
+so  html 加此属性，网页就可以全屏覆盖。
+
+
+
+2.如果想对某个元素进行底部上移或者顶部下移可以做以下适配。
+
+   注：如果想下面constant env 属性有效果，请务必添加上面meta 标签才能实现。
+
+/*
+ *  iphoneX pulic  css
+ *  2018-01-01
+ */
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){ 
+
+   body{
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-bottom: env(safe-area-inset-bottom);
+   }
+   .iphonex-pt{
+      padding-top: constant(safe-area-inset-top);
+      padding-top: env(safe-area-inset-top);
+   }
+   .iphonex-pb{
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-bottom: env(safe-area-inset-bottom);
+   }
+   .iphonex-mt{
+      margin-top: constant(safe-area-inset-top);
+      margin-top: env(safe-area-inset-top);
+   }
+   .iphonex-mb{
+      margin-bottom: constant(safe-area-inset-bottom);
+      margin-bottom: env(safe-area-inset-bottom);
+   }
+   .iphonex-pl{
+      padding-left: constant(safe-area-inset-left);
+      padding-left: env(safe-area-inset-left);
+   }
+   .iphonex-pr{
+      padding-right: constant(safe-area-inset-right);
+      padding-right: env(safe-area-inset-right);
+   }
+   .iphonex-ml{
+      margin-left: constant(safe-area-inset-left);
+      margin-left: env(safe-area-inset-left);
+   }
+   .iphonex-mr{
+      margin-right: constant(safe-area-inset-right);
+      margin-right: env(safe-area-inset-right);
+   }
+   .iphonex-bd-top-bg{
+      border-top: 88px solid transparent;
+   }
+   .iphonex-bd-top{
+      border-top: 44px solid transparent;
+   }
+   .iphonex-bd-bottom{
+      border-bottom: 34px solid transparent;
+   }
+
+}
+
+3.js 方法，有些接口必须用js 去处理，不能用css样式实现，那么就可以这样做
+
+if($(window).width() === 375 && $(window).height() === 724 && window.devicePixelRatio === 3){
+
+        $(".phonex-pb").css("padding-bottom","34px");
+}
+
+
+ps: 写在后面
+
+对于constant(safe-area-inset-bottom) 这样的属性完全可以不用写在media 媒体查询里面，
+上面只是做了公共样式处理，safe-area-inset-bottom 意义其实相当于 底部34px。
+类似padding-bottom:34px;
+考虑其他兼容问题，
+多做了一个透明border 处理方法，
+仅仅是一种解决方式而已，其实都能实现。

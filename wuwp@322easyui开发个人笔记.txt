@@ -1426,8 +1426,15 @@ $.each(data, function (i) {
 
 
 
-
-
+//七十、判断是否有滚动条
+if(document.body.style.overflow!="hidden"&&document.body.scroll!="no"&&
+document.body.scrollHeight>document.body.offsetHeight)
+{
+alert("有滚动条");
+}else
+{
+alert("无滚动条");
+}
 
 
 

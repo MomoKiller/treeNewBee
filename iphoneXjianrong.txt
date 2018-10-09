@@ -72,8 +72,7 @@ so  html 加此属性，网页就可以全屏覆盖。
 3.js 方法，有些接口必须用js 去处理，不能用css样式实现，那么就可以这样做
 
 if($(window).width() === 375 && $(window).height() === 724 && window.devicePixelRatio === 3){
-
-        $(".phonex-pb").css("padding-bottom","34px");
+    $(".phonex-pb").css("padding-bottom","34px");
 }
 
 

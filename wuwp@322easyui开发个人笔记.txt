@@ -1495,8 +1495,49 @@ if(parseInt(serverTime) > 210000 || parseInt(serverTime) <60000){
 }
 
 
+// 对象三种方式：无序对象{a:1}，数组[1,2,3]，以及函数等。
+// 深拷贝（针对对象类型）的两种方案
+1、递归递归去复制所有层级属性。
+function deepClone(obj){
+    let objClone = Array.isArray(obj)?[]:{};
+    if(obj && typeof obj==="object"){
+        for(key in obj){
+            if(obj.hasOwnProperty(key)){
+                //判断ojb子元素是否为对象，如果是，递归复制
+                if(obj[key]&&typeof obj[key] ==="object"){
+                    objClone[key] = deepClone(obj[key]);
+                }else{
+                    //如果不是，简单复制
+                    objClone[key] = obj[key];
+                }
+            }
+        }
+    }
+    return objClone;
+}    
+let a=[1,2,3,4],
+    b=deepClone(a);
+a[0]=2;
+console.log(a,b);
 
+2、JSON对象的parse和stringify
+function deepClone(obj){
+    let _obj = JSON.stringify(obj),
+        objClone = JSON.parse(_obj);
+    return objClone
+}    
+let a=[0,1,[2,3],4],
+    b=deepClone(a);
+a[0]=1;
+a[2][0]=1;
+console.log(a,b);
 
+3、JQ的extend方法
+let a=[0,1,[2,3],4],
+    b=$.extend(true,[],a);
+a[0]=1;
+a[2][0]=1;
+console.log(a,b);
 
 
 

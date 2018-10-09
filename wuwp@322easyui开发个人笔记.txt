@@ -1,13 +1,13 @@
-/====================================ÒÔÏÂÊÇÊ¹ÓÃeasyui¿ª·¢¼¯¿ÍÏîÄ¿Ê±×Ü½áµÄÒ»Ğ©js¿ª·¢¾­Ñé==================================//
+ï»¿/====================================ä»¥ä¸‹æ˜¯ä½¿ç”¨easyuiå¼€å‘é›†å®¢é¡¹ç›®æ—¶æ€»ç»“çš„ä¸€äº›jså¼€å‘ç»éªŒ==================================//
 
 
 http://www.zi-han.net/case/easyui/
 
-Ò»¡¢»ñÈ¡µ±Ç°Ò³ÃæurlÖĞ²ÎÊıµÄ ·½·¨
-case: http://localhost:8080/EasySight/jsp/massageInquire/net.jsp?id=1899300008253446   »ñÈ¡urlÖĞ"?" ºóÃæµÄ×Ö·û´®
-·½·¨1£º Í¨¹ıµ÷ÓÃjs»ñÈ¡
+ä¸€ã€è·å–å½“å‰é¡µé¢urlä¸­å‚æ•°çš„ æ–¹æ³•
+case: http://localhost:8080/EasySight/jsp/massageInquire/net.jsp?id=1899300008253446   è·å–urlä¸­"?" åé¢çš„å­—ç¬¦ä¸²
+æ–¹æ³•1ï¼š é€šè¿‡è°ƒç”¨jsè·å–
 function GetRequest() {
-	var url = location.search; //»ñÈ¡urlÖĞ"?"·ûºóµÄ×Ö´®
+	var url = location.search; //è·å–urlä¸­"?"ç¬¦åçš„å­—ä¸²
 	var theRequest = new Object();
 		if (url.indexOf("?") != -1) {
 		   var str = url.substr(1);
@@ -18,68 +18,68 @@ function GetRequest() {
 		   }
 	return theRequest;		
 }	
-·½·¨¶ş£º ÔÚ<%%>µÄ·½·¨ÖĞÌí¼Ó»ñÈ¡url¶ÔÓ¦ ²ÎÊıµÄjava´úÂë
+æ–¹æ³•äºŒï¼š åœ¨<%%>çš„æ–¹æ³•ä¸­æ·»åŠ è·å–urlå¯¹åº” å‚æ•°çš„javaä»£ç 
 String productNo=request.getParameter("id").toString();
 
-¶ş¡¢easyui¼ÓÔØÊı¾İ±í¸ñµÄ·½Ê½
-	1¡¢¶ÔÓ¦Ò³ÃæµÄdiv¿Ø¼ş£º
-    <div data-options="region:'center'" id="tableID" title="½á¹ûÁĞ±í">
-	2¡¢¶ÔÓ¦³õÊ¼»¯´úÂë£º
-	//³õÊ¼»¯table
+äºŒã€easyuiåŠ è½½æ•°æ®è¡¨æ ¼çš„æ–¹å¼
+	1ã€å¯¹åº”é¡µé¢çš„divæ§ä»¶ï¼š
+    <div data-options="region:'center'" id="tableID" title="ç»“æœåˆ—è¡¨">
+	2ã€å¯¹åº”åˆå§‹åŒ–ä»£ç ï¼š
+	//åˆå§‹åŒ–table
 	
-	var pageSize = 20;									//¶¨ÒåÃ¿Ò³ÏÔÊ¾µÄÁĞÊı  
-	$("#tableID").datagrid({							//¼ÓÔØ¶ÔÓ¦µÄ±í¸ñ	
-		striped: true,									//ÊÇ·ñÏÔÊ¾ÌõÎÆ
-	    //fitColumns: true,								// ¶¨ÒåÁĞÊÇ·ñ×ÔÊÊÓ¦¿í¶È   trueÔòËùÓĞÁĞ¶¼Õ¹Ê¾ÔÚÒ³ÃæÉÏ	false¸ù¾İ¶¨ÒåµÄ¿í¶ÈÕ¹Ê¾ÁĞ
+	var pageSize = 20;									//å®šä¹‰æ¯é¡µæ˜¾ç¤ºçš„åˆ—æ•°  
+	$("#tableID").datagrid({							//åŠ è½½å¯¹åº”çš„è¡¨æ ¼	
+		striped: true,									//æ˜¯å¦æ˜¾ç¤ºæ¡çº¹
+	    //fitColumns: true,								// å®šä¹‰åˆ—æ˜¯å¦è‡ªé€‚åº”å®½åº¦   trueåˆ™æ‰€æœ‰åˆ—éƒ½å±•ç¤ºåœ¨é¡µé¢ä¸Š	falseæ ¹æ®å®šä¹‰çš„å®½åº¦å±•ç¤ºåˆ—
 	    singleSelect: true,
-	    rownumbers: true,								//ÊÇ·ñÏÔÊ¾ĞĞºÅ
-	    pagination: true,								//Ò³Âë
-	    nowrap: false,									//×Ô¶¯»»ĞĞ
-	    pageSize:pageSize,								//Õ¹Ê¾µÄÁĞµÄ ´óĞ¡
-	    showFooter: true,								//Õ¹Ê¾ grid µ×²¿µÄ¹¤¾ßÀ¸
-	    loadMsg:'ÕıÔÚ¼ÓÔØ...',							//¼ÓÔØÊı¾İÊÇ µÄÌáÊ¾ĞÅÏ¢
-	    emptyMsg:'ÎŞÊı¾İ',								//ÎŞÊı¾İÊÇ Õ¹Ê¾µÄÎÄ×ÖĞÅÏ¢
-	    columns: [[										//¶ÔÓ¦µÄÁĞÃû³Æ ¼° ¶ÔÓ¦µÄIDĞÅÏ¢£¬ID±£³ÖÓë ·µ»ØÖµ µÄkeyÃûÒ»ÖÂ
-	        {title : '¿Í»§Ãû³Æ',field : 'customerId',rowspan:2,width : 100},				//rowspan:2 ¿çÁ½ĞĞ
-            {title : '¿Í»§±àºÅ',field : 'customerCode',rowspan:2,width : 100}, 
-            {title : 'ÒµÎñ±êÊ¶',field : 'productNo',rowspan:2,width : 120},
-            {title : 'ÒµÎñÀàĞÍ', field: 'businessType', rowspan:2,width : 100},
-            {title : 'A¶Ë',colspan:6},														//colspan:6 ¿çÁùÁĞ
-            {title : 'Z¶Ë',colspan:7},
-            {title : 'ÒµÎñ¿ªÍ¨ÈÕÆÚ', field: 'openDate',rowspan:2, width : 140}
+	    rownumbers: true,								//æ˜¯å¦æ˜¾ç¤ºè¡Œå·
+	    pagination: true,								//é¡µç 
+	    nowrap: false,									//è‡ªåŠ¨æ¢è¡Œ
+	    pageSize:pageSize,								//å±•ç¤ºçš„åˆ—çš„ å¤§å°
+	    showFooter: true,								//å±•ç¤º grid åº•éƒ¨çš„å·¥å…·æ 
+	    loadMsg:'æ­£åœ¨åŠ è½½...',							//åŠ è½½æ•°æ®æ˜¯ çš„æç¤ºä¿¡æ¯
+	    emptyMsg:'æ— æ•°æ®',								//æ— æ•°æ®æ˜¯ å±•ç¤ºçš„æ–‡å­—ä¿¡æ¯
+	    columns: [[										//å¯¹åº”çš„åˆ—åç§° åŠ å¯¹åº”çš„IDä¿¡æ¯ï¼ŒIDä¿æŒä¸ è¿”å›å€¼ çš„keyåä¸€è‡´
+	        {title : 'å®¢æˆ·åç§°',field : 'customerId',rowspan:2,width : 100},				//rowspan:2 è·¨ä¸¤è¡Œ
+            {title : 'å®¢æˆ·ç¼–å·',field : 'customerCode',rowspan:2,width : 100}, 
+            {title : 'ä¸šåŠ¡æ ‡è¯†',field : 'productNo',rowspan:2,width : 120},
+            {title : 'ä¸šåŠ¡ç±»å‹', field: 'businessType', rowspan:2,width : 100},
+            {title : 'Aç«¯',colspan:6},														//colspan:6 è·¨å…­åˆ—
+            {title : 'Zç«¯',colspan:7},
+            {title : 'ä¸šåŠ¡å¼€é€šæ—¥æœŸ', field: 'openDate',rowspan:2, width : 140}
        		],[
-            {title : 'µØÖ·', field: 'aAddress', width : 100},
-            {title : 'ÓªÒµ²¿', field: 'aBusinessHall', width : 100},
-            {title : 'µØÇø', field: 'aProvinceId', width : 200,formatter: function(value,row,index){
+            {title : 'åœ°å€', field: 'aAddress', width : 100},
+            {title : 'è¥ä¸šéƒ¨', field: 'aBusinessHall', width : 100},
+            {title : 'åœ°åŒº', field: 'aProvinceId', width : 200,formatter: function(value,row,index){
             	return (row.aProvinceId==null?"":row.aProvinceId)+(row.aCityId==null?"":row.aCityId)+(row.aCountryId==null?"":row.aCityId);
             }},
-            {title : 'A¶ËÒµÎñ±£ÕÏµÈ¼¶', field: 'aAssureGrade', width : 100},
-            {title : '¼¼ÊõÁªÏµÈË', field: 'aCustomerContact', width : 100},
-            {title : 'ÁªÏµ·½Ê½', field: 'aCustomerPhone', width : 100},
+            {title : 'Aç«¯ä¸šåŠ¡ä¿éšœç­‰çº§', field: 'aAssureGrade', width : 100},
+            {title : 'æŠ€æœ¯è”ç³»äºº', field: 'aCustomerContact', width : 100},
+            {title : 'è”ç³»æ–¹å¼', field: 'aCustomerPhone', width : 100},
 
-            {title : 'ÓªÒµ²¿', field: 'zBusinessHall', width : 100},
-            {title : 'Z¶ËÓÃ»§Ãû³Æ', field: 'zUserName', width : 100},
-            {title : 'µØÖ·', field: 'zAddress', width : 200},
-            {title : 'µØÇø', field: 'zProvinceId', width : 100,formatter: function(value,row,index){
+            {title : 'è¥ä¸šéƒ¨', field: 'zBusinessHall', width : 100},
+            {title : 'Zç«¯ç”¨æˆ·åç§°', field: 'zUserName', width : 100},
+            {title : 'åœ°å€', field: 'zAddress', width : 200},
+            {title : 'åœ°åŒº', field: 'zProvinceId', width : 100,formatter: function(value,row,index){
             	return (row.zProvinceId==null?"":row.zProvinceId)+(row.zCityId==null?"":row.zCityId)+(row.zCountryId==null?"":row.zCityId);
             }},
-            {title : '¼¼ÊõÁªÏµÈË', field: 'customerContact', width : 100},
-            {title : 'ÁªÏµÈËµç»°', field: 'customerPhone', width : 100},
-            {title : 'ÒµÎñ±£ÕÏµÈ¼¶', field: 'assureGrade', width : 100}
+            {title : 'æŠ€æœ¯è”ç³»äºº', field: 'customerContact', width : 100},
+            {title : 'è”ç³»äººç”µè¯', field: 'customerPhone', width : 100},
+            {title : 'ä¸šåŠ¡ä¿éšœç­‰çº§', field: 'assureGrade', width : 100}
 	    ]],
-	    onDblClickRow: function(rowIndex, rowData){											//¶¨ÒåÁĞ µÄË«»÷ÊÂ¼ş  rowIndexÊÇµ±Ç°Ñ¡ÖĞĞĞµÄĞĞºÅ£¬rowData ÊÇ·µ»ØÖµµÄjsonÊı¾İ
-	    	 addDetailWin(rowData.businessType, rowData.intId,rowData.productNo);			//¶¨Òå¶ÔÓ¦µÄÊÂ¼ş
+	    onDblClickRow: function(rowIndex, rowData){											//å®šä¹‰åˆ— çš„åŒå‡»äº‹ä»¶  rowIndexæ˜¯å½“å‰é€‰ä¸­è¡Œçš„è¡Œå·ï¼ŒrowData æ˜¯è¿”å›å€¼çš„jsonæ•°æ®
+	    	 addDetailWin(rowData.businessType, rowData.intId,rowData.productNo);			//å®šä¹‰å¯¹åº”çš„äº‹ä»¶
 	    }
 	});
 	
-	//¼ÓÔØtableÊı¾İ
+	//åŠ è½½tableæ•°æ®
 	loadTableData(1,pageSize);
 	
-	var pager = $('#tableID').datagrid('getPager');	// get the pager of datagrid	ÖĞgetPagerÊÇ¹Ì¶¨easyuiµÄĞ´·¨²¢²»ÊÇĞ´ÈëµÄ²ÎÊı
+	var pager = $('#tableID').datagrid('getPager');	// get the pager of datagrid	ä¸­getPageræ˜¯å›ºå®šeasyuiçš„å†™æ³•å¹¶ä¸æ˜¯å†™å…¥çš„å‚æ•°
 	if(pager){
 		$(pager).pagination({
-			//showPageList:false,															//ÊÇ·ñÏÔÊ¾Ã¿Ò³ÏÔÊ¾µÄÁĞÊı  Ä¬ÈÏÏÔÊ¾
-			showRefresh:false,																//ÊÇ·ñÏÔÊ¾Ë¢ĞÂ°´Å¥  Ä¬ÈÏÏÔÊ¾
+			//showPageList:false,															//æ˜¯å¦æ˜¾ç¤ºæ¯é¡µæ˜¾ç¤ºçš„åˆ—æ•°  é»˜è®¤æ˜¾ç¤º
+			showRefresh:false,																//æ˜¯å¦æ˜¾ç¤ºåˆ·æ–°æŒ‰é’®  é»˜è®¤æ˜¾ç¤º
 			onSelectPage: function(pageNumber, pageSize){
 				loadTableData(pageNumber,pageSize);
 			}
@@ -87,63 +87,63 @@ String productNo=request.getParameter("id").toString();
 	}
 	
 	
-	function loadTableData(pageNumber,pageSize){											//¶¨Òå¼ÓÔØtableµÄÊÂ¼ş  pageNumber ÊÇ³õÊ¼Ò³µÄ´óĞ¡ pageSize ÊÇµ±Ç°ÏÔÊ¾Êı¾İÌõÊı
+	function loadTableData(pageNumber,pageSize){											//å®šä¹‰åŠ è½½tableçš„äº‹ä»¶  pageNumber æ˜¯åˆå§‹é¡µçš„å¤§å° pageSize æ˜¯å½“å‰æ˜¾ç¤ºæ•°æ®æ¡æ•°
 	//var params={};
-	var params=getSeachParams();															//µ÷ÓÃjsFunction »ñÈ¡Ò³Ãæ²ÎÊıĞÅÏ¢µÄ
-	jQuery.support.cors = true;																//ÉèÖÃ¿çÓò µ÷ÓÃajax £¬±ØĞëĞ´ÔÚ ajaxµÄÇ°Ãæ
+	var params=getSeachParams();															//è°ƒç”¨jsFunction è·å–é¡µé¢å‚æ•°ä¿¡æ¯çš„
+	jQuery.support.cors = true;																//è®¾ç½®è·¨åŸŸ è°ƒç”¨ajax ï¼Œå¿…é¡»å†™åœ¨ ajaxçš„å‰é¢
 	$.ajax({
-	    url: Query_URL+'/resource/service/get/'+(pageNumber-1)*pageSize+'/'+pageSize,		//¶ÔÓ¦µÄURL
-	    data:JSON.stringify(params),														//¸ñÊ½»¯²ÎÊıĞÅÏ¢			
-	    type:'POST',																		//ajaxµÄÀàĞÍ
+	    url: Query_URL+'/resource/service/get/'+(pageNumber-1)*pageSize+'/'+pageSize,		//å¯¹åº”çš„URL
+	    data:JSON.stringify(params),														//æ ¼å¼åŒ–å‚æ•°ä¿¡æ¯			
+	    type:'POST',																		//ajaxçš„ç±»å‹
 	    cache:false,
-	    contentType:'application/json',														//´«²ÎµÄÀàĞÍ											
-	    beforeSend : function(){															//Êı¾İ¼ÓÔØÖ®Ç°ÊÂ¼ş
-	    	$.messager.progress();//ÏÔÊ¾½ø¶ÈÌõ
+	    contentType:'application/json',														//ä¼ å‚çš„ç±»å‹											
+	    beforeSend : function(){															//æ•°æ®åŠ è½½ä¹‹å‰äº‹ä»¶
+	    	$.messager.progress();//æ˜¾ç¤ºè¿›åº¦æ¡
 	    },
-	    complete : function() {																//Êı¾İ¼ÓÔØÍê³ÉºóÊÂ¼ş
-	    	$.messager.progress('close');//¹Ø±Õ½ø¶ÈÌõ
+	    complete : function() {																//æ•°æ®åŠ è½½å®Œæˆåäº‹ä»¶
+	    	$.messager.progress('close');//å…³é—­è¿›åº¦æ¡
 	    },
-	    error:function(response){															//Êı¾İ¼ÓÔØÊ§°ÜÊÂ¼ş
-	    	alert('²éÑ¯Ê§°Ü£¬'+response.responseText);
+	    error:function(response){															//æ•°æ®åŠ è½½å¤±è´¥äº‹ä»¶
+	    	alert('æŸ¥è¯¢å¤±è´¥ï¼Œ'+response.responseText);
 	    },
-	    success:function(response){															//Êı¾İÔö¼ÓÔÚ³É¹¦ÊÂ¼ş	
-	        $("#tableID").datagrid('loadData', response);									//loadDataÊÇeasyui¹Ì¶¨Ğ´·¨ ²¢·Ç²ÎÊı
+	    success:function(response){															//æ•°æ®å¢åŠ åœ¨æˆåŠŸäº‹ä»¶	
+	        $("#tableID").datagrid('loadData', response);									//loadDataæ˜¯easyuiå›ºå®šå†™æ³• å¹¶éå‚æ•°
 	    }
 	});
 	}
-Èı¡¢js³õÊ¼»¯¼ÓÔØ
+ä¸‰ã€jsåˆå§‹åŒ–åŠ è½½
 	$(document).ready(function(){
-		//Òª³õÊ¼»¯µÄÄÚÈİ
+		//è¦åˆå§‹åŒ–çš„å†…å®¹
 	});
 	
-ËÄ¡¢ĞÂ½¨easyuiµ¯³ö´°¿ÚµÄ·½·¨
-	1¡¢¶ÔÓ¦µÄÒ³Ãæ¿Ø¼ş
-	<div id="addDetailWin"></div>															//Ò³Ãæ¿Ø¼şID Óë·½·¨ÖĞµÄIDÖµ¶ÔÓ¦µÄ
-	2¡¢¶ÔÓ¦µÄ¼ÓÔØ´°¿Ú·½·¨
-	function addDetailWin(businessType, intId,productNo){									//ÔÚ¶ÔÓ¦µÄÊÂ¼şÖĞ´¥·¢¸Ã·½·¨
+å››ã€æ–°å»ºeasyuiå¼¹å‡ºçª—å£çš„æ–¹æ³•
+	1ã€å¯¹åº”çš„é¡µé¢æ§ä»¶
+	<div id="addDetailWin"></div>															//é¡µé¢æ§ä»¶ID ä¸æ–¹æ³•ä¸­çš„IDå€¼å¯¹åº”çš„
+	2ã€å¯¹åº”çš„åŠ è½½çª—å£æ–¹æ³•
+	function addDetailWin(businessType, intId,productNo){									//åœ¨å¯¹åº”çš„äº‹ä»¶ä¸­è§¦å‘è¯¥æ–¹æ³•
 	var jspPath;														
-	if(businessType == "ÓïÒô×¨Ïß"){jspPath="speech.jsp";}
-	if(businessType == "»¥ÁªÍø×¨Ïß"){jspPath="net.jsp";}
-	if(businessType == "GPRS×¨Ïß"){jspPath="gprs.jsp";}
-	if(businessType == "¶ÌĞÅ×¨Ïß"){jspPath="sms.jsp";}
-	if(businessType == "´«Êä×¨Ïß"){jspPath="blank.jsp";}
-	$("#addDetailWin").window({ 															//addDetailWin ¶ÔÓ¦µÄÒ³Ãæ¿Ø¼şID
+	if(businessType == "è¯­éŸ³ä¸“çº¿"){jspPath="speech.jsp";}
+	if(businessType == "äº’è”ç½‘ä¸“çº¿"){jspPath="net.jsp";}
+	if(businessType == "GPRSä¸“çº¿"){jspPath="gprs.jsp";}
+	if(businessType == "çŸ­ä¿¡ä¸“çº¿"){jspPath="sms.jsp";}
+	if(businessType == "ä¼ è¾“ä¸“çº¿"){jspPath="blank.jsp";}
+	$("#addDetailWin").window({ 															//addDetailWin å¯¹åº”çš„é¡µé¢æ§ä»¶ID
 		title:' ',
 		width:400,
 		height:200,				
-		modal:true,				//ÊÇ·ñÕÚÕÖ²ã
-		collapsible:false,		//ÊÇ·ñ¿ÉÕÛµş
-		minimizable:false,		//ÊÇ·ñÏÔÊ¾×îĞ¡»¯°´Å¥
-		maximizable:false,		//ÊÇ·ñÏÔÊ¾×î´ó»¯°´Å¥	
-		maximized:true,			//×î´ó»¯
-		resizable:false,		//ÊÇ·ñ¿ÉÀ­Éì
-		draggable:false,		//ÊÇ·ñÍÏ¶¯
-		content:																			//´´½¨´°¿ÚµÄÄÚÈİ£¬¿ÉÒÔÊ¹ÓÃÒ³ÃæµÄÖĞµÄÄÚÈİ×ª»»
+		modal:true,				//æ˜¯å¦é®ç½©å±‚
+		collapsible:false,		//æ˜¯å¦å¯æŠ˜å 
+		minimizable:false,		//æ˜¯å¦æ˜¾ç¤ºæœ€å°åŒ–æŒ‰é’®
+		maximizable:false,		//æ˜¯å¦æ˜¾ç¤ºæœ€å¤§åŒ–æŒ‰é’®	
+		maximized:true,			//æœ€å¤§åŒ–
+		resizable:false,		//æ˜¯å¦å¯æ‹‰ä¼¸
+		draggable:false,		//æ˜¯å¦æ‹–åŠ¨
+		content:																			//åˆ›å»ºçª—å£çš„å†…å®¹ï¼Œå¯ä»¥ä½¿ç”¨é¡µé¢çš„ä¸­çš„å†…å®¹è½¬æ¢
 		'<div id="tt" class="easyui-tabs" border="false" fit="true" >'+
-		    '<div title="¶Ëµ½¶ËÍØÆË" data-options="closable:false" style="height: 100%;width: 100%;" >'+
+		    '<div title="ç«¯åˆ°ç«¯æ‹“æ‰‘" data-options="closable:false" style="height: 100%;width: 100%;" >'+
 				'<iframe frameborder="0" src="../../jtopo5.jsp?id='+intId+'"  style="width:100%;height:100%;overflow:hidden;" ></iframe>'+
 		    '</div>'+
-		    '<div title="'+businessType+'ÏêÇé" data-options="closable:false" style="height: 100%;width: 100%;" >'+
+		    '<div title="'+businessType+'è¯¦æƒ…" data-options="closable:false" style="height: 100%;width: 100%;" >'+
 				'<iframe frameborder="0" src="'+jspPath+'?id='+productNo+'" name="rightFrame" id="rightFrame" style="width:100%;height:100%;overflow:hidden;" ></iframe>'+
 			'</div>'+
 		'</div>'
@@ -151,134 +151,134 @@ String productNo=request.getParameter("id").toString();
 	}
 
 
-Îå¡¢¸ü¾ß·µ»ØµÄjsonÊı¾İ¸ñÊ½¶Ô Êı¾İ½øĞĞ¼Ó¹¤
-	1¡¢·µ»ØÖµµÄÀàĞÍµÄÊÇjson¸ñÊ½Êı¾İ£¬¶ÔÆä½øĞĞ¼Ó¹¤
+äº”ã€æ›´å…·è¿”å›çš„jsonæ•°æ®æ ¼å¼å¯¹ æ•°æ®è¿›è¡ŒåŠ å·¥
+	1ã€è¿”å›å€¼çš„ç±»å‹çš„æ˜¯jsonæ ¼å¼æ•°æ®ï¼Œå¯¹å…¶è¿›è¡ŒåŠ å·¥
     {
-        "Femto×¨Ïß": "Femto×¨Ïß",
-        "WLAN×¨Ïß": "WLAN×¨Ïß",
-        "¶ÌĞÅ": "¶ÌĞÅ"
+        "Femtoä¸“çº¿": "Femtoä¸“çº¿",
+        "WLANä¸“çº¿": "WLANä¸“çº¿",
+        "çŸ­ä¿¡": "çŸ­ä¿¡"
     }
-	2¡¢¶ÔÓ¦µÄjquery each()·½·¨£º
+	2ã€å¯¹åº”çš„jquery each()æ–¹æ³•ï¼š
 	ajax:success:function(data){
 	var html = '';
-	$.each(data,function(key,value){														//ÔÚajaxµÄsuccessÊÂ¼şÖĞÈç¹û´æÔÚÉÏÊö·µ»ØÖµ Ôò¿ÉÒÔÖ±½Óµ÷ÓÃ¸Ã·½·¨
+	$.each(data,function(key,value){														//åœ¨ajaxçš„successäº‹ä»¶ä¸­å¦‚æœå­˜åœ¨ä¸Šè¿°è¿”å›å€¼ åˆ™å¯ä»¥ç›´æ¥è°ƒç”¨è¯¥æ–¹æ³•
 		html += "<option value=\"" + key + "\" >" + value + "</option>";
 	});
 	}
 	
-Áù¡¢¸ù¾İä¯ÀÀÆ÷µÄ¸ß¶È×Ô¶¯µ÷ÕûÒ³ÃæµÄ¸ß¶È
+å…­ã€æ ¹æ®æµè§ˆå™¨çš„é«˜åº¦è‡ªåŠ¨è°ƒæ•´é¡µé¢çš„é«˜åº¦
 	var winHeight = 0;
-    function findDimensions() //º¯Êı£º»ñÈ¡³ß´ç
+    function findDimensions() //å‡½æ•°ï¼šè·å–å°ºå¯¸
     {
-       	winHeight = window.innerHeight;														// window.innerHeight ÊÇ»ñÈ¡µ±Ç°ä¯ÀÀÆ÷µÄµÄ¸ß¶È
+       	winHeight = window.innerHeight;														// window.innerHeight æ˜¯è·å–å½“å‰æµè§ˆå™¨çš„çš„é«˜åº¦
 		
 		
        	$("#heightFine").height(winHeight-44);
     }
-    findDimensions();                                           							//  ³õÊ¼»¯Ò»´Î
+    findDimensions();                                           							//  åˆå§‹åŒ–ä¸€æ¬¡
 
-Æß¡¢»ñÈ¡Ä³¸ö¿Ø¼ş¸ß¶ÈµÄ·½·¨
-	var o = document.getElementById("viewID");												//viewÖ¸¿Ø¼şµÄID
-	var h = o.offsetHeight;  //¸ß¶È
-	var w = o.offsetWidth;  //¿í¶È
+ä¸ƒã€è·å–æŸä¸ªæ§ä»¶é«˜åº¦çš„æ–¹æ³•
+	var o = document.getElementById("viewID");												//viewæŒ‡æ§ä»¶çš„ID
+	var h = o.offsetHeight;  //é«˜åº¦
+	var w = o.offsetWidth;  //å®½åº¦
 
-°Ë¡¢ÁíÍâÕûÀíµÄÒ»Ğ©»ñÈ¡Ò³Ãæ¿í¶È¡¢¸ß¶ÈµÄ·½·¨
+å…«ã€å¦å¤–æ•´ç†çš„ä¸€äº›è·å–é¡µé¢å®½åº¦ã€é«˜åº¦çš„æ–¹æ³•
 var s = "";
-s += " ÍøÒ³¿É¼ûÇøÓò¿í£º"+ document.body.clientWidth;
-s += " ÍøÒ³¿É¼ûÇøÓò¸ß£º"+ document.body.clientHeight;
-s += " ÍøÒ³¿É¼ûÇøÓò¿í£º"+ document.body.offsetWidth + " (°üÀ¨±ßÏßºÍ¹ö¶¯ÌõµÄ¿í)";
-s += " ÍøÒ³¿É¼ûÇøÓò¸ß£º"+ document.body.offsetHeight + " (°üÀ¨±ßÏßµÄ¿í)";
-s += " ÍøÒ³ÕıÎÄÈ«ÎÄ¿í£º"+ document.body.scrollWidth;
-s += " ÍøÒ³ÕıÎÄÈ«ÎÄ¸ß£º"+ document.body.scrollHeight;
-s += " ÍøÒ³±»¾íÈ¥µÄ¸ß(ff)£º"+ document.body.scrollTop;
-s += " ÍøÒ³±»¾íÈ¥µÄ¸ß(ie)£º"+ document.documentElement.scrollTop;
-s += " ÍøÒ³±»¾íÈ¥µÄ×ó£º"+ document.body.scrollLeft;
-s += " ÍøÒ³ÕıÎÄ²¿·ÖÉÏ£º"+ window.screenTop;
-s += " ÍøÒ³ÕıÎÄ²¿·Ö×ó£º"+ window.screenLeft;
-s += " ÆÁÄ»·Ö±æÂÊµÄ¸ß£º"+ window.screen.height;
-s += " ÆÁÄ»·Ö±æÂÊµÄ¿í£º"+ window.screen.width;
-s += " ÆÁÄ»¿ÉÓÃ¹¤×÷Çø¸ß¶È£º"+ window.screen.availHeight;
-s += " ÆÁÄ»¿ÉÓÃ¹¤×÷Çø¿í¶È£º"+ window.screen.availWidth;
-s += " ÄãµÄÆÁÄ»ÉèÖÃÊÇ "+ window.screen.colorDepth +" Î»²ÊÉ«";
-s += " ÄãµÄÆÁÄ»ÉèÖÃ "+ window.screen.deviceXDPI +" ÏñËØ/Ó¢´ç"; 
+s += " ç½‘é¡µå¯è§åŒºåŸŸå®½ï¼š"+ document.body.clientWidth;
+s += " ç½‘é¡µå¯è§åŒºåŸŸé«˜ï¼š"+ document.body.clientHeight;
+s += " ç½‘é¡µå¯è§åŒºåŸŸå®½ï¼š"+ document.body.offsetWidth + " (åŒ…æ‹¬è¾¹çº¿å’Œæ»šåŠ¨æ¡çš„å®½)";
+s += " ç½‘é¡µå¯è§åŒºåŸŸé«˜ï¼š"+ document.body.offsetHeight + " (åŒ…æ‹¬è¾¹çº¿çš„å®½)";
+s += " ç½‘é¡µæ­£æ–‡å…¨æ–‡å®½ï¼š"+ document.body.scrollWidth;
+s += " ç½‘é¡µæ­£æ–‡å…¨æ–‡é«˜ï¼š"+ document.body.scrollHeight;
+s += " ç½‘é¡µè¢«å·å»çš„é«˜(ff)ï¼š"+ document.body.scrollTop;
+s += " ç½‘é¡µè¢«å·å»çš„é«˜(ie)ï¼š"+ document.documentElement.scrollTop;
+s += " ç½‘é¡µè¢«å·å»çš„å·¦ï¼š"+ document.body.scrollLeft;
+s += " ç½‘é¡µæ­£æ–‡éƒ¨åˆ†ä¸Šï¼š"+ window.screenTop;
+s += " ç½‘é¡µæ­£æ–‡éƒ¨åˆ†å·¦ï¼š"+ window.screenLeft;
+s += " å±å¹•åˆ†è¾¨ç‡çš„é«˜ï¼š"+ window.screen.height;
+s += " å±å¹•åˆ†è¾¨ç‡çš„å®½ï¼š"+ window.screen.width;
+s += " å±å¹•å¯ç”¨å·¥ä½œåŒºé«˜åº¦ï¼š"+ window.screen.availHeight;
+s += " å±å¹•å¯ç”¨å·¥ä½œåŒºå®½åº¦ï¼š"+ window.screen.availWidth;
+s += " ä½ çš„å±å¹•è®¾ç½®æ˜¯ "+ window.screen.colorDepth +" ä½å½©è‰²";
+s += " ä½ çš„å±å¹•è®¾ç½® "+ window.screen.deviceXDPI +" åƒç´ /è‹±å¯¸"; 
 
-¾Å¡¢¸ø¿Ø¼şÉèÖÃ¸ß¶ÈÊôĞÔµÄ·½·¨
-	1¡¢¿´apiÎÄµµ£¬Èô¹û´æÔÚÉèÖµ·½·¨£¬Ö±½ÓÊ¹ÓÃ¸Ã·½·¨£º
+ä¹ã€ç»™æ§ä»¶è®¾ç½®é«˜åº¦å±æ€§çš„æ–¹æ³•
+	1ã€çœ‹apiæ–‡æ¡£ï¼Œè‹¥æœå­˜åœ¨è®¾å€¼æ–¹æ³•ï¼Œç›´æ¥ä½¿ç”¨è¯¥æ–¹æ³•ï¼š
 	$("#panelID").height((winHeight-49)/2-40);	
-	2¡¢ÀûÓÃcssµÄÉèÖµÊôĞÔÖµ·½·¨ ÕÒµ½¶ÔÓ¦µÄÊôĞÔÔÚ¸³Öµ	heightValue ÎªÒ»¸ö±äÁ¿
+	2ã€åˆ©ç”¨cssçš„è®¾å€¼å±æ€§å€¼æ–¹æ³• æ‰¾åˆ°å¯¹åº”çš„å±æ€§åœ¨èµ‹å€¼	heightValue ä¸ºä¸€ä¸ªå˜é‡
 	$(".panelClass").css("height",heightValue);
 		?--->    $(".panelClass").css({"height",heightValue});
-	3¡¢ÀûÓÃattr ×ª»»ÖµµÄ·½·¨¸øÊôĞÔ¸³Öµ¡£ÕÒ¶Ô¿Ø¼şµÄÊôĞÔÖµÊÇ¹Ø¼ü£º
-	$(".panelClass").attr("data-content", "µç»°:"+data.phone);
+	3ã€åˆ©ç”¨attr è½¬æ¢å€¼çš„æ–¹æ³•ç»™å±æ€§èµ‹å€¼ã€‚æ‰¾å¯¹æ§ä»¶çš„å±æ€§å€¼æ˜¯å…³é”®ï¼š
+	$(".panelClass").attr("data-content", "ç”µè¯:"+data.phone);
 	
-Ê®¡¢ÈıÖÖ¶¨Òå click ÊÂ¼şµÄ·½Ê½£º
-	1¡¢
+åã€ä¸‰ç§å®šä¹‰ click äº‹ä»¶çš„æ–¹å¼ï¼š
+	1ã€
 	$(document).on("click","#tableID", function(){
-		//¶ÔÓ¦µÄÊÂ¼ş
+		//å¯¹åº”çš„äº‹ä»¶
 	});
-	2¡¢
+	2ã€
 	$("#tableID").on("click",function(){
-		//¶ÔÓ¦µÄÊÂ¼ş
+		//å¯¹åº”çš„äº‹ä»¶
 	});
-	3¡¢
+	3ã€
 	$("#tableID").click(function(){
-		//¶ÔÓ¦µÄÊÂ¼ş
+		//å¯¹åº”çš„äº‹ä»¶
 	});
 
-Ê®Ò»¡¢	Ò³ÃæÌø×ªµÄ·½·¨
-	1¡¢Í¨ÓÃµÄÒ³ÃæÌø×ª·½·¨ £¬Ò»°ãÒÔ¸ùÄ¿Â¼ÎªÆğÊ¼Ä¿Â¼
-	window.location.href = urls;															//urlsÎªÌø×ªµÄÂ·¾¶ 
-	2¡¢Ğ´ÔÚhtmlÖĞµÄÒ³ÃæÌø×ª·½·¨	£¬Ò»°ãÒÔµ±Ç°Ä¿Â¼ÎªÆğÊ¼Ä¿Â¼£º
-		¶ÔÓ¦µÄÒ³Ãæ²¿·Ö£º
-	<iframe id="iframeID" style="display:none;"></iframe><!-- ´ËiframeÎŞÆäËüÓÃÍ¾£¬Ò»°ãÉèÖÃÒş²Ø-->
-		¶ÔÓ¦µÄjs²¿·Ö£º
+åä¸€ã€	é¡µé¢è·³è½¬çš„æ–¹æ³•
+	1ã€é€šç”¨çš„é¡µé¢è·³è½¬æ–¹æ³• ï¼Œä¸€èˆ¬ä»¥æ ¹ç›®å½•ä¸ºèµ·å§‹ç›®å½•
+	window.location.href = urls;															//urlsä¸ºè·³è½¬çš„è·¯å¾„ 
+	2ã€å†™åœ¨htmlä¸­çš„é¡µé¢è·³è½¬æ–¹æ³•	ï¼Œä¸€èˆ¬ä»¥å½“å‰ç›®å½•ä¸ºèµ·å§‹ç›®å½•ï¼š
+		å¯¹åº”çš„é¡µé¢éƒ¨åˆ†ï¼š
+	<iframe id="iframeID" style="display:none;"></iframe><!-- æ­¤iframeæ— å…¶å®ƒç”¨é€”ï¼Œä¸€èˆ¬è®¾ç½®éšè—-->
+		å¯¹åº”çš„jséƒ¨åˆ†ï¼š
 	document.getElementById("iframeID").src =urls;	
-	3¡¢<a>±êÇ©ÖĞµÄsrcÊôĞÔÖĞÖ±½ÓĞ´ÈëÂ·¾¶¡£¿ÉÒÔµã»÷ÎÄ×ÖÖ±½ÓÌø×ªµ½ÏàÓ¦µÄÒ³Ãæ
-	<a href="jsp/selfservice/self_service_operate.jsp" title="µã»÷½øÈëÒµÎñ±¨¸æ²éÑ¯">
-		<span style="color: #436EEE;">ËÕÄşµçÆ÷6ÔÂÍøÂçÔËĞĞ±¨¸æ</span></a>
-	4¡¢ÔÚa±êÇ©ÖĞÍ¨¹ıclick·½·¨Ìø×ªµ½ÏàÓ¦µÄÒ³Ãæ
-	<a href="javascript:void(0)" class="icon-gear" onclick="javascript:functionTZ()" title="µã»÷½øĞĞÅäÖÃ"></a>	
-	js²¿·Ö£º
+	3ã€<a>æ ‡ç­¾ä¸­çš„srcå±æ€§ä¸­ç›´æ¥å†™å…¥è·¯å¾„ã€‚å¯ä»¥ç‚¹å‡»æ–‡å­—ç›´æ¥è·³è½¬åˆ°ç›¸åº”çš„é¡µé¢
+	<a href="jsp/selfservice/self_service_operate.jsp" title="ç‚¹å‡»è¿›å…¥ä¸šåŠ¡æŠ¥å‘ŠæŸ¥è¯¢">
+		<span style="color: #436EEE;">è‹å®ç”µå™¨6æœˆç½‘ç»œè¿è¡ŒæŠ¥å‘Š</span></a>
+	4ã€åœ¨aæ ‡ç­¾ä¸­é€šè¿‡clickæ–¹æ³•è·³è½¬åˆ°ç›¸åº”çš„é¡µé¢
+	<a href="javascript:void(0)" class="icon-gear" onclick="javascript:functionTZ()" title="ç‚¹å‡»è¿›è¡Œé…ç½®"></a>	
+	jséƒ¨åˆ†ï¼š
 	function functionTZ(){
 		window.location.href = urls;		
 	}
-	5¡¢<iframe>±êÇ©ÖĞµÄsrcÊôĞÔÖĞÖ±½ÓĞ´ÈëÂ·¾¶£¬µ±´ò¿ªµ±Ç°Ò³ÃæµÄiframeÖĞµÄÒ³ÃæÒ²»áËæÖ®¼ÓÔØ³öÀ´¡£
+	5ã€<iframe>æ ‡ç­¾ä¸­çš„srcå±æ€§ä¸­ç›´æ¥å†™å…¥è·¯å¾„ï¼Œå½“æ‰“å¼€å½“å‰é¡µé¢çš„iframeä¸­çš„é¡µé¢ä¹Ÿä¼šéšä¹‹åŠ è½½å‡ºæ¥ã€‚
 	<iframe src="sys_index.jsp" scrolling="auto" name="rightFrame" id="rightFrame"
             style="bottom:0px; width:100%;height: 100%;" title="rightFrame"/>
-	Ò³ÃæÈç¹ûÓĞÊ÷ĞÎ½á¹¹µÄÌø×ª£¬ÊôĞÔ½á¹¹ÖĞµÄtarget Ò²ÄÜÖ¸¶¨µ½Õâ¸öiframeÖĞ
+	é¡µé¢å¦‚æœæœ‰æ ‘å½¢ç»“æ„çš„è·³è½¬ï¼Œå±æ€§ç»“æ„ä¸­çš„target ä¹Ÿèƒ½æŒ‡å®šåˆ°è¿™ä¸ªiframeä¸­
 	<ul class="menuson" style="background-color: #FFFFFF">
-		<li><cite></cite><a href="jsp/userManage.jsp" target="rightFrameMenu">ÓÃ»§¹ÜÀí</a><i></i></li>
-		<li><cite></cite><a href="jsp/LogOperateManage.jsp" target="rightFrameMenu">²Ù×÷ÈÕÖ¾¹ÜÀí</a><i></i></li>
-		<li><cite></cite><a href="jsp/baseStationMaintain.jsp" target="rightFrameMenu">»ùÕ¾ĞÅÏ¢Î¬»¤</a><i></i></li>
-		<li><cite></cite><a href="jsp/switchMsgMaintain.jsp" target="rightFrameMenu">½»»»ÖĞĞÄĞÅÏ¢Î¬»¤</a><i></i></li>
+		<li><cite></cite><a href="jsp/userManage.jsp" target="rightFrameMenu">ç”¨æˆ·ç®¡ç†</a><i></i></li>
+		<li><cite></cite><a href="jsp/LogOperateManage.jsp" target="rightFrameMenu">æ“ä½œæ—¥å¿—ç®¡ç†</a><i></i></li>
+		<li><cite></cite><a href="jsp/baseStationMaintain.jsp" target="rightFrameMenu">åŸºç«™ä¿¡æ¯ç»´æŠ¤</a><i></i></li>
+		<li><cite></cite><a href="jsp/switchMsgMaintain.jsp" target="rightFrameMenu">äº¤æ¢ä¸­å¿ƒä¿¡æ¯ç»´æŠ¤</a><i></i></li>
 	</ul>
 
-Ê®¶ş¡¢±í¸ñÉèÖÃºÏ²¢±ß¿òÄ£ĞÍ(Ò³Ãæ)£º   
+åäºŒã€è¡¨æ ¼è®¾ç½®åˆå¹¶è¾¹æ¡†æ¨¡å‹(é¡µé¢)ï¼š   
  table
   {
   border-collapse:collapse;
   }
 
-Ê®Èı¡¢  Êó±ê¼àÌıÊÂ¼ş
-	case£ºhttp://www.cnblogs.com/rubylouvre/archive/2009/08/24/1552862.html   				//¿ÉÒÔ²Î¿¼µÄÍøÖ·
+åä¸‰ã€  é¼ æ ‡ç›‘å¬äº‹ä»¶
+	caseï¼šhttp://www.cnblogs.com/rubylouvre/archive/2009/08/24/1552862.html   				//å¯ä»¥å‚è€ƒçš„ç½‘å€
 	
-Ê®ËÄ¡¢¼üÅÌ¼àÌıÊÂ¼ş
-	// ÒÔÏÂÊÇÒ»¶Î ¼àÌıenter¼ü¡¢Esc¼ü¡¢F2¼ü µÄ¼üÅÌ¼àÌıÊÂ¼ş
+åå››ã€é”®ç›˜ç›‘å¬äº‹ä»¶
+	// ä»¥ä¸‹æ˜¯ä¸€æ®µ ç›‘å¬enteré”®ã€Escé”®ã€F2é”® çš„é”®ç›˜ç›‘å¬äº‹ä»¶
 	document.onkeydown=function(event){
     var e = event || window.event || arguments.callee.caller.arguments[0];
-     if(e && e.keyCode==13){ // enter ¼ü
-          //Òª×öµÄÊÂÇé
+     if(e && e.keyCode==13){ // enter é”®
+          //è¦åšçš„äº‹æƒ…
     	 userLogin();
      }
-     if(e && e.keyCode==27){ // °´ Esc 
-        //Òª×öµÄÊÂÇé
+     if(e && e.keyCode==27){ // æŒ‰ Esc 
+        //è¦åšçš„äº‹æƒ…
       }
-    if(e && e.keyCode==113){ // °´ F2 
-         //Òª×öµÄÊÂÇé
+    if(e && e.keyCode==113){ // æŒ‰ F2 
+         //è¦åšçš„äº‹æƒ…
        }            
 	}; 
 
-Ê®Îå¡¢¶¯Ì¬´´½¨js
+åäº”ã€åŠ¨æ€åˆ›å»ºjs
 case:
 function loadjs(script_filename) {
     var script = document.createElement('script');
@@ -296,27 +296,27 @@ function loadjs(script_filename) {
 var script = 'http://coolshell.cn/asyncjs/alert.js';
 loadjs(script);
 
-Ê®Áù¡¢Ò»¸öÕûºÏspring+springMVC+myBatis µÄÑùÀı
+åå…­ã€ä¸€ä¸ªæ•´åˆspring+springMVC+myBatis çš„æ ·ä¾‹
 case: http://ju.outofmemory.cn/entry/100681
 
-Ê®Æß¡¢µ÷ÓÃajaxµÄÁ½¸ö¾­µä·½·¨
-ÍøÕ¾£º(×¢*  ¹ØÓÚajaxÖĞµÄdata²ÎÊıÊı¾İÀàĞÍ×ª»»µÄÒ»Æ¬²©¿Í)   http://www.cnblogs.com/sunxi/p/3849361.html
+åä¸ƒã€è°ƒç”¨ajaxçš„ä¸¤ä¸ªç»å…¸æ–¹æ³•
+ç½‘ç«™ï¼š(æ³¨*  å…³äºajaxä¸­çš„dataå‚æ•°æ•°æ®ç±»å‹è½¬æ¢çš„ä¸€ç‰‡åšå®¢)   http://www.cnblogs.com/sunxi/p/3849361.html
 
-	//1¡¢µ÷ÓÃajaxµÄ	get ÇëÇó
+	//1ã€è°ƒç”¨ajaxçš„	get è¯·æ±‚
 		$.ajax({
         cache: false,
         type: "get",
         url:path+'/rs/report/home/dutyinfo/get',
         async: false,
         error: function(request) {
-        	bootbox.alert("Î´ÕÒµ½Öµ°àÈËĞÅÏ¢£¡");
+        	bootbox.alert("æœªæ‰¾åˆ°å€¼ç­äººä¿¡æ¯ï¼");
         },
         success: function(data) {
 			$("#userName").val(data.user_name);
         	$("#phone").val(data.phone);
         }
      });
-	//2¡¢µ÷ÓÃajaxµÄ post ÇëÇó 
+	//2ã€è°ƒç”¨ajaxçš„ post è¯·æ±‚ 
 		var params = {};
 		params.user_name = $("#userName").val();
 		params.phone = $("#phone").val();
@@ -328,59 +328,59 @@ case: http://ju.outofmemory.cn/entry/100681
 	        async: false,
 	        data:JSON.stringify(params),
 	        error: function(request) {
-	        	bootbox.alert("ĞŞ¸ÄÊ§°Ü£¡");
+	        	bootbox.alert("ä¿®æ”¹å¤±è´¥ï¼");
 	        },
 	        success: function(data) {
-				bootbox.alert("ĞŞ¸Ä³É¹¦£¡");
+				bootbox.alert("ä¿®æ”¹æˆåŠŸï¼");
 	        }
 	     });	
 
-	//3¡¢µ÷ÓÃajaxÖ±½Ó´¦Àíform±íµ¥µÄÊı¾İ
+	//3ã€è°ƒç”¨ajaxç›´æ¥å¤„ç†formè¡¨å•çš„æ•°æ®
 		$.ajax({
 	            cache: true,
 	            type: "POST",
 	            url:url,
-	            data:$("#formId").serialize(),// ÄãµÄformid
+	            data:$("#formId").serialize(),// ä½ çš„formid
 	            async: false,
 	            error: function(request) {
-	             console.log("Ê§°Ü");
+	             console.log("å¤±è´¥");
 	            },
 	            success: function(data) {
 	            	$('#'+modelId).modal('toggle');
 	            	$("#"+tableId).DataTable().draw();
-	            	//Çå¿ÕÊı¾İ
+	            	//æ¸…ç©ºæ•°æ®
 	            	
 	            }
 	         });
-	//4¡¢µ÷ÓÃajax ÓÃº¯Êı·½·¨»ØÈ¥dataÊı¾İ
+	//4ã€è°ƒç”¨ajax ç”¨å‡½æ•°æ–¹æ³•å›å»dataæ•°æ®
 		$("#deviceTable").dataTable({
-    	            serverSide: true,//·ÖÒ³£¬È¡Êı¾İµÈµÈµÄ¶¼·Åµ½·şÎñ¶ËÈ¥
-    	            processing: false,//ÔØÈëÊı¾İµÄÊ±ºòÊÇ·ñÏÔÊ¾¡°ÔØÈëÖĞ¡±
-    	            pageLength: 10,//Ê×´Î¼ÓÔØµÄÊı¾İÌõÊı
-    	            searching: false,//ËÑË÷
-    	            ordering: false,//ÅÅĞò²Ù×÷ÔÚ·şÎñ¶Ë½øĞĞ£¬ËùÒÔ¿ÉÒÔ¹ØÁË
-    	            ajax: {//ÀàËÆjqueryµÄajax²ÎÊı£¬»ù±¾¶¼¿ÉÒÔÓÃ¡£
-    	                type: "get",//ºóÌ¨Ö¸¶¨ÁË·½Ê½£¬Ä¬ÈÏget£¬Íâ¼ÓdatatableÄ¬ÈÏ¹¹ÔìµÄ²ÎÊıºÜ³¤£¬ÓĞ¿ÉÄÜ³¬¹ıgetµÄ×î´ó³¤¶È¡£
+    	            serverSide: true,//åˆ†é¡µï¼Œå–æ•°æ®ç­‰ç­‰çš„éƒ½æ”¾åˆ°æœåŠ¡ç«¯å»
+    	            processing: false,//è½½å…¥æ•°æ®çš„æ—¶å€™æ˜¯å¦æ˜¾ç¤ºâ€œè½½å…¥ä¸­â€
+    	            pageLength: 10,//é¦–æ¬¡åŠ è½½çš„æ•°æ®æ¡æ•°
+    	            searching: false,//æœç´¢
+    	            ordering: false,//æ’åºæ“ä½œåœ¨æœåŠ¡ç«¯è¿›è¡Œï¼Œæ‰€ä»¥å¯ä»¥å…³äº†
+    	            ajax: {//ç±»ä¼¼jqueryçš„ajaxå‚æ•°ï¼ŒåŸºæœ¬éƒ½å¯ä»¥ç”¨ã€‚
+    	                type: "get",//åå°æŒ‡å®šäº†æ–¹å¼ï¼Œé»˜è®¤getï¼Œå¤–åŠ datatableé»˜è®¤æ„é€ çš„å‚æ•°å¾ˆé•¿ï¼Œæœ‰å¯èƒ½è¶…è¿‡getçš„æœ€å¤§é•¿åº¦ã€‚
     	                url: url,
-    	                dataSrc: "rows",//Ä¬ÈÏdata£¬Ò²¿ÉÒÔĞ´ÆäËûµÄ£¬¸ñÊ½»¯tableµÄÊ±ºòÈ¡ÀïÃæµÄÊı¾İ
-    	                data: function (d) {//d ÊÇÔ­Ê¼µÄ·¢ËÍ¸ø·şÎñÆ÷µÄÊı¾İ£¬Ä¬ÈÏºÜ³¤¡£
+    	                dataSrc: "rows",//é»˜è®¤dataï¼Œä¹Ÿå¯ä»¥å†™å…¶ä»–çš„ï¼Œæ ¼å¼åŒ–tableçš„æ—¶å€™å–é‡Œé¢çš„æ•°æ®
+    	                data: function (d) {//d æ˜¯åŸå§‹çš„å‘é€ç»™æœåŠ¡å™¨çš„æ•°æ®ï¼Œé»˜è®¤å¾ˆé•¿ã€‚
     	                var param = getSearchParam();
     	                console.log(param);
-    	                    param.start = d.start;//¿ªÊ¼µÄĞòºÅ
-    	                    param.length = d.length;//ÒªÈ¡µÄÊı¾İµÄ
-    	                    return param;//×Ô¶¨ÒåĞèÒª´«µİµÄ²ÎÊı¡£
+    	                    param.start = d.start;//å¼€å§‹çš„åºå·
+    	                    param.length = d.length;//è¦å–çš„æ•°æ®çš„
+    	                    return param;//è‡ªå®šä¹‰éœ€è¦ä¼ é€’çš„å‚æ•°ã€‚
     	                }
     	            }
     	          ,
-    	            columns: [//¶ÔÓ¦ÉÏÃætheadÀïÃæµÄĞòÁĞ    
+    	            columns: [//å¯¹åº”ä¸Šé¢theadé‡Œé¢çš„åºåˆ—    
     	                      { data: "sys_name"},
                               
                               { data: "ip_addr"},
                               { data: "device_type","render": function(data, type, full) { 
-                                	if(data=='HOST') return "Ö÷»ú";
-                                  	if(data=='SWTICH') return "½»»»»ú";
-                                  	if(data=='ROUTER') return "Â·ÓÉÆ÷";
-                                  	else return "ÔİÎŞ";
+                                	if(data=='HOST') return "ä¸»æœº";
+                                  	if(data=='SWTICH') return "äº¤æ¢æœº";
+                                  	if(data=='ROUTER') return "è·¯ç”±å™¨";
+                                  	else return "æš‚æ— ";
                                    }
                                   },
                               { data: "city"},
@@ -391,7 +391,7 @@ case: http://ju.outofmemory.cn/entry/100681
                               	
                               },
                               { data: "device_id","render": function(data, type, full) { 
-                            	var    info='<a href="javascript:openPerconfig(\''+data+'\')"     class="btn btn-info  btn-xs"  title="ĞÔÄÜÖ¸±êÅäÖÃ"> <span class="glyphicon  glyphicon-book" ></span></a>';
+                            	var    info='<a href="javascript:openPerconfig(\''+data+'\')"     class="btn btn-info  btn-xs"  title="æ€§èƒ½æŒ‡æ ‡é…ç½®"> <span class="glyphicon  glyphicon-book" ></span></a>';
                               	return info;
                               }}
     	            ],
@@ -399,28 +399,28 @@ case: http://ju.outofmemory.cn/entry/100681
     	              
     	            },
     	            language: {
-    	                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>Ìõ¼ÇÂ¼',//×óÉÏ½ÇµÄ·ÖÒ³´óĞ¡ÏÔÊ¾¡£
+    	                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>æ¡è®°å½•',//å·¦ä¸Šè§’çš„åˆ†é¡µå¤§å°æ˜¾ç¤ºã€‚
     	               // lengthMenu:false,
-    	                processing: "ÔØÈëÖĞ",//´¦ÀíÒ³ÃæÊı¾İµÄÊ±ºòµÄÏÔÊ¾
-    	                paginate: {//·ÖÒ³µÄÑùÊ½ÎÄ±¾ÄÚÈİ¡£
-    	                    previous: "ÉÏÒ»Ò³",
-    	                    next: "ÏÂÒ»Ò³",
-    	                    first: "µÚÒ»Ò³",
-    	                    last: "×îºóÒ»Ò³"
+    	                processing: "è½½å…¥ä¸­",//å¤„ç†é¡µé¢æ•°æ®çš„æ—¶å€™çš„æ˜¾ç¤º
+    	                paginate: {//åˆ†é¡µçš„æ ·å¼æ–‡æœ¬å†…å®¹ã€‚
+    	                    previous: "ä¸Šä¸€é¡µ",
+    	                    next: "ä¸‹ä¸€é¡µ",
+    	                    first: "ç¬¬ä¸€é¡µ",
+    	                    last: "æœ€åä¸€é¡µ"
     	                },
-    	                zeroRecords: "Ã»ÓĞÄÚÈİ",//table tbodyÄÚÈİÎª¿ÕÊ±£¬tbodyµÄÄÚÈİ¡£
-    	                //ÏÂÃæÈıÕß¹¹³ÉÁË×ÜÌåµÄ×óÏÂ½ÇµÄÄÚÈİ¡£
-    	                info: '×Ü¹²_PAGES_ Ò³£¬ÏÔÊ¾µÚ_START_ µ½µÚ _END_ £¬¹²_TOTAL_ Ìõ ',//×óÏÂ½ÇµÄĞÅÏ¢ÏÔÊ¾£¬´óĞ´µÄ´ÊÎª¹Ø¼ü×Ö¡£
-    	                infoEmpty: "¹²0Ìõ¼ÇÂ¼",//É¸Ñ¡Îª¿ÕÊ±×óÏÂ½ÇµÄÏÔÊ¾¡£
-    	                infoFiltered: ""//É¸Ñ¡Ö®ºóµÄ×óÏÂ½ÇÉ¸Ñ¡ÌáÊ¾(ÁíÒ»¸öÊÇ·ÖÒ³ĞÅÏ¢ÏÔÊ¾£¬ÔÚÉÏÃæµÄinfoÖĞÒÑ¾­ÉèÖÃ£¬ËùÒÔ¿ÉÒÔ²»ÏÔÊ¾)£¬
+    	                zeroRecords: "æ²¡æœ‰å†…å®¹",//table tbodyå†…å®¹ä¸ºç©ºæ—¶ï¼Œtbodyçš„å†…å®¹ã€‚
+    	                //ä¸‹é¢ä¸‰è€…æ„æˆäº†æ€»ä½“çš„å·¦ä¸‹è§’çš„å†…å®¹ã€‚
+    	                info: 'æ€»å…±_PAGES_ é¡µï¼Œæ˜¾ç¤ºç¬¬_START_ åˆ°ç¬¬ _END_ ï¼Œå…±_TOTAL_ æ¡ ',//å·¦ä¸‹è§’çš„ä¿¡æ¯æ˜¾ç¤ºï¼Œå¤§å†™çš„è¯ä¸ºå…³é”®å­—ã€‚
+    	                infoEmpty: "å…±0æ¡è®°å½•",//ç­›é€‰ä¸ºç©ºæ—¶å·¦ä¸‹è§’çš„æ˜¾ç¤ºã€‚
+    	                infoFiltered: ""//ç­›é€‰ä¹‹åçš„å·¦ä¸‹è§’ç­›é€‰æç¤º(å¦ä¸€ä¸ªæ˜¯åˆ†é¡µä¿¡æ¯æ˜¾ç¤ºï¼Œåœ¨ä¸Šé¢çš„infoä¸­å·²ç»è®¾ç½®ï¼Œæ‰€ä»¥å¯ä»¥ä¸æ˜¾ç¤º)ï¼Œ
     	            },
     	            lengthChange:true,
     	            paging: true
     	        });
 				
-Ê®°Ë¡¢ÉèÖÃcookie Óë »ñÈ¡cookie µÄ·½·¨ Ò»°ãÊÇµÇÂ¼²Ù×÷ÊÇ½«ÓÃ»§ÃûÃÜÂëĞÅÏ¢·ÅÔÚcookieÖĞ
-1¡¢ÉèÖÃcookie
-//Ìí¼Ócookie (String name,String value,int day)  
+åå…«ã€è®¾ç½®cookie ä¸ è·å–cookie çš„æ–¹æ³• ä¸€èˆ¬æ˜¯ç™»å½•æ“ä½œæ˜¯å°†ç”¨æˆ·åå¯†ç ä¿¡æ¯æ”¾åœ¨cookieä¸­
+1ã€è®¾ç½®cookie
+//æ·»åŠ cookie (String name,String value,int day)  
 function addCookie(name,value,day) 
 { 
 var exp = new Date(); 
@@ -429,8 +429,8 @@ document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 } 
 //addCookie("userName",$("#userName").val(),7);
 
-2¡¢»ñÈ¡cookie
-//»ñÈ¡cookie (String name)
+2ã€è·å–cookie
+//è·å–cookie (String name)
 function getCookie(name) 
 { 
 var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
@@ -464,21 +464,21 @@ setCookie("h5Location","www.baidu.com");
 console.log(getCookie('h5Location'));
 
 
-Ê®¾Å¡¢indexOf()º¯Êı ·µ»ØÔÚ String ¶ÔÏóÖĞµÚÒ»´Î³öÏÖ×Ó×Ö·û´®µÄ×Ö·ûÎ»ÖÃ¡£µ±Î´ÕÒµ½·µ»ØÖµÊ±Ôò·µ»Ø -1
+åä¹ã€indexOf()å‡½æ•° è¿”å›åœ¨ String å¯¹è±¡ä¸­ç¬¬ä¸€æ¬¡å‡ºç°å­å­—ç¬¦ä¸²çš„å­—ç¬¦ä½ç½®ã€‚å½“æœªæ‰¾åˆ°è¿”å›å€¼æ—¶åˆ™è¿”å› -1
 var str = "hello world!";
 var a=str.indexOf("hello");
 var b=str.indexOf("Hello");
 var c=str.indexOf("world");
-·µ»Ø½á¹û£º
+è¿”å›ç»“æœï¼š
 a=0;
-b=-1; //Çø·Ö´óĞ¡Ğ´ ²éÕÒÎŞ½á¹û ·µ»Ø -1
+b=-1; //åŒºåˆ†å¤§å°å†™ æŸ¥æ‰¾æ— ç»“æœ è¿”å› -1
 c=6;
 
-¶şÊ®¡¢checkbox µÄÖµÅĞ¶Ï
-<input type="checkbox" title="¼Ç×¡ÃÜÂë" checked="checked" id="isCheck"><span style="color: #1e90ff">¼Ç×¡ÃÜÂë</span>
-$("#isCheck").prop("checked");  	//·µ»ØÖµÊÇbooleanÀàĞÍ
+äºŒåã€checkbox çš„å€¼åˆ¤æ–­
+<input type="checkbox" title="è®°ä½å¯†ç " checked="checked" id="isCheck"><span style="color: #1e90ff">è®°ä½å¯†ç </span>
+$("#isCheck").prop("checked");  	//è¿”å›å€¼æ˜¯booleanç±»å‹
 
-¶şÒ»¡¢Í¼Æ¬¹ö¶¯µÄ°¸Àı
+äºŒä¸€ã€å›¾ç‰‡æ»šåŠ¨çš„æ¡ˆä¾‹
 case1:
 html>
 <body>
@@ -486,18 +486,18 @@ html>
 div { font-size:12px; }
 </style>
 <div id="mq" style="width:100%;height:70px;overflow:hidden;border:1px solid #000000" onmouseover="iScrollAmount=0" onmouseout="iScrollAmount=1">
-ÀîĞÂ³É<br/>
-ñÒÏ²·²<br/>
-¶­ÀïĞñ<br/>
-ÕÅÀö¾ı<br/>
-¶ÅÖ¾·¼<br/>
-Àî¹úÓñ<br/>
+ææ–°æˆ<br/>
+è¤šå–œå‡¡<br/>
+è‘£é‡Œæ—­<br/>
+å¼ ä¸½å›<br/>
+æœå¿—èŠ³<br/>
+æå›½ç‰<br/>
 </div>
 <script>
-var oMarquee = document.getElementById("mq"); //¹ö¶¯¶ÔÏó
-var iLineHeight = 14; //µ¥ĞĞ¸ß¶È£¬ÏñËØ
-var iLineCount = 6; //Êµ¼ÊĞĞÊı
-var iScrollAmount = 1; //Ã¿´Î¹ö¶¯¸ß¶È£¬ÏñËØ
+var oMarquee = document.getElementById("mq"); //æ»šåŠ¨å¯¹è±¡
+var iLineHeight = 14; //å•è¡Œé«˜åº¦ï¼Œåƒç´ 
+var iLineCount = 6; //å®é™…è¡Œæ•°
+var iScrollAmount = 1; //æ¯æ¬¡æ»šåŠ¨é«˜åº¦ï¼Œåƒç´ 
 function run() {
 oMarquee.scrollTop += iScrollAmount;
 if ( oMarquee.scrollTop == iLineCount * iLineHeight )
@@ -513,13 +513,13 @@ window.setTimeout( "run()", 2000 );
 </script>
 </body>
 </html>
-//ÍÆ¼öÊ¹ÓÃcase2µÄ·½Ê½¼ÓÔØ
+//æ¨èä½¿ç”¨case2çš„æ–¹å¼åŠ è½½
 case2:
 <div id="demo" style="overflow: hidden;height: 200px;width:100%;">
 	<div id="demo1">
-	<li class="list-group-item" style="height:41px;"><a href="#">¡ñ&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
-	<li class="list-group-item" style="height:41px;"><a href="#">¡ñ&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
-	<li class="list-group-item" style="height:41px;"><a href="#">¡ñ&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
+	<li class="list-group-item" style="height:41px;"><a href="#">â—&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
+	<li class="list-group-item" style="height:41px;"><a href="#">â—&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
+	<li class="list-group-item" style="height:41px;"><a href="#">â—&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
 	......
 	</div>
 </div>
@@ -547,27 +547,27 @@ case2:
 		} 
 		}) 
 		
-¶ş¶ş¡¢ÍøÒ³×ÔÊÊÓ¦¿í¶ÈÉè¼Æ
-website£ºhttp://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html
+äºŒäºŒã€ç½‘é¡µè‡ªé€‚åº”å®½åº¦è®¾è®¡
+websiteï¼šhttp://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html
 
-Ñ¡Ôñ¼ÓÔØcss
-//´úÂëÒâË¼ÊÇ£¬Èç¹ûÆÁÄ»¿í¶ÈĞ¡ÓÚ400ÏñËØ£¨max-device-width: 400px£©£¬¾Í¼ÓÔØtinyScreen.cssÎÄ¼ş¡£
+é€‰æ‹©åŠ è½½css
+//ä»£ç æ„æ€æ˜¯ï¼Œå¦‚æœå±å¹•å®½åº¦å°äº400åƒç´ ï¼ˆmax-device-width: 400pxï¼‰ï¼Œå°±åŠ è½½tinyScreen.cssæ–‡ä»¶ã€‚
 <link rel="stylesheet" type="text/css"
-¡¡¡¡¡¡¡¡media="screen and (max-device-width: 400px)"
-¡¡¡¡¡¡¡¡href="tinyScreen.css" />	
-//Èç¹ûÆÁÄ»¿í¶ÈÔÚ400ÏñËØµ½600ÏñËØÖ®¼ä£¬Ôò¼ÓÔØsmallScreen.cssÎÄ¼ş¡£	
+ã€€ã€€ã€€ã€€media="screen and (max-device-width: 400px)"
+ã€€ã€€ã€€ã€€href="tinyScreen.css" />	
+//å¦‚æœå±å¹•å®½åº¦åœ¨400åƒç´ åˆ°600åƒç´ ä¹‹é—´ï¼Œåˆ™åŠ è½½smallScreen.cssæ–‡ä»¶ã€‚	
 <link rel="stylesheet" type="text/css"
-¡¡¡¡¡¡¡¡media="screen and (min-width: 400px) and (max-device-width: 600px)"
-¡¡¡¡¡¡¡¡href="smallScreen.css" />
-//³ıÁËÓÃhtml±êÇ©¼ÓÔØCSSÎÄ¼ş£¬»¹¿ÉÒÔÔÚÏÖÓĞCSSÎÄ¼şÖĞ¼ÓÔØ¡£
+ã€€ã€€ã€€ã€€media="screen and (min-width: 400px) and (max-device-width: 600px)"
+ã€€ã€€ã€€ã€€href="smallScreen.css" />
+//é™¤äº†ç”¨htmlæ ‡ç­¾åŠ è½½CSSæ–‡ä»¶ï¼Œè¿˜å¯ä»¥åœ¨ç°æœ‰CSSæ–‡ä»¶ä¸­åŠ è½½ã€‚
 @import url("tinyScreen.css") screen and (max-device-width: 400px);
 
-¶şÈı¡¢ä¯ÀÀÆ÷×î´ó»¯¡¢×îĞ¡»¯¡¢»òÕß¸Ä±ä´óĞ¡ÊÇ´¥·¢¸ÃÊÂ¼ş£¬²¢ÇÒË¢ĞÂÒ³Ãæ
-²Î¿¼ÍøÕ¾£ºhttp://www.jb51.net/article/14397.htm
+äºŒä¸‰ã€æµè§ˆå™¨æœ€å¤§åŒ–ã€æœ€å°åŒ–ã€æˆ–è€…æ”¹å˜å¤§å°æ˜¯è§¦å‘è¯¥äº‹ä»¶ï¼Œå¹¶ä¸”åˆ·æ–°é¡µé¢
+å‚è€ƒç½‘ç«™ï¼šhttp://www.jb51.net/article/14397.htm
 window.onresize = function(){
-	location.reload(false);		//µ±ÎªtrueÊ±ÖØĞÂ»ñÈ¡Êı¾İ¼ÓÔØÒ³Ãæ µ±ÎªfalseÊ±»ñÈ¡»º´æ²¢Ë¢ĞÂÒ³Ãæ
+	location.reload(false);		//å½“ä¸ºtrueæ—¶é‡æ–°è·å–æ•°æ®åŠ è½½é¡µé¢ å½“ä¸ºfalseæ—¶è·å–ç¼“å­˜å¹¶åˆ·æ–°é¡µé¢
 }	
-//µ±Ç°Ò³Ãæ½ûÓÃ onresize ÊÂ¼ş
+//å½“å‰é¡µé¢ç¦ç”¨ onresize äº‹ä»¶
 window.onresize = function(e){
 	if(e && e.preventDefault){
 		e.preventDefault();
@@ -579,31 +579,31 @@ window.onresize = function(e){
 
 
 
-¶şËÄ¡¢ÏÂÃæÈı¸öÎÄ¼ş¿ØÖÆhtml»òjspÒ³Ãæ²»»á³öÏÖÂÒÂë£¬ÇÒ±ØĞë·ÅÔÚÒ³Ãæ<head>±êÇ©ÖĞµÄ×îÇ°Ãæ
+äºŒå››ã€ä¸‹é¢ä¸‰ä¸ªæ–‡ä»¶æ§åˆ¶htmlæˆ–jspé¡µé¢ä¸ä¼šå‡ºç°ä¹±ç ï¼Œä¸”å¿…é¡»æ”¾åœ¨é¡µé¢<head>æ ‡ç­¾ä¸­çš„æœ€å‰é¢
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	
-¶şÎå¡¢ĞŞ¸ÄÄ¬ÈÏÒ³ÃæµÄapacher-tomcatÍ¼±ê
+äºŒäº”ã€ä¿®æ”¹é»˜è®¤é¡µé¢çš„apacher-tomcatå›¾æ ‡
 	<head>
 	<link rel="icon" href="resources/bootstrap/bootstrap-3.3.5/docs/favicon.ico">
 	</head>
 	
 	
-¶şÁù¡¢¿ØÖÆbodyµÄ±³¾°ÑÕÉ«¡¢±³¾°Í¼Æ¬
+äºŒå…­ã€æ§åˆ¶bodyçš„èƒŒæ™¯é¢œè‰²ã€èƒŒæ™¯å›¾ç‰‡
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>hello world</title>
 </head>
-<!--  ×îÔ­Ê¼µÄ·½Ê½ÈçÏÂ£º¶¨ÒåbodyµÄ±³¾°ÑÕÉ«ÎªÀ¶É«£¬ÖĞ¼ä²¿·ÖÎª°×É«	-->
+<!--  æœ€åŸå§‹çš„æ–¹å¼å¦‚ä¸‹ï¼šå®šä¹‰bodyçš„èƒŒæ™¯é¢œè‰²ä¸ºè“è‰²ï¼Œä¸­é—´éƒ¨åˆ†ä¸ºç™½è‰²	-->
 <!--
 <body style="background-color: blue;">
 <div style="background-color:white;width:800px;height:1000px;margin:0 auto;">
 </div>
 </body>
 -->
-<!---  ¶Ô´Ë·½·¨½øĞĞĞŞ¸Ä°ÑbodyµÄ±³¾°ÑÕÉ«¸Ä³É±³¾°Í¼Æ¬  --->
+<!---  å¯¹æ­¤æ–¹æ³•è¿›è¡Œä¿®æ”¹æŠŠbodyçš„èƒŒæ™¯é¢œè‰²æ”¹æˆèƒŒæ™¯å›¾ç‰‡  --->
 <body style="background-image: url('background.png')">
 
 <div style="background-color: blue;width: 800px;height: 500px;margin: 0 auto;">
@@ -611,11 +611,11 @@ window.onresize = function(e){
 
 </body>
 <style>
-	//¶¨ÒåÍ¼Æ¬¾ÓÖĞ£¬ÇÒÍ¼Æ¬²»ÖØ¸´
+	//å®šä¹‰å›¾ç‰‡å±…ä¸­ï¼Œä¸”å›¾ç‰‡ä¸é‡å¤
     /*
     body {
         background-image: url("background.png");
-        background-position: 50% 50%;		//¶¨ÒåË®Æ½´¹Ö±¾ÓÖĞ
+        background-position: 50% 50%;		//å®šä¹‰æ°´å¹³å‚ç›´å±…ä¸­
         background-repeat:no-repeat;
     }
      body { background-image: url("background.png"); background-position-x: 50%; background-repeat:no-repeat; }
@@ -623,7 +623,7 @@ window.onresize = function(e){
     /**
     body { background-image: url("background.png"); background-position-x: 50%;background-position-y: 50%; background-repeat:no-repeat; }
     */
-	//ÏÂÃæµÄÊÇÏîÄ¿ÖĞ²Ëµ¥µÄÊµÀı
+	//ä¸‹é¢çš„æ˜¯é¡¹ç›®ä¸­èœå•çš„å®ä¾‹
 	{
 	background-image: url("../../../images/homePage/DHXLBJ2.png");
 	background-position: 100% 100%;		
@@ -634,14 +634,14 @@ window.onresize = function(e){
 </style>
 </html>
 
-¶şÆß¡¢¿ØÖÆÍ¼Æ¬µÄÏÔÊ¾·½Ê½
+äºŒä¸ƒã€æ§åˆ¶å›¾ç‰‡çš„æ˜¾ç¤ºæ–¹å¼
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>hello world</title>
 </head>
 <body>
-<!--  ¿ØÖÆÍ¼Æ¬´óĞ¡ºÍä¯ÀÀÆ÷´°¿ÚµÄ´óĞ¡Ò»ÖÂ	-->
+<!--  æ§åˆ¶å›¾ç‰‡å¤§å°å’Œæµè§ˆå™¨çª—å£çš„å¤§å°ä¸€è‡´	-->
 <div id="Layer1" style="position:absolute; width:100%; height:100%; z-index:-1">
     <img src="0f1077ba53.png" height="100%" width="100%"/>
 </div>
@@ -651,38 +651,38 @@ window.onresize = function(e){
 
 
 
-¶ş°Ë¡¢²é¿´µ±Ç°jquery°æ±¾ĞÅÏ¢
+äºŒå…«ã€æŸ¥çœ‹å½“å‰jqueryç‰ˆæœ¬ä¿¡æ¯
 <script type="text/javascript">
 jQuery(function(){ 
     alert(jQuery.fn.jquery);        
 })
 </script>
 
-¶ş¾Å¡¢³¬Á´
-²»Í¬±êÇ©³¬Á´µÄ·½Ê½²»Í¬
-case1£º<a href="http://www.baidu.com"></a>
+äºŒä¹ã€è¶…é“¾
+ä¸åŒæ ‡ç­¾è¶…é“¾çš„æ–¹å¼ä¸åŒ
+case1ï¼š<a href="http://www.baidu.com"></a>
 	   <a onclick="clickEvent();"></a>
 case2: <iframe src="http://www.baidu.com"></iframe>
 
-ÈıÊ®¡¢¸¸½Úµã
+ä¸‰åã€çˆ¶èŠ‚ç‚¹
 parent.$("#ID").Event();
 
-ÈıÒ»¡¢ÓĞÊ±»áÓöµ½<iframe src="webAdd"></iframe>ÖĞµÄÄÚÈİÎŞ·¨´ò¿ªµÄÇé¿ö
-´¦Àí·½·¨£º
-1¡¢¶¯Ì¬¸øiframe¸³Öµ
+ä¸‰ä¸€ã€æœ‰æ—¶ä¼šé‡åˆ°<iframe src="webAdd"></iframe>ä¸­çš„å†…å®¹æ— æ³•æ‰“å¼€çš„æƒ…å†µ
+å¤„ç†æ–¹æ³•ï¼š
+1ã€åŠ¨æ€ç»™iframeèµ‹å€¼
 $("iframe").attr("src","webAdd");
 
-Èı¶ş¡¢message¶Ô»°¿ò  (ÊÂ¼ş×îºÃ·ÅÔÚÅĞ¶ÏÌåÖĞ£¬·ñÔòÊÂ¼ş»áÔ½¹ı messager ÊÂ¼şÍùÏÂÖ´ĞĞ)
-$.messager.alert('ÌáÊ¾','ÌáÊ¾ÄÚÈİ£¡');
-$.messager.confirm('ÌáÊ¾','ÊÇ·ñ...',function(flag){
+ä¸‰äºŒã€messageå¯¹è¯æ¡†  (äº‹ä»¶æœ€å¥½æ”¾åœ¨åˆ¤æ–­ä½“ä¸­ï¼Œå¦åˆ™äº‹ä»¶ä¼šè¶Šè¿‡ messager äº‹ä»¶å¾€ä¸‹æ‰§è¡Œ)
+$.messager.alert('æç¤º','æç¤ºå†…å®¹ï¼');
+$.messager.confirm('æç¤º','æ˜¯å¦...',function(flag){
 	if(flag){
-	//Ñ¡×ÅOK ¶ÔÓ¦µÄÊÂ¼ş
+	//é€‰ç€OK å¯¹åº”çš„äº‹ä»¶
 	}else{
-	//Ñ¡Ôñcancle ¶ÔÓ¦µÄÊÂ¼ş
+	//é€‰æ‹©cancle å¯¹åº”çš„äº‹ä»¶
 	}
 });
 
-ÈıÈı¡¢Ò³ÃæÑùÊ½  Ê¹ÓÃÎ±Àà ÊÇ¿Ø¼ş ±³¾°¸Ä±äÍ¸Ã÷¶È  ²úÉúÒõÓ°
+ä¸‰ä¸‰ã€é¡µé¢æ ·å¼  ä½¿ç”¨ä¼ªç±» æ˜¯æ§ä»¶ èƒŒæ™¯æ”¹å˜é€æ˜åº¦  äº§ç”Ÿé˜´å½±
 		img{
     	opacity:1.0;
 		filter:alpha(opacity=100); /* For IE8 and earlier */
@@ -690,20 +690,20 @@ $.messager.confirm('ÌáÊ¾','ÊÇ·ñ...',function(flag){
     	img:hover {
     	opacity:0.8;				
 		filter:alpha(opacity=80); /* For IE8 and earlier */
-		box-shadow: 2px 2px 1px #888888;	/*±³¾°ÒõÓ°*/
+		box-shadow: 2px 2px 1px #888888;	/*èƒŒæ™¯é˜´å½±*/
     	}
 
-ÈıËÄ¡¢form±íµ¥µÄÇå¿Õ
-case1£º
+ä¸‰å››ã€formè¡¨å•çš„æ¸…ç©º
+case1ï¼š
 	$('#formId').form('clear');
 case2:	
 	$('#formId')[0].reset();
 case3:	
-	/*ÖğÒ»µØ¶ÔformÖĞ¿Ø¼şµÄÄÚÈİ ¸³ÖµÎª¿Õ*/
+	/*é€ä¸€åœ°å¯¹formä¸­æ§ä»¶çš„å†…å®¹ èµ‹å€¼ä¸ºç©º*/
 	$('#formId inputId').val("");
 
-ÈıÎå¡¢ JSÊı×éÈ¥ÖØ
-²ÎÊı arr ÎªÊı×é±äÁ¿
+ä¸‰äº”ã€ JSæ•°ç»„å»é‡
+å‚æ•° arr ä¸ºæ•°ç»„å˜é‡
 function unique(arr) {
     var result = [], hash = {};
     for (var i = 0, elem; (elem = arr[i]) != null; i++) {
@@ -715,34 +715,34 @@ function unique(arr) {
     return result;
 }
 
-ÈıÁù¡¢Ê¶±ğµ±Ç°ä¯ÀÀÆ÷    ÓÃ»§²»Í¬ä¯ÀÀÆ÷µÄ¼æÈİĞÔµ÷Õû
+ä¸‰å…­ã€è¯†åˆ«å½“å‰æµè§ˆå™¨    ç”¨æˆ·ä¸åŒæµè§ˆå™¨çš„å…¼å®¹æ€§è°ƒæ•´
 function myBrowser(){
-    var userAgent = navigator.userAgent; //È¡µÃä¯ÀÀÆ÷µÄuserAgent×Ö·û´®
+    var userAgent = navigator.userAgent; //å–å¾—æµè§ˆå™¨çš„userAgentå­—ç¬¦ä¸²
     var isOpera = userAgent.indexOf("Opera") > -1;
     if (isOpera) {
         return "Opera"
-    }; //ÅĞ¶ÏÊÇ·ñOperaä¯ÀÀÆ÷
+    }; //åˆ¤æ–­æ˜¯å¦Operaæµè§ˆå™¨
     if (userAgent.indexOf("Firefox") > -1) {
         return "FF";
-    } //ÅĞ¶ÏÊÇ·ñFirefoxä¯ÀÀÆ÷
+    } //åˆ¤æ–­æ˜¯å¦Firefoxæµè§ˆå™¨
     if (userAgent.indexOf("Chrome") > -1){
   		return "Chrome";
  	}
     if (userAgent.indexOf("Safari") > -1) {
         return "Safari";
-    } //ÅĞ¶ÏÊÇ·ñSafariä¯ÀÀÆ÷
+    } //åˆ¤æ–­æ˜¯å¦Safariæµè§ˆå™¨
     if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
         return "IE";
-    }; //ÅĞ¶ÏÊÇ·ñIEä¯ÀÀÆ÷
+    }; //åˆ¤æ–­æ˜¯å¦IEæµè§ˆå™¨
 }
 
 
-ÈıÆß¡¢cssÑùÊ½ ¸Ä±ätableÖĞÄ³Ò»ÁĞµÄ¿í¶È 
-case1: ¸Ä±ätableÖĞµÚÒ»ÁĞµÄcss	
+ä¸‰ä¸ƒã€cssæ ·å¼ æ”¹å˜tableä¸­æŸä¸€åˆ—çš„å®½åº¦ 
+case1: æ”¹å˜tableä¸­ç¬¬ä¸€åˆ—çš„css	
 	table tr td:first-child{
 		width:15%;
 	}
-case2£ºÈ»¶øÔÚÑ¡ÔñtableÖĞµÄµÚ¶ş£¬ÄËÖÁµÚÈıÁĞ...Ê±²»ÄÜÒÔ´ËÀàÍÆ£¬µ«¿ÉÒÔÓÃÒ»ÏÂ·½Ê½£¬ÇĞ¸Ã·½·¨¿ÉÒÔÒÔ´ËÀàÍÆ
+case2ï¼šç„¶è€Œåœ¨é€‰æ‹©tableä¸­çš„ç¬¬äºŒï¼Œä¹ƒè‡³ç¬¬ä¸‰åˆ—...æ—¶ä¸èƒ½ä»¥æ­¤ç±»æ¨ï¼Œä½†å¯ä»¥ç”¨ä¸€ä¸‹æ–¹å¼ï¼Œåˆ‡è¯¥æ–¹æ³•å¯ä»¥ä»¥æ­¤ç±»æ¨
 	table tr td:nth-child(2){
 		width: 25%;
 	}
@@ -750,7 +750,7 @@ case2£ºÈ»¶øÔÚÑ¡ÔñtableÖĞµÄµÚ¶ş£¬ÄËÖÁµÚÈıÁĞ...Ê±²»ÄÜÒÔ´ËÀàÍÆ£¬µ«¿ÉÒÔÓÃÒ»ÏÂ·½Ê½£¬Ç
 	table tr td:nth-child(3){
 		width: 10%;
 	}
-case3: table µ¥ĞĞË«ĞĞµÄÑùÊ½(¶¨ÒåÒ»¸ö¼òµ¥µÄtableÑùÊ½)Ñ¡Ôñ±í¸ñµÄÆæÊıĞĞÅ¼ÊıĞĞ
+case3: table å•è¡ŒåŒè¡Œçš„æ ·å¼(å®šä¹‰ä¸€ä¸ªç®€å•çš„tableæ ·å¼)é€‰æ‹©è¡¨æ ¼çš„å¥‡æ•°è¡Œå¶æ•°è¡Œ
 table, th , td  {
   border: 1px solid grey;
   border-collapse: collapse;
@@ -765,27 +765,27 @@ table tr:nth-child(even) {
 	
 	
 	
-Èı°Ë¡¢	grid»ñÈ¡Ñ¡ÖĞĞĞ
-case1:Ñ¡ÖĞµÄÒ»ĞĞ
+ä¸‰å…«ã€	gridè·å–é€‰ä¸­è¡Œ
+case1:é€‰ä¸­çš„ä¸€è¡Œ
 var row = $('#tableId').datagrid('getSelected');
-case2:Ñ¡ÖĞµÄËùÓĞĞĞ
+case2:é€‰ä¸­çš„æ‰€æœ‰è¡Œ
 var row = $('#tableId').datagrid('getRows');
 
-Èı¾Å¡¢gridÄ¬ÈÏÑ¡ÖĞµÚÒ»Ìõ
+ä¸‰ä¹ã€gridé»˜è®¤é€‰ä¸­ç¬¬ä¸€æ¡
 $('#tableId').datagrid('selectRow',0);
 
-ËÄÊ®¡¢±äĞ¡ÊÖÊôĞÔ(ÂèµÄ£¬Õâ¸öÀÏ×Ó¾¹È»Ã»¼Ç)
-cursor:pointer;																						//±äĞ¡ÊÖÊôĞÔ
-cursor:hand;																						//Í¬ÊÇ±äĞ¡ÊÖÊôĞÔ£¬µ«ÊÇÖ»ÓĞIEÉÏÄÜÏÔÊ¾£¬ÆäËüä¯ÀÀÆ÷²»¼æÈİ
+å››åã€å˜å°æ‰‹å±æ€§(å¦ˆçš„ï¼Œè¿™ä¸ªè€å­ç«Ÿç„¶æ²¡è®°)
+cursor:pointer;																						//å˜å°æ‰‹å±æ€§
+cursor:hand;																						//åŒæ˜¯å˜å°æ‰‹å±æ€§ï¼Œä½†æ˜¯åªæœ‰IEä¸Šèƒ½æ˜¾ç¤ºï¼Œå…¶å®ƒæµè§ˆå™¨ä¸å…¼å®¹
 
-ËÄÒ»¡¢panel¡¢tableµÄÔ²½ÇÊôĞÔ
+å››ä¸€ã€panelã€tableçš„åœ†è§’å±æ€§
 .panel{
 	border-radius:4px;
 }
 
 
-ËÄ¶ş¡¢¹ØÓÚeasyuiµÄ´°¿Ú windows
-1¡¢ĞÂ½¨´°¿Ú
+å››äºŒã€å…³äºeasyuiçš„çª—å£ windows
+1ã€æ–°å»ºçª—å£
 $("#windowId").window({
 	title:'',
 	width:10,
@@ -798,24 +798,24 @@ $("#windowId").window({
 	draggable:false,
 	content:'<form></form>',
 	onBeforeClose:function(){
-		//´°¿Ú¹Ø±ÕÊ±µÄ´¥·¢ÊÂ¼ş
+		//çª—å£å…³é—­æ—¶çš„è§¦å‘äº‹ä»¶
 	},
 	onOpen:function(){
-		//´°¿Ú´ò¿ªÊ±µÄ´¥·¢ÊÂ¼ş
+		//çª—å£æ‰“å¼€æ—¶çš„è§¦å‘äº‹ä»¶
 	}
 });
-2¡¢¹Ø±Õ´°¿Ú£º
+2ã€å…³é—­çª—å£ï¼š
 $("#windowId").window("close");
 
 
 
 
-ËÄÈı¡¢¹ØÓÚgrid µÄÁĞÕ¹Ê¾ µ±ÁĞÖĞº¬ÓĞ¶à¸ö×ÓÏîµÄÇé¿ö
+å››ä¸‰ã€å…³äºgrid çš„åˆ—å±•ç¤º å½“åˆ—ä¸­å«æœ‰å¤šä¸ªå­é¡¹çš„æƒ…å†µ
 		columns: [[
 			{title : 'ID',field : 'id',hidden : true},
-			{title : 'ÃÜÂë',field : 'userPwd',hidden : true},
-			{title : 'ÕÊºÅÃû³Æ',field : 'userName',width : 200},
-			{title : '¼¯ÍÅ¿Í»§±àºÅ',field : 'relats.customerCode',width : 200,
+			{title : 'å¯†ç ',field : 'userPwd',hidden : true},
+			{title : 'å¸å·åç§°',field : 'userName',width : 200},
+			{title : 'é›†å›¢å®¢æˆ·ç¼–å·',field : 'relats.customerCode',width : 200,
 				formatter:function(val,row,index){
 					var codeMap = [];
 					$.each(row.relats,function(val,value){
@@ -824,27 +824,27 @@ $("#windowId").window("close");
 					return codeMap;
 				}
 			},
-			{title : '¼¯ÍÅ¿Í»§Ãû³Æ',field : 'relats.customerCode',width : 200,
+			{title : 'é›†å›¢å®¢æˆ·åç§°',field : 'relats.customerCode',width : 200,
 				formatter:function(val,rec){
 					return relats[0].customerCode;
 				}
 			},
-			{title : '´´½¨ÈË',field : 'createUser',width : 200},
-			{title : '´´½¨Ê±¼ä',field : 'createTime',width : 200},
-			{title : 'ËùÊô½ÇÉ«',field : 'roleName',width : 200},
-			{title : 'É¾³ı±êÊ¶',field : 'stateflag',width : 200}
+			{title : 'åˆ›å»ºäºº',field : 'createUser',width : 200},
+			{title : 'åˆ›å»ºæ—¶é—´',field : 'createTime',width : 200},
+			{title : 'æ‰€å±è§’è‰²',field : 'roleName',width : 200},
+			{title : 'åˆ é™¤æ ‡è¯†',field : 'stateflag',width : 200}
 	    ]]
 
 
 
-ËÄËÄ¡¢¹ØÓÚ js  ÖĞµÄmapºÍArrayList
-	1¡¢¶¨ÒåMAP
+å››å››ã€å…³äº js  ä¸­çš„mapå’ŒArrayList
+	1ã€å®šä¹‰MAP
 	var testMap = [];
 	$.each(dataArray,function(val,value){
 		testMap.push(value.mapKey);	
 	});
 	return testMap;
-	2¡¢¶¨Òåarrylist
+	2ã€å®šä¹‰arrylist
 	$.each(dataArray,function(val,value){
 		var testArray = {};
 		testArray.param1 = value.arrayKey;
@@ -854,96 +854,96 @@ $("#windowId").window("close");
 	return testArray;
 
 
-ËÄÎå¡¢¹ØÓÚ JS µÄ»òÔËËã·û || 
+å››äº”ã€å…³äº JS çš„æˆ–è¿ç®—ç¬¦ || 
 
 function getEven(e){
 	return e || window.event;
 }
 
-||Õâ¸öµÄÒâË¼ÊÇ»ò   
-Ò²¾ÍÊÇËµä¯ÀÀÆ÷¶ÔÓÚÊÂ¼şeÊÇ²»Ò»ÑùµÄ¡£
-µ±Ã»ÓĞeµÄÊ±ºò×Ô¶¯·µ»Øwindow.event
-Ò²¾ÍÊÇËµ»áÈ¡ÆäÖĞÒ»¸ö¡£
-µÚÒ»¸öÓĞ¾ÍÓÃµÚÒ»¸ö²»¹ÜµÚ¶ş¸öÓĞÃ»ÓĞ£¬
-µÚÒ»¸öÃ»ÓĞ¾ÍÓÃµÚ¶ş¸ö£¬
-Á½¸ö¶¼Ã»ÓĞ¾Íundefined¿©
+||è¿™ä¸ªçš„æ„æ€æ˜¯æˆ–   
+ä¹Ÿå°±æ˜¯è¯´æµè§ˆå™¨å¯¹äºäº‹ä»¶eæ˜¯ä¸ä¸€æ ·çš„ã€‚
+å½“æ²¡æœ‰eçš„æ—¶å€™è‡ªåŠ¨è¿”å›window.event
+ä¹Ÿå°±æ˜¯è¯´ä¼šå–å…¶ä¸­ä¸€ä¸ªã€‚
+ç¬¬ä¸€ä¸ªæœ‰å°±ç”¨ç¬¬ä¸€ä¸ªä¸ç®¡ç¬¬äºŒä¸ªæœ‰æ²¡æœ‰ï¼Œ
+ç¬¬ä¸€ä¸ªæ²¡æœ‰å°±ç”¨ç¬¬äºŒä¸ªï¼Œ
+ä¸¤ä¸ªéƒ½æ²¡æœ‰å°±undefinedå’¯
 
 
-ËÄÁù¡¢¹ØÓÚlinkbutton ºÍ button  ÉèÖÃ diasable ÊôĞÔµÄ·½·¨ÎÊÌâ
+å››å…­ã€å…³äºlinkbutton å’Œ button  è®¾ç½® diasable å±æ€§çš„æ–¹æ³•é—®é¢˜
 case: http://www.jeasyui.net/plugins/187.html
-case£º http://www.cnblogs.com/haogj/archive/2013/05/13/3074461.html
+caseï¼š http://www.cnblogs.com/haogj/archive/2013/05/13/3074461.html
 
-1¡¢ //buttonÁ½ÖÖ·½·¨ÉèÖÃdisabledÊôĞÔ  
-¡¡$('#areaSelect').attr("disabled",true);  
-¡¡$('#areaSelect').attr("disabled","disabled");  
-¡¡//ÈıÖÖ·½·¨ÒÆ³ıdisabledÊôĞÔ  
-¡¡$('#areaSelect').attr("disabled",false);  
-¡¡$('#areaSelect').removeAttr("disabled");  
-¡¡$('#areaSelect').attr("disabled","");  
-2¡¢ //linkbuton ÉèÖÃdisable
+1ã€ //buttonä¸¤ç§æ–¹æ³•è®¾ç½®disabledå±æ€§  
+ã€€$('#areaSelect').attr("disabled",true);  
+ã€€$('#areaSelect').attr("disabled","disabled");  
+ã€€//ä¸‰ç§æ–¹æ³•ç§»é™¤disabledå±æ€§  
+ã€€$('#areaSelect').attr("disabled",false);  
+ã€€$('#areaSelect').removeAttr("disabled");  
+ã€€$('#areaSelect').attr("disabled","");  
+2ã€ //linkbuton è®¾ç½®disable
   $("#confirmComplain").linkbutton("diasable");
-    //linkbutton ÉèÖÃenable
+    //linkbutton è®¾ç½®enable
   $("#confirmComplain").linkbutton("enable");	
 
 
-ËÄÆß¡¢easyui  DateGrid(¶àÑ¡) »ñÈ¡ËùÑ¡Ïî ¡¢ Çå³şËùÑ¡Ïî
-case:»ñÈ¡ËùÑ¡Ïî
+å››ä¸ƒã€easyui  DateGrid(å¤šé€‰) è·å–æ‰€é€‰é¡¹ ã€ æ¸…æ¥šæ‰€é€‰é¡¹
+case:è·å–æ‰€é€‰é¡¹
 $("#datagridId").datagrid("getSelections");
-case£ºÇå³şËùÑ¡Ïî
+caseï¼šæ¸…æ¥šæ‰€é€‰é¡¹
 $("#datagridId").datagrid("clearSelections");
-case:¶Ô¶àÑ¡Êı¾İµÄ´¦Àí
+case:å¯¹å¤šé€‰æ•°æ®çš„å¤„ç†
 var rows = $("#datagridId").datagrid("getSelections");
 
 
 
-ËÄ°Ë¡¢¹ØÓÚº¯Êıjoin()ºÍsplit()
+å››å…«ã€å…³äºå‡½æ•°join()å’Œsplit()
 var array = [a,b,c,d,e,f,g];
 var result = array.join(',');
-result µÄ½á¹ûÎª£º "a,b,c,d,e,f,g"
+result çš„ç»“æœä¸ºï¼š "a,b,c,d,e,f,g"
 
 var after = result.split(',');
-after µÄ½á¹ûÎª£º[a,b,c,d,e,f,g]
+after çš„ç»“æœä¸ºï¼š[a,b,c,d,e,f,g]
 
-ËÄ¾Å¡¢radio »ñÈ¡ÖµÓë¸³Öµ
-//»ñÈ¡Ñ¡ÖĞÖµ
+å››ä¹ã€radio è·å–å€¼ä¸èµ‹å€¼
+//è·å–é€‰ä¸­å€¼
 params.isCenter = $(":radio[name='isCenter'][checked]").val();
-//¸³Öµ
+//èµ‹å€¼
 $(":radio[name='isCenter'][value='" + value + "']").prop("checked", "checked");
 
 
 
-ÎåÁã¡¢¸ù¾İ·µ»ØµÄJson Êı×éÖØ¹¹²Ëµ¥
+äº”é›¶ã€æ ¹æ®è¿”å›çš„Json æ•°ç»„é‡æ„èœå•
 var menuMap = {
-	//Ò»¼¶²Ëµ¥
-	"generalSitu":"¸Å¿ö",
-	"userManage":"¿Í»§×ÊÁÏ",
-	"alarmMonitor":"¹ÊÕÏ¼à¿Ø",
-	"topo":"ÍØÆË¸ÅÀÀ",
-	"performance":"ĞÔÄÜ·ÖÎö",
-	"selfService":"×ÔÖú·şÎñ",
-	"systemManage":"ÏµÍ³¹ÜÀí",
-	//¶ş¼¶²Ëµ¥
-	"individual":"ÒµÎñĞÅÏ¢",
-	"machineRoom":"»ú·¿ĞÅÏ¢",
-	"realTime_monitor":"ÊµÊ±ĞÔÄÜ",
-	"showMenu":"ĞÔÄÜ·ÖÎö",
-	"mfun_sheet_query":"¹ÊÕÏ¹¤µ¥²éÑ¯",
-	"complaint_sheet_query":"Í¶Ëß¹¤µ¥²éÑ¯",
-	"open_sheet_query":"¿ªÍ¨¹¤µ¥²éÑ¯",
-	"complainSystem":"¼à¿ØÍ¶ËßÏêÇé",
-	"customComplain":"¿Í»§Í¶ËßÏêÇé",
-	"customerAccountManage":"¿Í»§ÕÊºÅ¹ÜÀí",
-	"managerAccountManage":"¿Í»§¾­ÀíÕÊºÅ¹ÜÀí",
-	"managerViewManage":"¿Í»§¾­ÀíÊÓÍ¼ÅäÖÃ",
-	//Èı¼¶²Ëµ¥
-	"internetTransaction":"»¥ÁªÍø×¨ÏßÒµÎñ·ÖÎö",
-	"transmissionTransaction":"´«Êä×¨ÏßÒµÎñ·ÖÎö",
-	"phoneticsoundTransaction":"ÓïÒô×¨ÏßÒµÎñ·ÖÎö",
-	"gprsPriLineTransaction":"GPRS×¨ÏßÒµÎñ·ÖÎö",
-	"shortmessageTransaction":"¶ÌĞÅ×¨ÏßÒµÎñ·ÖÎö"	
+	//ä¸€çº§èœå•
+	"generalSitu":"æ¦‚å†µ",
+	"userManage":"å®¢æˆ·èµ„æ–™",
+	"alarmMonitor":"æ•…éšœç›‘æ§",
+	"topo":"æ‹“æ‰‘æ¦‚è§ˆ",
+	"performance":"æ€§èƒ½åˆ†æ",
+	"selfService":"è‡ªåŠ©æœåŠ¡",
+	"systemManage":"ç³»ç»Ÿç®¡ç†",
+	//äºŒçº§èœå•
+	"individual":"ä¸šåŠ¡ä¿¡æ¯",
+	"machineRoom":"æœºæˆ¿ä¿¡æ¯",
+	"realTime_monitor":"å®æ—¶æ€§èƒ½",
+	"showMenu":"æ€§èƒ½åˆ†æ",
+	"mfun_sheet_query":"æ•…éšœå·¥å•æŸ¥è¯¢",
+	"complaint_sheet_query":"æŠ•è¯‰å·¥å•æŸ¥è¯¢",
+	"open_sheet_query":"å¼€é€šå·¥å•æŸ¥è¯¢",
+	"complainSystem":"ç›‘æ§æŠ•è¯‰è¯¦æƒ…",
+	"customComplain":"å®¢æˆ·æŠ•è¯‰è¯¦æƒ…",
+	"customerAccountManage":"å®¢æˆ·å¸å·ç®¡ç†",
+	"managerAccountManage":"å®¢æˆ·ç»ç†å¸å·ç®¡ç†",
+	"managerViewManage":"å®¢æˆ·ç»ç†è§†å›¾é…ç½®",
+	//ä¸‰çº§èœå•
+	"internetTransaction":"äº’è”ç½‘ä¸“çº¿ä¸šåŠ¡åˆ†æ",
+	"transmissionTransaction":"ä¼ è¾“ä¸“çº¿ä¸šåŠ¡åˆ†æ",
+	"phoneticsoundTransaction":"è¯­éŸ³ä¸“çº¿ä¸šåŠ¡åˆ†æ",
+	"gprsPriLineTransaction":"GPRSä¸“çº¿ä¸šåŠ¡åˆ†æ",
+	"shortmessageTransaction":"çŸ­ä¿¡ä¸“çº¿ä¸šåŠ¡åˆ†æ"	
 };	
 
-//ÅäÖÃÊ×Ò³²Ëµ¥
+//é…ç½®é¦–é¡µèœå•
 function MenuShow(){
 	var menu=[{
 		id:"generalSitu",
@@ -974,18 +974,18 @@ function MenuShow(){
 		}]
 	}];
 	console.log(menu);
-	//¹¹½¨Ò»¼¶²Ëµ¥
+	//æ„å»ºä¸€çº§èœå•
 	var menuHtml = '';
 	var menuHtml2 = '';
 	var menuHtml3 = '';
 	for(var i=0;i<menu.length;i++){
 		menuHtml += '<li><a class="go" href="javascript:;" id="'+menu[i].id+'">'+menuMap[menu[i].id]+'</a>';		
-		//¹¹½¨¶ş¼¶²Ëµ¥
+		//æ„å»ºäºŒçº§èœå•
 		menuHtml2 = '<blockquote><div class="ChildNavIn">';
 		if(menu[i].child!=""&&menu[i].child.length>0){
 			for(var j=0;j<menu[i].child.length;j++){
 				menuHtml2 += '<a class="First" href="javascript:;" id="'+menu[i].child[j].id+'">'+menuMap[menu[i].child[j].id]+'</a>';
-				//¹¹½¨Èı¼¶²Ëµ¥
+				//æ„å»ºä¸‰çº§èœå•
 				menuHtml3 = '<div class="NavDeptIn"><div class="NavDeptInList">'
 				if(menu[i].child[j].child!=""&&menu[i].child[j].child.length!=0){
 					for(var k=0;k<menu[i].child[j].child.length;k++){
@@ -1004,38 +1004,38 @@ function MenuShow(){
 }		
 
 
-ÎåÒ»¡¢×Ö½ÚÁ÷ÎÄ¼ş×ª»¯³ÉÍ¼Æ¬ICON
+äº”ä¸€ã€å­—èŠ‚æµæ–‡ä»¶è½¬åŒ–æˆå›¾ç‰‡ICON
 	<img id="logoString" src="images/homePage/unlog.png" alt="..."/>
-	logoString Îª½Ó¿Ú·µ»Ø×Ö½ÚÂë £º
+	logoString ä¸ºæ¥å£è¿”å›å­—èŠ‚ç  ï¼š
 	var logoString = "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAGu5JREFUeNqsenlwXPd93+ede9+LxX0DBEESJCiRJikeMk0lsh1JI9lSxqrstknqxuM6bdJ/mjozqcZxpzNNZ5yZuI2rxm3qzKSK3Ti6fOgKJdKiSBEUTxAEcRLXAthd7H28u5+3oI7Ybu1JhZk3AHb3vff7Xp/j91ZwHAdmLouf/nFECbZWh90w4UD80BuAUN+E4E1DiQfhmCKsegZKqA+11Qn4kmMwCosRCPaArTkPlufOPFycXXe83YdesPTSj2HU7qQOPVI0Shnkrp1DMLUX+bUbCPbuRWL0MDLnv4/kic9DVH3bN+OPICnQ8ndQW7/Gv9WfWWvrfZ+HjI/iRxDdG0uKN7C/mpk+aWwt/mp57drxmYuTnqIVwcjxcQjVt47KhvrvLETfzs9OnIPlnJdU3xVJ9qx9FEuQ///WL0FUPP1mpfZQdvKVT5YWL9+TnrzYtrwsYGo5iCuZ3Vg3etA5H8Ou/iSGEgV/qzd3qrX6yilV8uqCEL9ZXyxeFgTPT0RReYvXmhYE8efd6e7xUQbCVuS9ekRZfqi8fOUTlfTcxzYnL3ZvpkuYvhPBanUcVrANvl4FR4aqiEVUmHYVpY0clmqtuOkkYdTbkfQX1NGO9fHW4Oy435v4QvnmnezGjR/NBfyxVyRZ+brj2LbbWoIkw7EMHvr/M5hfHIjg9qkIQbg7H171yVL+8p9unnspkVtZwdqGg6sbw6gqQ+gf8uKBAQ0jOxRIxiwqSwvwhOMQg93I3boCSQwC/iSWNoI4Px3GMy/74VUsjPdk5AO7zbaeTm/b2uULR3zT5/9aDkanBcZi1crQ8xk0SlNI7joO29D+gYGIBvPgh+Ll8JsCpJj8Txa/91zi3Ku3cNU6hYXKLhw6HMQT+yYxkJyFJXrQ2ALqpQKqeQm++hakKm8T70GjrhE8auiJ";
 	$("#logoString").attr("src","data:image/jpg;base64,"+logoString);
 
 
-Îå¶ş¡¢datagrid ÖĞµÄĞĞ µÄµã»÷ ÓëË«»÷ÊÂ¼ş
+äº”äºŒã€datagrid ä¸­çš„è¡Œ çš„ç‚¹å‡» ä¸åŒå‡»äº‹ä»¶
 onClickRow : function(rowIndex,rowData){
 }
 onDblClickRow: function(rowIndex, rowData){											
 }
 
-ÎåÈı¡¢¸Ä±äµ±Ç°Ê±¼ä
+äº”ä¸‰ã€æ”¹å˜å½“å‰æ—¶é—´
 var nowDate = new Date();
-//ÌáÇ°15Ìì
+//æå‰15å¤©
 nowDate.setDate(nowDate - 15);
-//ÌáÇ°Ò»¸öÔÂ
+//æå‰ä¸€ä¸ªæœˆ
 nowDate.setDate(nowDate - 30);
-//ÌáÇ°Ò»Äê
+//æå‰ä¸€å¹´
 nowDate.setDate();
 
 
-ÎåËÄ¡¢ÏÂÀ­¿Ø¼ş ½øĞĞÊµÊ±Ë¢ĞÂ¹¦ÄÜ		//ÖÜÆÚĞÔÔËĞĞ
+äº”å››ã€ä¸‹æ‹‰æ§ä»¶ è¿›è¡Œå®æ—¶åˆ·æ–°åŠŸèƒ½		//å‘¨æœŸæ€§è¿è¡Œ
 	<select class="easyui-combobox" id="state" name="state" style="width:auto;">
-		<option value="30">30Ãë</option>
-		<option value="60">1·ÖÖÓ</option>
-		<option value="300">5·ÖÖÓ</option>
-		<option value="600">10·ÖÖÓ</option>
-		<option value="0">ÔİÍ£Ë¢ĞÂ</option>
+		<option value="30">30ç§’</option>
+		<option value="60">1åˆ†é’Ÿ</option>
+		<option value="300">5åˆ†é’Ÿ</option>
+		<option value="600">10åˆ†é’Ÿ</option>
+		<option value="0">æš‚åœåˆ·æ–°</option>
 	</select>
-	var sit=setInterval(function(){loadTableData(1,pageSize);},30*1000);	//³õÊ¼»¯30ÃëË¢ĞÂÒ»´Î
+	var sit=setInterval(function(){loadTableData(1,pageSize);},30*1000);	//åˆå§‹åŒ–30ç§’åˆ·æ–°ä¸€æ¬¡
 	$('#state').combobox({
 		onChange: function(newVal,oldVal){
 			if(newVal==0){
@@ -1049,13 +1049,13 @@ nowDate.setDate();
 
 
 
-ÎåÎå¡¢ÎÄ¼şÉÏ´«£¨µ¼ÈëÄ£°æ   ĞèÒªÒıÓÃ jquery.form.js ÎÄ¼ş£©
-<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onClick="javascript:importCustomer();" id="importCustomer">ÓÃ»§ĞÅÏ¢µ¼Èë</a>
-//===========================µ¼Èë¿Í»§ĞÅÏ¢===
+äº”äº”ã€æ–‡ä»¶ä¸Šä¼ ï¼ˆå¯¼å…¥æ¨¡ç‰ˆ   éœ€è¦å¼•ç”¨ jquery.form.js æ–‡ä»¶ï¼‰
+<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onClick="javascript:importCustomer();" id="importCustomer">ç”¨æˆ·ä¿¡æ¯å¯¼å…¥</a>
+//===========================å¯¼å…¥å®¢æˆ·ä¿¡æ¯===
 function importCustomer(){
 	var rows = $('#centerTable').datagrid('getSelected');
-	if(rows == null || rows == ""){		//Ñ¡ÖĞĞĞÔò½øĞĞ²Ù×÷
-		$.messager.alert('ÌáÊ¾','ÇëÑ¡ÔñÒ»ÌõÊı¾İ½øĞĞµ¼Èë£¡');
+	if(rows == null || rows == ""){		//é€‰ä¸­è¡Œåˆ™è¿›è¡Œæ“ä½œ
+		$.messager.alert('æç¤º','è¯·é€‰æ‹©ä¸€æ¡æ•°æ®è¿›è¡Œå¯¼å…¥ï¼');
 		return false;
 	}
 	var html = 
@@ -1067,14 +1067,14 @@ function importCustomer(){
 		'</tr>'+ 
 		'<tr>' +
 		'<td>' +
-		'<a class="easyui-linkbutton" href="#" onClick="javascript:formCommit();">Ìá½»</a>' +
-		'<a class="easyui-linkbutton" href="#" onClick="javascript:formClose();">È¡Ïû</a>' +
+		'<a class="easyui-linkbutton" href="#" onClick="javascript:formCommit();">æäº¤</a>' +
+		'<a class="easyui-linkbutton" href="#" onClick="javascript:formClose();">å–æ¶ˆ</a>' +
 		'</td>'+ 
 		'</tr>' +
 		'</table>' +
 		'</form>'; 
 	$('#importWin').window({
-		title: 'ÇëÑ¡ÔñĞèÒªµ¼ÈëµÄÎÄ¼ş',
+		title: 'è¯·é€‰æ‹©éœ€è¦å¯¼å…¥çš„æ–‡ä»¶',
 		width: 300,
 		height: 120,
 		modal: false,
@@ -1094,17 +1094,17 @@ function formCommit(){
 	var rows = $('#centerTable').datagrid('getSelected');
 	var fileContent = $('#excelEId').val();
 	if(fileContent ==null ||fileContent == ""){
-		$("#msgTipsId").html('<span style="color:red;"><lable>*ÇëÑ¡È¡µ¼ÈëÎÄ¼ş</lable><span>');
+		$("#msgTipsId").html('<span style="color:red;"><lable>*è¯·é€‰å–å¯¼å…¥æ–‡ä»¶</lable><span>');
 		$('#excelEId').focus();
 		return;
 	}else{$("#msgTipsId").html('');}
 //	if(fileContent.substring(fileContent.lastIndexOf(".") + 1).toLowerCase()=="xlsx"){ 
-//		$("#msgTipsId").html('<span style="color:red;"><lable>*03ÒÔÉÏ°æ±¾Excelµ¼ÈëÔİ²»Ö§³Ö!</lable><span>');
+//		$("#msgTipsId").html('<span style="color:red;"><lable>*03ä»¥ä¸Šç‰ˆæœ¬Excelå¯¼å…¥æš‚ä¸æ”¯æŒ!</lable><span>');
 //		$('#excelEId').focus();
 //		return;    
 //	}else{$("#msgTipsId").html('');}    
 	if (fileContent.substring(fileContent.lastIndexOf(".") + 1).toLowerCase()!="xls"&&fileContent.substring(fileContent.lastIndexOf(".") + 1).toLowerCase()!="xlsx") {    
-		$("#msgTipsId").html('<span style="color:red;"><lable>*µ¼ÈëÎÄ¼şÀàĞÍ±ØĞëÎªexcel!</lable><span>');
+		$("#msgTipsId").html('<span style="color:red;"><lable>*å¯¼å…¥æ–‡ä»¶ç±»å‹å¿…é¡»ä¸ºexcel!</lable><span>');
 		$('#excelEId').focus();
 		return;    
 	}else{$("#msgTipsId").html('');}    
@@ -1118,12 +1118,12 @@ function formCommit(){
 			formClose();
 			if(data=="<pre>success</pre>"){
 				loadTableData(1,pageSize);
-				$.messager.alert("ÌáÊ¾","»ú·¿ĞÅÏ¢µ¼Èë³É¹¦£¡");   
-			}else{$.messager.alert("ÌáÊ¾","»ú·¿ĞÅÏ¢µ¼ÈëÊ§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");}
+				$.messager.alert("æç¤º","æœºæˆ¿ä¿¡æ¯å¯¼å…¥æˆåŠŸï¼");   
+			}else{$.messager.alert("æç¤º","æœºæˆ¿ä¿¡æ¯å¯¼å…¥å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼");}
 		},    
 		error: function (msg) {  
 			formClose();
-        	$.messager.alert("ÌáÊ¾","»ú·¿ĞÅÏ¢µ¼ÈëÊ§°Ü£¡");    
+        	$.messager.alert("æç¤º","æœºæˆ¿ä¿¡æ¯å¯¼å…¥å¤±è´¥ï¼");    
 		}
 	}); 
 }
@@ -1132,16 +1132,16 @@ function formClose(){
 	$('#importWin').window('close');
 }
 
-ÎåÁù¡¢Í¼Æ¬ÉÏ´« £¨ ĞèÒªÒıÓÃ jquery.form.js ÎÄ¼ş£©£©
+äº”å…­ã€å›¾ç‰‡ä¸Šä¼  ï¼ˆ éœ€è¦å¼•ç”¨ jquery.form.js æ–‡ä»¶ï¼‰ï¼‰
 <div class="fieldsetWithBottom" style="border:solid 0px;padding-top:10px;">
 	<table  id="cad_table_0">
 		<tr>
 			<td><!-- action = 'http://10.40.107.154:8088/easysightInt/rest/customer/update/img?id=' -->
 			<form id="submitImg"><!--  method = 'post' enctype ="multipart/form-data" -->
-				<input type="file" onchange="previewImage(this)" style="margin-left:20px;width:600px;" name="bmImg" />		<!--  ÕâÒ»¿éÊÇÍ¼Æ¬Ñ¡ÔñÇøÓò	-->
+				<input type="file" onchange="previewImage(this)" style="margin-left:20px;width:600px;" name="bmImg" />		<!--  è¿™ä¸€å—æ˜¯å›¾ç‰‡é€‰æ‹©åŒºåŸŸ	-->
 				<input type="text" name="basicId" style="display:none;" value="<%=basicId %>">
 			</form>
-			<div id="preview" style="padding-top:10px;margin-left:20px;">													<!--  ÕâÒ»¿éÊÇÍ¼Æ¬Õ¹Ê¾ÇøÓò  -->
+			<div id="preview" style="padding-top:10px;margin-left:20px;">													<!--  è¿™ä¸€å—æ˜¯å›¾ç‰‡å±•ç¤ºåŒºåŸŸ  -->
 				<img id="imghead" width=100 height=100 border=0 src=''>
 			</div>
 			</td>
@@ -1151,27 +1151,27 @@ function formClose(){
 //----------------------------------
 	$("#submitImg").ajaxSubmit({    
 		type: "post",      
-		dataType: "json",//·µ»Ø½á¹û¸ñÊ½  
+		dataType: "json",//è¿”å›ç»“æœæ ¼å¼  
 		url: Query_URL+'/customer/update/img?id='+basicId,
-		data: { "action": "imghead" },//ÇëÇóÊı¾İ  
+		data: { "action": "imghead" },//è¯·æ±‚æ•°æ®  
 		success: function (data) { 
 			if(data){
-        		$.messager.alert('ÌáÊ¾','Í¼Æ¬ĞÅÏ¢Ìá½»³É¹¦£¡');
+        		$.messager.alert('æç¤º','å›¾ç‰‡ä¿¡æ¯æäº¤æˆåŠŸï¼');
 				parent.loadTableData(pageNumber,pageSize);
        			parent.$('#userWin').window('close');
 			}else{
 				parent.loadTableData(pageNumber,pageSize);
-        		$.messager.alert('ÌáÊ¾','Í¼Æ¬ĞÅÌá½»´æÊ§°Ü£¡'); 
+        		$.messager.alert('æç¤º','å›¾ç‰‡ä¿¡æäº¤å­˜å¤±è´¥ï¼'); 
        			parent.$('#userWin').window('close');
 			}
 		},    
 		error: function (msg) {  
-			$.messager.alert('ÌáÊ¾','Í¼Æ¬ĞÅÏ¢Ìá½»Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡');
+			$.messager.alert('æç¤º','å›¾ç‰‡ä¿¡æ¯æäº¤å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼');
         	parent.$('#userWin').window('close');
 		}
 	});
 
-///Í¼Æ¬ÔÚÒ³ÃæµÄ²é¿´·½·¨
+///å›¾ç‰‡åœ¨é¡µé¢çš„æŸ¥çœ‹æ–¹æ³•
 function previewImage(file){
 	var MAXWIDTH  = $(document).width();
 	var MAXHEIGHT = $(document).height()-80;
@@ -1188,7 +1188,7 @@ function previewImage(file){
 		var reader = new FileReader();
 		reader.onload = function(evt){img.src = evt.target.result;}
 		reader.readAsDataURL(file.files[0]);
-	}else{ //¼æÈİIE
+	}else{ //å…¼å®¹IE
 		var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
 		file.select();
 		var src = document.selection.createRange().text;
@@ -1219,7 +1219,7 @@ function clacImgZoomParam( maxWidth, maxHeight, width, height ){
 	return param;
 }
 
-ÎåÆß¡¢Ñ¡ÔñÆ÷ ÖĞÅÅ³ıÆäÖĞµÄÒ»ÖÖÇé¿ö  :not(input[type="checkbox"]){}
+äº”ä¸ƒã€é€‰æ‹©å™¨ ä¸­æ’é™¤å…¶ä¸­çš„ä¸€ç§æƒ…å†µ  :not(input[type="checkbox"]){}
 $('table input:not(input[type="checkbox"]),table textarea').hover(
 function () {
 	$(this).attr("title",$(this)[0].value);
@@ -1228,38 +1228,38 @@ function () {
 	//$(this).removeClass("focus");  
 });  
 	
-Îå°Ë¡¢¹ØÓÚÊ±¼ä²ÎÊıµÄ×ª»»
-//¸ø¿Ø¼ş¸³Öµ ²»Í¬µÄÊ±¼ä ¸ñÊ½('2017-04-24')
+äº”å…«ã€å…³äºæ—¶é—´å‚æ•°çš„è½¬æ¢
+//ç»™æ§ä»¶èµ‹å€¼ ä¸åŒçš„æ—¶é—´ æ ¼å¼('2017-04-24')
     document.getElementById("start_time").value = (new Date().addMonths(-6)).format('yyyy-MM-dd hh:mm:ss');
     document.getElementById("start_time").value = (new Date().addDays(-1)).format('yyyy-MM-dd hh:mm:ss');
     document.getElementById("start_time").value = (new Date().addDays(-3)).format('yyyy-MM-dd hh:mm:ss');
-//Ê±¼ä¸ñÊ½Îª('2017-04-24') µÄÖµ ½øĞĞÌáÇ°Ò»Ìì(¼õÒ»Ìì)µÄ²Ù×÷
+//æ—¶é—´æ ¼å¼ä¸º('2017-04-24') çš„å€¼ è¿›è¡Œæå‰ä¸€å¤©(å‡ä¸€å¤©)çš„æ“ä½œ
 	(new Date(maxTime.replace(/-/g,"/")).addDays(-1)).format('yyyy-MM-dd hh:mm:ss') 	
 	
-Îå¾Å¡¢¹ØÓÚGoogleä¯ÀÀÆ÷ÏÂ easyui-linkbutton »á²úÉúÏòÏÂÆ«ÒÆµÄĞŞ¸Ä·½·¨
-	ÔÚcssµÄstyleÖĞÌí¼Ó a.l-btn{vertical-align:middle;} Ê¹°´Å¥ÄÜ¹»Õı³£¾ÓÖĞÏÔÊ¾
+äº”ä¹ã€å…³äºGoogleæµè§ˆå™¨ä¸‹ easyui-linkbutton ä¼šäº§ç”Ÿå‘ä¸‹åç§»çš„ä¿®æ”¹æ–¹æ³•
+	åœ¨cssçš„styleä¸­æ·»åŠ  a.l-btn{vertical-align:middle;} ä½¿æŒ‰é’®èƒ½å¤Ÿæ­£å¸¸å±…ä¸­æ˜¾ç¤º
 	
 
-ÁùÊ®¡¢¹ØÓÚÕıÔò±í´ïÊ½µÄÊ¹ÓÃ·½·¨£º
+å…­åã€å…³äºæ­£åˆ™è¡¨è¾¾å¼çš„ä½¿ç”¨æ–¹æ³•ï¼š
 	http://www.cnblogs.com/jiuban2391/p/6061542.html  
-	¾ßÌå¼û  ¡°ÕıÔò±í´ïÊ½²¹³ä¡±  ¡°ÕıÔò±í´ïÊ½ÑéÖ¤ÓÊÏä¡±
+	å…·ä½“è§  â€œæ­£åˆ™è¡¨è¾¾å¼è¡¥å……â€  â€œæ­£åˆ™è¡¨è¾¾å¼éªŒè¯é‚®ç®±â€
 	
-ÁùÒ»¡¢Æ¥Åäºº×ÖµÄÕıÔò±í´ïÊ½	
+å…­ä¸€ã€åŒ¹é…æ±‰å­—çš„æ­£åˆ™è¡¨è¾¾å¼	
 	var passwordReg	= /[\u4E00-\u9FA5\uF900-\uFA2D]/;
 	
-Áù¶ş¡¢
-window.history.go(-1);  //·µ»ØÉÏÒ»Ò³
-window.history.back();  //·µ»ØÉÏÒ»Ò³
-//Èç¹ûÒªÇ¿ĞĞË¢ĞÂµÄ»°¾ÍÊÇ£ºwindow.history.back();location.reload();
+å…­äºŒã€
+window.history.go(-1);  //è¿”å›ä¸Šä¸€é¡µ
+window.history.back();  //è¿”å›ä¸Šä¸€é¡µ
+//å¦‚æœè¦å¼ºè¡Œåˆ·æ–°çš„è¯å°±æ˜¯ï¼šwindow.history.back();location.reload();
  
-window.location.go(-1); //Ë¢ĞÂÉÏÒ»Ò³
+window.location.go(-1); //åˆ·æ–°ä¸Šä¸€é¡µ
 
 
-ÁùÈı¡¢
-//¼ä¸ôÊ±¼ä¶Î
+å…­ä¸‰ã€
+//é—´éš”æ—¶é—´æ®µ
 function getNewDay(dateTemp, days) {
     var dateTemp = dateTemp.split("-");
-    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //×ª»»ÎªMM-DD-YYYY¸ñÊ½
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //è½¬æ¢ä¸ºMM-DD-YYYYæ ¼å¼
     var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
     var rDate = new Date(millSeconds);
     var year = rDate.getFullYear();
@@ -1269,7 +1269,7 @@ function getNewDay(dateTemp, days) {
     if (date < 10) date = "0" + date;
     return (year + "-" + month + "-" + date);
 }
-//µ±Ç°Ê±¼ä
+//å½“å‰æ—¶é—´
 function getNowFormatDate() {
     var date = new Date();
     var seperator1 = "-";
@@ -1286,12 +1286,12 @@ function getNowFormatDate() {
     return currentdate;
 }
 	
-ÁùËÄ¡¢¼ä¸ôÊ±¼ä¶Î  µÚÒ»¸ö Ê±¼ä¶Î£º2017-01-01 £¬µÚ¶ş¸ö²ÎÊı£ºÍùºóÌí¼Ó N Ìì
+å…­å››ã€é—´éš”æ—¶é—´æ®µ  ç¬¬ä¸€ä¸ª æ—¶é—´æ®µï¼š2017-01-01 ï¼Œç¬¬äºŒä¸ªå‚æ•°ï¼šå¾€åæ·»åŠ  N å¤©
 
-/* ²»¼æÈİ»ğºü
+/* ä¸å…¼å®¹ç«ç‹
 function getNewDay(dateTemp, days) {
     var dateTemp = dateTemp.split("-");
-    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //×ª»»ÎªMM-DD-YYYY¸ñÊ½
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //è½¬æ¢ä¸ºMM-DD-YYYYæ ¼å¼
     var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
     var rDate = new Date(millSeconds);
     var year = rDate.getFullYear();
@@ -1309,8 +1309,8 @@ function getNewDay(date,days){
     return d.getFullYear()+'-'+m+'-'+d.getDate();
 }	
 
-ÁùÎå¡¢throw ÉùÃ÷
-var x=prompt("ÇëÊäÈë 0 ÖÁ 10 Ö®¼äµÄÊı£º","")
+å…­äº”ã€throw å£°æ˜
+var x=prompt("è¯·è¾“å…¥ 0 è‡³ 10 ä¹‹é—´çš„æ•°ï¼š","")
 try
 { 
 if(x>10) 
@@ -1323,48 +1323,48 @@ else if(isNaN(x))
 catch(er)
 {
 if(er=="Err1") 
-  alert("´íÎó£¡¸ÃÖµÌ«´ó£¡")
+  alert("é”™è¯¯ï¼è¯¥å€¼å¤ªå¤§ï¼")
 if(er == "Err2") 
-  alert("´íÎó£¡¸ÃÖµÌ«Ğ¡£¡") 
+  alert("é”™è¯¯ï¼è¯¥å€¼å¤ªå°ï¼") 
 if(er == "Err3") 
-  alert("´íÎó£¡¸ÃÖµ²»ÊÇÊı×Ö£¡") 
+  alert("é”™è¯¯ï¼è¯¥å€¼ä¸æ˜¯æ•°å­—ï¼") 
 }
 
 
-ÁùÁù¡¢onerror ÊÂ¼ş--¼àÌı´íÎóÊÂ¼ş
+å…­å…­ã€onerror äº‹ä»¶--ç›‘å¬é”™è¯¯äº‹ä»¶
 onerror=handleErr
 var txt=""
 
 function handleErr(msg,url,l)
 {
-txt="±¾Ò³ÖĞ´æÔÚ´íÎó¡£\n\n"
-txt+="´íÎó£º" + msg + "\n"
+txt="æœ¬é¡µä¸­å­˜åœ¨é”™è¯¯ã€‚\n\n"
+txt+="é”™è¯¯ï¼š" + msg + "\n"
 txt+="URL: " + url + "\n"
-txt+="ĞĞ£º" + l + "\n\n"
-txt+="µã»÷¡°È·¶¨¡±¼ÌĞø¡£\n\n"
+txt+="è¡Œï¼š" + l + "\n\n"
+txt+="ç‚¹å‡»â€œç¡®å®šâ€ç»§ç»­ã€‚\n\n"
 alert(txt)
 return true
 }
 
 function message()
 {
-	adddlert("Welcome guest!")		//¶¨Òå´íÎó·½·¨´¥·¢onerror ÊÂ¼ş--¼àÌı´íÎóÊÂ¼ş
+	adddlert("Welcome guest!")		//å®šä¹‰é”™è¯¯æ–¹æ³•è§¦å‘onerror äº‹ä»¶--ç›‘å¬é”™è¯¯äº‹ä»¶
 }
 
 mseeage();
 
-ÁùÆß¡¢»ñÈ¡data-param ÖĞµÄÖµ
+å…­ä¸ƒã€è·å–data-param ä¸­çš„å€¼
 $(selecter).getDate('param');
 $(selecter).attr('data-param');
 
 
-Áù°Ë¡¢»ñÈ¡ä¯ÀÀÆ÷²ÎÊı·½·¨µÄÁ½¸ö·½·¨
-getQueryString: function (name) {		//»ñÈ¡ä¯ÀÀÆ÷²ÎÊı1      
+å…­å…«ã€è·å–æµè§ˆå™¨å‚æ•°æ–¹æ³•çš„ä¸¤ä¸ªæ–¹æ³•
+getQueryString: function (name) {		//è·å–æµè§ˆå™¨å‚æ•°1      
 	var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
 	var result = window.location.search.substr(1).match(reg);
 	return result?decodeURIComponent(result[2]):null;
 },		
-getQueryString: function (name) {		//»ñÈ¡ä¯ÀÀÆ÷²ÎÊı2
+getQueryString: function (name) {		//è·å–æµè§ˆå™¨å‚æ•°2
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 	var r = window.location.search.substr(1).match(reg);
 	if (r != null) return unescape(r[2]); return null;
@@ -1385,8 +1385,8 @@ getQueryString: function (name) {		//»ñÈ¡ä¯ÀÀÆ÷²ÎÊı2
     return value;*/
 
 
-Áù¾Å¡¢substitute() ·½·¨¼ÓÔØ±í¸ñ
-1¡¢ĞÂ½¨Ò³ÃæÄ£°å
+å…­ä¹ã€substitute() æ–¹æ³•åŠ è½½è¡¨æ ¼
+1ã€æ–°å»ºé¡µé¢æ¨¡æ¿
 var trTpl       =  '<tr>'
 	+ '<td>{listId}</td>'
 	+ '<td>{listNumber}</td>'
@@ -1397,7 +1397,7 @@ var trTpl       =  '<tr>'
 	+ '<td>{listingState}</td>'
 	+ '<td>{storage}</td>'
 	+ '</tr>';
-2¡¢ĞÂ½¨Êı¾İÄ£°å
+2ã€æ–°å»ºæ•°æ®æ¨¡æ¿
 var trArr   = {
 	'listId':       data[i].listId,
 	'listNumber':   data[i].listNumber,
@@ -1408,7 +1408,7 @@ var trArr   = {
 	'listingState': $listState[data[i].listingState],
 	'storage':      data[i].storage
 };
-3¡¢Ò³ÃæÄ£°å¼ÓÔØÊı¾İÄ£°å---ÓÃsubsitituteÌæ»»Ò³ÃæÄ£°åÖĞµÄÊı¾İ
+3ã€é¡µé¢æ¨¡æ¿åŠ è½½æ•°æ®æ¨¡æ¿---ç”¨subsitituteæ›¿æ¢é¡µé¢æ¨¡æ¿ä¸­çš„æ•°æ®
 $.each(data, function (i) {
 	var trArr   = {
 		'listId':       data[i].listId,
@@ -1422,67 +1422,69 @@ $.each(data, function (i) {
 	};
 	hisHtml     += trTpl.substitute(trArr);
 });
-//---------hisHtml---Îª×îÖÕµÄÒ³ÃæÔªËØ
+//---------hisHtml---ä¸ºæœ€ç»ˆçš„é¡µé¢å…ƒç´ 
 
 
 
-//ÆßÊ®¡¢ÅĞ¶ÏÊÇ·ñÓĞ¹ö¶¯Ìõ
+//ä¸ƒåã€åˆ¤æ–­æ˜¯å¦æœ‰æ»šåŠ¨æ¡
 if(document.body.style.overflow!="hidden"&&document.body.scroll!="no"&&
 document.body.scrollHeight>document.body.offsetHeight)
 {
-alert("ÓĞ¹ö¶¯Ìõ");
+alert("æœ‰æ»šåŠ¨æ¡");
 }else
 {
-alert("ÎŞ¹ö¶¯Ìõ");
+alert("æ— æ»šåŠ¨æ¡");
 }
 
 
-// Ê±¼ä´Á ×ª»»³É yyyy-MM-dd HH-mm-ss
-·½·¨1£º
-function?formatDateTime(inputTime)?{??
-????var?date?=?new?Date(inputTime);
-????var?y?=?date.getFullYear();??
-????var?m?=?date.getMonth()?+?1;??
-????m?=?m?<?10???('0'?+?m)?:?m;??
-????var?d?=?date.getDate();??
-????d?=?d?<?10???('0'?+?d)?:?d;??
-????var?h?=?date.getHours();
-????h?=?h?<?10???('0'?+?h)?:?h;
-????var?minute?=?date.getMinutes();
-????var?second?=?date.getSeconds();
-????minute?=?minute?<?10???('0'?+?minute)?:?minute;??
-????second?=?second?<?10???('0'?+?second)?:?second;?
-????return?y?+?'-'?+?m?+?'-'?+?d+'?'+h+':'+minute+':'+second;??
+// æ—¶é—´æˆ³ è½¬æ¢æˆ yyyy-MM-dd HH-mm-ss
+æ–¹æ³•1ï¼š
+functionÂ formatDateTime(inputTime)Â {Â Â 
+Â Â Â Â varÂ dateÂ =Â newÂ Date(inputTime);
+Â Â Â Â varÂ yÂ =Â date.getFullYear();Â Â 
+Â Â Â Â varÂ mÂ =Â date.getMonth()Â +Â 1;Â Â 
+Â Â Â Â mÂ =Â mÂ <Â 10Â ?Â ('0'Â +Â m)Â :Â m;Â Â 
+Â Â Â Â varÂ dÂ =Â date.getDate();Â Â 
+Â Â Â Â dÂ =Â dÂ <Â 10Â ?Â ('0'Â +Â d)Â :Â d;Â Â 
+Â Â Â Â varÂ hÂ =Â date.getHours();
+Â Â Â Â hÂ =Â hÂ <Â 10Â ?Â ('0'Â +Â h)Â :Â h;
+Â Â Â Â varÂ minuteÂ =Â date.getMinutes();
+Â Â Â Â varÂ secondÂ =Â date.getSeconds();
+Â Â Â Â minuteÂ =Â minuteÂ <Â 10Â ?Â ('0'Â +Â minute)Â :Â minute;Â Â 
+Â Â Â Â secondÂ =Â secondÂ <Â 10Â ?Â ('0'Â +Â second)Â :Â second;Â 
+Â Â Â Â returnÂ yÂ +Â '-'Â +Â mÂ +Â '-'Â +Â d+'Â '+h+':'+minute+':'+second;Â Â 
 };
+
 
 formatDateTime(inputTime);
 
-·½·¨2£º
-var?tool?=?(function?($)?{
-???var?formatDateTime?=?function?(inputTime)?{??
-????	var?date?=?new?Date(inputTime);
-????????var?y?=?date.getFullYear();??
-????????var?m?=?date.getMonth()?+?1;??
-????????m?=?m?<?10???('0'?+?m)?:?m;??
-????????var?d?=?date.getDate();??
-????????d?=?d?<?10???('0'?+?d)?:?d;??
-????????var?h?=?date.getHours();
-????????h?=?h?<?10???('0'?+?h)?:?h;
-????????var?minute?=?date.getMinutes();
-????????var?second?=?date.getSeconds();
-????????minute?=?minute?<?10???('0'?+?minute)?:?minute;??
-????????second?=?second?<?10???('0'?+?second)?:?second;?
-????????return?y?+?'-'?+?m?+?'-'?+?d+'?'+h+':'+minute+':'+second;??
-????};??
-????
-????return?{?
-????????formatDateTime?:?formatDateTime??//×îºóÒ»ĞĞ²»ÒªÓĞ¶ººÅ
-????};
+æ–¹æ³•2ï¼š
+varÂ toolÂ =Â (functionÂ ($)Â {
+Â Â Â varÂ formatDateTimeÂ =Â functionÂ (inputTime)Â {Â Â 
+Â Â Â Â 	varÂ dateÂ =Â newÂ Date(inputTime);
+Â Â Â Â Â Â Â Â varÂ yÂ =Â date.getFullYear();Â Â 
+Â Â Â Â Â Â Â Â varÂ mÂ =Â date.getMonth()Â +Â 1;Â Â 
+Â Â Â Â Â Â Â Â mÂ =Â mÂ <Â 10Â ?Â ('0'Â +Â m)Â :Â m;Â Â 
+Â Â Â Â Â Â Â Â varÂ dÂ =Â date.getDate();Â Â 
+Â Â Â Â Â Â Â Â dÂ =Â dÂ <Â 10Â ?Â ('0'Â +Â d)Â :Â d;Â Â 
+Â Â Â Â Â Â Â Â varÂ hÂ =Â date.getHours();
+Â Â Â Â Â Â Â Â hÂ =Â hÂ <Â 10Â ?Â ('0'Â +Â h)Â :Â h;
+Â Â Â Â Â Â Â Â varÂ minuteÂ =Â date.getMinutes();
+Â Â Â Â Â Â Â Â varÂ secondÂ =Â date.getSeconds();
+Â Â Â Â Â Â Â Â minuteÂ =Â minuteÂ <Â 10Â ?Â ('0'Â +Â minute)Â :Â minute;Â Â 
+Â Â Â Â Â Â Â Â secondÂ =Â secondÂ <Â 10Â ?Â ('0'Â +Â second)Â :Â second;Â 
+Â Â Â Â Â Â Â Â returnÂ yÂ +Â '-'Â +Â mÂ +Â '-'Â +Â d+'Â '+h+':'+minute+':'+second;Â Â 
+Â Â Â Â };Â Â 
+Â Â Â Â 
+Â Â Â Â returnÂ {Â 
+Â Â Â Â Â Â Â Â formatDateTimeÂ :Â formatDateTimeÂ Â //æœ€åä¸€è¡Œä¸è¦æœ‰é€—å·
+Â Â Â Â };
 })(jQuery);
+
 
 formatDateTime(o.beginDate);
 
-// Ê±¼ä½ØÈ¡±È½Ï
+// æ—¶é—´æˆªå–æ¯”è¾ƒ
 var serverTime = formatDateTime(time);
 var reg = new RegExp(':', 'g');
 var timeString = serverTime.substring(11,20).replace(reg,'');

@@ -1,0 +1,52 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>浮动广告</title>
+</head>
+<body style="background-color:pink">
+<div id="ad" style="position:absolute">
+<a href=http://www.baidu.com target="_blank">
+<img src="2.gif" border="0" width="120" heigth="80">
+<input type="button" value="关闭窗口" onclick="closeWindow()"/><!-- 适用于IE浏览器 -->
+</a>
+</div>
+<script type="text/javascript">
+var x = 400,y = 300
+var xin = true, yin = true
+var step = 1
+var delay = 25
+var obj=document.getElementById("ad")
+function floatAD()
+{
+var L=T=0
+var R= document.body.clientWidth-obj.offsetWidth
+var B = document.body.clientHeight-obj.offsetHeight
+obj.style.left = x + document.body.scrollLeft
+obj.style.top = y + document.body.scrollTop
+x = x + step*(xin?1:-1)
+if (x < L) { xin = true; x = L}
+if (x > R){ xin = false; x = R}
+y = y + step*(yin?1:-1)
+if (y < T) { yin = true; y = T }
+if (y > B) { yin = false; y = B }
+}
+var itl= setInterval("floatAD()", delay)
+function closeWindow()
+{
+                      window.close();
+                   }
+</script>
+<style type="text/css">
+input{
+   background-image:url(638.jpg);
+   border:0px;
+   margin:0px;
+   padding:0px;
+   height:23px;
+   width:82px;
+   font-size:14px;
+}
+</style>
+</body>
+</html>

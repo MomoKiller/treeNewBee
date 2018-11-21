@@ -439,12 +439,12 @@ else return null;
 } 
 //alert(getCookie("userName"));
 function setCookie(name,value)
-      {
-          var Days = 30;
-          var exp = new Date();
-          exp.setTime(exp.getTime() + Days*24*60*60*1000);
-          document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-      }
+{
+  var Days = 30;
+  var exp = new Date();
+  exp.setTime(exp.getTime() + Days*24*60*60*1000);
+  document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
 function getCookie(c_name)
 {
   if (document.cookie.length>0)
@@ -462,6 +462,34 @@ function getCookie(c_name)
 }
 setCookie("h5Location","www.baidu.com");
 console.log(getCookie('h5Location'));
+
+function getQueryString(name) {//获取浏览器参数
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+function setCookie(name, value) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+}
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+    if (arr = document.cookie.match(reg))
+
+        return unescape(arr[2]);
+    else
+        return null;
+}
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null)
+        document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
 
 
 十九、indexOf()函数 返回在 String 对象中第一次出现子字符串的字符位置。当未找到返回值时则返回 -1
@@ -1540,8 +1568,36 @@ a[2][0]=1;
 console.log(a,b);
 
 
+// H5 列表滚动刷新
+windowScreen: function(){
+	var page = 1; 
+	if(!isScreen){return}
+	$(window).scroll(function(){
+		if($(window).scrollTop() + $(window).height() >= $(document).height()){
+			isScreen = false;
+			page += 1;
+			if($htmltype == '5004'){//手机翻页
+				 // main.getPaylist(page);
+				 main.getPaylist((page-1)*20);
+			}else if($htmltype == '5002'){//生活缴费翻页
+				 main.getliFelist(page);
+			}else if($htmltype == '5005'){//手机流量翻页
+				main.getTrafficList(page);
+			}
+		}                
+	})
+},
 
-
+// H5 标准头部尾部
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+</head>
 
 
 

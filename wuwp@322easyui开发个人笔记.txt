@@ -1600,6 +1600,32 @@ windowScreen: function(){
 </head>
 
 
+// 
+/* Number 原型方法扩展 */
+(function($) {
+	if (!$) return;
+	$.extend(Number.prototype, {
+		// 添加逗号分隔，返回为字符串
+		comma: function(length) {
+			if (!length || length < 1) length = 3;
+			var source = ('' + this).split('.');
+			source[0] = source[0].replace(new RegExp('(\\d)(?=(\\d{' + length + '})+$)', 'ig'), '$1,');
+			return source.join('.');
+		},
+		// 生成随机数
+		randomInt: function(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		},
+		// 左侧补齐，返回为字符串
+		padLeft: function(width, ch) {
+			return ('' + this).padLeft(width, ch);
+		},
+		// 右侧补齐，返回字符串
+		padRight: function(width, ch) {
+			return ('' + this).padRight(width, ch);
+		}
+	});
+})(jQuery);
 
 
 

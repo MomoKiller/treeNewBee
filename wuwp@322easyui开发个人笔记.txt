@@ -1627,7 +1627,8 @@ windowScreen: function(){
 	});
 })(jQuery);
 
-
+// 单页面应用
+https://www.cnblogs.com/zion0707/p/5204161.html
 
 
 

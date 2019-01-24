@@ -1630,6 +1630,17 @@ windowScreen: function(){
 // 单页面应用
 https://www.cnblogs.com/zion0707/p/5204161.html
 
+单页面引用
+var url = ''	// 页面链接
+$.get(url, {} ,function(result){
+	//	返回页面中的html
+	$(selector).append(result);
+})
+
+// 懒加载
+1、应用lazyload.js
+2、使用lazyload.js中的方法（度娘知道）
+
 
 
 

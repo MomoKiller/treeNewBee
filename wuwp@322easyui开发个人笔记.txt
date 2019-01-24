@@ -1643,6 +1643,8 @@ $.get(url, {} ,function(result){
 
 
 
+// JS prototype 模式封装
+
 
 
 

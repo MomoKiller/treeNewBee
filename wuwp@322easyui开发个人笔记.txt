@@ -1686,6 +1686,12 @@ NETWORK:*
 FALLBACK: /
 
 
+// JQ 判断元素显示或隐藏
+1、$('#selector').is(':hidden');
+2、$('#selector').is(':visible');
+3、$('#selector').css('display') == 'none'
+
+
 
 
 

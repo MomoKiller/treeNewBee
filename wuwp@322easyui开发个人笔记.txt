@@ -1664,7 +1664,26 @@ $.get(url, {} ,function(result){
 2、使用lazyload.js中的方法（度娘知道）
 
 
+// manifest 离线缓存技术
+<!DOCTYPE html>
+<html manifest = 'test.manifest'>
+<head>
+	<meta charset='utf-8'>
+	<title>离线存储技术</title>
+</head>
+<body>
+	<img src='img1.png'>
+	<img src='img2.png'>
+</body>
+</html>
 
+test.manifest 文件内容：(只缓存了第一张图片的内容)
+
+CACHE MANIFEST 
+#v01 
+img1.png 
+NETWORK:* 
+FALLBACK: /
 
 
 

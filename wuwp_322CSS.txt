@@ -1,0 +1,459 @@
+//============================CSS  布局、定义样式、常用的一些属性=============================
+
+
+
+
+
+
+
+一、clear:both   图像左侧和右侧都不允许出现浮动元素
+参考网址：http://www.w3school.com.cn/tiy/t.asp?f=csse_class-clear
+footer{
+float:left;
+clear:both;
+}
+
+二、表格合并边框
+	table
+	{
+	border-collapse:collapse;
+	}
+  
+三、定义伪类(:hover 表示鼠标浮动属性)	改变背景透明度  背景阴影效果
+	img{
+    opacity:1.0;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+	}
+  	img:hover {
+    opacity:0.8;				
+	filter:alpha(opacity=80); /* For IE8 and earlier */
+	box-shadow: 2px 2px 1px #888888;	/*背景阴影*/
+    }
+
+四、
+
+
+
+
+
+
+*布局
+设置container容器居中
+#Container{
+    width:1000px;
+    margin:0 auto;/*设置整个容器在浏览器中水平居中*/
+    background:#CF3;
+}
+
+
+
+
+
+
+
+*字体样式
+
+
+
+
+*模块样式
+
+
+
+
+
+
+
+
+
+
+
+//不使用代理
+var myImage = (function() {
+    var imgNode = document.createElement("img");
+    document.body.appendChild(imgNode);
+    var img = new Image();
+
+    img.onload = function() {
+        imgNode.src = img.src;
+    };
+
+    return {
+        setSrc: function(src) {
+            imgNode.src = "./images/loading.gif";
+            img.src = src;
+        }
+    }
+})();
+
+myImage.setSrc("./images/originImg.png");
+
+
+//==============使用代理的图片预加载技术
+// 创建图片DOM
+var myImage = (function() {
+    var imgNode = document.createElement("img");
+    document.body.appendChild(imgNode);
+
+    return {
+        setSrc: function(src) {
+            imgNode.src = src;
+        }
+    };
+})();
+
+// 代理
+var proxyImage = (function() {
+    var img = new Image();
+
+    img.onload = function() {
+        myImage.setSrc(this.src);   // this指向img！img加载完成后，将img.src传递给myImage
+    };
+
+    return {
+        setSrc: function(src) {
+            myImage.setSrc("./images/loading.gif");     // loading
+            img.src = src;
+        }
+    };
+})();
+
+proxyImage.setSrc("./images/originImg.png");
+
+
+
+
+
+//背景图片自动填充(背景图片覆盖)
+body{
+	background: url("images/img/background.png");
+	background-repeat: no-repeat;
+	background-size: cover; 
+	-moz-background-size: cover; 
+	}
+	//下面的是项目中菜单的实例
+	{
+	background-image: url("../../../images/homePage/DHXLBJ2.png");
+	background-position: 100% 100%;		
+    background-repeat:no-repeat;
+	background-size: cover; 
+	-moz-background-size: cover;
+	}
+	
+//背景图片居中显示
+.logoPanel{
+	width:650px;
+    height: 170px;
+    margin-top: 100px;
+    margin-left:auto;
+    margin-right:auto;
+	}
+
+
+//区块 垂直 水平 居中(子容器在父容器中水平垂直居中)
+1、父容器添加属性
+	.parent{
+		positon:relative;
+	}
+2、子容器添加属性
+	.child{		
+		width:chilrWidth;				/*定义控件的长度*/
+		height:childHeight;				/*定义控件的高度*/
+		position:absolute;				/*与父容器属性对应*/
+    	left: 50%;						/*自己理解去吧.0_0.*/
+    	top: 50%;
+    	margin-left:-chilrWidth/2;
+    	margin-top:-childHeight/2;
+	}
+
+
+
+	
+
+//网上找到 关于 table 布局的另一种方式
+/*设置查询条件样式*/
+  	.searchDiv{display: table; table-layout: fixed; width: 100%;}
+	.searchDiv .colDiv{display: table-cell; padding-left: 10px;}
+/*对应的Html标签*/
+<div class="searchDiv">
+	<div class="colDiv"></div>
+	<div class="colDiv" ></div>
+	<div class="colDiv"></div>
+	<div class="colDiv"></div>
+</div>	
+	
+	
+
+//设置边框
+	border:1px solid #3a87ad;
+
+
+设置文本下划线
+
+
+
+设置图片 在平面浮动
+#float-hint{
+    position: fixed;
+    right: 10px;
+    bottom: 20px;
+    z-index: 2000000000;
+    border-radius: 2px;
+}
+设置图片、区域在页面的相对位置
+#float-man{
+    position: absolute;
+    right: 517px;
+    top: 355px;
+    height: 140px;
+    width: 70px;
+}
+
+//设置图片、区块居中
+.center
+{
+margin:auto;
+width:70%;
+background-color:#b0e0e6;
+}
+
+//完整的css引用 必须包含的两个属性：href="" , rel="stylesheet".
+    <link href="../resources/css/online-consulting.css" rel="stylesheet">
+
+	
+//利用css3 实现页面动画效果
+.className{
+	width:0px;
+	-webkit-transition: width .5s;
+    -moz-transition: width .5s;
+    -ms-transition: width .5s;
+    -o-transition: width .5s;
+    transition: width .5s;
+}
+.className:hover{
+	width:100px;
+	-webkit-transition: width .5s;
+    -moz-transition: width .5s;
+    -ms-transition: width .5s;
+    -o-transition: width .5s;
+    transition: width .5s;
+}
+//以下是利用JS 方法实现css3动画效果
+$('.className').css{
+	"width":'10px',
+	"transition":'width .5s'
+}
+
+
+
+
+
+
+/----start---- 设置半透明背景   
+.floor-us .con li {
+    position: relative;
+    width: 230px;
+    height: 308px;
+    float: left;
+    margin: 0 50px;
+    overflow: hidden;
+    background: rgba(255,255,255,.5);
+}
+//
+.floor-us .con li img{
+	height: 154px;
+	display: block;
+    opacity: 1;
+    margin: 40px auto 50px;
+    transition: margin 0.5s;
+}
+//添加css3 属性样式
+.floor-us .con li:hover img{
+	height: 154px;
+	display: block;
+	opacity: 1;
+	margin: 0px auto 0px;
+	transition: margin 0.5s;		//在0.5s内完成动画效果的转换
+}
+// 设置文本
+.floor-us .con li p {
+    height: 114px;
+    position: relative;
+    padding: 20px 18px;
+    font-size: 16px;
+    line-height: 30px;
+    color: #666;
+    background-color: #fff;
+}
+/----end--------可以参考当前文件夹下  css3动画浮动效果0.5s.html------/
+
+
+/-----start----  关于css 的position 属性对应的功能
+absolute   	-> 	生成 绝 对定位的元素，相对于 static 定位以外的第一个父元素进行定位，
+				元素位置通过 left top right bottom 属性进行规定
+fixed		->	生成 绝 对定位的元素，相对于浏览器窗口进行定位
+				元素位置通过 left top right bottom 属性进行规定
+relative  	->  生成 相 对定位的元素，相对于其正常的位置进行定位
+				left: 20 会向元素的 left 位置添加 20 像素
+static 		-> 	默认值。没有定位，元素出现在正常的流中 （忽略 top bottom left right 或 z-index 声明）
+inherit		-> 	规定应该从父元素继承 position 属性的值
+/------end--------/
+
+
+
+
+// css3 伪类::before (在字体前方加 |)
+.new_about_company .list_t::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 16px;
+    margin-right: 15px;
+    background-color: #d23030;
+    position: relative;
+    bottom: -3px;
+}
+
+// css 控制 一行显示所有文字，多出的文字 自动加 ...
+.li { overflow:hidden;text-overflow:ellipsis; -o-text-overflow:ellipsis;white-space:nowrap;width:100%;}  
+
+
+//css 控制行显示文字  自动 ...
+p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-weight: bold;
+}
+
+
+
+// css 控制手机版 H5 不显示默认的选中框
+*:focus {outline: none;}
+
+
+
+// 各种箭头效果
+	http://blog.csdn.net/tangtang5963/article/details/51490107
+	
+	
+	
+//我的箭头啊，
+.address-holder::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #fee;
+    margin-top: -105px;
+    float: right;
+    margin-right: -1px;
+}
+
+.address-holder::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #999;
+    margin-top: -14px;
+    float: right;
+}	
+
+
+
+//CSS 实现隐藏滚动条同时又可以滚动
+.element::-webkit-scrollbar {display:none}
+
+如果要兼容 PC 其他浏览器（IE、Firefox 等），
+国外一位才人 John Kurlak 也研究出了一种办法。
+在容器外面再嵌套一层 overflow:hidden 
+内部内容再限制尺寸和外部嵌套层一样，就变相隐藏了。
+<div class="outer-container">
+     <div class="inner-container">
+        <div class="content">
+            ......
+        </div>
+     </div>
+ </div>
+.outer-container,
+.content {
+    width: 200px; 
+	height: 200px;
+}
+.outer-container {
+    position: relative;
+    overflow: hidden;
+}
+.inner-container {
+    position: absolute; 
+	left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+ /* for Chrome */
+.inner-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+//css3  实现浮动图片 会放大的效果
+.pane-module .module-pic:hover img {
+    transition: all .3s ease-out .1s;
+    transform: matrix(1.05,0,0,1.05,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+//h5页面Input 选中后出险黄色边框
+input{
+	border: 0;
+	outline: none;
+}
+
+//webkit-内核浏览器背景颜色渐变
+div{
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(blue), color-stop(0.5, green), to(red));
+}
+
+
+// 关于钱的符号
+￥￥￥￥￥￥￥￥￥
+
+// 控制placeholder样式兼容写法
+.header .search_box .search_input::-webkit-input-placeholder {
+    color: #bbbbbb;
+}
+.header .search_box .search_input:-moz-placeholder {
+    color: #bbbbbb;
+}
+.header .search_box .search_input::-moz-placeholder {
+    color: #bbbbbb;
+}
+.header .search_box .search_input:-ms-input-placeholder { 
+    color: #bbbbbb;
+}
+
+//	响应式设计
+@media screen and (min-width:600px) {
+  nav {
+    float: left;
+    width: 25%;
+  }
+  section {
+    margin-left: 25%;
+  }
+}
+@media screen and (max-width:599px) {
+  nav li {
+    display: inline;
+  }
+}
+

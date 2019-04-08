@@ -1,0 +1,1713 @@
+/====================================以下是使用easyui开发集客项目时总结的一些js开发经验==================================//
+
+
+http://www.zi-han.net/case/easyui/
+
+一、获取当前页面url中参数的 方法
+case: http://localhost:8080/EasySight/jsp/massageInquire/net.jsp?id=1899300008253446   获取url中"?" 后面的字符串
+方法1： 通过调用js获取
+function GetRequest() {
+	var url = location.search; //获取url中"?"符后的字串
+	var theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+		   var str = url.substr(1);
+			strs = str.split("&");
+		      for(var i = 0; i < strs.length; i ++) {
+		         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+		      }
+		   }
+	return theRequest;		
+}	
+方法二： 在<%%>的方法中添加获取url对应 参数的java代码
+String productNo=request.getParameter("id").toString();
+
+二、easyui加载数据表格的方式
+	1、对应页面的div控件：
+    <div data-options="region:'center'" id="tableID" title="结果列表">
+	2、对应初始化代码：
+	//初始化table
+	
+	var pageSize = 20;									//定义每页显示的列数  
+	$("#tableID").datagrid({							//加载对应的表格	
+		striped: true,									//是否显示条纹
+	    //fitColumns: true,								// 定义列是否自适应宽度   true则所有列都展示在页面上	false根据定义的宽度展示列
+	    singleSelect: true,
+	    rownumbers: true,								//是否显示行号
+	    pagination: true,								//页码
+	    nowrap: false,									//自动换行
+	    pageSize:pageSize,								//展示的列的 大小
+	    showFooter: true,								//展示 grid 底部的工具栏
+	    loadMsg:'正在加载...',							//加载数据是 的提示信息
+	    emptyMsg:'无数据',								//无数据是 展示的文字信息
+	    columns: [[										//对应的列名称 及 对应的ID信息，ID保持与 返回值 的key名一致
+	        {title : '客户名称',field : 'customerId',rowspan:2,width : 100},				//rowspan:2 跨两行
+            {title : '客户编号',field : 'customerCode',rowspan:2,width : 100}, 
+            {title : '业务标识',field : 'productNo',rowspan:2,width : 120},
+            {title : '业务类型', field: 'businessType', rowspan:2,width : 100},
+            {title : 'A端',colspan:6},														//colspan:6 跨六列
+            {title : 'Z端',colspan:7},
+            {title : '业务开通日期', field: 'openDate',rowspan:2, width : 140}
+       		],[
+            {title : '地址', field: 'aAddress', width : 100},
+            {title : '营业部', field: 'aBusinessHall', width : 100},
+            {title : '地区', field: 'aProvinceId', width : 200,formatter: function(value,row,index){
+            	return (row.aProvinceId==null?"":row.aProvinceId)+(row.aCityId==null?"":row.aCityId)+(row.aCountryId==null?"":row.aCityId);
+            }},
+            {title : 'A端业务保障等级', field: 'aAssureGrade', width : 100},
+            {title : '技术联系人', field: 'aCustomerContact', width : 100},
+            {title : '联系方式', field: 'aCustomerPhone', width : 100},
+
+            {title : '营业部', field: 'zBusinessHall', width : 100},
+            {title : 'Z端用户名称', field: 'zUserName', width : 100},
+            {title : '地址', field: 'zAddress', width : 200},
+            {title : '地区', field: 'zProvinceId', width : 100,formatter: function(value,row,index){
+            	return (row.zProvinceId==null?"":row.zProvinceId)+(row.zCityId==null?"":row.zCityId)+(row.zCountryId==null?"":row.zCityId);
+            }},
+            {title : '技术联系人', field: 'customerContact', width : 100},
+            {title : '联系人电话', field: 'customerPhone', width : 100},
+            {title : '业务保障等级', field: 'assureGrade', width : 100}
+	    ]],
+	    onDblClickRow: function(rowIndex, rowData){											//定义列 的双击事件  rowIndex是当前选中行的行号，rowData 是返回值的json数据
+	    	 addDetailWin(rowData.businessType, rowData.intId,rowData.productNo);			//定义对应的事件
+	    }
+	});
+	
+	//加载table数据
+	loadTableData(1,pageSize);
+	
+	var pager = $('#tableID').datagrid('getPager');	// get the pager of datagrid	中getPager是固定easyui的写法并不是写入的参数
+	if(pager){
+		$(pager).pagination({
+			//showPageList:false,															//是否显示每页显示的列数  默认显示
+			showRefresh:false,																//是否显示刷新按钮  默认显示
+			onSelectPage: function(pageNumber, pageSize){
+				loadTableData(pageNumber,pageSize);
+			}
+		});
+	}
+	
+	
+	function loadTableData(pageNumber,pageSize){											//定义加载table的事件  pageNumber 是初始页的大小 pageSize 是当前显示数据条数
+	//var params={};
+	var params=getSeachParams();															//调用jsFunction 获取页面参数信息的
+	jQuery.support.cors = true;																//设置跨域 调用ajax ，必须写在 ajax的前面
+	$.ajax({
+	    url: Query_URL+'/resource/service/get/'+(pageNumber-1)*pageSize+'/'+pageSize,		//对应的URL
+	    data:JSON.stringify(params),														//格式化参数信息			
+	    type:'POST',																		//ajax的类型
+	    cache:false,
+	    contentType:'application/json',														//传参的类型											
+	    beforeSend : function(){															//数据加载之前事件
+	    	$.messager.progress();//显示进度条
+	    },
+	    complete : function() {																//数据加载完成后事件
+	    	$.messager.progress('close');//关闭进度条
+	    },
+	    error:function(response){															//数据加载失败事件
+	    	alert('查询失败，'+response.responseText);
+	    },
+	    success:function(response){															//数据增加在成功事件	
+	        $("#tableID").datagrid('loadData', response);									//loadData是easyui固定写法 并非参数
+	    }
+	});
+	}
+三、js初始化加载
+	$(document).ready(function(){
+		//要初始化的内容
+	});
+	
+四、新建easyui弹出窗口的方法
+	1、对应的页面控件
+	<div id="addDetailWin"></div>															//页面控件ID 与方法中的ID值对应的
+	2、对应的加载窗口方法
+	function addDetailWin(businessType, intId,productNo){									//在对应的事件中触发该方法
+	var jspPath;														
+	if(businessType == "语音专线"){jspPath="speech.jsp";}
+	if(businessType == "互联网专线"){jspPath="net.jsp";}
+	if(businessType == "GPRS专线"){jspPath="gprs.jsp";}
+	if(businessType == "短信专线"){jspPath="sms.jsp";}
+	if(businessType == "传输专线"){jspPath="blank.jsp";}
+	$("#addDetailWin").window({ 															//addDetailWin 对应的页面控件ID
+		title:' ',
+		width:400,
+		height:200,				
+		modal:true,				//是否遮罩层
+		collapsible:false,		//是否可折叠
+		minimizable:false,		//是否显示最小化按钮
+		maximizable:false,		//是否显示最大化按钮	
+		maximized:true,			//最大化
+		resizable:false,		//是否可拉伸
+		draggable:false,		//是否拖动
+		content:																			//创建窗口的内容，可以使用页面的中的内容转换
+		'<div id="tt" class="easyui-tabs" border="false" fit="true" >'+
+		    '<div title="端到端拓扑" data-options="closable:false" style="height: 100%;width: 100%;" >'+
+				'<iframe frameborder="0" src="../../jtopo5.jsp?id='+intId+'"  style="width:100%;height:100%;overflow:hidden;" ></iframe>'+
+		    '</div>'+
+		    '<div title="'+businessType+'详情" data-options="closable:false" style="height: 100%;width: 100%;" >'+
+				'<iframe frameborder="0" src="'+jspPath+'?id='+productNo+'" name="rightFrame" id="rightFrame" style="width:100%;height:100%;overflow:hidden;" ></iframe>'+
+			'</div>'+
+		'</div>'
+	});
+	}
+
+
+五、更具返回的json数据格式对 数据进行加工
+	1、返回值的类型的是json格式数据，对其进行加工
+    {
+        "Femto专线": "Femto专线",
+        "WLAN专线": "WLAN专线",
+        "短信": "短信"
+    }
+	2、对应的jquery each()方法：
+	ajax:success:function(data){
+	var html = '';
+	$.each(data,function(key,value){														//在ajax的success事件中如果存在上述返回值 则可以直接调用该方法
+		html += "<option value=\"" + key + "\" >" + value + "</option>";
+	});
+	}
+	
+六、根据浏览器的高度自动调整页面的高度
+	var winHeight = 0;
+    function findDimensions() //函数：获取尺寸
+    {
+       	winHeight = window.innerHeight;														// window.innerHeight 是获取当前浏览器的的高度
+		
+		
+       	$("#heightFine").height(winHeight-44);
+    }
+    findDimensions();                                           							//  初始化一次
+
+七、获取某个控件高度的方法
+	var o = document.getElementById("viewID");												//view指控件的ID
+	var h = o.offsetHeight;  //高度
+	var w = o.offsetWidth;  //宽度
+
+八、另外整理的一些获取页面宽度、高度的方法
+var s = "";
+s += " 网页可见区域宽："+ document.body.clientWidth;
+s += " 网页可见区域高："+ document.body.clientHeight;
+s += " 网页可见区域宽："+ document.body.offsetWidth + " (包括边线和滚动条的宽)";
+s += " 网页可见区域高："+ document.body.offsetHeight + " (包括边线的宽)";
+s += " 网页正文全文宽："+ document.body.scrollWidth;
+s += " 网页正文全文高："+ document.body.scrollHeight;
+s += " 网页被卷去的高(ff)："+ document.body.scrollTop;
+s += " 网页被卷去的高(ie)："+ document.documentElement.scrollTop;
+s += " 网页被卷去的左："+ document.body.scrollLeft;
+s += " 网页正文部分上："+ window.screenTop;
+s += " 网页正文部分左："+ window.screenLeft;
+s += " 屏幕分辨率的高："+ window.screen.height;
+s += " 屏幕分辨率的宽："+ window.screen.width;
+s += " 屏幕可用工作区高度："+ window.screen.availHeight;
+s += " 屏幕可用工作区宽度："+ window.screen.availWidth;
+s += " 你的屏幕设置是 "+ window.screen.colorDepth +" 位彩色";
+s += " 你的屏幕设置 "+ window.screen.deviceXDPI +" 像素/英寸"; 
+
+九、给控件设置高度属性的方法
+	1、看api文档，若果存在设值方法，直接使用该方法：
+	$("#panelID").height((winHeight-49)/2-40);	
+	2、利用css的设值属性值方法 找到对应的属性在赋值	heightValue 为一个变量
+	$(".panelClass").css("height",heightValue);
+		?--->    $(".panelClass").css({"height",heightValue});
+	3、利用attr 转换值的方法给属性赋值。找对控件的属性值是关键：
+	$(".panelClass").attr("data-content", "电话:"+data.phone);
+	
+十、三种定义 click 事件的方式：
+	1、
+	$(document).on("click","#tableID", function(){
+		//对应的事件
+	});
+	2、
+	$("#tableID").on("click",function(){
+		//对应的事件
+	});
+	3、
+	$("#tableID").click(function(){
+		//对应的事件
+	});
+
+十一、	页面跳转的方法
+	1、通用的页面跳转方法 ，一般以根目录为起始目录
+	window.location.href = urls;															//urls为跳转的路径 
+	2、写在html中的页面跳转方法	，一般以当前目录为起始目录：
+		对应的页面部分：
+	<iframe id="iframeID" style="display:none;"></iframe><!-- 此iframe无其它用途，一般设置隐藏-->
+		对应的js部分：
+	document.getElementById("iframeID").src =urls;	
+	3、<a>标签中的src属性中直接写入路径。可以点击文字直接跳转到相应的页面
+	<a href="jsp/selfservice/self_service_operate.jsp" title="点击进入业务报告查询">
+		<span style="color: #436EEE;">苏宁电器6月网络运行报告</span></a>
+	4、在a标签中通过click方法跳转到相应的页面
+	<a href="javascript:void(0)" class="icon-gear" onclick="javascript:functionTZ()" title="点击进行配置"></a>	
+	js部分：
+	function functionTZ(){
+		window.location.href = urls;		
+	}
+	5、<iframe>标签中的src属性中直接写入路径，当打开当前页面的iframe中的页面也会随之加载出来。
+	<iframe src="sys_index.jsp" scrolling="auto" name="rightFrame" id="rightFrame"
+            style="bottom:0px; width:100%;height: 100%;" title="rightFrame"/>
+	页面如果有树形结构的跳转，属性结构中的target 也能指定到这个iframe中
+	<ul class="menuson" style="background-color: #FFFFFF">
+		<li><cite></cite><a href="jsp/userManage.jsp" target="rightFrameMenu">用户管理</a><i></i></li>
+		<li><cite></cite><a href="jsp/LogOperateManage.jsp" target="rightFrameMenu">操作日志管理</a><i></i></li>
+		<li><cite></cite><a href="jsp/baseStationMaintain.jsp" target="rightFrameMenu">基站信息维护</a><i></i></li>
+		<li><cite></cite><a href="jsp/switchMsgMaintain.jsp" target="rightFrameMenu">交换中心信息维护</a><i></i></li>
+	</ul>
+
+十二、表格设置合并边框模型(页面)：   
+ table
+  {
+  border-collapse:collapse;
+  }
+
+十三、  鼠标监听事件
+	case：http://www.cnblogs.com/rubylouvre/archive/2009/08/24/1552862.html   				//可以参考的网址
+	
+十四、键盘监听事件
+	// 以下是一段 监听enter键、Esc键、F2键 的键盘监听事件
+	document.onkeydown=function(event){
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+     if(e && e.keyCode==13){ // enter 键
+          //要做的事情
+    	 userLogin();
+     }
+     if(e && e.keyCode==27){ // 按 Esc 
+        //要做的事情
+      }
+    if(e && e.keyCode==113){ // 按 F2 
+         //要做的事情
+       }            
+	}; 
+
+十五、动态创建js
+case:
+function loadjs(script_filename) {
+    var script = document.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', script_filename);
+    script.setAttribute('id', 'coolshell_script_id');
+ 
+    script_id = document.getElementById('coolshell_script_id');
+    if(script_id){
+        document.getElementsByTagName('head')[0].removeChild(script_id);
+    }
+    document.getElementsByTagName('head')[0].appendChild(script);
+}
+ 
+var script = 'http://coolshell.cn/asyncjs/alert.js';
+loadjs(script);
+
+十六、一个整合spring+springMVC+myBatis 的样例
+case: http://ju.outofmemory.cn/entry/100681
+
+十七、调用ajax的两个经典方法
+网站：(注*  关于ajax中的data参数数据类型转换的一片博客)   http://www.cnblogs.com/sunxi/p/3849361.html
+
+	//1、调用ajax的	get 请求
+		$.ajax({
+        cache: false,
+        type: "get",
+        url:path+'/rs/report/home/dutyinfo/get',
+        async: false,
+        error: function(request) {
+        	bootbox.alert("未找到值班人信息！");
+        },
+        success: function(data) {
+			$("#userName").val(data.user_name);
+        	$("#phone").val(data.phone);
+        }
+     });
+	//2、调用ajax的 post 请求 
+		var params = {};
+		params.user_name = $("#userName").val();
+		params.phone = $("#phone").val();
+		$.ajax({
+	        cache: false,
+	        type: "post",
+	        url:path+'/rs/report/home/dutyinfo/edit',
+            contentType: "application/json; charset=utf-8",
+	        async: false,
+	        data:JSON.stringify(params),
+	        error: function(request) {
+	        	bootbox.alert("修改失败！");
+	        },
+	        success: function(data) {
+				bootbox.alert("修改成功！");
+	        }
+	     });	
+
+	//3、调用ajax直接处理form表单的数据
+		$.ajax({
+	            cache: true,
+	            type: "POST",
+	            url:url,
+	            data:$("#formId").serialize(),// 你的formid
+	            async: false,
+	            error: function(request) {
+	             console.log("失败");
+	            },
+	            success: function(data) {
+	            	$('#'+modelId).modal('toggle');
+	            	$("#"+tableId).DataTable().draw();
+	            	//清空数据
+	            	
+	            }
+	         });
+	//4、调用ajax 用函数方法回去data数据
+		$("#deviceTable").dataTable({
+    	            serverSide: true,//分页，取数据等等的都放到服务端去
+    	            processing: false,//载入数据的时候是否显示“载入中”
+    	            pageLength: 10,//首次加载的数据条数
+    	            searching: false,//搜索
+    	            ordering: false,//排序操作在服务端进行，所以可以关了
+    	            ajax: {//类似jquery的ajax参数，基本都可以用。
+    	                type: "get",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
+    	                url: url,
+    	                dataSrc: "rows",//默认data，也可以写其他的，格式化table的时候取里面的数据
+    	                data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
+    	                var param = getSearchParam();
+    	                console.log(param);
+    	                    param.start = d.start;//开始的序号
+    	                    param.length = d.length;//要取的数据的
+    	                    return param;//自定义需要传递的参数。
+    	                }
+    	            }
+    	          ,
+    	            columns: [//对应上面thead里面的序列    
+    	                      { data: "sys_name"},
+                              
+                              { data: "ip_addr"},
+                              { data: "device_type","render": function(data, type, full) { 
+                                	if(data=='HOST') return "主机";
+                                  	if(data=='SWTICH') return "交换机";
+                                  	if(data=='ROUTER') return "路由器";
+                                  	else return "暂无";
+                                   }
+                                  },
+                              { data: "city"},
+                              { data: "vendor"},
+                              { data: "last_timestamp","render": function(data, type, full) { 
+                              	return data.substring(0,19);
+                              }
+                              	
+                              },
+                              { data: "device_id","render": function(data, type, full) { 
+                            	var    info='<a href="javascript:openPerconfig(\''+data+'\')"     class="btn btn-info  btn-xs"  title="性能指标配置"> <span class="glyphicon  glyphicon-book" ></span></a>';
+                              	return info;
+                              }}
+    	            ],
+    	            initComplete: function (setting, json) {
+    	              
+    	            },
+    	            language: {
+    	                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
+    	               // lengthMenu:false,
+    	                processing: "载入中",//处理页面数据的时候的显示
+    	                paginate: {//分页的样式文本内容。
+    	                    previous: "上一页",
+    	                    next: "下一页",
+    	                    first: "第一页",
+    	                    last: "最后一页"
+    	                },
+    	                zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
+    	                //下面三者构成了总体的左下角的内容。
+    	                info: '总共_PAGES_ 页，显示第_START_ 到第 _END_ ，共_TOTAL_ 条 ',//左下角的信息显示，大写的词为关键字。
+    	                infoEmpty: "共0条记录",//筛选为空时左下角的显示。
+    	                infoFiltered: ""//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
+    	            },
+    	            lengthChange:true,
+    	            paging: true
+    	        });
+				
+十八、设置cookie 与 获取cookie 的方法 一般是登录操作是将用户名密码信息放在cookie中
+1、设置cookie
+//添加cookie (String name,String value,int day)  
+function addCookie(name,value,day) 
+{ 
+var exp = new Date(); 
+exp.setTime(exp.getTime() + day*24*60*60*1000); 
+document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+} 
+//addCookie("userName",$("#userName").val(),7);
+
+2、获取cookie
+//获取cookie (String name)
+function getCookie(name) 
+{ 
+var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+if(arr=document.cookie.match(reg)) return unescape(arr[2]); 
+else return null; 
+} 
+//alert(getCookie("userName"));
+function setCookie(name,value)
+{
+  var Days = 30;
+  var exp = new Date();
+  exp.setTime(exp.getTime() + Days*24*60*60*1000);
+  document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+function getCookie(c_name)
+{
+  if (document.cookie.length>0)
+  {
+	  c_start=document.cookie.indexOf(c_name + "=")
+	  if (c_start!=-1)
+	  {
+		  c_start=c_start + c_name.length+1
+		  c_end=document.cookie.indexOf(";",c_start)
+		  if (c_end==-1) c_end=document.cookie.length
+		  return unescape(document.cookie.substring(c_start,c_end))
+	  }
+  }
+  return ""
+}
+setCookie("h5Location","www.baidu.com");
+console.log(getCookie('h5Location'));
+
+function getQueryString(name) {//获取浏览器参数
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+function setCookie(name, value) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+}
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+    if (arr = document.cookie.match(reg))
+
+        return unescape(arr[2]);
+    else
+        return null;
+}
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null)
+        document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
+
+
+十九、indexOf()函数 返回在 String 对象中第一次出现子字符串的字符位置。当未找到返回值时则返回 -1
+var str = "hello world!";
+var a=str.indexOf("hello");
+var b=str.indexOf("Hello");
+var c=str.indexOf("world");
+返回结果：
+a=0;
+b=-1; //区分大小写 查找无结果 返回 -1
+c=6;
+
+二十、checkbox 的值判断
+<input type="checkbox" title="记住密码" checked="checked" id="isCheck"><span style="color: #1e90ff">记住密码</span>
+$("#isCheck").prop("checked");  	//返回值是boolean类型
+
+二一、图片滚动的案例
+case1:
+html>
+<body>
+<style>
+div { font-size:12px; }
+</style>
+<div id="mq" style="width:100%;height:70px;overflow:hidden;border:1px solid #000000" onmouseover="iScrollAmount=0" onmouseout="iScrollAmount=1">
+李新成<br/>
+褚喜凡<br/>
+董里旭<br/>
+张丽君<br/>
+杜志芳<br/>
+李国玉<br/>
+</div>
+<script>
+var oMarquee = document.getElementById("mq"); //滚动对象
+var iLineHeight = 14; //单行高度，像素
+var iLineCount = 6; //实际行数
+var iScrollAmount = 1; //每次滚动高度，像素
+function run() {
+oMarquee.scrollTop += iScrollAmount;
+if ( oMarquee.scrollTop == iLineCount * iLineHeight )
+oMarquee.scrollTop = 0;
+if ( oMarquee.scrollTop % iLineHeight == 0 ) {
+window.setTimeout( "run()", 2000 );
+} else {
+window.setTimeout( "run()", 50 );
+}
+}
+oMarquee.innerHTML += oMarquee.innerHTML;
+window.setTimeout( "run()", 2000 );
+</script>
+</body>
+</html>
+//推荐使用case2的方式加载
+case2:
+<div id="demo" style="overflow: hidden;height: 200px;width:100%;">
+	<div id="demo1">
+	<li class="list-group-item" style="height:41px;"><a href="#">●&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
+	<li class="list-group-item" style="height:41px;"><a href="#">●&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
+	<li class="list-group-item" style="height:41px;"><a href="#">●&nbsp;'+dataJson[i].title+'('+dataJson[i].timeStamp.substring(5,10)+')</a><li>
+	......
+	</div>
+</div>
+	$(function() { 
+		var $this = $("#demo"); 
+		var scrollTimer; 
+		$this.hover(function() { 
+		clearInterval(scrollTimer); 
+		}, function() { 
+		scrollTimer = setInterval(function() { 
+		scrollNews($this); 
+		}, 1000); 
+		}).trigger("mouseleave"); 
+
+		function scrollNews(obj) { 
+		var $self = obj.find("#demo1"); 
+		//var lineHeight = $self.find("li:first").height(); 
+		$self.animate({ 
+		"marginTop": -40 + "px" 
+		}, 6000, function() { 
+		$self.css({ 
+		marginTop: 0 
+		}).find("li:first").appendTo($self); 
+		}) 
+		} 
+		}) 
+		
+二二、网页自适应宽度设计
+website：http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html
+
+选择加载css
+//代码意思是，如果屏幕宽度小于400像素（max-device-width: 400px），就加载tinyScreen.css文件。
+<link rel="stylesheet" type="text/css"
+　　　　media="screen and (max-device-width: 400px)"
+　　　　href="tinyScreen.css" />	
+//如果屏幕宽度在400像素到600像素之间，则加载smallScreen.css文件。	
+<link rel="stylesheet" type="text/css"
+　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
+　　　　href="smallScreen.css" />
+//除了用html标签加载CSS文件，还可以在现有CSS文件中加载。
+@import url("tinyScreen.css") screen and (max-device-width: 400px);
+
+二三、浏览器最大化、最小化、或者改变大小是触发该事件，并且刷新页面
+参考网站：http://www.jb51.net/article/14397.htm
+window.onresize = function(){
+	location.reload(false);		//当为true时重新获取数据加载页面 当为false时获取缓存并刷新页面
+}	
+//当前页面禁用 onresize 事件
+window.onresize = function(e){
+	if(e && e.preventDefault){
+		e.preventDefault();
+	}else{
+		window.event.returnValue = false;
+	}
+	return false;
+}
+
+
+
+二四、下面三个文件控制html或jsp页面不会出现乱码，且必须放在页面<head>标签中的最前面
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+二五、修改默认页面的apacher-tomcat图标
+	<head>
+	<link rel="icon" href="resources/bootstrap/bootstrap-3.3.5/docs/favicon.ico">
+	</head>
+	
+	
+二六、控制body的背景颜色、背景图片
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>hello world</title>
+</head>
+<!--  最原始的方式如下：定义body的背景颜色为蓝色，中间部分为白色	-->
+<!--
+<body style="background-color: blue;">
+<div style="background-color:white;width:800px;height:1000px;margin:0 auto;">
+</div>
+</body>
+-->
+<!---  对此方法进行修改把body的背景颜色改成背景图片  --->
+<body style="background-image: url('background.png')">
+
+<div style="background-color: blue;width: 800px;height: 500px;margin: 0 auto;">
+</div>
+
+</body>
+<style>
+	//定义图片居中，且图片不重复
+    /*
+    body {
+        background-image: url("background.png");
+        background-position: 50% 50%;		//定义水平垂直居中
+        background-repeat:no-repeat;
+    }
+     body { background-image: url("background.png"); background-position-x: 50%; background-repeat:no-repeat; }
+    */
+    /**
+    body { background-image: url("background.png"); background-position-x: 50%;background-position-y: 50%; background-repeat:no-repeat; }
+    */
+	//下面的是项目中菜单的实例
+	{
+	background-image: url("../../../images/homePage/DHXLBJ2.png");
+	background-position: 100% 100%;		
+    background-repeat:no-repeat;
+	background-size: cover; 
+	-moz-background-size: cover;
+	}
+</style>
+</html>
+
+二七、控制图片的显示方式
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>hello world</title>
+</head>
+<body>
+<!--  控制图片大小和浏览器窗口的大小一致	-->
+<div id="Layer1" style="position:absolute; width:100%; height:100%; z-index:-1">
+    <img src="0f1077ba53.png" height="100%" width="100%"/>
+</div>
+</body>
+</html>
+
+
+
+
+二八、查看当前jquery版本信息
+<script type="text/javascript">
+jQuery(function(){ 
+    alert(jQuery.fn.jquery);        
+})
+</script>
+
+二九、超链
+不同标签超链的方式不同
+case1：<a href="http://www.baidu.com"></a>
+	   <a onclick="clickEvent();"></a>
+case2: <iframe src="http://www.baidu.com"></iframe>
+
+三十、父节点
+parent.$("#ID").Event();
+
+三一、有时会遇到<iframe src="webAdd"></iframe>中的内容无法打开的情况
+处理方法：
+1、动态给iframe赋值
+$("iframe").attr("src","webAdd");
+
+三二、message对话框  (事件最好放在判断体中，否则事件会越过 messager 事件往下执行)
+$.messager.alert('提示','提示内容！');
+$.messager.confirm('提示','是否...',function(flag){
+	if(flag){
+	//选着OK 对应的事件
+	}else{
+	//选择cancle 对应的事件
+	}
+});
+
+三三、页面样式  使用伪类 是控件 背景改变透明度  产生阴影
+		img{
+    	opacity:1.0;
+		filter:alpha(opacity=100); /* For IE8 and earlier */
+    	}
+    	img:hover {
+    	opacity:0.8;				
+		filter:alpha(opacity=80); /* For IE8 and earlier */
+		box-shadow: 2px 2px 1px #888888;	/*背景阴影*/
+    	}
+
+三四、form表单的清空
+case1：
+	$('#formId').form('clear');
+case2:	
+	$('#formId')[0].reset();
+case3:	
+	/*逐一地对form中控件的内容 赋值为空*/
+	$('#formId inputId').val("");
+
+三五、 JS数组去重
+参数 arr 为数组变量
+function unique(arr) {
+    var result = [], hash = {};
+    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+        if (!hash[elem]) {
+            result.push(elem);
+            hash[elem] = true;
+        }
+    }
+    return result;
+}
+
+三六、识别当前浏览器    用户不同浏览器的兼容性调整
+function myBrowser(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1;
+    if (isOpera) {
+        return "Opera"
+    }; //判断是否Opera浏览器
+    if (userAgent.indexOf("Firefox") > -1) {
+        return "FF";
+    } //判断是否Firefox浏览器
+    if (userAgent.indexOf("Chrome") > -1){
+  		return "Chrome";
+ 	}
+    if (userAgent.indexOf("Safari") > -1) {
+        return "Safari";
+    } //判断是否Safari浏览器
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+        return "IE";
+    }; //判断是否IE浏览器
+}
+
+
+三七、css样式 改变table中某一列的宽度 
+case1: 改变table中第一列的css	
+	table tr td:first-child{
+		width:15%;
+	}
+case2：然而在选择table中的第二，乃至第三列...时不能以此类推，但可以用一下方式，切该方法可以以此类推
+	table tr td:nth-child(2){
+		width: 25%;
+	}
+	...
+	table tr td:nth-child(3){
+		width: 10%;
+	}
+case3: table 单行双行的样式(定义一个简单的table样式)选择表格的奇数行偶数行
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd)	{
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}	
+	
+	
+	
+三八、	grid获取选中行
+case1:选中的一行
+var row = $('#tableId').datagrid('getSelected');
+case2:选中的所有行
+var row = $('#tableId').datagrid('getRows');
+
+三九、grid默认选中第一条
+$('#tableId').datagrid('selectRow',0);
+
+四十、变小手属性(妈的，这个老子竟然没记)
+cursor:pointer;																						//变小手属性
+cursor:hand;																						//同是变小手属性，但是只有IE上能显示，其它浏览器不兼容
+
+四一、panel、table的圆角属性
+.panel{
+	border-radius:4px;
+}
+
+
+四二、关于easyui的窗口 windows
+1、新建窗口
+$("#windowId").window({
+	title:'',
+	width:10,
+	hieght:10,
+	modal:false,
+	collapsible:false,
+	minimizable:false,
+	maximizable:false,
+	maximized:false,
+	draggable:false,
+	content:'<form></form>',
+	onBeforeClose:function(){
+		//窗口关闭时的触发事件
+	},
+	onOpen:function(){
+		//窗口打开时的触发事件
+	}
+});
+2、关闭窗口：
+$("#windowId").window("close");
+
+
+
+
+四三、关于grid 的列展示 当列中含有多个子项的情况
+		columns: [[
+			{title : 'ID',field : 'id',hidden : true},
+			{title : '密码',field : 'userPwd',hidden : true},
+			{title : '帐号名称',field : 'userName',width : 200},
+			{title : '集团客户编号',field : 'relats.customerCode',width : 200,
+				formatter:function(val,row,index){
+					var codeMap = [];
+					$.each(row.relats,function(val,value){
+						codeMap.push(value.customerCode);	
+					});
+					return codeMap;
+				}
+			},
+			{title : '集团客户名称',field : 'relats.customerCode',width : 200,
+				formatter:function(val,rec){
+					return relats[0].customerCode;
+				}
+			},
+			{title : '创建人',field : 'createUser',width : 200},
+			{title : '创建时间',field : 'createTime',width : 200},
+			{title : '所属角色',field : 'roleName',width : 200},
+			{title : '删除标识',field : 'stateflag',width : 200}
+	    ]]
+
+
+
+四四、关于 js  中的map和ArrayList
+	1、定义MAP
+	var testMap = [];
+	$.each(dataArray,function(val,value){
+		testMap.push(value.mapKey);	
+	});
+	return testMap;
+	2、定义arrylist
+	$.each(dataArray,function(val,value){
+		var testArray = {};
+		testArray.param1 = value.arrayKey;
+		...
+		
+	});
+	return testArray;
+
+
+四五、关于 JS 的或运算符 || 
+
+function getEven(e){
+	return e || window.event;
+}
+
+||这个的意思是或   
+也就是说浏览器对于事件e是不一样的。
+当没有e的时候自动返回window.event
+也就是说会取其中一个。
+第一个有就用第一个不管第二个有没有，
+第一个没有就用第二个，
+两个都没有就undefined咯
+
+
+四六、关于linkbutton 和 button  设置 diasable 属性的方法问题
+case: http://www.jeasyui.net/plugins/187.html
+case： http://www.cnblogs.com/haogj/archive/2013/05/13/3074461.html
+
+1、 //button两种方法设置disabled属性  
+　$('#areaSelect').attr("disabled",true);  
+　$('#areaSelect').attr("disabled","disabled");  
+　//三种方法移除disabled属性  
+　$('#areaSelect').attr("disabled",false);  
+　$('#areaSelect').removeAttr("disabled");  
+　$('#areaSelect').attr("disabled","");  
+2、 //linkbuton 设置disable
+  $("#confirmComplain").linkbutton("diasable");
+    //linkbutton 设置enable
+  $("#confirmComplain").linkbutton("enable");	
+
+
+四七、easyui  DateGrid(多选) 获取所选项 、 清楚所选项
+case:获取所选项
+$("#datagridId").datagrid("getSelections");
+case：清楚所选项
+$("#datagridId").datagrid("clearSelections");
+case:对多选数据的处理
+var rows = $("#datagridId").datagrid("getSelections");
+
+
+
+四八、关于函数join()和split()
+var array = [a,b,c,d,e,f,g];
+var result = array.join(',');
+result 的结果为： "a,b,c,d,e,f,g"
+
+var after = result.split(',');
+after 的结果为：[a,b,c,d,e,f,g]
+
+四九、radio 获取值与赋值
+//获取选中值
+params.isCenter = $(":radio[name='isCenter'][checked]").val();
+//赋值
+$(":radio[name='isCenter'][value='" + value + "']").prop("checked", "checked");
+
+
+
+五零、根据返回的Json 数组重构菜单
+var menuMap = {
+	//一级菜单
+	"generalSitu":"概况",
+	"userManage":"客户资料",
+	"alarmMonitor":"故障监控",
+	"topo":"拓扑概览",
+	"performance":"性能分析",
+	"selfService":"自助服务",
+	"systemManage":"系统管理",
+	//二级菜单
+	"individual":"业务信息",
+	"machineRoom":"机房信息",
+	"realTime_monitor":"实时性能",
+	"showMenu":"性能分析",
+	"mfun_sheet_query":"故障工单查询",
+	"complaint_sheet_query":"投诉工单查询",
+	"open_sheet_query":"开通工单查询",
+	"complainSystem":"监控投诉详情",
+	"customComplain":"客户投诉详情",
+	"customerAccountManage":"客户帐号管理",
+	"managerAccountManage":"客户经理帐号管理",
+	"managerViewManage":"客户经理视图配置",
+	//三级菜单
+	"internetTransaction":"互联网专线业务分析",
+	"transmissionTransaction":"传输专线业务分析",
+	"phoneticsoundTransaction":"语音专线业务分析",
+	"gprsPriLineTransaction":"GPRS专线业务分析",
+	"shortmessageTransaction":"短信专线业务分析"	
+};	
+
+//配置首页菜单
+function MenuShow(){
+	var menu=[{
+		id:"generalSitu",
+		child:""	
+	},{
+		id:"userManage",
+		child:[{
+			id:"individual",
+			child:""
+		},{
+			id:"machineRoom",
+			child:""
+		}]
+	},{
+		id:"performance",
+		child:[{
+			id:"realTime_monitor",
+			child:""
+		},{
+			id:"showMenu",
+			child:[{
+				id:"internetTransaction",
+				child:""
+			},{
+				id:"transmissionTransaction",
+				child:""
+			}]
+		}]
+	}];
+	console.log(menu);
+	//构建一级菜单
+	var menuHtml = '';
+	var menuHtml2 = '';
+	var menuHtml3 = '';
+	for(var i=0;i<menu.length;i++){
+		menuHtml += '<li><a class="go" href="javascript:;" id="'+menu[i].id+'">'+menuMap[menu[i].id]+'</a>';		
+		//构建二级菜单
+		menuHtml2 = '<blockquote><div class="ChildNavIn">';
+		if(menu[i].child!=""&&menu[i].child.length>0){
+			for(var j=0;j<menu[i].child.length;j++){
+				menuHtml2 += '<a class="First" href="javascript:;" id="'+menu[i].child[j].id+'">'+menuMap[menu[i].child[j].id]+'</a>';
+				//构建三级菜单
+				menuHtml3 = '<div class="NavDeptIn"><div class="NavDeptInList">'
+				if(menu[i].child[j].child!=""&&menu[i].child[j].child.length!=0){
+					for(var k=0;k<menu[i].child[j].child.length;k++){
+						menuHtml3 += '<a class="First " href="javascript:;" id="'+menu[i].child[j].child[k].id+'">'+menuMap[menu[i].child[j].child[k].id]+'</a>';
+					}
+					menuHtml3 += '</div></div>';	
+					menuHtml2 += menuHtml3;	
+				}
+			}		
+			menuHtml2 += '</div></blockquote>';
+			menuHtml += menuHtml2;
+		}	
+		menuHtml += '</li><li class="s">|</li>';
+	}
+	$("#MutiNav .multiUl").html(menuHtml);
+}		
+
+
+五一、字节流文件转化成图片ICON
+	<img id="logoString" src="images/homePage/unlog.png" alt="..."/>
+	logoString 为接口返回字节码 ：
+	var logoString = "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAGu5JREFUeNqsenlwXPd93+ede9+LxX0DBEESJCiRJikeMk0lsh1JI9lSxqrstknqxuM6bdJ/mjozqcZxpzNNZ5yZuI2rxm3qzKSK3Ti6fOgKJdKiSBEUTxAEcRLXAthd7H28u5+3oI7Ybu1JhZk3AHb3vff7Xp/j91ZwHAdmLouf/nFECbZWh90w4UD80BuAUN+E4E1DiQfhmCKsegZKqA+11Qn4kmMwCosRCPaArTkPlufOPFycXXe83YdesPTSj2HU7qQOPVI0Shnkrp1DMLUX+bUbCPbuRWL0MDLnv4/kic9DVH3bN+OPICnQ8ndQW7/Gv9WfWWvrfZ+HjI/iRxDdG0uKN7C/mpk+aWwt/mp57drxmYuTnqIVwcjxcQjVt47KhvrvLETfzs9OnIPlnJdU3xVJ9qx9FEuQ///WL0FUPP1mpfZQdvKVT5YWL9+TnrzYtrwsYGo5iCuZ3Vg3etA5H8Ou/iSGEgV/qzd3qrX6yilV8uqCEL9ZXyxeFgTPT0RReYvXmhYE8efd6e7xUQbCVuS9ekRZfqi8fOUTlfTcxzYnL3ZvpkuYvhPBanUcVrANvl4FR4aqiEVUmHYVpY0clmqtuOkkYdTbkfQX1NGO9fHW4Oy435v4QvnmnezGjR/NBfyxVyRZ+brj2LbbWoIkw7EMHvr/M5hfHIjg9qkIQbg7H171yVL+8p9unnspkVtZwdqGg6sbw6gqQ+gf8uKBAQ0jOxRIxiwqSwvwhOMQg93I3boCSQwC/iSWNoI4Px3GMy/74VUsjPdk5AO7zbaeTm/b2uULR3zT5/9aDkanBcZi1crQ8xk0SlNI7joO29D+gYGIBvPgh+Ll8JsCpJj8Txa/91zi3Ku3cNU6hYXKLhw6HMQT+yYxkJyFJXrQ2ALqpQKqeQm++hakKm8T70GjrhE8auiJ";
+	$("#logoString").attr("src","data:image/jpg;base64,"+logoString);
+
+
+五二、datagrid 中的行 的点击 与双击事件
+onClickRow : function(rowIndex,rowData){
+}
+onDblClickRow: function(rowIndex, rowData){											
+}
+
+五三、改变当前时间
+var nowDate = new Date();
+//提前15天
+nowDate.setDate(nowDate - 15);
+//提前一个月
+nowDate.setDate(nowDate - 30);
+//提前一年
+nowDate.setDate();
+
+
+五四、下拉控件 进行实时刷新功能		//周期性运行
+	<select class="easyui-combobox" id="state" name="state" style="width:auto;">
+		<option value="30">30秒</option>
+		<option value="60">1分钟</option>
+		<option value="300">5分钟</option>
+		<option value="600">10分钟</option>
+		<option value="0">暂停刷新</option>
+	</select>
+	var sit=setInterval(function(){loadTableData(1,pageSize);},30*1000);	//初始化30秒刷新一次
+	$('#state').combobox({
+		onChange: function(newVal,oldVal){
+			if(newVal==0){
+				clearInterval(sit);
+			}else{
+				clearInterval(sit);
+				sit=setInterval(function(){loadTableData(1,pageSize);},newVal*1000);
+			}
+        }
+	});
+
+
+
+五五、文件上传（导入模版   需要引用 jquery.form.js 文件）
+<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onClick="javascript:importCustomer();" id="importCustomer">用户信息导入</a>
+//===========================导入客户信息===
+function importCustomer(){
+	var rows = $('#centerTable').datagrid('getSelected');
+	if(rows == null || rows == ""){		//选中行则进行操作
+		$.messager.alert('提示','请选择一条数据进行导入！');
+		return false;
+	}
+	var html = 
+		'<form id="uploadForm" style="padding:0px 30px;">' +
+		'<table style="text-align:center;">'+ 
+		'<tr id="msgTipsId"></tr>'+ 
+		'<tr>' +
+		'<td><input type="file" name="fileName" id="excelEId"/></td>' +
+		'</tr>'+ 
+		'<tr>' +
+		'<td>' +
+		'<a class="easyui-linkbutton" href="#" onClick="javascript:formCommit();">提交</a>' +
+		'<a class="easyui-linkbutton" href="#" onClick="javascript:formClose();">取消</a>' +
+		'</td>'+ 
+		'</tr>' +
+		'</table>' +
+		'</form>'; 
+	$('#importWin').window({
+		title: '请选择需要导入的文件',
+		width: 300,
+		height: 120,
+		modal: false,
+		shadow: false,
+		closed: false,
+		collapsible:true,
+		minimizable:false,
+		maximizable:false,
+		resizable:true,
+		content:html
+	});
+	$('#importWin').window('open');
+	$("#msgTipsId").html("");
+	
+}
+
+function formCommit(){
+	var rows = $('#centerTable').datagrid('getSelected');
+	var fileContent = $('#excelEId').val();
+	if(fileContent ==null ||fileContent == ""){
+		$("#msgTipsId").html('<span style="color:red;"><lable>*请选取导入文件</lable><span>');
+		$('#excelEId').focus();
+		return;
+	}else{$("#msgTipsId").html('');}   
+	if (fileContent.substring(fileContent.lastIndexOf(".") + 1).toLowerCase()!="xls"&&fileContent.substring(fileContent.lastIndexOf(".") + 1).toLowerCase()!="xlsx") {    
+		$("#msgTipsId").html('<span style="color:red;"><lable>*导入文件类型必须为excel!</lable><span>');
+		$('#excelEId').focus();
+		return;    
+	}else{$("#msgTipsId").html('');}    
+	
+	$("#uploadForm").ajaxSubmit({    
+		type: "post",      
+		dataType: 'text/html',  // 'xml', 'script', or 'json' (expected server response type)     
+		url: Query_URL+'/customer/upload?token='+$.cookie("token")+'&id='+rows.ID,
+		iframe:false,
+		success: function (data) { 
+			formClose();
+			if(data=="<pre>success</pre>"){
+				loadTableData(1,pageSize);
+				$.messager.alert("提示","机房信息导入成功！");   
+			}else{$.messager.alert("提示","机房信息导入失败，请联系管理员！");}
+		},    
+		error: function (msg) {  
+			formClose();
+        	$.messager.alert("提示","机房信息导入失败！");    
+		}
+	}); 
+}
+function formClose(){
+	$("#msgTipsId").html("");
+	$('#importWin').window('close');
+}
+
+五六、图片上传 （ 需要引用 jquery.form.js 文件））
+<div class="fieldsetWithBottom" style="border:solid 0px;padding-top:10px;">
+	<table  id="cad_table_0">
+		<tr>
+			<td><!-- action = 'http://10.40.107.154:8088/easysightInt/rest/customer/update/img?id=' -->
+			<form id="submitImg"><!--  method = 'post' enctype ="multipart/form-data" -->
+				<input type="file" onchange="previewImage(this)" style="margin-left:20px;width:600px;" name="bmImg" />		<!--  这一块是图片选择区域	-->
+				<input type="text" name="basicId" style="display:none;" value="<%=basicId %>">
+			</form>
+			<div id="preview" style="padding-top:10px;margin-left:20px;">													<!--  这一块是图片展示区域  -->
+				<img id="imghead" width=100 height=100 border=0 src=''>
+			</div>
+			</td>
+		</tr>
+	</table>
+</div>
+//----------------------------------
+	$("#submitImg").ajaxSubmit({    
+		type: "post",      
+		dataType: "json",//返回结果格式  
+		url: Query_URL+'/customer/update/img?id='+basicId,
+		data: { "action": "imghead" },//请求数据  
+		success: function (data) { 
+			if(data){
+        		$.messager.alert('提示','图片信息提交成功！');
+				parent.loadTableData(pageNumber,pageSize);
+       			parent.$('#userWin').window('close');
+			}else{
+				parent.loadTableData(pageNumber,pageSize);
+        		$.messager.alert('提示','图片信提交存失败！'); 
+       			parent.$('#userWin').window('close');
+			}
+		},    
+		error: function (msg) {  
+			$.messager.alert('提示','图片信息提交失败，请联系管理员！');
+        	parent.$('#userWin').window('close');
+		}
+	});
+
+///图片在页面的查看方法
+function previewImage(file){
+	var MAXWIDTH  = $(document).width();
+	var MAXHEIGHT = $(document).height()-80;
+	var div = document.getElementById('preview');
+	if (file.files && file.files[0]){
+		div.innerHTML ='<img id="imghead">';
+		var img = document.getElementById('imghead');
+		img.onload = function(){
+			var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+			img.width  =  rect.width;
+			img.height =  rect.height;
+			img.style.marginTop = rect.top+'px';
+		}
+		var reader = new FileReader();
+		reader.onload = function(evt){img.src = evt.target.result;}
+		reader.readAsDataURL(file.files[0]);
+	}else{ //兼容IE
+		var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+		file.select();
+		var src = document.selection.createRange().text;
+		div.innerHTML = '<img id="imghead">';
+		var img = document.getElementById('imghead');
+		img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+		var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+		status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+		div.innerHTML = "<div id='divhead' style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+	}
+}
+function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+	var param = {top:0, left:0, width:width, height:height};
+	if( width>maxWidth || height>maxHeight ){
+		rateWidth = width / maxWidth;
+		rateHeight = height / maxHeight;
+		
+		if( rateWidth > rateHeight ){
+			param.width =  maxWidth;
+			param.height = Math.round(height / rateWidth);
+		}else{
+			param.width = Math.round(width / rateHeight);
+			param.height = maxHeight;
+		}
+	}
+	param.left = Math.round((maxWidth - param.width) / 2);
+	param.top = Math.round((maxHeight - param.height) / 2);
+	return param;
+}
+
+五七、选择器 中排除其中的一种情况  :not(input[type="checkbox"]){}
+$('table input:not(input[type="checkbox"]),table textarea').hover(
+function () {
+	$(this).attr("title",$(this)[0].value);
+},
+function () {  
+	//$(this).removeClass("focus");  
+});  
+	
+五八、关于时间参数的转换
+//给控件赋值 不同的时间 格式('2017-04-24')
+    document.getElementById("start_time").value = (new Date().addMonths(-6)).format('yyyy-MM-dd hh:mm:ss');
+    document.getElementById("start_time").value = (new Date().addDays(-1)).format('yyyy-MM-dd hh:mm:ss');
+    document.getElementById("start_time").value = (new Date().addDays(-3)).format('yyyy-MM-dd hh:mm:ss');
+//时间格式为('2017-04-24') 的值 进行提前一天(减一天)的操作
+	(new Date(maxTime.replace(/-/g,"/")).addDays(-1)).format('yyyy-MM-dd hh:mm:ss') 	
+	
+五九、关于Google浏览器下 easyui-linkbutton 会产生向下偏移的修改方法
+	在css的style中添加 a.l-btn{vertical-align:middle;} 使按钮能够正常居中显示
+	
+
+六十、关于正则表达式的使用方法：
+	http://www.cnblogs.com/jiuban2391/p/6061542.html  
+	具体见  “正则表达式补充”  “正则表达式验证邮箱”
+	
+六一、匹配汉字的正则表达式	
+	var passwordReg	= /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+	
+六二、
+window.history.go(-1);  //返回上一页
+window.history.back();  //返回上一页
+//如果要强行刷新的话就是：window.history.back();location.reload();
+ 
+window.location.go(-1); //刷新上一页
+
+
+六三、
+//间隔时间段
+function getNewDay(dateTemp, days) {
+    var dateTemp = dateTemp.split("-");
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //转换为MM-DD-YYYY格式
+    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+    var rDate = new Date(millSeconds);
+    var year = rDate.getFullYear();
+    var month = rDate.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    var date = rDate.getDate();
+    if (date < 10) date = "0" + date;
+    return (year + "-" + month + "-" + date);
+}
+//当前时间
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+    return currentdate;
+}
+	
+六四、间隔时间段  第一个 时间段：2017-01-01 ，第二个参数：往后添加 N 天
+
+/* 不兼容火狐
+function getNewDay(dateTemp, days) {
+    var dateTemp = dateTemp.split("-");
+    var nDate = new Date(dateTemp[1] + '-' + dateTemp[2] + '-' + dateTemp[0]); //转换为MM-DD-YYYY格式
+    var millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+    var rDate = new Date(millSeconds);
+    var year = rDate.getFullYear();
+    var month = rDate.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    var date = rDate.getDate();
+    if (date < 10) date = "0" + date;
+    return (year + "-" + month + "-" + date);
+}
+*/
+function getNewDay(date,days){
+    var d=new Date(date);
+    d.setDate(d.getDate()+days);
+    var m=d.getMonth()+1;
+    return d.getFullYear()+'-'+m+'-'+d.getDate();
+}	
+
+六五、throw 声明
+var x=prompt("请输入 0 至 10 之间的数：","")
+try
+{ 
+if(x>10) 
+  throw "Err1" 
+else if(x<0)
+  throw "Err2"
+else if(isNaN(x))
+  throw "Err3"
+} 
+catch(er)
+{
+if(er=="Err1") 
+  alert("错误！该值太大！")
+if(er == "Err2") 
+  alert("错误！该值太小！") 
+if(er == "Err3") 
+  alert("错误！该值不是数字！") 
+}
+
+
+六六、onerror 事件--监听错误事件
+onerror=handleErr
+var txt=""
+
+function handleErr(msg,url,l)
+{
+txt="本页中存在错误。\n\n"
+txt+="错误：" + msg + "\n"
+txt+="URL: " + url + "\n"
+txt+="行：" + l + "\n\n"
+txt+="点击“确定”继续。\n\n"
+alert(txt)
+return true
+}
+
+function message()
+{
+	adddlert("Welcome guest!")		//定义错误方法触发onerror 事件--监听错误事件
+}
+
+mseeage();
+
+六七、获取data-param 中的值
+$(selecter).getDate('param');
+$(selecter).attr('data-param');
+
+
+六八、获取浏览器参数方法的两个方法
+getQueryString: function (name) {		//获取浏览器参数1      
+	var reg = new RegExp("(^|&)"+name+"=([^&]*)(&|$)");
+	var result = window.location.search.substr(1).match(reg);
+	return result?decodeURIComponent(result[2]):null;
+},		
+getQueryString: function (name) {		//获取浏览器参数2
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null) return unescape(r[2]); return null;
+},
+
+/*
+var r = window.location.search.substr(1);
+var arr=r.split('&');
+var map={};
+var value;
+for(var i=0;i<arr.length;i++){
+	var k=arr[i].split('=')[0];
+	var v=arr[i].split('=')[1];
+	map[k]=v;
+	if(k==name)
+		value=v;
+}
+if(!name)
+	return map;
+return value;
+*/
+
+
+六九、substitute() 方法加载表格
+1、新建页面模板
+var trTpl       =  '<tr>'
+	+ '<td>{listId}</td>'
+	+ '<td>{listNumber}</td>'
+	+ '<td>{listName}</td>'
+	+ '<td>{boxSell}</td>'
+	+ '<td>{minPrice}</td>'
+	+ '<td>{storeName}</td>'
+	+ '<td>{listingState}</td>'
+	+ '<td>{storage}</td>'
+	+ '</tr>';
+2、新建数据模板
+var trArr   = {
+	'listId':       data[i].listId,
+	'listNumber':   data[i].listNumber,
+	'listName':     data[i].listName,
+	'boxSell':      $boxSell[data[i].boxSell],
+	'minPrice':     data[i].minPrice,
+	'storeName':    data[i].storeName,
+	'listingState': $listState[data[i].listingState],
+	'storage':      data[i].storage
+};
+3、页面模板加载数据模板---用subsititute替换页面模板中的数据
+$.each(data, function (i) {
+	var trArr   = {
+		'listId':       data[i].listId,
+		'listNumber':   data[i].listNumber,
+		'listName':     data[i].listName,
+		'boxSell':      $boxSell[data[i].boxSell],
+		'minPrice':     data[i].minPrice,
+		'storeName':    data[i].storeName,
+		'listingState': $listState[data[i].listingState],
+		'storage':      data[i].storage
+	};
+	hisHtml     += trTpl.substitute(trArr);
+});
+//---------hisHtml---为最终的页面元素
+
+
+
+//七十、判断是否有滚动条
+if(document.body.style.overflow!="hidden"&&document.body.scroll!="no"&&
+document.body.scrollHeight>document.body.offsetHeight)
+{
+alert("有滚动条");
+}else
+{
+alert("无滚动条");
+}
+
+
+// 时间戳 转换成 yyyy-MM-dd HH-mm-ss
+方法1：
+function formatDateTime(inputTime) {  
+    var date = new Date(inputTime);
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? ('0' + m) : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;  
+    second = second < 10 ? ('0' + second) : second; 
+    return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+};
+
+
+formatDateTime(inputTime);
+
+方法2：
+var tool = (function ($) {
+   var formatDateTime = function (inputTime) {  
+    	var date = new Date(inputTime);
+        var y = date.getFullYear();  
+        var m = date.getMonth() + 1;  
+        m = m < 10 ? ('0' + m) : m;  
+        var d = date.getDate();  
+        d = d < 10 ? ('0' + d) : d;  
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;  
+        second = second < 10 ? ('0' + second) : second; 
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+    };  
+    
+    return { 
+        formatDateTime : formatDateTime  //最后一行不要有逗号
+    };
+})(jQuery);
+
+
+formatDateTime(o.beginDate);
+
+// 时间截取比较
+var serverTime = formatDateTime(time);
+var reg = new RegExp(':', 'g');
+var timeString = serverTime.substring(11,20).replace(reg,'');
+if(parseInt(serverTime) > 210000 || parseInt(serverTime) <60000){
+	$('.checkout-tip').css('display','block');
+}else{
+	$('.checkout-tip').css('display','none');
+}
+
+
+// 对象三种方式：无序对象{a:1}，数组[1,2,3]，以及函数等。
+// 深拷贝（针对对象类型）的两种方案
+1、递归递归去复制所有层级属性。
+function deepClone(obj){
+    let objClone = Array.isArray(obj)?[]:{};
+    if(obj && typeof obj==="object"){
+        for(key in obj){
+            if(obj.hasOwnProperty(key)){
+                //判断ojb子元素是否为对象，如果是，递归复制
+                if(obj[key]&&typeof obj[key] ==="object"){
+                    objClone[key] = deepClone(obj[key]);
+                }else{
+                    //如果不是，简单复制
+                    objClone[key] = obj[key];
+                }
+            }
+        }
+    }
+    return objClone;
+}    
+let a=[1,2,3,4],
+    b=deepClone(a);
+a[0]=2;
+console.log(a,b);
+
+2、JSON对象的parse和stringify
+function deepClone(obj){
+    let _obj = JSON.stringify(obj),
+        objClone = JSON.parse(_obj);
+    return objClone
+}    
+let a=[0,1,[2,3],4],
+    b=deepClone(a);
+a[0]=1;
+a[2][0]=1;
+console.log(a,b);
+
+3、JQ的extend方法
+let a=[0,1,[2,3],4],
+    b=$.extend(true,[],a);
+a[0]=1;
+a[2][0]=1;
+console.log(a,b);
+
+
+// H5 列表滚动刷新
+windowScreen: function(){
+	var page = 1; 
+	if(!isScreen){return}
+	$(window).scroll(function(){
+		if($(window).scrollTop() + $(window).height() >= $(document).height()){
+			isScreen = false;
+			page += 1;
+			if($htmltype == '5004'){//手机翻页
+				 // main.getPaylist(page);
+				 main.getPaylist((page-1)*20);
+			}else if($htmltype == '5002'){//生活缴费翻页
+				 main.getliFelist(page);
+			}else if($htmltype == '5005'){//手机流量翻页
+				main.getTrafficList(page);
+			}
+		}                
+	})
+},
+
+// H5 标准头部尾部
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+</head>
+
+
+// 
+/* Number 原型方法扩展 */
+(function($) {
+	if (!$) return;
+	$.extend(Number.prototype, {
+		// 添加逗号分隔，返回为字符串
+		comma: function(length) {
+			if (!length || length < 1) length = 3;
+			var source = ('' + this).split('.');
+			source[0] = source[0].replace(new RegExp('(\\d)(?=(\\d{' + length + '})+$)', 'ig'), '$1,');
+			return source.join('.');
+		},
+		// 生成随机数
+		randomInt: function(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		},
+		// 左侧补齐，返回为字符串
+		padLeft: function(width, ch) {
+			return ('' + this).padLeft(width, ch);
+		},
+		// 右侧补齐，返回字符串
+		padRight: function(width, ch) {
+			return ('' + this).padRight(width, ch);
+		}
+	});
+})(jQuery);
+
+123.comma(); ?
+
+
+// JS prototype 模式封装 （六九有该方法使用案例）
+(function($) {
+	if (!$) return;
+	$.extend(String.prototype, {
+		// 举个栗子： 拓展substitute方法
+		substitute: function(data) {
+			if (data && typeof(data) == 'object') {
+				return this.replace(/\{([^{}]+)\}/g, function(match, key) {
+					var value = data[key];
+					return (value !== undefined) ? '' + value: '';
+				});
+			} else {
+				return this.toString();
+			}
+		},
+	});
+})(jQuery);
+
+
+
+// 单页面应用
+https://www.cnblogs.com/zion0707/p/5204161.html
+
+单页面引用
+var url = ''	// 页面链接
+$.get(url, {} ,function(result){
+	//	返回页面中的html
+	$(selector).append(result);
+})
+
+// 懒加载
+1、应用lazyload.js
+2、使用lazyload.js中的方法（度娘知道）
+
+
+// manifest 离线缓存技术
+<!DOCTYPE html>
+<html manifest = 'test.manifest'>
+<head>
+	<meta charset='utf-8'>
+	<title>离线存储技术</title>
+</head>
+<body>
+	<img src='img1.png'>
+	<img src='img2.png'>
+</body>
+</html>
+
+test.manifest 文件内容：(只缓存了第一张图片的内容)
+
+CACHE MANIFEST 
+#v01 
+img1.png 
+NETWORK:* 
+FALLBACK: /
+
+
+// JQ 判断元素显示或隐藏
+1、$('#selector').is(':hidden');
+2、$('#selector').is(':visible');
+3、$('#selector').css('display') == 'none'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

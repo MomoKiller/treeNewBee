@@ -1,4 +1,0 @@
-//============================
-
-1、一个文件上传的java后台和前台的网站：
-http://www.runoob.com/jsp/jsp-file-uploading.html

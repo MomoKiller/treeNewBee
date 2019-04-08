@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>ÔÈËÙ¶¯»­</title>
+<title>åŒ€é€ŸåŠ¨ç”»</title>
 <style type="text/css">
  html,body{margin:0;padding:0;}
  div{margin:0;padding:0;}
@@ -28,8 +28,8 @@ window.onload = function(){
  }
 }
 var timer = null;
-function startMover(itarget){//Ä¿±êÖµ
- clearInterval(timer);//Ö´ĞĞµ±Ç°¶¯»­Í¬Ê±Çå³ıÖ®Ç°µÄ¶¯»­
+function startMover(itarget){//ç›®æ ‡å€¼
+ clearInterval(timer);//æ‰§è¡Œå½“å‰åŠ¨ç”»åŒæ—¶æ¸…é™¤ä¹‹å‰çš„åŠ¨ç”»
  var odiv = document.getElementById('odiv');
  timer = setInterval(function(){
  var speed = 0;
@@ -47,19 +47,19 @@ function startMover(itarget){//Ä¿±êÖµ
   }
  },30);
 }
-//×¢Ã÷£ºoffsetWidth = width+padding+border
+//æ³¨æ˜ï¼šoffsetWidth = width+padding+border
 //offsetHeight = height+padding+border
 //offsetWidth=(border-width)*2+(padding-left)+(width)+(padding-right)
 //offsetHeight=(border-width)*2+(padding-top)+(height)+(padding-bottom)
 /*
-offsetLeft=(offsetParentµÄpadding-left)+(ÖĞ¼äÔªËØµÄoffsetWidth)+(µ±Ç°ÔªËØµÄmargin-left)¡£
-offsetTop=(offsetParentµÄpadding-top)+(ÖĞ¼äÔªËØµÄoffsetHeight)+(µ±Ç°ÔªËØµÄmargin-top)¡£
-µ±offsetParentÎªbodyÊ±Çé¿ö±È½ÏÌØÊâ:
-ÔÚIE8/9/10¼°ChromeÖĞ£¬offsetLeft = (bodyµÄmargin-left)+(bodyµÄborder-width)+(bodyµÄpadding-left)+(µ±Ç°ÔªËØµÄmargin-left)¡£
-ÔÚFireFoxÖĞ£¬offsetLeft = (bodyµÄmargin-left)+(bodyµÄpadding-left)+(µ±Ç°ÔªËØµÄmargin-left)¡£
-offsetParentÊôĞÔ·µ»ØÒ»¸ö¶ÔÏóµÄÒıÓÃ£¬Õâ¸ö¶ÔÏóÊÇ¾àÀëµ÷ÓÃoffsetParentµÄÔªËØ×î½üµÄ£¨ÔÚ°üº¬²ã´ÎÖĞ×î¿¿½üµÄ£©£¬²¢ÇÒÊÇÒÑ½øĞĞ¹ıCSS¶¨Î»µÄÈİÆ÷ÔªËØ¡£ Èç¹ûÕâ¸öÈİÆ÷ÔªËØÎ´½øĞĞCSS¶¨Î», ÔòoffsetParentÊôĞÔµÄÈ¡ÖµÎª¸ùÔªËØµÄÒıÓÃ¡£
-×ÜµÄÀ´ËµÁ½Ìõ¹æÔò£º
-1¡¢Èç¹ûµ±Ç°ÔªËØµÄ¸¸¼¶ÔªËØÃ»ÓĞ½øĞĞCSS¶¨Î»£¨positionÎªabsolute»òrelative£©£¬offsetParentÎªbody¡£
-2¡¢Èç¹ûµ±Ç°ÔªËØµÄ¸¸¼¶ÔªËØÖĞÓĞCSS¶¨Î»£¨positionÎªabsolute»òrelative£©£¬offsetParentÈ¡×î½üµÄÄÇ¸ö¸¸¼¶ÔªËØ¡£
+offsetLeft=(offsetParentçš„padding-left)+(ä¸­é—´å…ƒç´ çš„offsetWidth)+(å½“å‰å…ƒç´ çš„margin-left)ã€‚
+offsetTop=(offsetParentçš„padding-top)+(ä¸­é—´å…ƒç´ çš„offsetHeight)+(å½“å‰å…ƒç´ çš„margin-top)ã€‚
+å½“offsetParentä¸ºbodyæ—¶æƒ…å†µæ¯”è¾ƒç‰¹æ®Š:
+åœ¨IE8/9/10åŠChromeä¸­ï¼ŒoffsetLeft = (bodyçš„margin-left)+(bodyçš„border-width)+(bodyçš„padding-left)+(å½“å‰å…ƒç´ çš„margin-left)ã€‚
+åœ¨FireFoxä¸­ï¼ŒoffsetLeft = (bodyçš„margin-left)+(bodyçš„padding-left)+(å½“å‰å…ƒç´ çš„margin-left)ã€‚
+offsetParentå±æ€§è¿”å›ä¸€ä¸ªå¯¹è±¡çš„å¼•ç”¨ï¼Œè¿™ä¸ªå¯¹è±¡æ˜¯è·ç¦»è°ƒç”¨offsetParentçš„å…ƒç´ æœ€è¿‘çš„ï¼ˆåœ¨åŒ…å«å±‚æ¬¡ä¸­æœ€é è¿‘çš„ï¼‰ï¼Œå¹¶ä¸”æ˜¯å·²è¿›è¡Œè¿‡CSSå®šä½çš„å®¹å™¨å…ƒç´ ã€‚ å¦‚æœè¿™ä¸ªå®¹å™¨å…ƒç´ æœªè¿›è¡ŒCSSå®šä½, åˆ™offsetParentå±æ€§çš„å–å€¼ä¸ºæ ¹å…ƒç´ çš„å¼•ç”¨ã€‚
+æ€»çš„æ¥è¯´ä¸¤æ¡è§„åˆ™ï¼š
+1ã€å¦‚æœå½“å‰å…ƒç´ çš„çˆ¶çº§å…ƒç´ æ²¡æœ‰è¿›è¡ŒCSSå®šä½ï¼ˆpositionä¸ºabsoluteæˆ–relativeï¼‰ï¼ŒoffsetParentä¸ºbodyã€‚
+2ã€å¦‚æœå½“å‰å…ƒç´ çš„çˆ¶çº§å…ƒç´ ä¸­æœ‰CSSå®šä½ï¼ˆpositionä¸ºabsoluteæˆ–relativeï¼‰ï¼ŒoffsetParentå–æœ€è¿‘çš„é‚£ä¸ªçˆ¶çº§å…ƒç´ ã€‚
 */
 </script>

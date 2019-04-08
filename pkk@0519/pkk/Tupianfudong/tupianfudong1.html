@@ -3,23 +3,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>¸¡¶¯Í¼Æ¬</title>
+<title>æµ®åŠ¨å›¾ç‰‡</title>
 <script type="text/javascript">
-var step = 1; // ÒÆ¶¯µÄÏñËØ
-var y = -1; // ´¹Ö±ÒÆ¶¯µÄ·½Ïò£¬-1±íÊ¾ÏòÉÏ£¬1±íÊ¾ÏòÏÂ
-var x = 1; // Ë®Æ½ÒÆ¶¯µÄ·½Ïò£¬-1±íÊ¾Ïò×ó£¬1±íÊ¾ÏòÓÒ
+var step = 1; // ç§»åŠ¨çš„åƒç´ 
+var y = -1; // å‚ç›´ç§»åŠ¨çš„æ–¹å‘ï¼Œ-1è¡¨ç¤ºå‘ä¸Šï¼Œ1è¡¨ç¤ºå‘ä¸‹
+var x = 1; // æ°´å¹³ç§»åŠ¨çš„æ–¹å‘ï¼Œ-1è¡¨ç¤ºå‘å·¦ï¼Œ1è¡¨ç¤ºå‘å³
 function myFloat()
 {
 var img = document.getElementById("myImg");
-// »ñÈ¡Í¼Æ¬ºÍµ±Ç°ä¯ÀÀÆ÷´°¿ÚÉÏ±ß¾à£¬ÓÉÓÚimg.style.top»ñÈ¡µÄÖµ´øpxµ¥Î»
+// è·å–å›¾ç‰‡å’Œå½“å‰æµè§ˆå™¨çª—å£ä¸Šè¾¹è·ï¼Œç”±äºimg.style.topè·å–çš„å€¼å¸¦pxå•ä½
 var top = img.style.top.replace("px", "");
 // top = top - 100;
 // img.style.top = top + "px";
-// »ñÈ¡Í¼Æ¬ºÍµ±Ç°ä¯ÀÀÆ÷´°¿Ú×ó±ß¾à
+// è·å–å›¾ç‰‡å’Œå½“å‰æµè§ˆå™¨çª—å£å·¦è¾¹è·
 var left = img.style.left.replace("px", "");
 // left = left - 100;
 // img.style.left = left + "px";
-// ÉÏÏÂÒÆ¶¯
+// ä¸Šä¸‹ç§»åŠ¨
 if(top <= 0)
 {
 y = 1;
@@ -30,7 +30,7 @@ y = -1;
 }
 top = (top*1) + (step * y);
 img.style.top = top + "px";
-// ×óÓÒÒÆ¶¯
+// å·¦å³ç§»åŠ¨
 if(left <= 0)
 {
 x = 1;

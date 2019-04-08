@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Í¸Ã÷¶È¶¯»­</title>
+<title>é€æ˜åº¦åŠ¨ç”»</title>
 <style type="text/css">
  html,body{margin:0;padding:0;}
  div{margin:0;padding:0;}
@@ -24,13 +24,13 @@ window.onload = function(){
   odiv[i].onmouseout = function(){
    startOP(this,30);
   }
-  odiv[i].timer = null;//ÊÂÏÈ¶¨Òå
-  odiv[i].alpha = null;//ÊÂÏÈ¶¨Òå
-  //ÕâÀï·¢ÏÖÒ»¸öÎÊÌâ£¬¶ÔÏóµÄ¶¯»­ÊôĞÔ¿ÉÒÔ²»¶¨Òå£¬µ«ÊÇÍ¸Ã÷¶ÈÊôĞÔ±ØĞë¶¨Òå£¬·ñÔò±¨´í
+  odiv[i].timer = null;//äº‹å…ˆå®šä¹‰
+  odiv[i].alpha = null;//äº‹å…ˆå®šä¹‰
+  //è¿™é‡Œå‘ç°ä¸€ä¸ªé—®é¢˜ï¼Œå¯¹è±¡çš„åŠ¨ç”»å±æ€§å¯ä»¥ä¸å®šä¹‰ï¼Œä½†æ˜¯é€æ˜åº¦å±æ€§å¿…é¡»å®šä¹‰ï¼Œå¦åˆ™æŠ¥é”™
  }
 }
 function startOP(obj,utarget){
-  clearInterval(obj.timer);//ÏÈ¹Ø±Õ¶¨Ê±Æ÷
+  clearInterval(obj.timer);//å…ˆå…³é—­å®šæ—¶å™¨
   obj.timer = setInterval(function(){
   var speed = 0;
   if(obj.alpha>utarget){
@@ -43,7 +43,7 @@ function startOP(obj,utarget){
   if(obj.alpha == utarget){
   clearInterval(obj.timer);
   }
-  obj.style.filter = 'alpha(opacity:'+obj.alpha+')';//»ùÓÚIEµÄ
+  obj.style.filter = 'alpha(opacity:'+obj.alpha+')';//åŸºäºIEçš„
   obj.style.opacity = parseInt(obj.alpha)/100;
   },30); 
 }

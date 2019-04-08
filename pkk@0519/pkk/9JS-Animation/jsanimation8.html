@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Á´Ê½¶¯»­</title>
+<title>é“¾å¼åŠ¨ç”»</title>
 <style type="text/css">
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,tr,td {margin:0;padding:0; font-size:12px;} 
 table {border-collapse:collapse;border-spacing:0;} 
@@ -44,13 +44,13 @@ window.onload = function(){
   });
  };
  li1.timer = null;
- function startMov(obj,itarget,attr,fn){//fn»Øµ÷º¯Êı
-  clearInterval(obj.timer);//Ö´ĞĞ¶¯»­Ö®Ç°Çå³ı¶¯»­
+ function startMov(obj,itarget,attr,fn){//fnå›è°ƒå‡½æ•°
+  clearInterval(obj.timer);//æ‰§è¡ŒåŠ¨ç”»ä¹‹å‰æ¸…é™¤åŠ¨ç”»
   obj.timer = setInterval(function(){
    var icur = 0;
    if(attr == 'opacity'){
-   icur = Math.round(parseFloat(getStyle(obj,attr))*100);//×ª»»³ÉÕûÊı,²¢ÇÒËÄÉáÎåÈëÏÂ
-   //¼ÆËã»úÔÚ¼ÆËãĞ¡ÊıµÄÊ±ºòÍùÍùÊÇ²»×¼È·µÄ£¡
+   icur = Math.round(parseFloat(getStyle(obj,attr))*100);//è½¬æ¢æˆæ•´æ•°,å¹¶ä¸”å››èˆäº”å…¥ä¸‹
+   //è®¡ç®—æœºåœ¨è®¡ç®—å°æ•°çš„æ—¶å€™å¾€å¾€æ˜¯ä¸å‡†ç¡®çš„ï¼
    }
    else{
    icur = parseInt(getStyle(obj,attr));
@@ -85,6 +85,6 @@ window.onload = function(){
   }
  }
 }
-//offsetWidth»ñÈ¡µÄÊÇÔªËØÊµ¼ÊµÄ¿í¶È£¨°üÀ¨±ß¿òºÍÄÚ±ß¾à£©
-//Ö»ÒªÊÇ¶àÎïÌåÔË¶¯£¬ËùÓĞµÄÊôĞÔ¶¼²»ÄÜ¹²ÓÃ
+//offsetWidthè·å–çš„æ˜¯å…ƒç´ å®é™…çš„å®½åº¦ï¼ˆåŒ…æ‹¬è¾¹æ¡†å’Œå†…è¾¹è·ï¼‰
+//åªè¦æ˜¯å¤šç‰©ä½“è¿åŠ¨ï¼Œæ‰€æœ‰çš„å±æ€§éƒ½ä¸èƒ½å…±ç”¨
 </script>

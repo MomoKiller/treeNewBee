@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>»º³å¶¯»­</title>
+<title>ç¼“å†²åŠ¨ç”»</title>
 <style type="text/css">
  html,body{margin:0;padding:0;}
  div{margin:0;padding:0;}
@@ -28,19 +28,19 @@ window.onload = function(){
  }
 }
 var timer = null;
-function startMover(itarget){//ËÙ¶ÈºÍÄ¿±êÖµ
- clearInterval(timer);//Ö´ĞĞµ±Ç°¶¯»­Í¬Ê±Çå³ıÖ®Ç°µÄ¶¯»­
+function startMover(itarget){//é€Ÿåº¦å’Œç›®æ ‡å€¼
+ clearInterval(timer);//æ‰§è¡Œå½“å‰åŠ¨ç”»åŒæ—¶æ¸…é™¤ä¹‹å‰çš„åŠ¨ç”»
  var odiv = document.getElementById('odiv');
  timer = setInterval(function(){
- var speed = (itarget-odiv.offsetLeft)/10;//»º³å¶¯»­µÄËÙ¶È²ÎÊı±ä»¯Öµ
- //Èç¹ûËÙ¶ÈÊÇ´óÓÚ0£¬ËµÃ÷ÊÇÏòÓÒ×ß£¬ÄÇÃ´¾ÍÏòÉÏÈ¡Õû
+ var speed = (itarget-odiv.offsetLeft)/10;//ç¼“å†²åŠ¨ç”»çš„é€Ÿåº¦å‚æ•°å˜åŒ–å€¼
+ //å¦‚æœé€Ÿåº¦æ˜¯å¤§äº0ï¼Œè¯´æ˜æ˜¯å‘å³èµ°ï¼Œé‚£ä¹ˆå°±å‘ä¸Šå–æ•´
  speed = speed>0?Math.ceil(speed):Math.floor(speed);
- //Math.floor();ÏòÏÂÈ¡Õû
+ //Math.floor();å‘ä¸‹å–æ•´
  if(odiv.offsetLeft == itarget){
   clearInterval(timer);
  }
  else{
-  //clientLeft ·µ»Ø¶ÔÏóµÄoffsetLeftÊôĞÔÖµºÍµ½µ±Ç°´°¿Ú×ó±ßµÄÕæÊµÖµÖ®¼äµÄ¾àÀë 
+  //clientLeft è¿”å›å¯¹è±¡çš„offsetLeftå±æ€§å€¼å’Œåˆ°å½“å‰çª—å£å·¦è¾¹çš„çœŸå®å€¼ä¹‹é—´çš„è·ç¦» 
   odiv.style.left = odiv.offsetLeft+speed+'px';
   }
  },30);

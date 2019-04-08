@@ -1,4 +1,4 @@
-//============================CSS  ²¼¾Ö¡¢¶¨ÒåÑùÊ½¡¢³£ÓÃµÄÒ»Ğ©ÊôĞÔ=============================
+//============================CSS  å¸ƒå±€ã€å®šä¹‰æ ·å¼ã€å¸¸ç”¨çš„ä¸€äº›å±æ€§=============================
 
 
 
@@ -6,20 +6,20 @@
 
 
 
-Ò»¡¢clear:both   Í¼Ïñ×ó²àºÍÓÒ²à¶¼²»ÔÊĞí³öÏÖ¸¡¶¯ÔªËØ
-²Î¿¼ÍøÖ·£ºhttp://www.w3school.com.cn/tiy/t.asp?f=csse_class-clear
+ä¸€ã€clear:both   å›¾åƒå·¦ä¾§å’Œå³ä¾§éƒ½ä¸å…è®¸å‡ºç°æµ®åŠ¨å…ƒç´ 
+å‚è€ƒç½‘å€ï¼šhttp://www.w3school.com.cn/tiy/t.asp?f=csse_class-clear
 footer{
 float:left;
 clear:both;
 }
 
-¶ş¡¢±í¸ñºÏ²¢±ß¿ò
+äºŒã€è¡¨æ ¼åˆå¹¶è¾¹æ¡†
 	table
 	{
 	border-collapse:collapse;
 	}
   
-Èı¡¢¶¨ÒåÎ±Àà(:hover ±íÊ¾Êó±ê¸¡¶¯ÊôĞÔ)	¸Ä±ä±³¾°Í¸Ã÷¶È  ±³¾°ÒõÓ°Ğ§¹û
+ä¸‰ã€å®šä¹‰ä¼ªç±»(:hover è¡¨ç¤ºé¼ æ ‡æµ®åŠ¨å±æ€§)	æ”¹å˜èƒŒæ™¯é€æ˜åº¦  èƒŒæ™¯é˜´å½±æ•ˆæœ
 	img{
     opacity:1.0;
 	filter:alpha(opacity=100); /* For IE8 and earlier */
@@ -27,21 +27,21 @@ clear:both;
   	img:hover {
     opacity:0.8;				
 	filter:alpha(opacity=80); /* For IE8 and earlier */
-	box-shadow: 2px 2px 1px #888888;	/*±³¾°ÒõÓ°*/
+	box-shadow: 2px 2px 1px #888888;	/*èƒŒæ™¯é˜´å½±*/
     }
 
-ËÄ¡¢
+å››ã€
 
 
 
 
 
 
-*²¼¾Ö
-ÉèÖÃcontainerÈİÆ÷¾ÓÖĞ
+*å¸ƒå±€
+è®¾ç½®containerå®¹å™¨å±…ä¸­
 #Container{
     width:1000px;
-    margin:0 auto;/*ÉèÖÃÕû¸öÈİÆ÷ÔÚä¯ÀÀÆ÷ÖĞË®Æ½¾ÓÖĞ*/
+    margin:0 auto;/*è®¾ç½®æ•´ä¸ªå®¹å™¨åœ¨æµè§ˆå™¨ä¸­æ°´å¹³å±…ä¸­*/
     background:#CF3;
 }
 
@@ -51,24 +51,24 @@ clear:both;
 
 
 
-*×ÖÌåÑùÊ½
+*å­—ä½“æ ·å¼
 
 
 
 
-*Ä£¿éÑùÊ½
-
-
-
-
-
+*æ¨¡å—æ ·å¼
 
 
 
 
 
 
-//²»Ê¹ÓÃ´úÀí
+
+
+
+
+
+//ä¸ä½¿ç”¨ä»£ç†
 var myImage = (function() {
     var imgNode = document.createElement("img");
     document.body.appendChild(imgNode);
@@ -89,8 +89,8 @@ var myImage = (function() {
 myImage.setSrc("./images/originImg.png");
 
 
-//==============Ê¹ÓÃ´úÀíµÄÍ¼Æ¬Ô¤¼ÓÔØ¼¼Êõ
-// ´´½¨Í¼Æ¬DOM
+//==============ä½¿ç”¨ä»£ç†çš„å›¾ç‰‡é¢„åŠ è½½æŠ€æœ¯
+// åˆ›å»ºå›¾ç‰‡DOM
 var myImage = (function() {
     var imgNode = document.createElement("img");
     document.body.appendChild(imgNode);
@@ -102,12 +102,12 @@ var myImage = (function() {
     };
 })();
 
-// ´úÀí
+// ä»£ç†
 var proxyImage = (function() {
     var img = new Image();
 
     img.onload = function() {
-        myImage.setSrc(this.src);   // thisÖ¸Ïòimg£¡img¼ÓÔØÍê³Éºó£¬½«img.src´«µİ¸ømyImage
+        myImage.setSrc(this.src);   // thisæŒ‡å‘imgï¼imgåŠ è½½å®Œæˆåï¼Œå°†img.srcä¼ é€’ç»™myImage
     };
 
     return {
@@ -124,14 +124,14 @@ proxyImage.setSrc("./images/originImg.png");
 
 
 
-//±³¾°Í¼Æ¬×Ô¶¯Ìî³ä(±³¾°Í¼Æ¬¸²¸Ç)
+//èƒŒæ™¯å›¾ç‰‡è‡ªåŠ¨å¡«å……(èƒŒæ™¯å›¾ç‰‡è¦†ç›–)
 body{
 	background: url("images/img/background.png");
 	background-repeat: no-repeat;
 	background-size: cover; 
 	-moz-background-size: cover; 
 	}
-	//ÏÂÃæµÄÊÇÏîÄ¿ÖĞ²Ëµ¥µÄÊµÀı
+	//ä¸‹é¢çš„æ˜¯é¡¹ç›®ä¸­èœå•çš„å®ä¾‹
 	{
 	background-image: url("../../../images/homePage/DHXLBJ2.png");
 	background-position: 100% 100%;		
@@ -140,7 +140,7 @@ body{
 	-moz-background-size: cover;
 	}
 	
-//±³¾°Í¼Æ¬¾ÓÖĞÏÔÊ¾
+//èƒŒæ™¯å›¾ç‰‡å±…ä¸­æ˜¾ç¤º
 .logoPanel{
 	width:650px;
     height: 170px;
@@ -150,17 +150,17 @@ body{
 	}
 
 
-//Çø¿é ´¹Ö± Ë®Æ½ ¾ÓÖĞ(×ÓÈİÆ÷ÔÚ¸¸ÈİÆ÷ÖĞË®Æ½´¹Ö±¾ÓÖĞ)
-1¡¢¸¸ÈİÆ÷Ìí¼ÓÊôĞÔ
+//åŒºå— å‚ç›´ æ°´å¹³ å±…ä¸­(å­å®¹å™¨åœ¨çˆ¶å®¹å™¨ä¸­æ°´å¹³å‚ç›´å±…ä¸­)
+1ã€çˆ¶å®¹å™¨æ·»åŠ å±æ€§
 	.parent{
 		positon:relative;
 	}
-2¡¢×ÓÈİÆ÷Ìí¼ÓÊôĞÔ
+2ã€å­å®¹å™¨æ·»åŠ å±æ€§
 	.child{		
-		width:chilrWidth;				/*¶¨Òå¿Ø¼şµÄ³¤¶È*/
-		height:childHeight;				/*¶¨Òå¿Ø¼şµÄ¸ß¶È*/
-		position:absolute;				/*Óë¸¸ÈİÆ÷ÊôĞÔ¶ÔÓ¦*/
-    	left: 50%;						/*×Ô¼ºÀí½âÈ¥°É.0_0.*/
+		width:chilrWidth;				/*å®šä¹‰æ§ä»¶çš„é•¿åº¦*/
+		height:childHeight;				/*å®šä¹‰æ§ä»¶çš„é«˜åº¦*/
+		position:absolute;				/*ä¸çˆ¶å®¹å™¨å±æ€§å¯¹åº”*/
+    	left: 50%;						/*è‡ªå·±ç†è§£å»å§.0_0.*/
     	top: 50%;
     	margin-left:-chilrWidth/2;
     	margin-top:-childHeight/2;
@@ -170,11 +170,11 @@ body{
 
 	
 
-//ÍøÉÏÕÒµ½ ¹ØÓÚ table ²¼¾ÖµÄÁíÒ»ÖÖ·½Ê½
-/*ÉèÖÃ²éÑ¯Ìõ¼şÑùÊ½*/
+//ç½‘ä¸Šæ‰¾åˆ° å…³äº table å¸ƒå±€çš„å¦ä¸€ç§æ–¹å¼
+/*è®¾ç½®æŸ¥è¯¢æ¡ä»¶æ ·å¼*/
   	.searchDiv{display: table; table-layout: fixed; width: 100%;}
 	.searchDiv .colDiv{display: table-cell; padding-left: 10px;}
-/*¶ÔÓ¦µÄHtml±êÇ©*/
+/*å¯¹åº”çš„Htmlæ ‡ç­¾*/
 <div class="searchDiv">
 	<div class="colDiv"></div>
 	<div class="colDiv" ></div>
@@ -184,15 +184,15 @@ body{
 	
 	
 
-//ÉèÖÃ±ß¿ò
+//è®¾ç½®è¾¹æ¡†
 	border:1px solid #3a87ad;
 
 
-ÉèÖÃÎÄ±¾ÏÂ»®Ïß
+è®¾ç½®æ–‡æœ¬ä¸‹åˆ’çº¿
 
 
 
-ÉèÖÃÍ¼Æ¬ ÔÚÆ½Ãæ¸¡¶¯
+è®¾ç½®å›¾ç‰‡ åœ¨å¹³é¢æµ®åŠ¨
 #float-hint{
     position: fixed;
     right: 10px;
@@ -200,7 +200,7 @@ body{
     z-index: 2000000000;
     border-radius: 2px;
 }
-ÉèÖÃÍ¼Æ¬¡¢ÇøÓòÔÚÒ³ÃæµÄÏà¶ÔÎ»ÖÃ
+è®¾ç½®å›¾ç‰‡ã€åŒºåŸŸåœ¨é¡µé¢çš„ç›¸å¯¹ä½ç½®
 #float-man{
     position: absolute;
     right: 517px;
@@ -209,7 +209,7 @@ body{
     width: 70px;
 }
 
-//ÉèÖÃÍ¼Æ¬¡¢Çø¿é¾ÓÖĞ
+//è®¾ç½®å›¾ç‰‡ã€åŒºå—å±…ä¸­
 .center
 {
 margin:auto;
@@ -217,11 +217,11 @@ width:70%;
 background-color:#b0e0e6;
 }
 
-//ÍêÕûµÄcssÒıÓÃ ±ØĞë°üº¬µÄÁ½¸öÊôĞÔ£ºhref="" , rel="stylesheet".
+//å®Œæ•´çš„csså¼•ç”¨ å¿…é¡»åŒ…å«çš„ä¸¤ä¸ªå±æ€§ï¼šhref="" , rel="stylesheet".
     <link href="../resources/css/online-consulting.css" rel="stylesheet">
 
 	
-//ÀûÓÃcss3 ÊµÏÖÒ³Ãæ¶¯»­Ğ§¹û
+//åˆ©ç”¨css3 å®ç°é¡µé¢åŠ¨ç”»æ•ˆæœ
 .className{
 	width:0px;
 	-webkit-transition: width .5s;
@@ -238,7 +238,7 @@ background-color:#b0e0e6;
     -o-transition: width .5s;
     transition: width .5s;
 }
-//ÒÔÏÂÊÇÀûÓÃJS ·½·¨ÊµÏÖcss3¶¯»­Ğ§¹û
+//ä»¥ä¸‹æ˜¯åˆ©ç”¨JS æ–¹æ³•å®ç°css3åŠ¨ç”»æ•ˆæœ
 $('.className').css{
 	"width":'10px',
 	"transition":'width .5s'
@@ -249,7 +249,7 @@ $('.className').css{
 
 
 
-/----start---- ÉèÖÃ°ëÍ¸Ã÷±³¾°   
+/----start---- è®¾ç½®åŠé€æ˜èƒŒæ™¯   
 .floor-us .con li {
     position: relative;
     width: 230px;
@@ -267,15 +267,15 @@ $('.className').css{
     margin: 40px auto 50px;
     transition: margin 0.5s;
 }
-//Ìí¼Ócss3 ÊôĞÔÑùÊ½
+//æ·»åŠ css3 å±æ€§æ ·å¼
 .floor-us .con li:hover img{
 	height: 154px;
 	display: block;
 	opacity: 1;
 	margin: 0px auto 0px;
-	transition: margin 0.5s;		//ÔÚ0.5sÄÚÍê³É¶¯»­Ğ§¹ûµÄ×ª»»
+	transition: margin 0.5s;		//åœ¨0.5så†…å®ŒæˆåŠ¨ç”»æ•ˆæœçš„è½¬æ¢
 }
-// ÉèÖÃÎÄ±¾
+// è®¾ç½®æ–‡æœ¬
 .floor-us .con li p {
     height: 114px;
     position: relative;
@@ -285,24 +285,24 @@ $('.className').css{
     color: #666;
     background-color: #fff;
 }
-/----end--------¿ÉÒÔ²Î¿¼µ±Ç°ÎÄ¼ş¼ĞÏÂ  css3¶¯»­¸¡¶¯Ğ§¹û0.5s.html------/
+/----end--------å¯ä»¥å‚è€ƒå½“å‰æ–‡ä»¶å¤¹ä¸‹  css3åŠ¨ç”»æµ®åŠ¨æ•ˆæœ0.5s.html------/
 
 
-/-----start----  ¹ØÓÚcss µÄposition ÊôĞÔ¶ÔÓ¦µÄ¹¦ÄÜ
-absolute   	-> 	Éú³É ¾ø ¶Ô¶¨Î»µÄÔªËØ£¬Ïà¶ÔÓÚ static ¶¨Î»ÒÔÍâµÄµÚÒ»¸ö¸¸ÔªËØ½øĞĞ¶¨Î»£¬
-				ÔªËØÎ»ÖÃÍ¨¹ı left top right bottom ÊôĞÔ½øĞĞ¹æ¶¨
-fixed		->	Éú³É ¾ø ¶Ô¶¨Î»µÄÔªËØ£¬Ïà¶ÔÓÚä¯ÀÀÆ÷´°¿Ú½øĞĞ¶¨Î»
-				ÔªËØÎ»ÖÃÍ¨¹ı left top right bottom ÊôĞÔ½øĞĞ¹æ¶¨
-relative  	->  Éú³É Ïà ¶Ô¶¨Î»µÄÔªËØ£¬Ïà¶ÔÓÚÆäÕı³£µÄÎ»ÖÃ½øĞĞ¶¨Î»
-				left: 20 »áÏòÔªËØµÄ left Î»ÖÃÌí¼Ó 20 ÏñËØ
-static 		-> 	Ä¬ÈÏÖµ¡£Ã»ÓĞ¶¨Î»£¬ÔªËØ³öÏÖÔÚÕı³£µÄÁ÷ÖĞ £¨ºöÂÔ top bottom left right »ò z-index ÉùÃ÷£©
-inherit		-> 	¹æ¶¨Ó¦¸Ã´Ó¸¸ÔªËØ¼Ì³Ğ position ÊôĞÔµÄÖµ
+/-----start----  å…³äºcss çš„position å±æ€§å¯¹åº”çš„åŠŸèƒ½
+absolute   	-> 	ç”Ÿæˆ ç» å¯¹å®šä½çš„å…ƒç´ ï¼Œç›¸å¯¹äº static å®šä½ä»¥å¤–çš„ç¬¬ä¸€ä¸ªçˆ¶å…ƒç´ è¿›è¡Œå®šä½ï¼Œ
+				å…ƒç´ ä½ç½®é€šè¿‡ left top right bottom å±æ€§è¿›è¡Œè§„å®š
+fixed		->	ç”Ÿæˆ ç» å¯¹å®šä½çš„å…ƒç´ ï¼Œç›¸å¯¹äºæµè§ˆå™¨çª—å£è¿›è¡Œå®šä½
+				å…ƒç´ ä½ç½®é€šè¿‡ left top right bottom å±æ€§è¿›è¡Œè§„å®š
+relative  	->  ç”Ÿæˆ ç›¸ å¯¹å®šä½çš„å…ƒç´ ï¼Œç›¸å¯¹äºå…¶æ­£å¸¸çš„ä½ç½®è¿›è¡Œå®šä½
+				left: 20 ä¼šå‘å…ƒç´ çš„ left ä½ç½®æ·»åŠ  20 åƒç´ 
+static 		-> 	é»˜è®¤å€¼ã€‚æ²¡æœ‰å®šä½ï¼Œå…ƒç´ å‡ºç°åœ¨æ­£å¸¸çš„æµä¸­ ï¼ˆå¿½ç•¥ top bottom left right æˆ– z-index å£°æ˜ï¼‰
+inherit		-> 	è§„å®šåº”è¯¥ä»çˆ¶å…ƒç´ ç»§æ‰¿ position å±æ€§çš„å€¼
 /------end--------/
 
 
 
 
-// css3 Î±Àà::before (ÔÚ×ÖÌåÇ°·½¼Ó |)
+// css3 ä¼ªç±»::before (åœ¨å­—ä½“å‰æ–¹åŠ  |)
 .new_about_company .list_t::before {
     content: "";
     display: inline-block;
@@ -314,11 +314,11 @@ inherit		-> 	¹æ¶¨Ó¦¸Ã´Ó¸¸ÔªËØ¼Ì³Ğ position ÊôĞÔµÄÖµ
     bottom: -3px;
 }
 
-// css ¿ØÖÆ Ò»ĞĞÏÔÊ¾ËùÓĞÎÄ×Ö£¬¶à³öµÄÎÄ×Ö ×Ô¶¯¼Ó ...
+// css æ§åˆ¶ ä¸€è¡Œæ˜¾ç¤ºæ‰€æœ‰æ–‡å­—ï¼Œå¤šå‡ºçš„æ–‡å­— è‡ªåŠ¨åŠ  ...
 .li { overflow:hidden;text-overflow:ellipsis; -o-text-overflow:ellipsis;white-space:nowrap;width:100%;}  
 
 
-//css ¿ØÖÆĞĞÏÔÊ¾ÎÄ×Ö  ×Ô¶¯ ...
+//css æ§åˆ¶è¡Œæ˜¾ç¤ºæ–‡å­—  è‡ªåŠ¨ ...
 p{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -330,17 +330,17 @@ p{
 
 
 
-// css ¿ØÖÆÊÖ»ú°æ H5 ²»ÏÔÊ¾Ä¬ÈÏµÄÑ¡ÖĞ¿ò
+// css æ§åˆ¶æ‰‹æœºç‰ˆ H5 ä¸æ˜¾ç¤ºé»˜è®¤çš„é€‰ä¸­æ¡†
 *:focus {outline: none;}
 
 
 
-// ¸÷ÖÖ¼ıÍ·Ğ§¹û
+// å„ç§ç®­å¤´æ•ˆæœ
 	http://blog.csdn.net/tangtang5963/article/details/51490107
 	
 	
 	
-//ÎÒµÄ¼ıÍ·°¡£¬
+//æˆ‘çš„ç®­å¤´å•Šï¼Œ
 .address-holder::after {
     content: '';
     width: 0;
@@ -367,13 +367,13 @@ p{
 
 
 
-//CSS ÊµÏÖÒş²Ø¹ö¶¯ÌõÍ¬Ê±ÓÖ¿ÉÒÔ¹ö¶¯
+//CSS å®ç°éšè—æ»šåŠ¨æ¡åŒæ—¶åˆå¯ä»¥æ»šåŠ¨
 .element::-webkit-scrollbar {display:none}
 
-Èç¹ûÒª¼æÈİ PC ÆäËûä¯ÀÀÆ÷£¨IE¡¢Firefox µÈ£©£¬
-¹úÍâÒ»Î»²ÅÈË John Kurlak Ò²ÑĞ¾¿³öÁËÒ»ÖÖ°ì·¨¡£
-ÔÚÈİÆ÷ÍâÃæÔÙÇ¶Ì×Ò»²ã overflow:hidden 
-ÄÚ²¿ÄÚÈİÔÙÏŞÖÆ³ß´çºÍÍâ²¿Ç¶Ì×²ãÒ»Ñù£¬¾Í±äÏàÒş²ØÁË¡£
+å¦‚æœè¦å…¼å®¹ PC å…¶ä»–æµè§ˆå™¨ï¼ˆIEã€Firefox ç­‰ï¼‰ï¼Œ
+å›½å¤–ä¸€ä½æ‰äºº John Kurlak ä¹Ÿç ”ç©¶å‡ºäº†ä¸€ç§åŠæ³•ã€‚
+åœ¨å®¹å™¨å¤–é¢å†åµŒå¥—ä¸€å±‚ overflow:hidden 
+å†…éƒ¨å†…å®¹å†é™åˆ¶å°ºå¯¸å’Œå¤–éƒ¨åµŒå¥—å±‚ä¸€æ ·ï¼Œå°±å˜ç›¸éšè—äº†ã€‚
 <div class="outer-container">
      <div class="inner-container">
         <div class="content">
@@ -404,7 +404,7 @@ p{
 
 
 
-//css3  ÊµÏÖ¸¡¶¯Í¼Æ¬ »á·Å´óµÄĞ§¹û
+//css3  å®ç°æµ®åŠ¨å›¾ç‰‡ ä¼šæ”¾å¤§çš„æ•ˆæœ
 .pane-module .module-pic:hover img {
     transition: all .3s ease-out .1s;
     transform: matrix(1.05,0,0,1.05,0,0);
@@ -412,22 +412,22 @@ p{
     backface-visibility: hidden;
 }
 
-//h5Ò³ÃæInput Ñ¡ÖĞºó³öÏÕ»ÆÉ«±ß¿ò
+//h5é¡µé¢Input é€‰ä¸­åå‡ºé™©é»„è‰²è¾¹æ¡†
 input{
 	border: 0;
 	outline: none;
 }
 
-//webkit-ÄÚºËä¯ÀÀÆ÷±³¾°ÑÕÉ«½¥±ä
+//webkit-å†…æ ¸æµè§ˆå™¨èƒŒæ™¯é¢œè‰²æ¸å˜
 div{
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(blue), color-stop(0.5, green), to(red));
 }
 
 
-// ¹ØÓÚÇ®µÄ·ûºÅ
-£¤£¤£¤£¤£¤£¤£¤£¤£¤
+// å…³äºé’±çš„ç¬¦å·
+ï¿¥ï¿¥ï¿¥ï¿¥ï¿¥ï¿¥ï¿¥ï¿¥ï¿¥
 
-// ¿ØÖÆplaceholderÑùÊ½¼æÈİĞ´·¨
+// æ§åˆ¶placeholderæ ·å¼å…¼å®¹å†™æ³•
 .header .search_box .search_input::-webkit-input-placeholder {
     color: #bbbbbb;
 }
@@ -441,7 +441,7 @@ div{
     color: #bbbbbb;
 }
 
-//	ÏìÓ¦Ê½Éè¼Æ
+//	å“åº”å¼è®¾è®¡
 @media screen and (min-width:600px) {
   nav {
     float: left;

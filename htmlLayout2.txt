@@ -5,11 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>DIV+CSS²¼¾Ö½Ì³Ì</title>
+    <title>DIV+CSSå¸ƒå±€æ•™ç¨‹</title>
     <style type="text/css">
         #Container{
             width:1000px;
-            margin:0 auto;/*ÉèÖÃÕû¸öÈİÆ÷ÔÚä¯ÀÀÆ÷ÖĞË®Æ½¾ÓÖĞ*/
+            margin:0 auto;/*è®¾ç½®æ•´ä¸ªå®¹å™¨åœ¨æµè§ˆå™¨ä¸­æ°´å¹³å±…ä¸­*/
             background:#CF3;
         }
         #Header{
@@ -23,25 +23,25 @@
         }
         #Content{
             height:600px;
-            /*´Ë´¦¶ÔÈİÆ÷ÉèÖÃÁË¸ß¶È£¬Ò»°ã²»½¨Òé¶ÔÈİÆ÷ÉèÖÃ¸ß¶È£¬Ò»°ãÊ¹ÓÃoverflow:auto;ÊôĞÔÉèÖÃÈİÆ÷¸ù¾İÄÚÈİ×ÔÊÊÓ¦¸ß¶È£¬Èç¹û²»Ö¸¶¨¸ß¶È»ò²»ÉèÖÃ×ÔÊÊÓ¦¸ß¶È£¬ÈİÆ÷½«Ä¬ÈÏÎª1¸ö×Ö·û¸ß¶È£¬ÈİÆ÷·½µÄ²¼¾ÖÔªËØ£¨footer£©ÉèÖÃmargin-top:ÊôĞÔ½«ÎŞĞ§*/
-            margin-top:20px;/*´Ë´¦½²½âmarginµÄÓÃ·¨£¬ÉèÖÃcontentÓëÉÏÃæheaderÔªËØÖ®¼äµÄ¾àÀë*/
+            /*æ­¤å¤„å¯¹å®¹å™¨è®¾ç½®äº†é«˜åº¦ï¼Œä¸€èˆ¬ä¸å»ºè®®å¯¹å®¹å™¨è®¾ç½®é«˜åº¦ï¼Œä¸€èˆ¬ä½¿ç”¨overflow:auto;å±æ€§è®¾ç½®å®¹å™¨æ ¹æ®å†…å®¹è‡ªé€‚åº”é«˜åº¦ï¼Œå¦‚æœä¸æŒ‡å®šé«˜åº¦æˆ–ä¸è®¾ç½®è‡ªé€‚åº”é«˜åº¦ï¼Œå®¹å™¨å°†é»˜è®¤ä¸º1ä¸ªå­—ç¬¦é«˜åº¦ï¼Œå®¹å™¨æ–¹çš„å¸ƒå±€å…ƒç´ ï¼ˆfooterï¼‰è®¾ç½®margin-top:å±æ€§å°†æ— æ•ˆ*/
+            margin-top:20px;/*æ­¤å¤„è®²è§£marginçš„ç”¨æ³•ï¼Œè®¾ç½®contentä¸ä¸Šé¢headerå…ƒç´ ä¹‹é—´çš„è·ç¦»*/
             background:#0FF;
         }
         #Content-Left{
             height:400px;
             width:200px;
-            margin:20px;/*ÉèÖÃÔªËØ¸úÆäËûÔªËØµÄ¾àÀëÎª20ÏñËØ*/
-            float:left;/*ÉèÖÃ¸¡¶¯£¬ÊµÏÖ¶àÁĞĞ§¹û£¬div+Css²¼¾ÖÖĞºÜÖØÒªµÄ*/
+            margin:20px;/*è®¾ç½®å…ƒç´ è·Ÿå…¶ä»–å…ƒç´ çš„è·ç¦»ä¸º20åƒç´ */
+            float:left;/*è®¾ç½®æµ®åŠ¨ï¼Œå®ç°å¤šåˆ—æ•ˆæœï¼Œdiv+Csså¸ƒå±€ä¸­å¾ˆé‡è¦çš„*/
             background:#90C;
         }
         #Content-Main{
             height:400px;
             width:680px;
-            margin:20px;/*ÉèÖÃÔªËØ¸úÆäËûÔªËØµÄ¾àÀëÎª20ÏñËØ*/
-            float:left;/*ÉèÖÃ¸¡¶¯£¬ÊµÏÖ¶àÁĞĞ§¹û£¬div+Css²¼¾ÖÖĞºÜÖØÒªµÄ*/
+            margin:20px;/*è®¾ç½®å…ƒç´ è·Ÿå…¶ä»–å…ƒç´ çš„è·ç¦»ä¸º20åƒç´ */
+            float:left;/*è®¾ç½®æµ®åŠ¨ï¼Œå®ç°å¤šåˆ—æ•ˆæœï¼Œdiv+Csså¸ƒå±€ä¸­å¾ˆé‡è¦çš„*/
             background:#90C;
         }
-        /*×¢£ºContent-LeftºÍContent-MainÔªËØÊÇContentÔªËØµÄ×ÓÔªËØ£¬Á½¸öÔªËØÊ¹ÓÃÁËfloat:left;ÉèÖÃ³ÉÁ½ÁĞ£¬Õâ¸öÁ½¸öÔªËØµÄ¿í¶ÈºÍÕâ¸öÁ½¸öÔªËØÉèÖÃµÄpadding¡¢marginµÄºÍÒ»¶¨²»ÄÜ´óÓÚ¸¸²ãContentÔªËØµÄ¿í¶È£¬·ñÔòÉèÖÃÁĞ½«Ê§°Ü*/
+        /*æ³¨ï¼šContent-Leftå’ŒContent-Mainå…ƒç´ æ˜¯Contentå…ƒç´ çš„å­å…ƒç´ ï¼Œä¸¤ä¸ªå…ƒç´ ä½¿ç”¨äº†float:left;è®¾ç½®æˆä¸¤åˆ—ï¼Œè¿™ä¸ªä¸¤ä¸ªå…ƒç´ çš„å®½åº¦å’Œè¿™ä¸ªä¸¤ä¸ªå…ƒç´ è®¾ç½®çš„paddingã€marginçš„å’Œä¸€å®šä¸èƒ½å¤§äºçˆ¶å±‚Contentå…ƒç´ çš„å®½åº¦ï¼Œå¦åˆ™è®¾ç½®åˆ—å°†å¤±è´¥*/
         #Footer{
             height:40px;
             background:#90C;
@@ -56,13 +56,13 @@
 <body>
 <div id="Container">
     <div id="Header">
-        <div id="logo">ÕâÀïÉèÖÃÁËpaddingÊôĞÔ½éÉÜÒ»ÏÂpaddingµÄÓÃ·¨,padding½«ÉèÖÃÎÄ±¾Óë±ß¿òµÄ¾àÀë¡£</div>
+        <div id="logo">è¿™é‡Œè®¾ç½®äº†paddingå±æ€§ä»‹ç»ä¸€ä¸‹paddingçš„ç”¨æ³•,paddingå°†è®¾ç½®æ–‡æœ¬ä¸è¾¹æ¡†çš„è·ç¦»ã€‚</div>
     </div>
     <div id="Content">
         <div id="Content-Left">Content-Left</div>
     ??<div id="Content-Main">Content-Main</div>
     </div>
-    <div class="Clear"><!--ÈçºÎÄãÉÏÃæÓÃµ½float,ÏÂÃæ²¼¾Ö¿ªÊ¼Ç°×îºÃÇå³ıÒ»ÏÂ¡£--></div>
+    <div class="Clear"><!--å¦‚ä½•ä½ ä¸Šé¢ç”¨åˆ°float,ä¸‹é¢å¸ƒå±€å¼€å§‹å‰æœ€å¥½æ¸…é™¤ä¸€ä¸‹ã€‚--></div>
     <div id="Footer">Footer</div>
 </div>
 </body>

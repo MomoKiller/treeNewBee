@@ -1,50 +1,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>JavaScript解决select下拉框中的内容太长显示不全的问题</title>
-<script type="text/javascript">
-      /**
-	   * 自动设置select下拉框的宽度
-	   */
-      function autoWidth()
-	  {
-		  //获取select中的ID
-		  var selectId = document.getElementById("select_option");
-		  //自动设置下拉框的宽度
-		  selectId.style.width = 'auto';
-	  }
-	  
-	  /**
-	   * 设置select下拉框的宽度
-	   */
-	  function setWidth()
-	  {
-		  //获取select中的ID
-		  var selectId = document.getElementById("select_option");
-		  //设置select下拉框的宽度为120
-		  selectId.style.width = "120px";
-	  }
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>JavaScript解决select下拉框中的内容太长显示不全的问题</title>
+	<script type="text/javascript">
+		/**
+		 * 自动设置select下拉框的宽度
+		 */
+		function autoWidth() {
+			//获取select中的ID
+			var selectId = document.getElementById("select_option");
+			//自动设置下拉框的宽度
+			selectId.style.width = 'auto';
+		}
+
+		/**
+		 * 设置select下拉框的宽度
+		 */
+		function setWidth() {
+			//获取select中的ID
+			var selectId = document.getElementById("select_option");
+			//设置select下拉框的宽度为120
+			selectId.style.width = "120px";
+		}
+	</script>
 </head>
- 
+
 <body>
-   <div id="select_div">
-       <select  id="select_option" 
-               onmousedown="autoWidth()" 
-       		   onblur="setWidth()" 
-               onchange="setWidth()">
-     		<option value="0">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</option>
-            <option value="1">BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</option>
-            <option value="2">CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</option>
-            <option value="3">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</option>
-            <option value="4">EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</option>
-            <option value="5">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</option>
-            <option value="6">GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</option>
-            <option value="7">HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</option>
-            <option value="8">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</option>
-            <option value="9">JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ</option>
-	  </select>
-   </div>
+	<div id="select_div">
+		<select id="select_option" onmousedown="autoWidth()" onblur="setWidth()" onchange="setWidth()">
+			<option value="0">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</option>
+			<option value="1">BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</option>
+			<option value="2">CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</option>
+			<option value="3">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</option>
+			<option value="4">EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</option>
+			<option value="5">FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</option>
+			<option value="6">GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG</option>
+			<option value="7">HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</option>
+			<option value="8">IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</option>
+			<option value="9">JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ</option>
+		</select>
+	</div>
 </body>
+
 </html>

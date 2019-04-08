@@ -1,79 +1,79 @@
-//============================================Ê¹ÓÃbootbox¿ª·¢ÏîÄ¿×Ü½á===================================//
+//============================================ä½¿ç”¨bootboxå¼€å‘é¡¹ç›®æ€»ç»“===================================//
 
 
-Ò»¡¢ÈçºÎ¸øÒ»¸ö¿Ø¼şÌí¼Ó¸ñÊ½Îªyyyy-MM-dd¸ñÊ½µÄÊ±¼ä
-var date = new Date();																//´´½¨Ò»¸öÊ±¼ä¶ÔÏó£»
-Y = date.getFullYear() + '-';														//»ñÈ¡Ê±¼äµÄÄê
-M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';	//»ñÈ¡Ê±¼ä¶ÔÏóµÄÔÂ·İ Èç¹ûĞ¡ÓÚ10ÔÚÇ°Ãæ¼Ó0£¬Èç¹û´óÓÚµÈÓÚ10ÔòÊÇÔ­Öµ
-D = (date.getDate()-1 < 10 ? '0'+(date.getDate()-1) : date.getDate()-1) + ' ';		//»ñÈ¡Ê±¼ä¶ÔÏóµÄÌì 
-//h = date.getHours() + ':';														//»ñÈ¡Ê±¼ä¶ÔÏóµÄÊ±
-//m = date.getMinutes() + ':';														//·Ö
-//s = date.getSeconds(); 															//Ãë
-$("#timeID").html(Y+M+D);															//¸øÒ³Ãæ¿Ø¼ş Ìí¼Ó×éºÏºóµÄÊ±¼äÖµ			
-//ÕûºÏ³ÉÎªÒ»¸ö·½·¨£º
+ä¸€ã€å¦‚ä½•ç»™ä¸€ä¸ªæ§ä»¶æ·»åŠ æ ¼å¼ä¸ºyyyy-MM-ddæ ¼å¼çš„æ—¶é—´
+var date = new Date();																//åˆ›å»ºä¸€ä¸ªæ—¶é—´å¯¹è±¡ï¼›
+Y = date.getFullYear() + '-';														//è·å–æ—¶é—´çš„å¹´
+M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';	//è·å–æ—¶é—´å¯¹è±¡çš„æœˆä»½ å¦‚æœå°äº10åœ¨å‰é¢åŠ 0ï¼Œå¦‚æœå¤§äºç­‰äº10åˆ™æ˜¯åŸå€¼
+D = (date.getDate()-1 < 10 ? '0'+(date.getDate()-1) : date.getDate()-1) + ' ';		//è·å–æ—¶é—´å¯¹è±¡çš„å¤© 
+//h = date.getHours() + ':';														//è·å–æ—¶é—´å¯¹è±¡çš„æ—¶
+//m = date.getMinutes() + ':';														//åˆ†
+//s = date.getSeconds(); 															//ç§’
+$("#timeID").html(Y+M+D);															//ç»™é¡µé¢æ§ä»¶ æ·»åŠ ç»„åˆåçš„æ—¶é—´å€¼			
+//æ•´åˆæˆä¸ºä¸€ä¸ªæ–¹æ³•ï¼š
 function getCurrentTime(){
-	var date = new Date();																//´´½¨Ò»¸öÊ±¼ä¶ÔÏó£»
-	Y = date.getFullYear() + '-';														//»ñÈ¡Ê±¼äµÄÄê
-	M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';	//»ñÈ¡Ê±¼ä¶ÔÏóµÄÔÂ·İ Èç¹ûĞ¡ÓÚ10ÔÚÇ°Ãæ¼Ó0£¬Èç¹û´óÓÚµÈÓÚ10ÔòÊÇÔ­Öµ
-	D = (date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate()) + ' ';		//»ñÈ¡Ê±¼ä¶ÔÏóµÄÌì 
-	h = date.getHours() + ':';														//»ñÈ¡Ê±¼ä¶ÔÏóµÄÊ±
-	m = date.getMinutes() + ':';														//·Ö
+	var date = new Date();																//åˆ›å»ºä¸€ä¸ªæ—¶é—´å¯¹è±¡ï¼›
+	Y = date.getFullYear() + '-';														//è·å–æ—¶é—´çš„å¹´
+	M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';	//è·å–æ—¶é—´å¯¹è±¡çš„æœˆä»½ å¦‚æœå°äº10åœ¨å‰é¢åŠ 0ï¼Œå¦‚æœå¤§äºç­‰äº10åˆ™æ˜¯åŸå€¼
+	D = (date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate()) + ' ';		//è·å–æ—¶é—´å¯¹è±¡çš„å¤© 
+	h = date.getHours() + ':';														//è·å–æ—¶é—´å¯¹è±¡çš„æ—¶
+	m = date.getMinutes() + ':';														//åˆ†
 	s = date.getSeconds(); 	
 	return Y+M+D+h+m+s;
 }
-//²Î¿¼·½·¨£¨²»½¨ÒéÊ¹ÓÃ£©
+//å‚è€ƒæ–¹æ³•ï¼ˆä¸å»ºè®®ä½¿ç”¨ï¼‰
 function getNowTime(){
 	var now = new Date();
-	var year = now.getFullYear();       //Äê
-	var month = now.getMonth()+1;     //ÔÂ
-	var day = now.getDate();            //ÈÕ
+	var year = now.getFullYear();       //å¹´
+	var month = now.getMonth()+1;     //æœˆ
+	var day = now.getDate();            //æ—¥
 	var tempTimes=year+'-'+month+'-'+day+' 00:00:00';
 	return new Date(tempTimes.replace(/-/g,"/"));
 }
 
 
-¶ş¡¢¸ø¿Ø¼şµÄÊôĞÔ¸³Öµ
-	1¡¢Èç¹û¿Ø¼şÖµÖ¸Ã÷ÁËÊôĞÔÊÇ data-content ÊôĞÔ¿ÉÒÔ°´ÕÕÈçÏÂ·½·¨¸³Öµ£º
-	$(".popover-examples a").attr("data-content", "µç»°:"+data.phone);
-	2¡¢Èç¹û¸øÖ¸Ã÷¿Ø¼şµÄÊôĞÔ¸³Öµ·½·¨ÎŞĞ§£¬¿ÉÒÔÓÃä¯ÀÀÆ÷F12 µÄµ÷ÊÔ·½·¨²éÕÒÕıÈ·µÄÊôĞÔÖµ£¬ÔÙ½øĞĞ¸³Öµ£º
-	¿Ø¼şÖĞÓĞtitle £¬µ«ÊÇä¯ÀÀÆ÷ÏÔÊ¾µÄÊµ¼ÊÊôĞÔÖµÎª data-original-title
-	$(".popover-examples a").attr("data-original-title", "Öµ°àÈË:"+data.user_name);
+äºŒã€ç»™æ§ä»¶çš„å±æ€§èµ‹å€¼
+	1ã€å¦‚æœæ§ä»¶å€¼æŒ‡æ˜äº†å±æ€§æ˜¯ data-content å±æ€§å¯ä»¥æŒ‰ç…§å¦‚ä¸‹æ–¹æ³•èµ‹å€¼ï¼š
+	$(".popover-examples a").attr("data-content", "ç”µè¯:"+data.phone);
+	2ã€å¦‚æœç»™æŒ‡æ˜æ§ä»¶çš„å±æ€§èµ‹å€¼æ–¹æ³•æ— æ•ˆï¼Œå¯ä»¥ç”¨æµè§ˆå™¨F12 çš„è°ƒè¯•æ–¹æ³•æŸ¥æ‰¾æ­£ç¡®çš„å±æ€§å€¼ï¼Œå†è¿›è¡Œèµ‹å€¼ï¼š
+	æ§ä»¶ä¸­æœ‰title ï¼Œä½†æ˜¯æµè§ˆå™¨æ˜¾ç¤ºçš„å®é™…å±æ€§å€¼ä¸º data-original-title
+	$(".popover-examples a").attr("data-original-title", "å€¼ç­äºº:"+data.user_name);
 	
-Èı¡¢ÏÂÀ­¶àÑ¡¿Ø¼ş
-	1¡¢Ó¦ÓÃÏàÓ¦µÄjsÎÄ¼ş
+ä¸‰ã€ä¸‹æ‹‰å¤šé€‰æ§ä»¶
+	1ã€åº”ç”¨ç›¸åº”çš„jsæ–‡ä»¶
 	<link rel="stylesheet" href="../resources/lib/multiSelect/bootstrap-select.min.css">
     <script src="../resources/lib/multiSelect/bootstrap-select.min.js"></script>
     <script src="../resources/lib/multiSelect/defaults-zh_CN.js"></script>
-	2¡¢Ò³Ãæ¿Ø¼ş Ìí¼ÓselectpickerÀàÊôĞÔ
+	2ã€é¡µé¢æ§ä»¶ æ·»åŠ selectpickerç±»å±æ€§
 	<select multiple data-live-search="false" class="selectpicker show-tick form-control" name="seleName" id="selectID" style="border: 0px">
-        <option value="ÔËÎ¬¼à¿Ø">ÔËÎ¬¼à¿Ø</option>
-        <option value="È¨ÏŞ¿ØÖÆ">È¨ÏŞ¿ØÖÆ</option>
-        <option value="ÅäÖÃ¹ÜÀí">ÅäÖÃ¹ÜÀí</option>
-        <option value="¸ÅÀÀ">¸ÅÀÀ</option>
-        <option value="ÔËÎ¬¸ÅÀÀ">ÔËÎ¬¸ÅÀÀ</option>
-        <option value="¹ÊÕÏ¸ÅÀÀ">¹ÊÕÏ¸ÅÀÀ</option>
+        <option value="è¿ç»´ç›‘æ§">è¿ç»´ç›‘æ§</option>
+        <option value="æƒé™æ§åˆ¶">æƒé™æ§åˆ¶</option>
+        <option value="é…ç½®ç®¡ç†">é…ç½®ç®¡ç†</option>
+        <option value="æ¦‚è§ˆ">æ¦‚è§ˆ</option>
+        <option value="è¿ç»´æ¦‚è§ˆ">è¿ç»´æ¦‚è§ˆ</option>
+        <option value="æ•…éšœæ¦‚è§ˆ">æ•…éšœæ¦‚è§ˆ</option>
     </select>
-	3¡¢ÏÂÀ­¿Ø¼şµÄ¸³Öµ²Ù×÷
-	var full = $("#tableID").DataTable().row($(this).parents("tr")).data();			//»ñÈ¡µ±Ç°Ñ¡dataTableÖĞĞĞµÄÊı¾İ
-	var str = full.privilege;														//¶ÔÓ¦¿Ø¼şµÄ¶ÔÓ¦Öµ
+	3ã€ä¸‹æ‹‰æ§ä»¶çš„èµ‹å€¼æ“ä½œ
+	var full = $("#tableID").DataTable().row($(this).parents("tr")).data();			//è·å–å½“å‰é€‰dataTableä¸­è¡Œçš„æ•°æ®
+	var str = full.privilege;														//å¯¹åº”æ§ä»¶çš„å¯¹åº”å€¼
     var arr=str.split(',');
-    $('#selectID').selectpicker('val', arr);               							//µ÷ÓÃ»ØÏÔº¯Êı  Ê¹Öµ³öÏÖ
-	4¡¢ÏÂÀ­¿Ø¼şÖØÖÃÊÂ¼ş
+    $('#selectID').selectpicker('val', arr);               							//è°ƒç”¨å›æ˜¾å‡½æ•°  ä½¿å€¼å‡ºç°
+	4ã€ä¸‹æ‹‰æ§ä»¶é‡ç½®äº‹ä»¶
 	$('#selectID').selectpicker('val', ''); 
 
 	
-ËÄ¡¢form±íµ¥ÖØÖÃÊÂ¼ş
+å››ã€formè¡¨å•é‡ç½®äº‹ä»¶
 	function reset(){
 	$("#formID")[0].reset();	
 	}
 
-Îå¡¢¸ù¾İÏÂÀ­Ñ¡ÔñµÄÊ±¼äÖµÀ´½øĞĞ Ë¢ĞÂÊ±¼ä¼ä¸ôµ÷Õû
+äº”ã€æ ¹æ®ä¸‹æ‹‰é€‰æ‹©çš„æ—¶é—´å€¼æ¥è¿›è¡Œ åˆ·æ–°æ—¶é—´é—´éš”è°ƒæ•´
 <select>
 	<option value="1">1<option>
 	<option value="2">2<option>
 	<option value="5" selected>5<option>
 </select>
-//ÁíÒ»ÖÖ¸ñÊ½
+//å¦ä¸€ç§æ ¼å¼
 <select>
 	<option>1<option>
 	<option>2<option>
@@ -82,72 +82,72 @@ function getNowTime(){
 		var time;
 		var timer1;
 		var timer2;
-		//ÊµÊ±Ë¢ĞÂ·½·¨ÖĞµ÷ÓÃµÄ·½·¨
+		//å®æ—¶åˆ·æ–°æ–¹æ³•ä¸­è°ƒç”¨çš„æ–¹æ³•
 		function intimefresh() {
-			$("#table").DataTable().draw();//µãËÑË÷ÖØĞÂ»æÖÆtable¡£
+			$("#table").DataTable().draw();//ç‚¹æœç´¢é‡æ–°ç»˜åˆ¶tableã€‚
 		}
-		//µ±Ñ¡Ôñ²»Í¬Ê±¼äÖµµÄÊ± ÔËĞĞ´Ë·½·¨
+		//å½“é€‰æ‹©ä¸åŒæ—¶é—´å€¼çš„æ—¶ è¿è¡Œæ­¤æ–¹æ³•
 		$(document).on("change","#simple",function(){
-			//Çå³ıµÚ¶ş¸ö setInterval() º¯Êı·½·¨
+			//æ¸…é™¤ç¬¬äºŒä¸ª setInterval() å‡½æ•°æ–¹æ³•
 			clearInterval(timer2);				
-			//Çå³ıµÚÒ»¸ö setInterval() º¯Êı·½·¨
+			//æ¸…é™¤ç¬¬ä¸€ä¸ª setInterval() å‡½æ•°æ–¹æ³•
 			clearInterval(timer1);
-			//ÖØĞÂ»ñÈ¡Ê±¼äÖµ
+			//é‡æ–°è·å–æ—¶é—´å€¼
 			time = $("#simple").val();
-			//¶¨Òå²¢Æô¶¯ µÚ¶ş¸ö setInterval() º¯Êı·½·¨
+			//å®šä¹‰å¹¶å¯åŠ¨ ç¬¬äºŒä¸ª setInterval() å‡½æ•°æ–¹æ³•
 			timer2 = setInterval(intimefresh, time * 1000 * 60);
 		});
-		//µÚÒ»´Î¼ÓÔØµÄÊ±ºò¶Ô time Öµ½øĞĞ³õÊ¼»¯
+		//ç¬¬ä¸€æ¬¡åŠ è½½çš„æ—¶å€™å¯¹ time å€¼è¿›è¡Œåˆå§‹åŒ–
 		$(document).ready(function() {		
-			time = $("#simple").val();				//¸ù¾İ¿Ø¼şÖĞµÄÖµÀ´³õÊ¼»¯Ê±¼ä
-			//Ê¹ÓÃ setInterval()  º¯ÊıÀ´½øĞĞÊµÊ±Ë¢ĞÂ
+			time = $("#simple").val();				//æ ¹æ®æ§ä»¶ä¸­çš„å€¼æ¥åˆå§‹åŒ–æ—¶é—´
+			//ä½¿ç”¨ setInterval()  å‡½æ•°æ¥è¿›è¡Œå®æ—¶åˆ·æ–°
 			/**
-			*  ×¢£º ÕâÀïºÜÓĞ±ØÒªÌáÊ¾Ò»ÏÂ£¬ËäÈ»timeÊÇ¸ö±äÁ¿£¬µ«ÊÇ³õÊ¼»¯ºósetInterval·½·¨ÖĞ timeµÄÖµÏàµ±ÓÚÊÇ¸ö¹Ì¶¨Öµ5
-			*           ËùÒÔÒªÔÚselect¿Ø¼şµÄchangeÊÂ¼şÖĞÇå³ş Õâ¸ösetInterval
+			*  æ³¨ï¼š è¿™é‡Œå¾ˆæœ‰å¿…è¦æç¤ºä¸€ä¸‹ï¼Œè™½ç„¶timeæ˜¯ä¸ªå˜é‡ï¼Œä½†æ˜¯åˆå§‹åŒ–åsetIntervalæ–¹æ³•ä¸­ timeçš„å€¼ç›¸å½“äºæ˜¯ä¸ªå›ºå®šå€¼5
+			*           æ‰€ä»¥è¦åœ¨selectæ§ä»¶çš„changeäº‹ä»¶ä¸­æ¸…æ¥š è¿™ä¸ªsetInterval
 			*/
 			timer1 = setInterval(intimefresh, time * 1000 * 60);
 		});
 
-Áù¡¢bootStrap ¼ÓÔØ±í¸ñµÄ·½·¨
+å…­ã€bootStrap åŠ è½½è¡¨æ ¼çš„æ–¹æ³•
 function initTable(url){
  var table = $("#table").dataTable({
           "createdRow": function ( row, data, index ) {
            var id=$("td", row).eq(0).html();
            var name=$("td", row).eq(1).html();
            var info='';
-        	   info='<a href="jsp/res/tetra/BaseStationDetail.jsp?id='+id+'" class="btn btn-info  btn-xs" style="margin-left: 5px;" title="²é¿´ÏêÏ¸"> <span class="glyphicon  glyphicon-book" ></span></a>';
-            //$('td', row).eq(7).html(''+info); @wuwp Òş²Ø¹¤³Ì×´Ì¬ÁĞ
+        	   info='<a href="jsp/res/tetra/BaseStationDetail.jsp?id='+id+'" class="btn btn-info  btn-xs" style="margin-left: 5px;" title="æŸ¥çœ‹è¯¦ç»†"> <span class="glyphicon  glyphicon-book" ></span></a>';
+            //$('td', row).eq(7).html(''+info); @wuwp éšè—å·¥ç¨‹çŠ¶æ€åˆ—
         	   $('td', row).eq(6).html(''+info);
             $('td', row).eq(0).html('<input type="checkbox" class="checkbox" name="checkbox" value="'+id+'"/>');      
           },
-            serverSide: true,//·ÖÒ³£¬È¡Êı¾İµÈµÈµÄ¶¼·Åµ½·şÎñ¶ËÈ¥
-            processing: false,//ÔØÈëÊı¾İµÄÊ±ºòÊÇ·ñÏÔÊ¾¡°ÔØÈëÖĞ¡±
-            pageLength: 10,//Ê×´Î¼ÓÔØµÄÊı¾İÌõÊı
-            searching: false,//ËÑË÷
-            ordering: false,//ÅÅĞò²Ù×÷ÔÚ·şÎñ¶Ë½øĞĞ£¬ËùÒÔ¿ÉÒÔ¹ØÁË
-             ajax: {//ÀàËÆjqueryµÄajax²ÎÊı£¬»ù±¾¶¼¿ÉÒÔÓÃ¡£
-                type: "get",//ºóÌ¨Ö¸¶¨ÁË·½Ê½£¬Ä¬ÈÏget£¬Íâ¼ÓdatatableÄ¬ÈÏ¹¹ÔìµÄ²ÎÊıºÜ³¤£¬ÓĞ¿ÉÄÜ³¬¹ıgetµÄ×î´ó³¤¶È¡£
+            serverSide: true,//åˆ†é¡µï¼Œå–æ•°æ®ç­‰ç­‰çš„éƒ½æ”¾åˆ°æœåŠ¡ç«¯å»
+            processing: false,//è½½å…¥æ•°æ®çš„æ—¶å€™æ˜¯å¦æ˜¾ç¤ºâ€œè½½å…¥ä¸­â€
+            pageLength: 10,//é¦–æ¬¡åŠ è½½çš„æ•°æ®æ¡æ•°
+            searching: false,//æœç´¢
+            ordering: false,//æ’åºæ“ä½œåœ¨æœåŠ¡ç«¯è¿›è¡Œï¼Œæ‰€ä»¥å¯ä»¥å…³äº†
+             ajax: {//ç±»ä¼¼jqueryçš„ajaxå‚æ•°ï¼ŒåŸºæœ¬éƒ½å¯ä»¥ç”¨ã€‚
+                type: "get",//åå°æŒ‡å®šäº†æ–¹å¼ï¼Œé»˜è®¤getï¼Œå¤–åŠ datatableé»˜è®¤æ„é€ çš„å‚æ•°å¾ˆé•¿ï¼Œæœ‰å¯èƒ½è¶…è¿‡getçš„æœ€å¤§é•¿åº¦ã€‚
                 url: url,
-                dataSrc: "rows",//Ä¬ÈÏdata£¬Ò²¿ÉÒÔĞ´ÆäËûµÄ£¬¸ñÊ½»¯tableµÄÊ±ºòÈ¡ÀïÃæµÄÊı¾İ
-                data: function (d) {//d ÊÇÔ­Ê¼µÄ·¢ËÍ¸ø·şÎñÆ÷µÄÊı¾İ£¬Ä¬ÈÏºÜ³¤¡£
+                dataSrc: "rows",//é»˜è®¤dataï¼Œä¹Ÿå¯ä»¥å†™å…¶ä»–çš„ï¼Œæ ¼å¼åŒ–tableçš„æ—¶å€™å–é‡Œé¢çš„æ•°æ®
+                data: function (d) {//d æ˜¯åŸå§‹çš„å‘é€ç»™æœåŠ¡å™¨çš„æ•°æ®ï¼Œé»˜è®¤å¾ˆé•¿ã€‚
                  var param = getSearchParam();
-                    param.offset = d.start;//¿ªÊ¼µÄĞòºÅ
-                    param.limit = d.length;//ÒªÈ¡µÄÊı¾İµÄ
-                    return param;//×Ô¶¨ÒåĞèÒª´«µİµÄ²ÎÊı¡£
+                    param.offset = d.start;//å¼€å§‹çš„åºå·
+                    param.limit = d.length;//è¦å–çš„æ•°æ®çš„
+                    return param;//è‡ªå®šä¹‰éœ€è¦ä¼ é€’çš„å‚æ•°ã€‚
                 }
             }
           ,
-            columns: [//¶ÔÓ¦ÉÏÃætheadÀïÃæµÄĞòÁĞ    
+            columns: [//å¯¹åº”ä¸Šé¢theadé‡Œé¢çš„åºåˆ—    
                 { data: "device_id"},           
                 { data: "sys_name"},
                 { data: "ip_addr"},    
                 { data: "city"},
-                //@wuwp Òş²Ø¹¤³Ì×´Ì¬ÁĞ
+                //@wuwp éšè—å·¥ç¨‹çŠ¶æ€åˆ—
                 { data: "project_status","bVisible":false,"render": function(data, type, full) { 
-                	if(data==0) return "ÔÚÍøÔËĞĞ";
-                	if(data==1) return "¹¤³Ì×´Ì¬";
-                	if(data==2) return "ÁÙÊ±ÍËÍø";
-                	else return "ÔİÎŞ";
+                	if(data==0) return "åœ¨ç½‘è¿è¡Œ";
+                	if(data==1) return "å·¥ç¨‹çŠ¶æ€";
+                	if(data==2) return "ä¸´æ—¶é€€ç½‘";
+                	else return "æš‚æ— ";
                  }
                 },
                 { data: "vendor"},
@@ -155,10 +155,10 @@ function initTable(url){
                 	return data.substring(0,19);
                 }      	
                 },
-                { data: "device_id"}//×Ö¶ÎÃû×ÖºÍ·µ»ØµÄjsonĞòÁĞµÄkey¶ÔÓ¦
+                { data: "device_id"}//å­—æ®µåå­—å’Œè¿”å›çš„jsonåºåˆ—çš„keyå¯¹åº”
                 /*{ data: "status","render": function(data, type, full) { 
-                	if(data==true) return "³É¹¦";
-                	else if(data==false) return "Ê§°Ü";
+                	if(data==true) return "æˆåŠŸ";
+                	else if(data==false) return "å¤±è´¥";
                  }},
                 { data: "remark"},*/
             ],
@@ -173,58 +173,58 @@ function initTable(url){
                   });
             },
             language: {
-                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>Ìõ¼ÇÂ¼',//×óÉÏ½ÇµÄ·ÖÒ³´óĞ¡ÏÔÊ¾¡£
+                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>æ¡è®°å½•',//å·¦ä¸Šè§’çš„åˆ†é¡µå¤§å°æ˜¾ç¤ºã€‚
                // lengthMenu:false,
-                processing: "ÔØÈëÖĞ",//´¦ÀíÒ³ÃæÊı¾İµÄÊ±ºòµÄÏÔÊ¾
-                paginate: {//·ÖÒ³µÄÑùÊ½ÎÄ±¾ÄÚÈİ¡£
-                    previous: "ÉÏÒ»Ò³",
-                    next: "ÏÂÒ»Ò³",
-                    first: "µÚÒ»Ò³",
-                    last: "×îºóÒ»Ò³"
+                processing: "è½½å…¥ä¸­",//å¤„ç†é¡µé¢æ•°æ®çš„æ—¶å€™çš„æ˜¾ç¤º
+                paginate: {//åˆ†é¡µçš„æ ·å¼æ–‡æœ¬å†…å®¹ã€‚
+                    previous: "ä¸Šä¸€é¡µ",
+                    next: "ä¸‹ä¸€é¡µ",
+                    first: "ç¬¬ä¸€é¡µ",
+                    last: "æœ€åä¸€é¡µ"
                 },
-                zeroRecords: "Ã»ÓĞÄÚÈİ",//table tbodyÄÚÈİÎª¿ÕÊ±£¬tbodyµÄÄÚÈİ¡£
-                //ÏÂÃæÈıÕß¹¹³ÉÁË×ÜÌåµÄ×óÏÂ½ÇµÄÄÚÈİ¡£
-                info: '×Ü¹²_PAGES_ Ò³£¬ÏÔÊ¾µÚ_START_ µ½µÚ _END_ £¬¹²_TOTAL_ Ìõ ',//×óÏÂ½ÇµÄĞÅÏ¢ÏÔÊ¾£¬´óĞ´µÄ´ÊÎª¹Ø¼ü×Ö¡£
-                infoEmpty: "¹²0Ìõ¼ÇÂ¼",//É¸Ñ¡Îª¿ÕÊ±×óÏÂ½ÇµÄÏÔÊ¾¡£
-                infoFiltered: ""//É¸Ñ¡Ö®ºóµÄ×óÏÂ½ÇÉ¸Ñ¡ÌáÊ¾(ÁíÒ»¸öÊÇ·ÖÒ³ĞÅÏ¢ÏÔÊ¾£¬ÔÚÉÏÃæµÄinfoÖĞÒÑ¾­ÉèÖÃ£¬ËùÒÔ¿ÉÒÔ²»ÏÔÊ¾)£¬
+                zeroRecords: "æ²¡æœ‰å†…å®¹",//table tbodyå†…å®¹ä¸ºç©ºæ—¶ï¼Œtbodyçš„å†…å®¹ã€‚
+                //ä¸‹é¢ä¸‰è€…æ„æˆäº†æ€»ä½“çš„å·¦ä¸‹è§’çš„å†…å®¹ã€‚
+                info: 'æ€»å…±_PAGES_ é¡µï¼Œæ˜¾ç¤ºç¬¬_START_ åˆ°ç¬¬ _END_ ï¼Œå…±_TOTAL_ æ¡ ',//å·¦ä¸‹è§’çš„ä¿¡æ¯æ˜¾ç¤ºï¼Œå¤§å†™çš„è¯ä¸ºå…³é”®å­—ã€‚
+                infoEmpty: "å…±0æ¡è®°å½•",//ç­›é€‰ä¸ºç©ºæ—¶å·¦ä¸‹è§’çš„æ˜¾ç¤ºã€‚
+                infoFiltered: ""//ç­›é€‰ä¹‹åçš„å·¦ä¸‹è§’ç­›é€‰æç¤º(å¦ä¸€ä¸ªæ˜¯åˆ†é¡µä¿¡æ¯æ˜¾ç¤ºï¼Œåœ¨ä¸Šé¢çš„infoä¸­å·²ç»è®¾ç½®ï¼Œæ‰€ä»¥å¯ä»¥ä¸æ˜¾ç¤º)ï¼Œ
             },
             lengthChange:true,
             paging: true
         });
- £ı
+ ï½
 
-Æß¡¢¹ØÓÚÒ³Ãæ²ÎÊıÖĞ´æÔÚºº×ÖµÄ×ªÂë¹¦ÄÜ
- case1¡¢Ò³Ãæ´«²ÎºÍ ºóÌ¨´úÂëÈ¡²ÎµÄ·½Ê½
-	ÔÚ»ñÈ¡Ò³Ãæ²ÎÊıµÄÊ±ºòÌí¼Ó encodeURI();
+ä¸ƒã€å…³äºé¡µé¢å‚æ•°ä¸­å­˜åœ¨æ±‰å­—çš„è½¬ç åŠŸèƒ½
+ case1ã€é¡µé¢ä¼ å‚å’Œ åå°ä»£ç å–å‚çš„æ–¹å¼
+	åœ¨è·å–é¡µé¢å‚æ•°çš„æ—¶å€™æ·»åŠ  encodeURI();
 		param.name = encodeURI(name);
-	ÔÚºóÌ¨´úÂëÖĞÌí¼Ó½âÂëµÄ·½·¨£º
+	åœ¨åå°ä»£ç ä¸­æ·»åŠ è§£ç çš„æ–¹æ³•ï¼š
 		params.put("name", URLDecoder.decode((String) params.get("name"),"utf-8"));
-		params ÎªºóÌ¨´¦ÀíÒµÎñµÄ²ÎÊı
- case2¡¢Ò³Ãæ´«²Î ÔÚÁíÒ»¸öÒ³ÃæÈ¡²ÎµÄ×ªÂë		
-	Ò³ÃæµÄ×ªÂë¸ñÊ½£º
+		params ä¸ºåå°å¤„ç†ä¸šåŠ¡çš„å‚æ•°
+ case2ã€é¡µé¢ä¼ å‚ åœ¨å¦ä¸€ä¸ªé¡µé¢å–å‚çš„è½¬ç 		
+	é¡µé¢çš„è½¬ç æ ¼å¼ï¼š
 	url= " urlName?paramType "+encodeURIComponent(encodeURIComponent(businessType));
 	
-	Ìø×ªÒ³Ãæ»ñÈ¡url²ÎÊı£¬ÏÖÔÚjava´úÂëÖĞ½«²ÎÊı×ªÂë£º
+	è·³è½¬é¡µé¢è·å–urlå‚æ•°ï¼Œç°åœ¨javaä»£ç ä¸­å°†å‚æ•°è½¬ç ï¼š
 	<%
 	String businessType=java.net.URLDecoder.decode(request.getParameter("businessType"),"UTF-8");
 	%>    
-    js»ñÈ¡²ÎÊı£º
+    jsè·å–å‚æ•°ï¼š
 	var businessType = "<%=businessType%>";
 
 
-°Ë¡¢ÌÖÂÛÒ³ÃæµÄÕâ¸ö±êÇ©
+å…«ã€è®¨è®ºé¡µé¢çš„è¿™ä¸ªæ ‡ç­¾
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <!DOCTYPE html>
-Ç°Õß»áÊ¹Ò³Ãæ³öÏÖ¹ö¶¯Ìõ£¬¶øºóÕß²»»á
+å‰è€…ä¼šä½¿é¡µé¢å‡ºç°æ»šåŠ¨æ¡ï¼Œè€Œåè€…ä¸ä¼š
 
-DOCTYPE±êÇ©ÊÇÎªÁËÈÃä¯ÀÀÆ÷°´ÕÕw3cµÄÍ³Ò»¸ñÊ½¶ÔÒ³Ãæ½øĞĞ½âÎö¡£¶øÏîÄ¿Ò³ÃæÓĞhtmlÓëjspÒ³ÃæÁ½ÖÖ¸ñÊ½
-¸öÈË¾õµÃhtmlÒ³ÃæÊ¹ÓÃµÚÒ»ÖÖ¡¢jspÒ³ÃæÊ¹ÓÃµÚ¶ş¸ö
+DOCTYPEæ ‡ç­¾æ˜¯ä¸ºäº†è®©æµè§ˆå™¨æŒ‰ç…§w3cçš„ç»Ÿä¸€æ ¼å¼å¯¹é¡µé¢è¿›è¡Œè§£æã€‚è€Œé¡¹ç›®é¡µé¢æœ‰htmlä¸jspé¡µé¢ä¸¤ç§æ ¼å¼
+ä¸ªäººè§‰å¾—htmlé¡µé¢ä½¿ç”¨ç¬¬ä¸€ç§ã€jspé¡µé¢ä½¿ç”¨ç¬¬äºŒä¸ª
 
 
-¾Å¡¢¸ü»»ÏîÄ¿Ò³ÃæÖĞµÄtomcatĞ¡Í¼±ê
-//ÍøÉÏµÄÊÂÀı´úÂë ·ÅÔÚ<head></head>±êÇ©ÖĞ
+ä¹ã€æ›´æ¢é¡¹ç›®é¡µé¢ä¸­çš„tomcatå°å›¾æ ‡
+//ç½‘ä¸Šçš„äº‹ä¾‹ä»£ç  æ”¾åœ¨<head></head>æ ‡ç­¾ä¸­
 <link rel="shortcut icon" href="http://www.weather.com.cn/favicon.ico" type="image/x-icon" />
-//bootStrap ÏîÄ¿Ò³ÃæµÄÊµÀı´úÂë
+//bootStrap é¡¹ç›®é¡µé¢çš„å®ä¾‹ä»£ç 
 <link rel="icon" href="resources/bootstrap/bootstrap-3.3.5/docs/favicon.ico">
 
 
@@ -234,18 +234,18 @@ DOCTYPE±êÇ©ÊÇÎªÁËÈÃä¯ÀÀÆ÷°´ÕÕw3cµÄÍ³Ò»¸ñÊ½¶ÔÒ³Ãæ½øĞĞ½âÎö¡£¶øÏîÄ¿Ò³ÃæÓĞhtmlÓëjspÒ
 
 
 
-Ê®¡¢bootstrapºËĞÄÎÄ¼şÒıÓÃ£¨Ò»°ãÔÚÒ³Ãæ×îºóÒıÓÃ£¬±£Ö¤Ò³ÃæÏÈ¼ÓÔØÔÚ¼ÓÔØ¶ÔÓ¦µÄÎÄ¼ş£©
-<!-- ĞÂ Bootstrap ºËĞÄ CSS ÎÄ¼ş -->
+åã€bootstrapæ ¸å¿ƒæ–‡ä»¶å¼•ç”¨ï¼ˆä¸€èˆ¬åœ¨é¡µé¢æœ€åå¼•ç”¨ï¼Œä¿è¯é¡µé¢å…ˆåŠ è½½åœ¨åŠ è½½å¯¹åº”çš„æ–‡ä»¶ï¼‰
+<!-- æ–° Bootstrap æ ¸å¿ƒ CSS æ–‡ä»¶ -->
 <link rel="stylesheet" href="dist/css/bootstrap.min.css">
-<!-- ¿ÉÑ¡µÄBootstrapÖ÷ÌâÎÄ¼ş£¨Ò»°ã²»ÓÃÒıÈë£© -->
+<!-- å¯é€‰çš„Bootstrapä¸»é¢˜æ–‡ä»¶ï¼ˆä¸€èˆ¬ä¸ç”¨å¼•å…¥ï¼‰ -->
 <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css">
-<!-- jQueryÎÄ¼ş¡£Îñ±ØÔÚbootstrap.min.js Ö®Ç°ÒıÈë -->
+<!-- jQueryæ–‡ä»¶ã€‚åŠ¡å¿…åœ¨bootstrap.min.js ä¹‹å‰å¼•å…¥ -->
 <script src="jquery/jquery.min.js"></script>
-<!-- ×îĞÂµÄ Bootstrap ºËĞÄ JavaScript ÎÄ¼ş -->
+<!-- æœ€æ–°çš„ Bootstrap æ ¸å¿ƒ JavaScript æ–‡ä»¶ -->
 <script src="dist/js/bootstrap.min.js"></script>
 
-Ê®Ò»¡¢²¼¾Ö
-1¡¢Õ¤¸ñ²¼¾Ö   (Õ¤¸ñÏµÍ³±ØĞë·ÅÔÚcontainer£¨¾ÓÖĞ£©»òcontainer-fluid£¨ÆÌÂú%£©µÄÈİÆ÷ÖĞ£¬±£Ö¤ÆäÖĞµÄÕ¤¸ñ²¼¾ÖÓĞ²ÎÕÕµÄ¶ÔÏó)
+åä¸€ã€å¸ƒå±€
+1ã€æ …æ ¼å¸ƒå±€   (æ …æ ¼ç³»ç»Ÿå¿…é¡»æ”¾åœ¨containerï¼ˆå±…ä¸­ï¼‰æˆ–container-fluidï¼ˆé“ºæ»¡%ï¼‰çš„å®¹å™¨ä¸­ï¼Œä¿è¯å…¶ä¸­çš„æ …æ ¼å¸ƒå±€æœ‰å‚ç…§çš„å¯¹è±¡)
 <div class="cotainer">
 	<div class="row">
 		<div class="col-md-3"></div>
@@ -254,19 +254,19 @@ DOCTYPE±êÇ©ÊÇÎªÁËÈÃä¯ÀÀÆ÷°´ÕÕw3cµÄÍ³Ò»¸ñÊ½¶ÔÒ³Ãæ½øĞĞ½âÎö¡£¶øÏîÄ¿Ò³ÃæÓĞhtmlÓëjspÒ
 </idv>
 
 			
-Ê®¶ş¡¢Ê±¼ä»ñÈ¡µÄ·½·¨ 
-		//»ñÈ¡ µ±Ç°Ê±¼ä + ÄãÏëÒªµÄÈÕÆÚ
+åäºŒã€æ—¶é—´è·å–çš„æ–¹æ³• 
+		//è·å– å½“å‰æ—¶é—´ + ä½ æƒ³è¦çš„æ—¥æœŸ
 		function _getDateYear(addYear) {
             var dd = new Date();
-            dd.setDate(dd.getYear()+addYear);//»ñÈ¡AddDayCountÄêºóµÄÈÕÆÚ
+            dd.setDate(dd.getYear()+addYear);//è·å–AddDayCountå¹´åçš„æ—¥æœŸ
 			/*
-			dd.setDate(dd.getDate()+addYear);//»ñÈ¡AddDayCountÌìºóµÄÈÕÆÚ
-			ÔÂµÄÀàÍÆ  -- ²»ÏëĞ´ÔÚeasyuiÀïÃæÁË
+			dd.setDate(dd.getDate()+addYear);//è·å–AddDayCountå¤©åçš„æ—¥æœŸ
+			æœˆçš„ç±»æ¨  -- ä¸æƒ³å†™åœ¨easyuié‡Œé¢äº†
 			*/
             var y = dd.getFullYear();
-            var m = dd.getMonth()+1;//»ñÈ¡µ±Ç°ÔÂ·İµÄÈÕÆÚ
+            var m = dd.getMonth()+1;//è·å–å½“å‰æœˆä»½çš„æ—¥æœŸ
             var d = dd.getDate();
-            return y+"Äê"+m+"ÔÂ"+d+"ÈÕ24Ê±";
+            return y+"å¹´"+m+"æœˆ"+d+"æ—¥24æ—¶";
         }			
 			
 

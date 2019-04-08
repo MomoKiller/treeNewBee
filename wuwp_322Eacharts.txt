@@ -1,17 +1,17 @@
-//=======================================Ê¹ÓÃEacharts¿ª·¢ÏîÄ¿¾­Ñé×Ü½á===============================================//
+//=======================================ä½¿ç”¨Eachartså¼€å‘é¡¹ç›®ç»éªŒæ€»ç»“===============================================//
 
 
 
-Ò»¡¢´´½¨Ò»¸öEachartÍ¼±í
-	1¡¢ÒıÓÃ¶ÔÓ¦µÄeacharts¶ÔÓ¦µÄjsÎÄ¼ş
+ä¸€ã€åˆ›å»ºä¸€ä¸ªEachartå›¾è¡¨
+	1ã€å¼•ç”¨å¯¹åº”çš„eachartså¯¹åº”çš„jsæ–‡ä»¶
 	 <script src="echarts-3.2.2/echarts-3.2.2.min.js"></script>
-	2¡¢ÔÚÒ³Ãæ±à¼­¶ÔÓ¦eachartsµÄ¿Ø¼ş
+	2ã€åœ¨é¡µé¢ç¼–è¾‘å¯¹åº”eachartsçš„æ§ä»¶
 	<div id="eachartsID"></div> 
 	 
-	2¡¢eachartµÄ³£¼û´´½¨·½·¨
-	var myChart = echarts.init(document.getElementById('eachartsID'));         //¶ÔÓ¦µÄ¿Ø¼şID
+	2ã€eachartçš„å¸¸è§åˆ›å»ºæ–¹æ³•
+	var myChart = echarts.init(document.getElementById('eachartsID'));         //å¯¹åº”çš„æ§ä»¶ID
 	var data=[
-	["»¥ÁªÍø",{value:166,itemStyle:{
+	["äº’è”ç½‘",{value:166,itemStyle:{
 	    normal:{
 	        color:'#0077C9'
 	    }
@@ -22,7 +22,7 @@
 	    }
 	}
 	}],
-	["ÓïÒô",{value:135,itemStyle:{
+	["è¯­éŸ³",{value:135,itemStyle:{
 	    normal:{
 	        color:'#00BD5B'
 	    }
@@ -44,7 +44,7 @@
 	    }
 	}
 	}],
-	["¶ÌĞÅ",{value:73,itemStyle:{
+	["çŸ­ä¿¡",{value:73,itemStyle:{
 	    normal:{
 	        color:'#FE8915'
 	    }
@@ -55,7 +55,7 @@
 	    }
 	}
 	}],
-	["´«Êä",{value:86,itemStyle:{
+	["ä¼ è¾“",{value:86,itemStyle:{
 	    normal:{
 	        color:'#FED519'
 	    }
@@ -73,7 +73,7 @@
     	    x: 10,
     	    y: 145,
     	    //y: height,
-    	    text: 'ÒµÎñ×ÜÊı£º123 '+'\n'+'¸æ¾¯Êı£º20',
+    	    text: 'ä¸šåŠ¡æ€»æ•°ï¼š123 '+'\n'+'å‘Šè­¦æ•°ï¼š20',
     	    textStyle: {
     			fontSize: 14,
     			fontStyle: 'normal',
@@ -83,8 +83,8 @@
     	},
          tooltip : {
             trigger: 'axis',
-            axisPointer : {            // ×ø±êÖáÖ¸Ê¾Æ÷£¬×ø±êÖá´¥·¢ÓĞĞ§
-                type : 'shadow'        // Ä¬ÈÏÎªÖ±Ïß£¬¿ÉÑ¡Îª£º'line' | 'shadow'
+            axisPointer : {            // åæ ‡è½´æŒ‡ç¤ºå™¨ï¼Œåæ ‡è½´è§¦å‘æœ‰æ•ˆ
+                type : 'shadow'        // é»˜è®¤ä¸ºç›´çº¿ï¼Œå¯é€‰ä¸ºï¼š'line' | 'shadow'
             }
         },
         xAxis: {
@@ -103,10 +103,10 @@
             borderWidth:1,
             borderColor:"#BBBBBB",
             backgroundColor:"#F7F7F7",
-            orient:'vertical',//¸ü¸ÄÍ¼±íÏÔÊ¾¸ñÊ½
+            orient:'vertical',//æ›´æ”¹å›¾è¡¨æ˜¾ç¤ºæ ¼å¼
             type:'piecewise',
             categories: [
-                '»¥ÁªÍø', 'ÓïÒô', 'GPRS', '¶ÌĞÅ',  '´«Êä','¸æ¾¯'
+                'äº’è”ç½‘', 'è¯­éŸ³', 'GPRS', 'çŸ­ä¿¡',  'ä¼ è¾“','å‘Šè­¦'
             ],
             outOfRange: {
             },
@@ -124,7 +124,7 @@
             backgroundColor:"#F7F7F7"
         },
         series: [{
-            name: 'ÒµÎñÁ¿',
+            name: 'ä¸šåŠ¡é‡',
             type: 'bar',
             label: {
                 normal: {
@@ -136,7 +136,7 @@
                 return item[1];
             })
         },{
-            name: '¸æ¾¯',
+            name: 'å‘Šè­¦',
             type: 'bar',
             label: {
                 normal: {
@@ -154,7 +154,7 @@
 
 	 
 	 
-¶ş¡¢eachartsÍ¼µÄµ¥»÷ºÍË«»÷ÊÂ¼ş
+äºŒã€eachartså›¾çš„å•å‡»å’ŒåŒå‡»äº‹ä»¶
 	var timeFn = null;
 	myChart.on('click', function (params) {
 		//console.log(params);
@@ -169,11 +169,11 @@
 		getBar.addDetailWin(params.name);
 	});
 
-Èı¡¢¶¯Ì¬´´½¨eachartsÍ¼±í
+ä¸‰ã€åŠ¨æ€åˆ›å»ºeachartså›¾è¡¨
 	var option = {
 	    tooltip: {
 	        trigger: 'axis',
-	        formatter: "Ê±¼ä:{b}<br/>ÏÂÔØÁ÷Á¿:{c0}GB<br/>ÉÏ´«Á÷Á¿:{c1}GB"
+	        formatter: "æ—¶é—´:{b}<br/>ä¸‹è½½æµé‡:{c0}GB<br/>ä¸Šä¼ æµé‡:{c1}GB"
 	    },
 	    grid : {
 		    width:'85%',
@@ -193,7 +193,7 @@
 	                for(var len=0;len<12;len++) {
 	                    now = new Date();
 	                    now.setHours(now.getHours()-len);
-	                    res.unshift(now.format('MM-dd hh')+'µã');
+	                    res.unshift(now.format('MM-dd hh')+'ç‚¹');
 	                }
 	                return res;
 	            })()
@@ -214,7 +214,7 @@
 	    ],
 	    series: [
 	        {
-	            name:'ÏÂÔØÁ÷Á¿',
+	            name:'ä¸‹è½½æµé‡',
 	            type:'line',
 	            smooth:true,
                 itemStyle: {normal: {areaStyle: {type: 'default'}}},
@@ -229,7 +229,7 @@
 	            })()
 	        },
 	        {
-	            name:'ÉÏ´«Á÷Á¿',
+	            name:'ä¸Šä¼ æµé‡',
 	            type:'line',
 	            smooth:true,
                 itemStyle: {normal: {areaStyle: {type: 'default'}}},
@@ -246,10 +246,10 @@
 	    ]
 	};
 function getBar3(){
-    var businissFlowChart = echarts.init(document.getElementById('businissFlowPanel'));         //¶ÔÓ¦µÄ¿Ø¼şID
+    var businissFlowChart = echarts.init(document.getElementById('businissFlowPanel'));         //å¯¹åº”çš„æ§ä»¶ID
     var height=$('#ErlCenterPanel').height()*0.7;
 
-    businissFlowChart.setOption(option);                                               //Ìí¼Ó¶ÔÓ¦µÄÊı¾İ option
+    businissFlowChart.setOption(option);                                               //æ·»åŠ å¯¹åº”çš„æ•°æ® option
 }
 
 

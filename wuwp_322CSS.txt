@@ -315,7 +315,13 @@ inherit		-> 	规定应该从父元素继承 position 属性的值
 }
 
 // css 控制 一行显示所有文字，多出的文字 自动加 ...
-.li { overflow:hidden;text-overflow:ellipsis; -o-text-overflow:ellipsis;white-space:nowrap;width:100%;}  
+.li { 
+	overflow:hidden;
+	text-overflow:ellipsis; 
+	-o-text-overflow:ellipsis;
+	white-space:nowrap;
+	width:100%;
+}  
 
 
 //css 控制行显示文字  自动 ...

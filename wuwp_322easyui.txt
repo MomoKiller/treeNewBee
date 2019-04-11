@@ -1692,8 +1692,15 @@ FALLBACK: /
 3、$('#selector').css('display') == 'none'
 
 
-
-
+// JQ each方法；
+1、
+$.each(obj, function(index, value){
+	// 循环
+});
+2、
+obj.each(index, value){
+	// 循环
+}
 
 
 

@@ -1701,8 +1701,10 @@ $.each(obj, function(index, value){
 obj.each(index, value){
 	// 循环
 }
+obj 必须是 $(select) 对象
 
-
+// p a 标签换行
+world-brek: break-all; // 或者其它参数
 
 
 

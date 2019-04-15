@@ -439,17 +439,17 @@ div{
 // 关于钱的符号
 ￥￥￥￥￥￥￥￥￥
 
-// 控制placeholder样式兼容写法
-.header .search_box .search_input::-webkit-input-placeholder {
+// 设置placeholder样式兼容写法
+.search_input::-webkit-input-placeholder {
     color: #bbbbbb;
 }
-.header .search_box .search_input:-moz-placeholder {
+.search_input:-moz-placeholder {
     color: #bbbbbb;
 }
-.header .search_box .search_input::-moz-placeholder {
+.search_input::-moz-placeholder {
     color: #bbbbbb;
 }
-.header .search_box .search_input:-ms-input-placeholder { 
+.search_input:-ms-input-placeholder { 
     color: #bbbbbb;
 }
 

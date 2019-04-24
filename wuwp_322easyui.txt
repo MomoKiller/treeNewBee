@@ -1708,6 +1708,10 @@ world-brek: break-all; // 或者其它参数
 
 
 
+// 关于js的继承
+https://blog.csdn.net/longyin0528/article/details/80504270
+
+
 
 
 

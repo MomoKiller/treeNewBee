@@ -1702,9 +1702,13 @@ obj.each(index, value){
 	// 循环
 }
 obj 必须是 $(select) 对象
+3、
+obj.forEach(function(){
+	// 循环
+})
 
 // p a 标签换行
-world-brek: break-all; // 或者其它参数
+world-break: break-all; // 或者其它参数
 
 
 

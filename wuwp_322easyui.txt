@@ -1698,9 +1698,9 @@ $.each(obj, function(index, value){
 	// 循环
 });
 2、
-obj.each(index, value){
+obj.each(function(index, value){
 	// 循环
-}
+});
 obj 必须是 $(select) 对象
 
 // p a 标签换行

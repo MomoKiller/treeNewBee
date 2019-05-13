@@ -711,6 +711,17 @@ function unique(arr) {
     }
     return result;
 }
+2、利用 Object.keys() 方法枚举 && 对象不能有相同的属性方法 
+function fn(arr){
+	var tempKey = {};
+	for(var i=0; i<arr.length; i++){
+		tempKey[arr[i]] = 0;
+	}
+	return Object.keys(tempKey)；
+}
+
+
+
 
 三六、识别当前浏览器    用户不同浏览器的兼容性调整
 function myBrowser(){
@@ -1671,17 +1682,30 @@ FALLBACK: /
 
 
 // 关于js的继承
-https://blog.csdn.net/longyin0528/article/details/80504270
+https://juejin.im/post/5ccff45a51882541b07a9e3d
 
+//构造函数继承
+function fn(){
+	this.name = "hello ";
+}
 
+function gz(){
+	fn.call(this);
+}
 
+var test1 = new gz();
+test1.name += "world";
+console.log(test1.name);
 
+// 原型链继承
+function yxl(){
+	
+}
+yxl.prototype = new fn();
 
-
-
-
-
-
+var test2 = new yxl();
+test2.name += "world";
+console.log(test2.name);
 
 
 

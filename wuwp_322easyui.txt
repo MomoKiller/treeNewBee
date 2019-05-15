@@ -712,14 +712,13 @@ function unique(arr) {
     return result;
 }
 2、利用 Object.keys() 方法枚举 && 对象不能有相同的属性方法 
-function fn(arr){
+function unique(arr){
 	var tempKey = {};
 	for(var i=0; i<arr.length; i++){
 		tempKey[arr[i]] = 0;
 	}
 	return Object.keys(tempKey)；
 }
-
 
 
 

@@ -18,8 +18,6 @@ function GetRequest() {
 		   }
 	return theRequest;		
 }	
-方法二： 在<%%>的方法中添加获取url对应 参数的java代码
-String productNo=request.getParameter("id").toString();
 
 二、easyui加载数据表格的方式
 	1、对应页面的div控件：
@@ -222,7 +220,15 @@ s += " 你的屏幕设置 "+ window.screen.deviceXDPI +" 像素/英寸";
 	});
 	3、
 	$("#tableID").click(function(){
-		//对应的事件
+		//事件
+	});
+	4、
+	$("#tableID").live(function(){
+		//事件
+	});
+	5、
+	$("#tableID").bind('click', function(){
+		//事件
 	});
 
 十一、	页面跳转的方法
@@ -252,11 +258,12 @@ s += " 你的屏幕设置 "+ window.screen.deviceXDPI +" 像素/英寸";
 		<li><cite></cite><a href="jsp/baseStationMaintain.jsp" target="rightFrameMenu">基站信息维护</a><i></i></li>
 		<li><cite></cite><a href="jsp/switchMsgMaintain.jsp" target="rightFrameMenu">交换中心信息维护</a><i></i></li>
 	</ul>
+	6、window.open(url, '_blank');
 
 十二、表格设置合并边框模型(页面)：   
  table
   {
-  border-collapse:collapse;
+	border-collapse:collapse;
   }
 
 十三、  鼠标监听事件
@@ -303,148 +310,134 @@ case: http://ju.outofmemory.cn/entry/100681
 网站：(注*  关于ajax中的data参数数据类型转换的一片博客)   http://www.cnblogs.com/sunxi/p/3849361.html
 
 	//1、调用ajax的	get 请求
-		$.ajax({
-        cache: false,
-        type: "get",
-        url:path+'/rs/report/home/dutyinfo/get',
-        async: false,
-        error: function(request) {
-        	bootbox.alert("未找到值班人信息！");
-        },
-        success: function(data) {
-			$("#userName").val(data.user_name);
-        	$("#phone").val(data.phone);
-        }
+	$.ajax({
+	cache: false,
+	type: "get",
+	url: path+'/rs/report/home/dutyinfo/get',
+	async: false,
+	error: function(request) {
+	},
+	success: function(data) {
+	}
      });
 	//2、调用ajax的 post 请求 
-		var params = {};
-		params.user_name = $("#userName").val();
-		params.phone = $("#phone").val();
-		$.ajax({
-	        cache: false,
-	        type: "post",
-	        url:path+'/rs/report/home/dutyinfo/edit',
-            contentType: "application/json; charset=utf-8",
-	        async: false,
-	        data:JSON.stringify(params),
-	        error: function(request) {
-	        	bootbox.alert("修改失败！");
-	        },
-	        success: function(data) {
-				bootbox.alert("修改成功！");
-	        }
-	     });	
+	var params = {};
+	params.user_name = $("#userName").val();
+	params.phone = $("#phone").val();
+	$.ajax({
+		cache: false,
+		type: "post",
+		url:path+'/rs/report/home/dutyinfo/edit',
+		contentType: "application/json; charset=utf-8",
+		async: false,
+		data:JSON.stringify(params),
+		error: function(request) {
+			bootbox.alert("修改失败！");
+		},
+		success: function(data) {
+			bootbox.alert("修改成功！");
+		}
+	 });	
 
 	//3、调用ajax直接处理form表单的数据
-		$.ajax({
-	            cache: true,
-	            type: "POST",
-	            url:url,
-	            data:$("#formId").serialize(),// 你的formid
-	            async: false,
-	            error: function(request) {
-	             console.log("失败");
-	            },
-	            success: function(data) {
-	            	$('#'+modelId).modal('toggle');
-	            	$("#"+tableId).DataTable().draw();
-	            	//清空数据
-	            	
-	            }
-	         });
+	$.ajax({
+		cache: true,
+		type: "POST",
+		url:url,
+		data:$("#formId").serialize(),// 你的formid
+		async: false,
+		error: function(request) {
+		 console.log("失败");
+		},
+		success: function(data) {
+			$('#'+modelId).modal('toggle');
+			$("#"+tableId).DataTable().draw();
+			//清空数据
+			
+		}
+	 });
 	//4、调用ajax 用函数方法回去data数据
-		$("#deviceTable").dataTable({
-    	            serverSide: true,//分页，取数据等等的都放到服务端去
-    	            processing: false,//载入数据的时候是否显示“载入中”
-    	            pageLength: 10,//首次加载的数据条数
-    	            searching: false,//搜索
-    	            ordering: false,//排序操作在服务端进行，所以可以关了
-    	            ajax: {//类似jquery的ajax参数，基本都可以用。
-    	                type: "get",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
-    	                url: url,
-    	                dataSrc: "rows",//默认data，也可以写其他的，格式化table的时候取里面的数据
-    	                data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
-    	                var param = getSearchParam();
-    	                console.log(param);
-    	                    param.start = d.start;//开始的序号
-    	                    param.length = d.length;//要取的数据的
-    	                    return param;//自定义需要传递的参数。
-    	                }
-    	            }
-    	          ,
-    	            columns: [//对应上面thead里面的序列    
-    	                      { data: "sys_name"},
-                              
-                              { data: "ip_addr"},
-                              { data: "device_type","render": function(data, type, full) { 
-                                	if(data=='HOST') return "主机";
-                                  	if(data=='SWTICH') return "交换机";
-                                  	if(data=='ROUTER') return "路由器";
-                                  	else return "暂无";
-                                   }
-                                  },
-                              { data: "city"},
-                              { data: "vendor"},
-                              { data: "last_timestamp","render": function(data, type, full) { 
-                              	return data.substring(0,19);
-                              }
-                              	
-                              },
-                              { data: "device_id","render": function(data, type, full) { 
-                            	var    info='<a href="javascript:openPerconfig(\''+data+'\')"     class="btn btn-info  btn-xs"  title="性能指标配置"> <span class="glyphicon  glyphicon-book" ></span></a>';
-                              	return info;
-                              }}
-    	            ],
-    	            initComplete: function (setting, json) {
-    	              
-    	            },
-    	            language: {
-    	                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
-    	               // lengthMenu:false,
-    	                processing: "载入中",//处理页面数据的时候的显示
-    	                paginate: {//分页的样式文本内容。
-    	                    previous: "上一页",
-    	                    next: "下一页",
-    	                    first: "第一页",
-    	                    last: "最后一页"
-    	                },
-    	                zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
-    	                //下面三者构成了总体的左下角的内容。
-    	                info: '总共_PAGES_ 页，显示第_START_ 到第 _END_ ，共_TOTAL_ 条 ',//左下角的信息显示，大写的词为关键字。
-    	                infoEmpty: "共0条记录",//筛选为空时左下角的显示。
-    	                infoFiltered: ""//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
-    	            },
-    	            lengthChange:true,
-    	            paging: true
-    	        });
+	$("#deviceTable").dataTable({
+		serverSide: true,//分页，取数据等等的都放到服务端去
+		processing: false,//载入数据的时候是否显示“载入中”
+		pageLength: 10,//首次加载的数据条数
+		searching: false,//搜索
+		ordering: false,//排序操作在服务端进行，所以可以关了
+		ajax: {//类似jquery的ajax参数，基本都可以用。
+			type: "get",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
+			url: url,
+			dataSrc: "rows",//默认data，也可以写其他的，格式化table的时候取里面的数据
+			data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
+			var param = getSearchParam();
+			console.log(param);
+				param.start = d.start;//开始的序号
+				param.length = d.length;//要取的数据的
+				return param;//自定义需要传递的参数。
+			}
+		}
+	  ,
+		columns: [//对应上面thead里面的序列    
+			{ data: "sys_name"},
+			{ data: "ip_addr"},
+			{ data: "device_type","render": function(data, type, full) { 
+				if(data=='HOST') return "主机";
+				if(data=='SWTICH') return "交换机";
+				if(data=='ROUTER') return "路由器";
+				else return "暂无";
+			   }
+			  },
+			{ data: "city"},
+			{ data: "vendor"},
+			{ data: "last_timestamp","render": function(data, type, full) { 
+				return data.substring(0,19);
+			}
+
+			},
+			{ data: "device_id","render": function(data, type, full) { 
+				var info='<a href="javascript:openPerconfig(\''+data+'\')"     class="btn btn-info  btn-xs"  title="性能指标配置"> <span class="glyphicon  glyphicon-book" ></span></a>';
+				return info;
+			}}
+		],
+		initComplete: function (setting, json) {
+		  
+		},
+		language: {
+			lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
+		   // lengthMenu:false,
+			processing: "载入中",//处理页面数据的时候的显示
+			paginate: {//分页的样式文本内容。
+				previous: "上一页",
+				next: "下一页",
+				first: "第一页",
+				last: "最后一页"
+			},
+			zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
+			//下面三者构成了总体的左下角的内容。
+			info: '总共_PAGES_ 页，显示第_START_ 到第 _END_ ，共_TOTAL_ 条 ',//左下角的信息显示，大写的词为关键字。
+			infoEmpty: "共0条记录",//筛选为空时左下角的显示。
+			infoFiltered: ""//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
+		},
+		lengthChange:true,
+		paging: true
+	});
 				
 十八、设置cookie 与 获取cookie 的方法 一般是登录操作是将用户名密码信息放在cookie中
-1、设置cookie
-//添加cookie (String name,String value,int day)  
-function addCookie(name,value,day) 
-{ 
-var exp = new Date(); 
-exp.setTime(exp.getTime() + day*24*60*60*1000); 
-document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
-} 
-//addCookie("userName",$("#userName").val(),7);
-
-2、获取cookie
-//获取cookie (String name)
+1、获取cookie
 function getCookie(name) 
 { 
-var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
-if(arr=document.cookie.match(reg)) return unescape(arr[2]); 
-else return null; 
+	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+	if(arr=document.cookie.match(reg)) return unescape(arr[2]); 
+	else return null; 
 } 
-//alert(getCookie("userName"));
+
 function setCookie(name,value)
 {
-  var Days = 30;
-  var exp = new Date();
-  exp.setTime(exp.getTime() + Days*24*60*60*1000);
-  document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+	var Days = 30;
+	var exp = new Date();
+	exp.setTime(exp.getTime() + Days*24*60*60*1000);
+	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
 }
+
 function getCookie(c_name)
 {
   if (document.cookie.length>0)
@@ -460,29 +453,7 @@ function getCookie(c_name)
   }
   return ""
 }
-setCookie("h5Location","www.baidu.com");
-console.log(getCookie('h5Location'));
 
-function getQueryString(name) {//获取浏览器参数
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return null;
-}
-function setCookie(name, value) {
-    var Days = 30;
-    var exp = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-}
-function getCookie(name) {
-    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-
-    if (arr = document.cookie.match(reg))
-
-        return unescape(arr[2]);
-    else
-        return null;
-}
 function delCookie(name) {
     var exp = new Date();
     exp.setTime(exp.getTime() - 1);
@@ -490,6 +461,14 @@ function delCookie(name) {
     if (cval != null)
         document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
+
+//获取浏览器参数
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+
 
 
 十九、indexOf()函数 返回在 String 对象中第一次出现子字符串的字符位置。当未找到返回值时则返回 -1
@@ -508,6 +487,7 @@ $("#isCheck").prop("checked");  	//返回值是boolean类型
 
 二一、图片滚动的案例
 case1:
+
 html>
 <body>
 <style>
@@ -541,6 +521,7 @@ window.setTimeout( "run()", 2000 );
 </script>
 </body>
 </html>
+
 //推荐使用case2的方式加载
 case2:
 <div id="demo" style="overflow: hidden;height: 200px;width:100%;">
@@ -573,22 +554,20 @@ case2:
 		}).find("li:first").appendTo($self); 
 		}) 
 		} 
-		}) 
+	}) 
 		
 二二、网页自适应宽度设计
 website：http://www.ruanyifeng.com/blog/2012/05/responsive_web_design.html
 
 选择加载css
 //代码意思是，如果屏幕宽度小于400像素（max-device-width: 400px），就加载tinyScreen.css文件。
-<link rel="stylesheet" type="text/css"
-　　　　media="screen and (max-device-width: 400px)"
-　　　　href="tinyScreen.css" />	
+<link rel="stylesheet" type="text/css" media="screen and (max-device-width: 400px)" href="tinyScreen.css" />	
+
 //如果屏幕宽度在400像素到600像素之间，则加载smallScreen.css文件。	
-<link rel="stylesheet" type="text/css"
-　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
-　　　　href="smallScreen.css" />
+<link rel="stylesheet" type="text/css" media="screen and (min-width: 400px) and (max-device-width: 600px)" href="smallScreen.css" />
 //除了用html标签加载CSS文件，还可以在现有CSS文件中加载。
 @import url("tinyScreen.css") screen and (max-device-width: 400px);
+
 
 二三、浏览器最大化、最小化、或者改变大小是触发该事件，并且刷新页面
 参考网站：http://www.jb51.net/article/14397.htm
@@ -680,17 +659,8 @@ window.onresize = function(e){
 
 
 二八、查看当前jquery版本信息
-<script type="text/javascript">
-jQuery(function(){ 
-    alert(jQuery.fn.jquery);        
-})
-</script>
+jQuery.fn.jquery
 
-二九、超链
-不同标签超链的方式不同
-case1：<a href="http://www.baidu.com"></a>
-	   <a onclick="clickEvent();"></a>
-case2: <iframe src="http://www.baidu.com"></iframe>
 
 三十、父节点
 parent.$("#ID").Event();
@@ -704,34 +674,33 @@ $("iframe").attr("src","webAdd");
 $.messager.alert('提示','提示内容！');
 $.messager.confirm('提示','是否...',function(flag){
 	if(flag){
-	//选着OK 对应的事件
+		// 事件
 	}else{
-	//选择cancle 对应的事件
+		// 事件
 	}
 });
 
 三三、页面样式  使用伪类 是控件 背景改变透明度  产生阴影
-		img{
-    	opacity:1.0;
+	img{
+		opacity:1.0;
 		filter:alpha(opacity=100); /* For IE8 and earlier */
-    	}
-    	img:hover {
-    	opacity:0.8;				
+	}
+	img:hover {
+		opacity:0.8;				
 		filter:alpha(opacity=80); /* For IE8 and earlier */
 		box-shadow: 2px 2px 1px #888888;	/*背景阴影*/
-    	}
+	}
 
 三四、form表单的清空
-case1：
-	$('#formId').form('clear');
-case2:	
-	$('#formId')[0].reset();
-case3:	
-	/*逐一地对form中控件的内容 赋值为空*/
-	$('#formId inputId').val("");
+	case1：
+		$('#formId').form('clear');
+	case2:	
+		$('#formId')[0].reset();
+	case3:	
+		/*逐一地对form中控件的内容 赋值为空*/
+		$('#formId inputId').val("");
 
 三五、 JS数组去重
-参数 arr 为数组变量
 function unique(arr) {
     var result = [], hash = {};
     for (var i = 0, elem; (elem = arr[i]) != null; i++) {
@@ -742,6 +711,17 @@ function unique(arr) {
     }
     return result;
 }
+2、利用 Object.keys() 方法枚举 && 对象不能有相同的属性方法 
+function fn(arr){
+	var tempKey = {};
+	for(var i=0; i<arr.length; i++){
+		tempKey[arr[i]] = 0;
+	}
+	return Object.keys(tempKey)；
+}
+
+
+
 
 三六、识别当前浏览器    用户不同浏览器的兼容性调整
 function myBrowser(){
@@ -779,18 +759,18 @@ case2：然而在选择table中的第二，乃至第三列...时不能以此类�
 		width: 10%;
 	}
 case3: table 单行双行的样式(定义一个简单的table样式)选择表格的奇数行偶数行
-table, th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
-}
-table tr:nth-child(odd)	{
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}	
-	
+	table, th , td  {
+		border: 1px solid grey;
+		border-collapse: collapse;
+		padding: 5px;
+	}
+	table tr:nth-child(odd)	{
+		background-color: #f1f1f1;
+	}
+	table tr:nth-child(even) {
+		background-color: #ffffff;
+	}	
+		
 	
 	
 三八、	grid获取选中行
@@ -802,9 +782,9 @@ var row = $('#tableId').datagrid('getRows');
 三九、grid默认选中第一条
 $('#tableId').datagrid('selectRow',0);
 
-四十、变小手属性(妈的，这个老子竟然没记)
-cursor:pointer;																						//变小手属性
-cursor:hand;																						//同是变小手属性，但是只有IE上能显示，其它浏览器不兼容
+四十、变小手属性
+cursor:pointer;				//变小手属性
+cursor:hand;				//但是只有IE上能显示
 
 四一、panel、table的圆角属性
 .panel{
@@ -839,29 +819,29 @@ $("#windowId").window("close");
 
 
 四三、关于grid 的列展示 当列中含有多个子项的情况
-		columns: [[
-			{title : 'ID',field : 'id',hidden : true},
-			{title : '密码',field : 'userPwd',hidden : true},
-			{title : '帐号名称',field : 'userName',width : 200},
-			{title : '集团客户编号',field : 'relats.customerCode',width : 200,
-				formatter:function(val,row,index){
-					var codeMap = [];
-					$.each(row.relats,function(val,value){
-						codeMap.push(value.customerCode);	
-					});
-					return codeMap;
-				}
-			},
-			{title : '集团客户名称',field : 'relats.customerCode',width : 200,
-				formatter:function(val,rec){
-					return relats[0].customerCode;
-				}
-			},
-			{title : '创建人',field : 'createUser',width : 200},
-			{title : '创建时间',field : 'createTime',width : 200},
-			{title : '所属角色',field : 'roleName',width : 200},
-			{title : '删除标识',field : 'stateflag',width : 200}
-	    ]]
+	columns: [[
+		{title : 'ID',field : 'id',hidden : true},
+		{title : '密码',field : 'userPwd',hidden : true},
+		{title : '帐号名称',field : 'userName',width : 200},
+		{title : '集团客户编号',field : 'relats.customerCode',width : 200,
+			formatter:function(val,row,index){
+				var codeMap = [];
+				$.each(row.relats,function(val,value){
+					codeMap.push(value.customerCode);	
+				});
+				return codeMap;
+			}
+		},
+		{title : '集团客户名称',field : 'relats.customerCode',width : 200,
+			formatter:function(val,rec){
+				return relats[0].customerCode;
+			}
+		},
+		{title : '创建人',field : 'createUser',width : 200},
+		{title : '创建时间',field : 'createTime',width : 200},
+		{title : '所属角色',field : 'roleName',width : 200},
+		{title : '删除标识',field : 'stateflag',width : 200}
+	]]
 
 
 
@@ -880,21 +860,6 @@ $("#windowId").window("close");
 		
 	});
 	return testArray;
-
-
-四五、关于 JS 的或运算符 || 
-
-function getEven(e){
-	return e || window.event;
-}
-
-||这个的意思是或   
-也就是说浏览器对于事件e是不一样的。
-当没有e的时候自动返回window.event
-也就是说会取其中一个。
-第一个有就用第一个不管第二个有没有，
-第一个没有就用第二个，
-两个都没有就undefined咯
 
 
 四六、关于linkbutton 和 button  设置 diasable 属性的方法问题
@@ -916,60 +881,63 @@ case： http://www.cnblogs.com/haogj/archive/2013/05/13/3074461.html
 
 四七、easyui  DateGrid(多选) 获取所选项 、 清楚所选项
 case:获取所选项
-$("#datagridId").datagrid("getSelections");
-case：清楚所选项
-$("#datagridId").datagrid("clearSelections");
+	$("#datagridId").datagrid("getSelections");
+case：清除所选项
+	$("#datagridId").datagrid("clearSelections");
 case:对多选数据的处理
-var rows = $("#datagridId").datagrid("getSelections");
+	var rows = $("#datagridId").datagrid("getSelections");
 
 
 
 四八、关于函数join()和split()
 var array = [a,b,c,d,e,f,g];
-var result = array.join(',');
-result 的结果为： "a,b,c,d,e,f,g"
 
-var after = result.split(',');
-after 的结果为：[a,b,c,d,e,f,g]
+JOIN：obj->string;
+	var result = array.join(',');
+	result 的结果为： "a,b,c,d,e,f,g"
+SPLIT: string->obj;
+	var after = result.split(',');
+	after 的结果为：[a,b,c,d,e,f,g]
 
 四九、radio 获取值与赋值
-//获取选中值
-params.isCenter = $(":radio[name='isCenter'][checked]").val();
-//赋值
-$(":radio[name='isCenter'][value='" + value + "']").prop("checked", "checked");
+	//获取选中值
+	params.isCenter = $(":radio[name='isCenter'][checked]").val();
+	$(":radio[name='isCenter'][value='" + value + "']").prop("checked");
+	//赋值
+	$(":radio[name='isCenter'][value='" + value + "']").prop("checked", "checked");
 
 
 
 五零、根据返回的Json 数组重构菜单
-var menuMap = {
-	//一级菜单
-	"generalSitu":"概况",
-	"userManage":"客户资料",
-	"alarmMonitor":"故障监控",
-	"topo":"拓扑概览",
-	"performance":"性能分析",
-	"selfService":"自助服务",
-	"systemManage":"系统管理",
-	//二级菜单
-	"individual":"业务信息",
-	"machineRoom":"机房信息",
-	"realTime_monitor":"实时性能",
-	"showMenu":"性能分析",
-	"mfun_sheet_query":"故障工单查询",
-	"complaint_sheet_query":"投诉工单查询",
-	"open_sheet_query":"开通工单查询",
-	"complainSystem":"监控投诉详情",
-	"customComplain":"客户投诉详情",
-	"customerAccountManage":"客户帐号管理",
-	"managerAccountManage":"客户经理帐号管理",
-	"managerViewManage":"客户经理视图配置",
-	//三级菜单
-	"internetTransaction":"互联网专线业务分析",
-	"transmissionTransaction":"传输专线业务分析",
-	"phoneticsoundTransaction":"语音专线业务分析",
-	"gprsPriLineTransaction":"GPRS专线业务分析",
-	"shortmessageTransaction":"短信专线业务分析"	
-};	
+	var menuMap = {
+		//一级菜单
+		"generalSitu":"概况",
+		"userManage":"客户资料",
+		"alarmMonitor":"故障监控",
+		"topo":"拓扑概览",
+		"performance":"性能分析",
+		"selfService":"自助服务",
+		"systemManage":"系统管理",
+		//二级菜单
+		"individual":"业务信息",
+		"machineRoom":"机房信息",
+		"realTime_monitor":"实时性能",
+		"showMenu":"性能分析",
+		"mfun_sheet_query":"故障工单查询",
+		"complaint_sheet_query":"投诉工单查询",
+		"open_sheet_query":"开通工单查询",
+		"complainSystem":"监控投诉详情",
+		"customComplain":"客户投诉详情",
+		"customerAccountManage":"客户帐号管理",
+		"managerAccountManage":"客户经理帐号管理",
+		"managerViewManage":"客户经理视图配置",
+		//三级菜单
+		"internetTransaction":"互联网专线业务分析",
+		"transmissionTransaction":"传输专线业务分析",
+		"phoneticsoundTransaction":"语音专线业务分析",
+		"gprsPriLineTransaction":"GPRS专线业务分析",
+		"shortmessageTransaction":"短信专线业务分析"	
+	};	
 
 //配置首页菜单
 function MenuShow(){
@@ -1032,8 +1000,9 @@ function MenuShow(){
 }		
 
 
-五一、字节流文件转化成图片ICON
+五一、 BASE64 图片格式的使用
 	<img id="logoString" src="images/homePage/unlog.png" alt="..."/>
+	
 	logoString 为接口返回字节码 ：
 	var logoString = "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAGu5JREFUeNqsenlwXPd93+ede9+LxX0DBEESJCiRJikeMk0lsh1JI9lSxqrstknqxuM6bdJ/mjozqcZxpzNNZ5yZuI2rxm3qzKSK3Ti6fOgKJdKiSBEUTxAEcRLXAthd7H28u5+3oI7Ybu1JhZk3AHb3vff7Xp/j91ZwHAdmLouf/nFECbZWh90w4UD80BuAUN+E4E1DiQfhmCKsegZKqA+11Qn4kmMwCosRCPaArTkPlufOPFycXXe83YdesPTSj2HU7qQOPVI0Shnkrp1DMLUX+bUbCPbuRWL0MDLnv4/kic9DVH3bN+OPICnQ8ndQW7/Gv9WfWWvrfZ+HjI/iRxDdG0uKN7C/mpk+aWwt/mp57drxmYuTnqIVwcjxcQjVt47KhvrvLETfzs9OnIPlnJdU3xVJ9qx9FEuQ///WL0FUPP1mpfZQdvKVT5YWL9+TnrzYtrwsYGo5iCuZ3Vg3etA5H8Ou/iSGEgV/qzd3qrX6yilV8uqCEL9ZXyxeFgTPT0RReYvXmhYE8efd6e7xUQbCVuS9ekRZfqi8fOUTlfTcxzYnL3ZvpkuYvhPBanUcVrANvl4FR4aqiEVUmHYVpY0clmqtuOkkYdTbkfQX1NGO9fHW4Oy435v4QvnmnezGjR/NBfyxVyRZ+brj2LbbWoIkw7EMHvr/M5hfHIjg9qkIQbg7H171yVL+8p9unnspkVtZwdqGg6sbw6gqQ+gf8uKBAQ0jOxRIxiwqSwvwhOMQg93I3boCSQwC/iSWNoI4Px3GMy/74VUsjPdk5AO7zbaeTm/b2uULR3zT5/9aDkanBcZi1crQ8xk0SlNI7joO29D+gYGIBvPgh+Ll8JsCpJj8Txa/91zi3Ku3cNU6hYXKLhw6HMQT+yYxkJyFJXrQ2ALqpQKqeQm++hakKm8T70GjrhE8auiJ";
 	$("#logoString").attr("src","data:image/jpg;base64,"+logoString);
@@ -1051,9 +1020,6 @@ var nowDate = new Date();
 nowDate.setDate(nowDate - 15);
 //提前一个月
 nowDate.setDate(nowDate - 30);
-//提前一年
-nowDate.setDate();
-
 
 五四、下拉控件 进行实时刷新功能		//周期性运行
 	<select class="easyui-combobox" id="state" name="state" style="width:auto;">
@@ -1245,11 +1211,11 @@ function clacImgZoomParam( maxWidth, maxHeight, width, height ){
 
 五七、选择器 中排除其中的一种情况  :not(input[type="checkbox"]){}
 $('table input:not(input[type="checkbox"]),table textarea').hover(
-function () {
-	$(this).attr("title",$(this)[0].value);
-},
-function () {  
-	//$(this).removeClass("focus");  
+	function () {
+		$(this).attr("title",$(this)[0].value);
+	},
+	function () {  
+		//$(this).removeClass("focus");  
 });  
 	
 五八、关于时间参数的转换
@@ -1274,9 +1240,9 @@ function () {
 六二、
 window.history.go(-1);  //返回上一页
 window.history.back();  //返回上一页
-//如果要强行刷新的话就是：window.history.back();location.reload();
- 
-window.location.go(-1); //刷新上一页
+//如果要强行刷新的话就是：
+window.history.back();
+location.reload();
 
 
 六三、
@@ -1334,25 +1300,25 @@ function getNewDay(date,days){
 }	
 
 六五、throw 声明
-var x=prompt("请输入 0 至 10 之间的数：","")
-try
-{ 
-if(x>10) 
-  throw "Err1" 
-else if(x<0)
-  throw "Err2"
-else if(isNaN(x))
-  throw "Err3"
-} 
-catch(er)
-{
-if(er=="Err1") 
-  alert("错误！该值太大！")
-if(er == "Err2") 
-  alert("错误！该值太小！") 
-if(er == "Err3") 
-  alert("错误！该值不是数字！") 
-}
+	var x=prompt("请输入 0 至 10 之间的数：","")
+	try
+	{ 
+		if(x>10) 
+		  throw "Err1" 
+		else if(x<0)
+		  throw "Err2"
+		else if(isNaN(x))
+		  throw "Err3"
+	} 
+	catch(er)
+	{
+		if(er=="Err1") 
+		  alert("错误！该值太大！")
+		if(er == "Err2") 
+		  alert("错误！该值太小！") 
+		if(er == "Err3") 
+		  alert("错误！该值不是数字！") 
+	}
 
 
 六六、onerror 事件--监听错误事件
@@ -1361,13 +1327,13 @@ var txt=""
 
 function handleErr(msg,url,l)
 {
-txt="本页中存在错误。\n\n"
-txt+="错误：" + msg + "\n"
-txt+="URL: " + url + "\n"
-txt+="行：" + l + "\n\n"
-txt+="点击“确定”继续。\n\n"
-alert(txt)
-return true
+	txt="本页中存在错误。\n\n"
+	txt+="错误：" + msg + "\n"
+	txt+="URL: " + url + "\n"
+	txt+="行：" + l + "\n\n"
+	txt+="点击“确定”继续。\n\n"
+	alert(txt)
+	return true
 }
 
 function message()
@@ -1457,10 +1423,10 @@ $.each(data, function (i) {
 if(document.body.style.overflow!="hidden"&&document.body.scroll!="no"&&
 document.body.scrollHeight>document.body.offsetHeight)
 {
-alert("有滚动条");
+	alert("有滚动条");
 }else
 {
-alert("无滚动条");
+	alert("无滚动条");
 }
 
 
@@ -1546,70 +1512,73 @@ formateDate: function(date){
 },
 
 
-// 对象三种方式：无序对象{a:1}，数组[1,2,3]，以及函数等。
+// 对象三种方式：
+	无序对象{a:1}，
+	数组[1,2,3]，
+	以及函数等。
 // 深拷贝（针对对象类型）的两种方案
 1、递归递归去复制所有层级属性。
-function deepClone(obj){
-    let objClone = Array.isArray(obj)?[]:{};
-    if(obj && typeof obj==="object"){
-        for(key in obj){
-            if(obj.hasOwnProperty(key)){
-                //判断ojb子元素是否为对象，如果是，递归复制
-                if(obj[key]&&typeof obj[key] ==="object"){
-                    objClone[key] = deepClone(obj[key]);
-                }else{
-                    //如果不是，简单复制
-                    objClone[key] = obj[key];
-                }
-            }
-        }
-    }
-    return objClone;
-}    
-let a=[1,2,3,4],
-    b=deepClone(a);
-a[0]=2;
-console.log(a,b);
+	function deepClone(obj){
+		let objClone = Array.isArray(obj)?[]:{};
+		if(obj && typeof obj==="object"){
+			for(key in obj){
+				if(obj.hasOwnProperty(key)){
+					//判断ojb子元素是否为对象，如果是，递归复制
+					if(obj[key]&&typeof obj[key] ==="object"){
+						objClone[key] = deepClone(obj[key]);
+					}else{
+						//如果不是，简单复制
+						objClone[key] = obj[key];
+					}
+				}
+			}
+		}
+		return objClone;
+	}    
+	let a=[1,2,3,4],
+		b=deepClone(a);
+	a[0]=2;
+	console.log(a,b);
 
 2、JSON对象的parse和stringify
-function deepClone(obj){
-    let _obj = JSON.stringify(obj),
-        objClone = JSON.parse(_obj);
-    return objClone
-}    
-let a=[0,1,[2,3],4],
-    b=deepClone(a);
-a[0]=1;
-a[2][0]=1;
-console.log(a,b);
+	function deepClone(obj){
+		let _obj = JSON.stringify(obj),
+			objClone = JSON.parse(_obj);
+		return objClone
+	}    
+	let a=[0,1,[2,3],4],
+		b=deepClone(a);
+	a[0]=1;
+	a[2][0]=1;
+	console.log(a,b);
 
 3、JQ的extend方法
-let a=[0,1,[2,3],4],
-    b=$.extend(true,[],a);
-a[0]=1;
-a[2][0]=1;
-console.log(a,b);
+	let a=[0,1,[2,3],4],
+		b=$.extend(true,[],a);
+	a[0]=1;
+	a[2][0]=1;
+	console.log(a,b);
 
 
 // H5 列表滚动刷新
-windowScreen: function(){
-	var page = 1; 
-	if(!isScreen){return}
-	$(window).scroll(function(){
-		if($(window).scrollTop() + $(window).height() >= $(document).height()){
-			isScreen = false;
-			page += 1;
-			if($htmltype == '5004'){//手机翻页
-				 // main.getPaylist(page);
-				 main.getPaylist((page-1)*20);
-			}else if($htmltype == '5002'){//生活缴费翻页
-				 main.getliFelist(page);
-			}else if($htmltype == '5005'){//手机流量翻页
-				main.getTrafficList(page);
-			}
-		}                
-	})
-},
+	windowScreen: function(){
+		var page = 1; 
+		if(!isScreen){return}
+		$(window).scroll(function(){
+			if($(window).scrollTop() + $(window).height() >= $(document).height()){
+				isScreen = false;
+				page += 1;
+				if($htmltype == '5004'){//手机翻页
+					 // main.getPaylist(page);
+					 main.getPaylist((page-1)*20);
+				}else if($htmltype == '5002'){//生活缴费翻页
+					 main.getliFelist(page);
+				}else if($htmltype == '5005'){//手机流量翻页
+					main.getTrafficList(page);
+				}
+			}                
+		})
+	},
 
 // H5 标准头部尾部
 <!DOCTYPE html>
@@ -1711,43 +1680,56 @@ FALLBACK: /
 
 
 // JQ 判断元素显示或隐藏
-1、$('#selector').is(':hidden');
-2、$('#selector').is(':visible');
-3、$('#selector').css('display') == 'none'
+	1、$('#selector').is(':hidden');
+	2、$('#selector').is(':visible');
+	3、$('#selector').css('display') == 'none'
 
 
 // JQ each方法；
 1、
-$.each(obj, function(index, value){
-	// 循环
-});
+	$.each(obj, function(index, value){
+		// 循环
+	});
 2、
-obj.each(function(index, value){
-	// 循环
-});
-obj 必须是 $(select) 对象
+	obj.each(function(index, value){
+		// 循环
+	});
+	obj 必须是 $(select) 对象
 3、
-obj.forEach(function(){
-	// 循环
-})
+	obj.forEach(function(){
+		// 循环
+	})
 
 // p a 标签换行
-world-break: break-all; // 或者其它参数
+	world-break: break-all; // 或者其它参数
 
 
 
 // 关于js的继承
-https://blog.csdn.net/longyin0528/article/details/80504270
+https://juejin.im/post/5ccff45a51882541b07a9e3d
 
+//构造函数继承
+function fn(){
+	this.name = "hello ";
+}
 
+function gz(){
+	fn.call(this);
+}
 
+var test1 = new gz();
+test1.name += "world";
+console.log(test1.name);
 
+// 原型链继承
+function yxl(){
+	
+}
+yxl.prototype = new fn();
 
-
-
-
-
-
+var test2 = new yxl();
+test2.name += "world";
+console.log(test2.name);
 
 
 

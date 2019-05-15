@@ -1521,6 +1521,30 @@ if(parseInt(serverTime) > 210000 || parseInt(serverTime) <60000){
 	$('.checkout-tip').css('display','none');
 }
 
+// 特殊时间格式化
+formateDate: function(date){
+	var arr=date.split("T");
+	var d=arr[0];  
+	var darr = d.split('-');
+	var t=arr[1];
+	var tarr = t.split('.000');
+	var marr = tarr[0].split(':');
+	
+	var y = parseInt(darr[0]);
+	var m = parseInt(darr[1]);
+	m = m < 10 ? ('0' + m) : m;
+	var d = parseInt(darr[2]);
+	d = d < 10 ? ('0' + d) : d;
+	var h = parseInt(marr[0]) + 8;
+	h = h < 10 ? ('0' + h) : h;
+	var minute = parseInt(marr[1]);
+	minute = minute < 10 ? ('0' + minute) : minute;
+	var secound = parseInt(marr[2]);
+	secound = secound < 10 ? ('0' + secound) : secound;
+
+	return y +'-'+ m +'-'+ d +' '+ h +':'+ minute +':'+ secound;
+},
+
 
 // 对象三种方式：无序对象{a:1}，数组[1,2,3]，以及函数等。
 // 深拷贝（针对对象类型）的两种方案

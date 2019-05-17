@@ -1730,6 +1730,12 @@ var test2 = new yxl();
 test2.name += "world";
 console.log(test2.name);
 
+// 判断是Array 和 Object  数组或JOSN对象
+Object.prototype.toString.call(value) === "[object Array]"		// 判断是否数组
+Object.prototype.toString.call(value) === "[object Object]"		// 判断是否JSON
+
+
+
 
 
 

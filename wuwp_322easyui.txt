@@ -1736,6 +1736,27 @@ Object.prototype.toString.call(value) === "[object Object]"		// 判断是否JSON
 
 
 
+//定义类-- class 封装	(等价于将方法放在prototype 上)
+class Point {
+    constructor (x, y) {
+        this.x =x;
+        this.y =y;
+      }
+
+        toString () {
+        return `( ${this.x}, ${this.y} )`;
+       }
+       toValue () {
+        return this.x+this.y;
+       }
+}
+var p = new Point(1,2);
+p.toString();
+//"(1,2)"
+p.toValue();
+//3
+
+
 
 
 

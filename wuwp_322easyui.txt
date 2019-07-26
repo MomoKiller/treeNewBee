@@ -1757,6 +1757,19 @@ p.toValue();
 //3
 
 
+// js加载顺序
+console.log('a');
+setTimeout(() => {
+    console.log('b');
+}, 0);
+console.log('c');
+Promise.resolve().then(() => {
+    console.log('d');
+})
+.then(() => {
+    console.log('e');
+});
 
+console.log('f');
 
 

@@ -65,4 +65,25 @@ export class arrayFun {
         }
         return arr;
     };
+	
+	// 深拷贝--递归
+	deepClone(arr){
+		let res = Array.isArray(obj) ? [] : {};
+        if (obj && typeof obj === "object") {
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if (obj[key] && typeof obj[key] === "object") {
+                        res[key] = com.deepClone(obj[key]);
+                    } else {
+                        res[key] = obj[key];
+                    }
+                }
+            }
+        }
+        return res;
+	}
+	// 深拷贝--简单粗暴法则
+	deepCloneJSON(arr){
+		return JSON.parse(JSON.stringify(arr));
+	}
 }

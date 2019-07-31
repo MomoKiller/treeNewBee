@@ -1772,4 +1772,33 @@ Promise.resolve().then(() => {
 
 console.log('f');
 
+// 下载文件 fileName:重命名; url:文件下载地址;
+let download => (filename,url){
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'blob';
+	xhr.onload = ()=> {
+		if (xhr.status === 200) {
+			let blob = xhr.response;
+			if (window.navigator.msSaveOrOpenBlob) {
+				navigator.msSaveBlob(blob, filename);
+			} else {
+				let link = document.createElement('a');
+				let body = document.querySelector('body');
+				link.href = window.URL.createObjectURL(blob);
+				link.download = filename;
+				link.style.display = 'none';
+				body.appendChild(link);
+				link.click();
+				body.removeChild(link);
+				window.URL.revokeObjectURL(link.href);
+			};
+		}
+	};
+	xhr.send();
+}
+
+
+
+
 

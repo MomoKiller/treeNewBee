@@ -147,13 +147,20 @@ body{
     margin-top: 100px;
     margin-left:auto;
     margin-right:auto;
-	}
+}
 
 
 //区块 垂直 水平 居中(子容器在父容器中水平垂直居中)
+参考：	https://www.w3cplus.com/css/centering-css-complete-guide.html
 1、父容器添加属性
 	.parent{
 		positon:relative;
+		
+		// 0.5 模糊问题
+		-webkit-transform-style: preserve-3d; 
+		-moz-transform-style: preserve-3d; 
+		transform-style: preserve-3d;
+
 	}
 2、子容器添加属性
 	.child{		
@@ -162,10 +169,15 @@ body{
 		position:absolute;				/*与父容器属性对应*/
     	left: 50%;						/*自己理解去吧.0_0.*/
     	top: 50%;
-    	margin-left:-chilrWidth/2;
-    	margin-top:-childHeight/2;
+    	transform: translate(-50%, -50%);
 	}
 
+// 未知高度居中
+.parent { 
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+}
 
 
 	

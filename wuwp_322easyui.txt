@@ -1236,12 +1236,29 @@ $('table input:not(input[type="checkbox"]),table textarea').hover(
 六一、匹配汉字的正则表达式	
 	var passwordReg	= /[\u4E00-\u9FA5\uF900-\uFA2D]/;
 	
+// 添加一些正则验证
+	public reg: any = {
+        phone: /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
+        email: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+        pwd: /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{8,32}$/,
+        ordernum: /(([1-9][\d]*)(\.[\d]{1,6})?)|(0\.[\d]{1,6})/,
+        sortnum: /^[1-9]\d*|0$/,
+        Rechargenum:/^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/,
+    }
+	
+	
 六二、
-window.history.go(-1);  //返回上一页
-window.history.back();  //返回上一页
-//如果要强行刷新的话就是：
-window.history.back();
-location.reload();
+	window.history.go(-1);  //返回上一页
+	window.history.back();  //返回上一页
+	//如果要强行刷新的话就是：
+	window.history.back();
+	location.reload();
+
+// 监听浏览器回退
+	location.onPopState(() => {
+		
+	});
+
 
 
 六三、
@@ -1797,6 +1814,21 @@ let download => (filename,url){
 	};
 	xhr.send();
 }
+
+// promise
+let ap = new Promise((resolve, reject)=>{
+	if(true){
+		resolve('成功参数');
+	}else{
+		reject('失败参数');
+	}
+});
+
+ap.then((suc)=>{	// 成功的回调
+	console.log(suc);
+},(err)=>{			// 失败的回调
+
+});
 
 
 

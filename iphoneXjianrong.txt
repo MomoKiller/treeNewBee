@@ -84,3 +84,19 @@ ps: 写在后面
 考虑其他兼容问题，
 多做了一个透明border 处理方法，
 仅仅是一种解决方式而已，其实都能实现。
+
+
+/**********这套兼容性方案不太好使----再寻找一套好使的方案************/
+
+html,body{ -webkit-text-size-adjust: none; }  // 当需要在中文版chrome浏览器中显示小于12px的字体时，而且此时页面放大效果会被阻止
+
+html,body{ -webkit-tap-highlight-color: rgba(0,0,0,0); }  // 去掉苹果手机点击瞬间出现的灰色背景
+
+input{ -webkit-appearance: none; } // 去除苹果手机默认的input样式（默认样式可丑了ಥ﹏ಥ）
+
+selector{ cursor: pointer } // 给IOS系统里cursor不为pointer的元素添加事件时会不同程度受影响，加上cursor: pointer可解决
+
+img{ pointer-events: none; } // 阻止图片在微信里被点击放大
+
+
+

@@ -18,6 +18,8 @@ so  html 加此属性，网页就可以全屏覆盖。
  *  iphoneX pulic  css
  *  2018-01-01
  */
+ 
+
 
 @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){ 
 
@@ -88,6 +90,7 @@ ps: 写在后面
 
 /**********这套兼容性方案不太好使----再寻找一套好使的方案************/
 
+
 html,body{ -webkit-text-size-adjust: none; }  // 当需要在中文版chrome浏览器中显示小于12px的字体时，而且此时页面放大效果会被阻止
 
 html,body{ -webkit-tap-highlight-color: rgba(0,0,0,0); }  // 去掉苹果手机点击瞬间出现的灰色背景
@@ -98,5 +101,8 @@ selector{ cursor: pointer } // 给IOS系统里cursor不为pointer的元素添加
 
 img{ pointer-events: none; } // 阻止图片在微信里被点击放大
 
+
+
+/*font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu,PingFangSC-Regular, sans-serif;*/
 
 

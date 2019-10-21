@@ -1835,4 +1835,99 @@ new Date().getTime();
 
 
 
+// 导出当前页
+reportExport(){
+	let rData = this.dataSource;
+	if(!rData || JSON.stringify(rData) == '[]'){
+		return;
+	}
+	let jsonData = [];  //要导出的json数据
+	let tempJson = {};
+	for(let i=0; i< rData.length; i++){
+		tempJson = {};
+		tempJson['externalTransId'] = rData[i].externalTransId != null ? rData[i].externalTransId : '';
+		tempJson['bankMerchantName'] = rData[i].bankMerchantName != null ? rData[i].bankMerchantName : '';
+		tempJson['userName'] = rData[i].userName != null ? rData[i].userName : '';
+		tempJson['toCardName'] = rData[i].toCardName != null ?  rData[i].toCardName : '';
+		tempJson['orderMoney'] = rData[i].orderMoney != null ? rData[i].orderMoney : '';
+		tempJson['orderCurrencyObj'] = rData[i].orderCurrencyObj.currencyName +
+			'(' + rData[i].orderCurrencyObj.currencyCode +')';
+		tempJson['transMoney'] = rData[i].transMoney != null ? rData[i].transMoney : '';
+		tempJson['submitCurrencyObj'] = rData[i].submitCurrencyObj.currencyName + 
+			'(' + rData[i].submitCurrencyObj.currencyCode +')';
+		tempJson['toCardNo'] = JSON.stringify(rData[i].toCardNo != null ? rData[i].toCardNo : '');
+		tempJson['ioType'] = this.StatusDisplay.AccountIoTypeDic[rData[i].ioType] != null ? 
+			this.StatusDisplay.AccountIoTypeDic[rData[i].ioType] : '';
+		tempJson['externalResult'] = this.StatusDisplay.getExternalResult[rData[i].externalResult];
+		tempJson['externalReturnMessage'] = rData[i].externalResult == 'Y' ? '成功' : 
+			(rData[i].externalResult == 'T' ? '超时关闭' : 
+			(rData[i].externalReturnMessage==null ? '订单进行中' : rData[i].externalReturnMessage));
+		tempJson['startTime'] = this.formateTime(rData[i].startTime);
+		tempJson['recvBankName'] = rData[i].recvBankName != null ? rData[i].recvBankName : '';
+		tempJson['recvTgfi'] = JSON.stringify(rData[i].recvTgfi != null ? rData[i].recvTgfi : '');
+		tempJson['orgCode'] = rData[i].organize.organize.orgName + 
+			'(' + rData[i].organize.organize.orgNum + ')';
+		tempJson['transType'] = this.StatusDisplay.getRunSearchType[rData[i].transType] != null ? 
+			this.StatusDisplay.getRunSearchType[rData[i].transType] : '';
+		tempJson['recordRemark'] = rData[i].recordRemark != null ? rData[i].recordRemark : '';
+		jsonData.push(tempJson);
+	}
+	
+	//列标题
+	let str = '<tr>'+
+		'<td>商户流水号</td>' +
+		'<td>商户名称</td>' +
+		'<td>用户名</td>' +
+		'<td>持卡人姓名</td>' +
+		'<td>输入金额</td>' +
+		'<td>输入币种</td>' +
+		'<td>支付金额</td>' +
+		'<td>支付币种</td>' +
+		'<td>银行卡卡号</td>' +
+		'<td>方向</td>' +
+		'<td>状态</td>' +
+		'<td>第三方返回信息</td>' +
+		'<td>日期</td>' +
+		'<td>支行名称</td>' +
+		'<td>支行行号</td>' +
+		'<td>渠道名称</td>' +
+		'<td>交易类型</td>' +
+		'<td>三方流水记录备注</td>' +
+	'</tr>';
+
+	//循环遍历，每行加入tr标签，每个单元格加td标签
+	for(let i = 0 ; i < jsonData.length ; i++ ){
+	str+='<tr>';
+	for(let item in jsonData[i]){
+		//增加\t为了不让表格显示科学计数法或者其他格式
+		str+=`<td>${ jsonData[i][item] + '\t'}</td>`;     
+	}
+	str+='</tr>';
+	}
+	//Worksheet名
+	let worksheet = 'Sheet1'
+	let uri = 'data:application/vnd.ms-excel;base64,';
+
+	//下载的表格模板数据
+	let template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" 
+	xmlns:x="urn:schemas-microsoft-com:office:excel" 
+	xmlns="http://www.w3.org/TR/REC-html40">
+	<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+	<x:Name>${worksheet}</x:Name>
+	<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+	</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+	</head><body><table>${str}</table></body></html>`;
+	//下载模板
+	// window.location.href = uri + this.base64(template);
+
+	let link = document.createElement("a");
+	link.href = uri + this.base64(template);
+	link.download =  "流水查询报表.xls";
+	document.body.appendChild(link);
+	link.click();
+	document.body.removeChild(link);
+}
+
+
+
 

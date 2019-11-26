@@ -1750,7 +1750,9 @@ console.log(test2.name);
 // 判断是Array 和 Object  数组或JOSN对象
 Object.prototype.toString.call(value) === "[object Array]"		// 判断是否数组
 Object.prototype.toString.call(value) === "[object Object]"		// 判断是否JSON
-
+// 延伸
+Object.prototype.toString.call(window) === "[object Window]"	// Window 对象
+Object.prototype.toString.call(Window) === "[object Function]"	// Window 为Function 对象
 
 
 //定义类-- class 封装	(等价于将方法放在prototype 上)
@@ -1928,7 +1930,33 @@ reportExport(){
 	document.body.removeChild(link);
 }
 
-// 
+
+
+// postMessage iframe与页面之间的通信
+1、父页面向子 iframe 传值
+	a：获取父页面dom,  postMessage 发送data 和 子 iframe 的地址;
+	var frame = document.getElementById('faIframe');
+	frame.contentWindow.postMessage(dataValue, 'data传递iframe的url');
+	
+	b: 子 iframe 监听获取父页面传递值;
+	window.addEventListener('message', function(e){
+		var data = e.data;
+		...
+	});
+	
+2、子 iframe 向父页面传值
+	a: 子 iframe 向父级传送 data 和 父页面地址
+	window.parent.postMessage(data, 'url...');
+	
+	b: 父页面监听获取数据
+	window.addEventListener('message', function(e){
+		var data = e.data;
+		...
+	});
+	
+	
+	
+
 
 
 

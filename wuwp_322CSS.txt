@@ -545,3 +545,7 @@ img {
 
 
 font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu
+
+
+//  ios 滑动 滚动处理添加下面的css样式
+-webkit-overflow-scrolling: touch;

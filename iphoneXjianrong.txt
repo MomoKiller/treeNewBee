@@ -95,7 +95,7 @@ html,body{ -webkit-text-size-adjust: none; }  // 当需要在中文版chrome浏
 
 html,body{ -webkit-tap-highlight-color: rgba(0,0,0,0); }  // 去掉苹果手机点击瞬间出现的灰色背景
 
-input{ -webkit-appearance: none; } // 去除苹果手机默认的input样式（默认样式可丑了ಥ﹏ಥ）
+input{ -webkit-appearance: none; } // 去除苹果手机默认的input样式
 
 selector{ cursor: pointer } // 给IOS系统里cursor不为pointer的元素添加事件时会不同程度受影响，加上cursor: pointer可解决
 

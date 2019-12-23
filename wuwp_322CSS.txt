@@ -549,3 +549,9 @@ font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHe
 
 //  ios 滑动 滚动处理添加下面的css样式
 -webkit-overflow-scrolling: touch;
+
+
+// 三种不刺眼的原色
+红：#ff0033;
+绿: #04b700;
+蓝: #488aff;

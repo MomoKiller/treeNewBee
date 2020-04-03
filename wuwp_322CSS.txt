@@ -256,6 +256,7 @@ p{
     -o-transition: width .5s;
     transition: width .5s;
 }
+
 //以下是利用JS 方法实现css3动画效果
 $('.className').css{
 	"width":'10px',
@@ -483,26 +484,26 @@ div{
 
 // 设置0.5px 的边框
 selector:before{
-   content: '';
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   border: 1px solid red;
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: 1px solid red;
 		
-   -webkit-transform-origin: 0 0;
-   -moz-transform-origin: 0 0;
-   -ms-transform-origin: 0 0;
-   -o-transform-origin: 0 0;
-   transform-origin: 0 0;
+	-webkit-transform-origin: 0 0;
+	-moz-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	-o-transform-origin: 0 0;
+	transform-origin: 0 0;
 		
-   -webkit-transform: scale(0.5, 0.5);
-   -ms-transform: scale(0.5, 0.5);
-   -o-transform: scale(0.5, 0.5);
-   transform: scale(0.5, 0.5);
+	-webkit-transform: scale(0.5, 0.5);
+	-ms-transform: scale(0.5, 0.5);
+	-o-transform: scale(0.5, 0.5);
+	transform: scale(0.5, 0.5);
 		
-   -webkit-box-sizing: border-box;
-   -moz-box-sizing: border-box;
-   box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 

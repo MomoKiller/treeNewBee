@@ -229,11 +229,6 @@ DOCTYPE标签是为了让浏览器按照w3c的统一格式对页面进行解析�
 
 
 
-
-
-
-
-
 十、bootstrap核心文件引用（一般在页面最后引用，保证页面先加载在加载对应的文件）
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="dist/css/bootstrap.min.css">

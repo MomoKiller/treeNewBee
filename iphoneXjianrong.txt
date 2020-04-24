@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 
-ps:我的实际项目里，只在手机qq 里面去访问页面时候 出现底部灰色安全区域块，可以说现在大部分公司页面都没有做兼容，包括百度，美团，京东...
+ps: 我的实际项目里，只在手机qq 里面去访问页面时候 出现底部灰色安全区域块，可以说现在大部分公司页面都没有做兼容，包括百度，美团，京东...
 
 so  html 加此属性，网页就可以全屏覆盖。
 

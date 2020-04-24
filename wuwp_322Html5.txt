@@ -18,7 +18,7 @@ http://echarts.baidu.com/demo.html#scatter-painter-choice
 
 /*html5  精选的13个网站*/
 http://www.pmcaff.com/article?id=2000000000008313
-/*额，游戏*/*/
+/*额，游戏 ^_^ */
 http://html5games.com/Game/Civilizations-Wars-Master-Edition/2001681a-0f53-4691-9318-04e419ac7c0c
 
 
@@ -31,7 +31,7 @@ http://www.pmcaff.com/article?id=2000000000008313
 
 
 
-防止H5BODY 滚动事件
+防止 H5 <body> 滚动事件
 // 禁止
 document.body.style.overflow = 'hidden';
 function _preventDefault(e) { e.preventDefault(); }

@@ -2054,4 +2054,7 @@ downloadIamge(imgsrc, name) {//下载图片地址和图片名
 	image.src = imgsrc;
 }
 		
-		
+	
+
+// 下拉选项，JS实现点击空白区域收回
+

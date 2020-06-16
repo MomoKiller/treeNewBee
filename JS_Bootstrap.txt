@@ -79,7 +79,7 @@ function getNowTime(){
 	
 四、form表单重置事件
 	function reset(){
-	$("#formID")[0].reset();	
+		$("#formID")[0].reset();	
 	}
 
 五、根据下拉选择的时间值来进行 刷新时间间隔调整
@@ -125,88 +125,86 @@ function getNowTime(){
 
 六、bootStrap 加载表格的方法
 function initTable(url){
- var table = $("#table").dataTable({
-          "createdRow": function ( row, data, index ) {
-           var id=$("td", row).eq(0).html();
-           var name=$("td", row).eq(1).html();
-           var info='';
-        	   info='<a href="jsp/res/tetra/BaseStationDetail.jsp?id='+id+'" class="btn btn-info  btn-xs" style="margin-left: 5px;" title="查看详细"> <span class="glyphicon  glyphicon-book" ></span></a>';
-            //$('td', row).eq(7).html(''+info); @wuwp 隐藏工程状态列
-        	   $('td', row).eq(6).html(''+info);
-            $('td', row).eq(0).html('<input type="checkbox" class="checkbox" name="checkbox" value="'+id+'"/>');      
-          },
-            serverSide: true,//分页，取数据等等的都放到服务端去
-            processing: false,//载入数据的时候是否显示“载入中”
-            pageLength: 10,//首次加载的数据条数
-            searching: false,//搜索
-            ordering: false,//排序操作在服务端进行，所以可以关了
-             ajax: {//类似jquery的ajax参数，基本都可以用。
-                type: "get",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
-                url: url,
-                dataSrc: "rows",//默认data，也可以写其他的，格式化table的时候取里面的数据
-                data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
-                 var param = getSearchParam();
-                    param.offset = d.start;//开始的序号
-                    param.limit = d.length;//要取的数据的
-                    return param;//自定义需要传递的参数。
-                }
-            }
-          ,
-            columns: [//对应上面thead里面的序列    
-                { data: "device_id"},           
-                { data: "sys_name"},
-                { data: "ip_addr"},    
-                { data: "city"},
-                //@wuwp 隐藏工程状态列
-                { data: "project_status","bVisible":false,"render": function(data, type, full) { 
-                	if(data==0) return "在网运行";
-                	if(data==1) return "工程状态";
-                	if(data==2) return "临时退网";
-                	else return "暂无";
-                 }
-                },
-                { data: "vendor"},
-                { data: "last_timestamp","render": function(data, type, full) { 
-                	return data.substring(0,19);
-                }      	
-                },
-                { data: "device_id"}//字段名字和返回的json序列的key对应
-                /*{ data: "status","render": function(data, type, full) { 
-                	if(data==true) return "成功";
-                	else if(data==false) return "失败";
-                 }},
-                { data: "remark"},*/
-            ],
-            initComplete: function (setting, json) {
-                $('#table td').nextAll().click(function(){
-                	$(".selector1").find(".checkbox").prop('checked',false);
-                	$(".selector1").removeClass("selector1");
-                	$(this).parent().parent().find(".selector").find(".checkbox").prop('checked',false);
-                    $(this).parent().parent().find(".selector").removeClass("selector");
-                    $(this).parent().find(".checkbox").prop('checked',true);
-                    $(this).parent().addClass("selector");  
-                  });
-            },
-            language: {
-                lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
-               // lengthMenu:false,
-                processing: "载入中",//处理页面数据的时候的显示
-                paginate: {//分页的样式文本内容。
-                    previous: "上一页",
-                    next: "下一页",
-                    first: "第一页",
-                    last: "最后一页"
-                },
-                zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
-                //下面三者构成了总体的左下角的内容。
-                info: '总共_PAGES_ 页，显示第_START_ 到第 _END_ ，共_TOTAL_ 条 ',//左下角的信息显示，大写的词为关键字。
-                infoEmpty: "共0条记录",//筛选为空时左下角的显示。
-                infoFiltered: ""//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
-            },
-            lengthChange:true,
-            paging: true
-        });
- ｝
+	var table = $("#table").dataTable({
+		"createdRow": function ( row, data, index ) {
+			var id=$("td", row).eq(0).html();
+			var name=$("td", row).eq(1).html();
+			var info='';
+			info='<a href="jsp/res/tetra/BaseStationDetail.jsp?id='+id+'" class="btn btn-info  btn-xs" style="margin-left: 5px;" title="查看详细"> <span class="glyphicon  glyphicon-book" ></span></a>';
+			$('td', row).eq(6).html(''+info);
+			$('td', row).eq(0).html('<input type="checkbox" class="checkbox" name="checkbox" value="'+id+'"/>');      
+		},
+		serverSide: true,//分页，取数据等等的都放到服务端去
+		processing: false,//载入数据的时候是否显示“载入中”
+		pageLength: 10,//首次加载的数据条数
+		searching: false,//搜索
+		ordering: false,//排序操作在服务端进行，所以可以关了
+		ajax: {//类似jquery的ajax参数，基本都可以用。
+			type: "get",//后台指定了方式，默认get，外加datatable默认构造的参数很长，有可能超过get的最大长度。
+			url: url,
+			dataSrc: "rows",//默认data，也可以写其他的，格式化table的时候取里面的数据
+			data: function (d) {//d 是原始的发送给服务器的数据，默认很长。
+			 var param = getSearchParam();
+				param.offset = d.start;//开始的序号
+				param.limit = d.length;//要取的数据的
+				return param;//自定义需要传递的参数。
+			}
+		},
+		columns: [//对应上面thead里面的序列    
+			{ data: "device_id"},           
+			{ data: "sys_name"},
+			{ data: "ip_addr"},    
+			{ data: "city"},
+			//@wuwp 隐藏工程状态列
+			{ data: "project_status","bVisible":false,"render": function(data, type, full) { 
+				if(data==0) return "在网运行";
+				if(data==1) return "工程状态";
+				if(data==2) return "临时退网";
+				else return "暂无";
+			 }
+			},
+			{ data: "vendor"},
+			{ data: "last_timestamp","render": function(data, type, full) { 
+				return data.substring(0,19);
+			}      	
+			},
+			{ data: "device_id"}//字段名字和返回的json序列的key对应
+			/*{ data: "status","render": function(data, type, full) { 
+				if(data==true) return "成功";
+				else if(data==false) return "失败";
+			 }},
+			{ data: "remark"},*/
+		],
+		initComplete: function (setting, json) {
+			$('#table td').nextAll().click(function(){
+				$(".selector1").find(".checkbox").prop('checked',false);
+				$(".selector1").removeClass("selector1");
+				$(this).parent().parent().find(".selector").find(".checkbox").prop('checked',false);
+				$(this).parent().parent().find(".selector").removeClass("selector");
+				$(this).parent().find(".checkbox").prop('checked',true);
+				$(this).parent().addClass("selector");  
+			  });
+		},
+		language: {
+			lengthMenu: '<select class="form-control input-xsmall">' + '<option value="5">5</option>' + '<option value="10">10</option>' + '<option value="20">20</option>' + '<option value="30">30</option>' + '<option value="40">40</option>' + '<option value="50">50</option>' + '</select>条记录',//左上角的分页大小显示。
+		   // lengthMenu:false,
+			processing: "载入中",//处理页面数据的时候的显示
+			paginate: {//分页的样式文本内容。
+				previous: "上一页",
+				next: "下一页",
+				first: "第一页",
+				last: "最后一页"
+			},
+			zeroRecords: "没有内容",//table tbody内容为空时，tbody的内容。
+			//下面三者构成了总体的左下角的内容。
+			info: '总共_PAGES_ 页，显示第_START_ 到第 _END_ ，共_TOTAL_ 条 ',//左下角的信息显示，大写的词为关键字。
+			infoEmpty: "共0条记录",//筛选为空时左下角的显示。
+			infoFiltered: ""//筛选之后的左下角筛选提示(另一个是分页信息显示，在上面的info中已经设置，所以可以不显示)，
+		},
+		lengthChange:true,
+		paging: true
+	});
+｝
 
 七、关于页面参数中存在汉字的转码功能
  case1、页面传参和 后台代码取参的方式

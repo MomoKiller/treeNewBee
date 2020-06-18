@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>缓冲动画</title>
+<style type="text/css">
+ html,body{margin:0;padding:0;}
+ div{margin:0;padding:0;}
+ .odiv{width:200px; height:200px; background:#f00; position:relative; left:-200px; top:100px;}
+ .sdiv{width:20px; height:60px; background:#00f; position:absolute; top:70px; right:-20px;}
+</style>
+</head>
+<body>
+<div id="odiv" class="odiv">
+ <div id="sdiv" class="sdiv">
+ </div>
+</div>
+</body>
+</html>
+<script language="javascript">
+window.onload = function(){
+ var odiv = document.getElementById('odiv');
+ odiv.onmouseover = function(){
+  startMover(0);
+ }
+ odiv.onmouseout = function(){
+  startMover(-200);
+ }
+}
+var timer = null;
+function startMover(itarget){//速度和目标值
+ clearInterval(timer);//执行当前动画同时清除之前的动画
+ var odiv = document.getElementById('odiv');
+ timer = setInterval(function(){
+ var speed = (itarget-odiv.offsetLeft)/10;//缓冲动画的速度参数变化值
+ //如果速度是大于0，说明是向右走，那么就向上取整
+ speed = speed>0?Math.ceil(speed):Math.floor(speed);
+ //Math.floor();向下取整
+ if(odiv.offsetLeft == itarget){
+  clearInterval(timer);
+ }
+ else{
+  //clientLeft 返回对象的offsetLeft属性值和到当前窗口左边的真实值之间的距离 
+  odiv.style.left = odiv.offsetLeft+speed+'px';
+  }
+ },30);
+}
+</script>

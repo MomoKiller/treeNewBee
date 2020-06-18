@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>样式动画</title>
+<style type="text/css">
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,tr,td {margin:0;padding:0; font-size:12px;} 
+table {border-collapse:collapse;border-spacing:0;} 
+fieldset,img {border:0} 
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal} 
+ol,ul {list-style:none} 
+caption,th,td{text-align:center} 
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal} 
+q:before,q:after {content:''} 
+abbr,acronym { border:0}
+.odiv{position:relative;width:200px; height:200px; border:2px solid #000; background:red; font-size:20px;}
+</style>
+</head>
+ 
+<body>
+<div id="odiv" class="odiv">
+ hjshfjdfsdfhsdj
+</div>
+</body>
+</html>
+<script language="javascript">
+/*
+currentStyle：获取计算后的样式，也叫当前样式、最终样式。
+优点：可以获取元素的最终样式，包括浏览器的默认值，而不像style只能获取行间样式，所以更常用到。
+注意：不能获取复合样式如background属性值，只能获取单一样式如background-color等。
+alert (oAbc.currentStyle);
+非常遗憾的是，这个好使的东西也不能被各大浏览器完美地支持。准确地说，在我测试的浏览器中，IE8和Opera 11弹出了“object CSSStyleDeclaration”；FF 12、chrome 14、safari 5则弹出“undefined”。
+虽然currentStyle无法适用于所有浏览器，但是可以根据以上测试的结果来区分开支持、不支持的浏览器，然后再找到兼容的写法。
+var oAbc = document.getElementById("abc");
+if(oAbc.currentStyle) {
+  //IE、Opera
+  alert("我支持currentStyle");
+} else {
+  //FF、chrome、safari
+  alert("我不支持currentStyle");
+}
+其实在FF浏览器中我们可以使用getComputedStyle(obj,false)来达到与IE下currentStyle相同的效果。
+getComputedStyle(obj,false)：在FF新版本中只需要第一个参数，即操作对象，第二个参数写“false”也是大家通用的写法，目的是为了兼容老版本的火狐浏览器。
+兼容写法：
+var oAbc = document.getElementById("abc");
+if(oAbc.currentStyle) {
+  //IE、Opera
+  //alert("我支持currentStyle");
+  alert(oAbc.currentStyle.width);
+} else {
+  //FF、chrome、safari
+  //alert("我不支持currentStyle");
+  alert(getComputedStyle(oAbc,false).width);
+}
+一个空白页面中body的id=”abc”，测试以上代码，IE和Opera弹出“auto”，其它三款浏览器则弹出“***px”。虽然结果不同，但是可以发现chrome和safari也都和火狐一样，顺利地读取到了属性值。不支持currentStyle的三款浏览器(FF、chrome、safari)，都是支持getComputedStyle的。
+结果表明：对浏览器是否支持currentStyle的判断 + getComputedStyle，就可以做到兼容各主流浏览器的效果。而且兼容写法并不复杂，你掌握了吗？^_^
+支持currentStyle：IE、Opera
+支持getComputedStyle：FireFox、Chrome、Safari
+注意最后的弹出内容，currentStyle返回浏览器的默认值”auto”，而getComputedStyle则返回具体的值”**px”。这应该是两者的一个小差异，有兴趣的童鞋可以一起交流研究下。
+*/
+window.onload = function(){
+ var odiv = document.getElementById('odiv');
+ odiv.onmouseover = function(){
+  startMov(this);
+ };
+ function startMov(obj){
+  setInterval(function(){
+  obj.style.width = parseInt(getStyle(obj,'width'))+1+'px';
+  obj.style.fontSize = parseInt(getStyle(obj,'fontSize'))+1+'px';
+  },30);
+ }
+ function getStyle(obj,attr)
+ {
+  if(obj.currentStyle){
+  return obj.currentStyle[attr];
+  }
+  else{
+  return getComputedStyle(obj,false)[attr];
+  }
+ }
+}
+//offsetWidth获取的是元素实际的宽度（包括边框和内边距）
+//只要是多物体运动，所有的属性都不能共用
+</script>

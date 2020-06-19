@@ -263,19 +263,19 @@ DOCTYPE标签是为了让浏览器按照w3c的统一格式对页面进行解析�
 
 			
 十二、时间获取的方法 
-		//获取 当前时间 + 你想要的日期
-		function _getDateYear(addYear) {
-            var dd = new Date();
-            dd.setDate(dd.getYear()+addYear);//获取AddDayCount年后的日期
-			/*
-			dd.setDate(dd.getDate()+addYear);//获取AddDayCount天后的日期
-			月的类推  -- 不想写在easyui里面了
-			*/
-            var y = dd.getFullYear();
-            var m = dd.getMonth()+1;//获取当前月份的日期
-            var d = dd.getDate();
-            return y+"年"+m+"月"+d+"日24时";
-        }			
+	//获取 当前时间 + 你想要的日期
+	function _getDateYear(addYear) {
+		var dd = new Date();
+		dd.setDate(dd.getYear()+addYear);//获取AddDayCount年后的日期
+		/*
+		dd.setDate(dd.getDate()+addYear);//获取AddDayCount天后的日期
+		月的类推  -- 不想写在easyui里面了
+		*/
+		var y = dd.getFullYear();
+		var m = dd.getMonth()+1;//获取当前月份的日期
+		var d = dd.getDate();
+		return y+"年"+m+"月"+d+"日24时";
+	}			
 			
 
 

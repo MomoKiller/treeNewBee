@@ -516,7 +516,8 @@ div{
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(blue), color-stop(0.5, green), to(red));
 }
 
-
+border:1px transparent solid;
+border-image:linear-gradient(to right,#000718,#23b7cb) 1 10;
 
 
 

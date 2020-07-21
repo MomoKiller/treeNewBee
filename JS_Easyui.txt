@@ -2058,3 +2058,16 @@ downloadIamge(imgsrc, name) {//下载图片地址和图片名
 
 // 下拉选项，JS实现点击空白区域收回
 
+
+
+
+// 原生js 改变高度
+var elem_ppdoThree_width=document.getElementsByClassName('ppdoThree_con_ul')[0].offsetHeight;
+var elem_ppdoThree_height=document.getElementsByClassName('ppdoThree_con_ul')[0].offsetWidth;
+document.getElementsByClassName('ppdoThree_con_right')[0].style.height=elem_ppdoThree_width+"px";
+document.getElementsByClassName('ppdoThree_con_right')[0].style.width=elem_ppdoThree_height-1+"px";
+var elem_ppdoFour_width=document.getElementsByClassName('ppdoFour_d_d fl_l')[0].offsetHeight;
+var elem_ppdoFour_height=document.getElementsByClassName('ppdoFour_d_d fl_l')[0].offsetWidth;
+document.getElementsByClassName('ppdoFour_right')[0].style.height=elem_ppdoFour_width-1+"px";
+document.getElementsByClassName('ppdoFour_right')[0].style.width=elem_ppdoThree_height-1+"px";
+

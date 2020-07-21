@@ -1,7 +1,7 @@
 1. 如果想全屏覆盖，html里面请使用
 
 
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no, viewport-fit=cover">
 
 <!-- 禁用缩放 -->
 <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -108,10 +108,12 @@ img{ pointer-events: none; } // 阻止图片在微信里被点击放大
 /*font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu,PingFangSC-Regular, sans-serif;*/
 
 
+
+
+
+
+
 /* IOS 图片上传 */
-
-
-
 /******** 解决IOS兼容图片上传 start ********/
 if (!HTMLCanvasElement.prototype.toBlob) {
 	Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
@@ -203,5 +205,100 @@ compress(img, bili, callBack) {
 		}
 	}, "image/jpeg");
 },
+
+
+
+
+
+
+
+
+/************ 解决 readonly 的输入框 点击出现光标 ************/
+<input readonly unselectable="on" onfocus="this.blur()" />
+
+
+
+
+
+/******** 微信QQ打开 -start- ********/
+.navigator {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background-color: #fff;
+}
+
+.show-ios,
+.show-android {
+	display: none;
+}
+
+.ak {
+	width: 100vw;
+	height: 100vh;
+}
+
+.ak img {
+	display: block;
+	margin: 20% auto 20px;
+	clear: both;
+	width: 30%;
+	max-width: 128px;
+	pointer-events: none;
+}
+
+img.icon {
+	width: 30px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 10px;
+}
+
+.ak h3 {
+	display: block;
+	width: 240px;
+	margin: auto;
+}
+/******** 微信QQ打开 -end- ********/
+
+<!--  微信|QQ打开 引导页  -->
+<div class="navigator show-ios">
+	<div class="ak">
+		<img src="http://47.103.95.97/staticResources/ttx/imgs/safari.jpg" alt="" width="100">
+		<h3>1.请点击右上角图标<img src="http://47.103.95.97/staticResources/ttx/imgs/menu.jpg" alt="" class="icon">
+			<br>2.用safari浏览器打开</h3>
+	</div>
+</div>
+<div class="navigator show-android">
+	<div class="ak">
+		<img src="http://47.103.95.97/staticResources/ttx/imgs/android.jpg" alt="" width="100">
+		<h3>1.请点击右上角图标<img src="http://47.103.95.97/staticResources/ttx/imgs/menu.jpg" alt="" class="icon">或<img src="http://47.103.95.97/staticResources/ttx/imgs/add.jpg" alt="" class="icon">
+			<br>2.用默认浏览器打开</h3>
+	</div>
+</div>
+
+/******** QQ|微信打开到提示页 start ********/
+setTimeout(function() {
+	var ua = navigator.userAgent;
+	var uaLow = navigator.userAgent.toLowerCase();
+	var domIos = document.querySelector('.show-ios');
+	var domAndroid = document.querySelector('.show-android');
+	// var domApp = document.querySelector('.ion-app');
+	if (uaLow.match(/MicroMessenger\/[0-9]/i) || uaLow.match(/QQ\/[0-9]/i)) {
+		// domApp.style.display = 'none';
+		if (ua.indexOf('Android') > -1 || ua.indexOf('Adr') > -1)
+			domAndroid.style.display = 'block';
+		if (!!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/))
+			domIos.style.display = 'block';
+	}
+}, 400);
+/******** QQ|微信打开到提示页 end ********/
+
+
+
+
 
 

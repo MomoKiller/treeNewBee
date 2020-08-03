@@ -2071,3 +2071,7 @@ var elem_ppdoFour_height=document.getElementsByClassName('ppdoFour_d_d fl_l')[0]
 document.getElementsByClassName('ppdoFour_right')[0].style.height=elem_ppdoFour_width-1+"px";
 document.getElementsByClassName('ppdoFour_right')[0].style.width=elem_ppdoThree_height-1+"px";
 
+
+
+// chrome 浏览器调试
+chrome://inspect/#devices

@@ -1,0 +1,183 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// JS原型对象
+https://www.cnblogs.com/chuanq/p/11016509.html
+// JS中的作用域和作用域链
+https://www.cnblogs.com/leftJS/p/11067908.html
+// webpack打包原理 
+https://segmentfault.com/a/1190000021494964?utm_source=tag-newest
+// H5 打包
+https://www.cnblogs.com/navysummer/p/9390661.html
+// We - 开源镜像站
+http://mirrors.neusoft.edu.cn/
+
+
+
+
+
+
+
+/**************** 栗子start *********************/
+var Pro = function (time) {
+	//返回一个Promise对象
+	return new Promise(function (resolve, reject) {
+		console.log('123');
+		//模拟接口调用
+		setTimeout(function () {
+			//这里告诉Promise 成功了，然后去执行then方法的第一个函数
+			resolve('成功返回');
+		}, time);
+	})
+};
+(function(){
+	console.log('start');
+	Pro(3000)
+	.then(function(data){
+		console.log(data);
+		return Pro(5000);})
+	.then(function(data){
+		console.log(data);
+		console.log('end');
+	})
+})();
+/**************** 栗子end *********************/
+
+
+/**************** 栗子start *********************/
+var Pro = function () {
+	//返回一个Promise对象
+	return new Promise(function (resolve, reject) {
+		//模拟接口调用
+		setTimeout(function () {
+			resolve(true);
+		}, 1000);
+	})
+};
+var Pro2 = function () {
+	//返回一个Promise对象
+	return new Promise(function (resolve, reject) {
+		//模拟接口调用
+		setTimeout(function () {
+			resolve('Pro2成功执行');
+		}, 1000);
+	})
+};
+
+Pro().then(function(data){
+	var val = data;
+	console.log(val)
+	if (val) {
+		console.log(1111)
+		return Pro2()
+	}
+	
+}).then(function(data1){
+	console.log(data1)
+})
+/**************** 栗子end *********************/
+
+
+
+
+
+/**************** 栗子start *********************/
+let p1 =new Promise(function(resolve,reject){
+	resolve(1);
+});
+let p2 = new Promise(function(resolve,reject){
+	resolve(2);
+});
+let p3 = new Promise(function(resolve,reject){
+	resolve(3);
+});
+Promise.all([p1, p2, p3]).then(function (results) {
+	console.log('success:'+results);
+}).catch(function(r){
+	console.log("error");
+	console.log(r);
+});
+/**************** 栗子end *********************/
+
+
+
+
+new Promise(function(resolve, reject){
+	setTimeout(function(){
+		resolve("ok");
+	}, 1000)
+}).then(function(res){
+	console.log(res)
+});
+
+
+
+/*********** 加载图片栗子 start ******************/ 
+let url1 = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3293635140,3955114282&fm=26&gp=0.jpg"
+let url2 = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1019333328,1858047370&fm=26&gp=0.jpg"
+let url3 = "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4226468334,723383513&fm=26&gp=0.jpg"
+
+let oImg1 = new Image()
+oImg1.onload = function() {
+	console.log('img1加载完毕')
+	let oImg2 = new Image()
+	oImg2.onload = function() {
+		console.log('img2加载完毕')
+		let oImg3 = new Image()
+		oImg3.onload = function() {
+			console.log('img3加载完毕')
+			console.log('全部加载完毕')
+		}
+		oImg3.src = url3
+	}
+	oImg2.src = url2
+}
+oImg1.src = url1
+
+// Promise
+function loadImg(url) {
+	let img = new Image()
+	img.src = url
+	return new Promise((resolve, reject) => {
+		img.onload = () => {
+			console.log(url)
+			resolve()
+		}
+		img.onerror = (e) => {
+			reject(e)
+		}
+	})
+}
+
+
+loadImg(url1).then(() => {
+	return loadImg(url2)
+}).then(() => {
+	return loadImg(url3)
+})
+/*********** 加载图片栗子 end ******************/ 
+
+
+
+
+
+
+
+
+

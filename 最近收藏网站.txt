@@ -175,6 +175,10 @@ loadImg(url1).then(() => {
 
 
 
+/*********** GULP 打包使用 ******************/ 
+https://www.cnblogs.com/flyingzeng/p/10536690.html
+
+
 
 
 

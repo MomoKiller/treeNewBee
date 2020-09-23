@@ -2075,3 +2075,19 @@ document.getElementsByClassName('ppdoFour_right')[0].style.width=elem_ppdoThree_
 
 // chrome 浏览器调试
 chrome://inspect/#devices
+
+
+
+// 设置header透明度渐变
+document.addEventListener('scroll', (e) => {
+  var scrollTop = 0
+  if(document.documentElement&&document.documentElement.scrollTop) {
+	scrollTop = document.documentElement.scrollTop;
+  } else if(document.body) {
+	scrollTop = document.body.scrollTop;
+  }
+  scrollTop = scrollTop > 90 ? 90 : scrollTop
+  this.opacity = scrollTop / 90
+})
+
+

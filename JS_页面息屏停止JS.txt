@@ -1,46 +1,40 @@
+
+
+
+|=========================================================================================================|
+|																										  |
+|																										  |
+|																										  |
+|																										  |
+|===================================		 JS_页面息屏停止JS	       ===================================|
+|																										  |
+|																										  |
+|																										  |
+|																										  |
+|=========================================================================================================|
+
+
+
+
 var b=getTime();
  
-function getTime()
-{
+function getTime(){
 	return Date.now();
-
 }
  
- 
- 
-document.addEventListener('webkitvisibilitychange',function()
-{
-	 
-	if(document.webkitVisibilityState=='hidden')
-	{
+document.addEventListener('webkitvisibilitychange',function(){
+	if(document.webkitVisibilityState=='hidden') {
 		b=getTime();
-	 
-	}else
-	{
-		document.body.appendChild(document.createTextNode('间隔:'+(getTime()-b)))
-	 
+	}else {
+		document.body.appendChild(document.createTextNode('间隔:'+(getTime()-b))) 
 	}
-	 
-	 
- 
-
 })
-document.addEventListener('mozvisibilitychange',function()
-{
- 
-	 
-	if(document.mozVisibilityState=='hidden')
-	{
+document.addEventListener('mozvisibilitychange',function() {
+	if(document.mozVisibilityState=='hidden'){
 		b=getTime();
-	 
-	}else
-	{
+	}else {
 		document.body.appendChild(document.createTextNode('间隔:'+(getTime()-b)))
-	 
-	}
-	 
-	 
-	 
+	} 
 })
 		
 		

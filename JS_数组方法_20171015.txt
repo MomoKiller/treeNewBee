@@ -113,3 +113,74 @@ function arrayFindString(arr,string)
 	var str = arr.join(""); 
     return str.indexOf(string); 
 }
+
+
+
+
+
+
+## 数组方法
+join()									
+push()和pop()
+shift()和unshift()
+sort()
+reverse()
+concat()
+slice()
+splice()
+indexOf()和 lastIndexOf() （ES5新增）
+forEach() （ES5新增）
+map() （ES5新增）
+filter() （ES5新增）
+every() （ES5新增）
+some() （ES5新增）
+
+
+## 改变原数组的方法
+push()						
+pop()
+shift()
+unshift()
+sort()
+reverse()
+concat()
+splice()
+
+
+## 不改变原数组方法
+join()							## 把数组转换成特定符号分割的字符串 # 
+slice(start,end):	返回从原数组中指定开始下标到结束下标之间的项组成的新数组 
+indexOf()
+lastIndexOf() （ES5新增）
+forEach() （ES5新增）
+map() （ES5新增）
+filter() （ES5新增）
+every() （ES5新增）
+some() （ES5新增）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

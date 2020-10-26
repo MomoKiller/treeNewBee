@@ -2091,3 +2091,55 @@ document.addEventListener('scroll', (e) => {
 })
 
 
+
+
+
+
+// 节流 | 防抖
+
+var isUsed = false;
+if(!isUsed) {
+	doSomething();			// 第一次执行代码
+	setTimeout(() => {
+		isUsed = false; 	// 状态重置
+	}, 400);
+}else {
+	isUsed = true;
+	setTimeout(() => {
+		isUsed = false;		// 状态重置
+	});
+}
+
+
+var timer = null;
+if(timer){
+	clearTimer(timer);
+	timer = null;
+	timer = setTimeout(() => {
+		doSomething();
+	}, 400);
+}else{
+	timer = setTimeout(() => {
+		doSomething();
+	}, 400);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

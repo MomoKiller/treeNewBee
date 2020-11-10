@@ -200,6 +200,14 @@ border:1px solid #3a87ad;
     border-radius: 2px;
 }
 
+//================panel、table的圆角属性==============
+.panel{
+	border-radius:4px;
+}
+
+//================变小手属性==================
+cursor:pointer;				//变小手属性
+cursor:hand;				//但是只有 IE 上能显示
 
 
 

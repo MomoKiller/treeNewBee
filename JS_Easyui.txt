@@ -2103,11 +2103,6 @@ if(!isUsed) {
 	setTimeout(() => {
 		isUsed = false; 	// 状态重置
 	}, 400);
-}else {
-	isUsed = true;
-	setTimeout(() => {
-		isUsed = false;		// 状态重置
-	});
 }
 
 
@@ -2126,8 +2121,12 @@ if(timer){
 
 
 
+// js 判断页面加载完成
+document.onreadystatechange = this.isOnReady;
 
 
+// dreader
+https://gamasexual.com/c/f/g/dreader/
 
 
 

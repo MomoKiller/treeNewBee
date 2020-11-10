@@ -711,6 +711,8 @@ font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHe
 	#blue: 		#488aff;
 	
 	
+// 比较流行的数字字体
+font-family: DIN-Medium;	
 	
 	
 	

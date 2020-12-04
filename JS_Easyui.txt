@@ -1710,6 +1710,16 @@ if(timer){
 
 // js 判断页面加载完成
 document.onreadystatechange = this.isOnReady;
+isOnReady() {
+  if (document.readyState == "complete") {
+	doSomething()....
+  }
+},
+// <=> 等价于
+that.$nextTick(() => {
+	doSomething()....
+});
+
 
 
 // dreader
@@ -1717,12 +1727,63 @@ https://gamasexual.com/c/f/g/dreader/
 
 
 
+// 吸顶效果实现
+a: js
+mounted () {
+   window.addEventListener('scroll', this.handleScroll);
+},
+destroyed(){
+    window.removeEventListener('scroll', this.handleScroll);
+},
+methods: {
+	handleScroll () {  
+		this.$nextTick(() => {
+			let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;  
+			let offsetTop = document.querySelector('#searchBar').offsetTop;
+			if (scrollTop > offsetTop) {
+				this.searchBarFixed = true;
+			} else {
+				this.searchBarFixed = false;
+			}
+		})
+	}
+}
+
+b: css
+.isFixed{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:999;
+}
+
+c: html
+<div id="searchBar" :class="searchBarFixed== true?'isFixed':''">
+
+
+
+// 获取函数多个参数----计算阶乘
+var mult = function(){     
+	console.log( '开始计算乘积' );     
+	var a = 1;     
+	for ( var i = 0, l = arguments.length; i < l; i++ ){         
+		a = a * arguments[i];      
+	}      
+	return a; 
+};
+mult(2,3,5);
+
+
+
+// 语句和表达式
+https://www.cnblogs.com/qlqwjy/p/7660590.html
 
 
 
 
-
-
+// Object.defineProperty  
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
 
 

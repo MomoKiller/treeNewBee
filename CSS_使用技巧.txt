@@ -149,8 +149,8 @@ body{
 }
 2、子容器添加属性
 .child{		
-	width:chilrWidth;				/*定义控件的长度*/
-	height:childHeight;				/*定义控件的高度*/
+	width: ;				/*定义控件的长度*/
+	height: ;				/*定义控件的高度*/
 	position:absolute;				/*与父容器属性对应*/
 	left: 50%;						/*自己理解去吧.0_0.*/
 	top: 50%;
@@ -721,6 +721,8 @@ font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHe
 	
 // 比较流行的数字字体
 font-family: DIN-Medium;	
+	
+	
 	
 	
 	

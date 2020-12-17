@@ -1786,7 +1786,15 @@ https://www.cnblogs.com/qlqwjy/p/7660590.html
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
 
+// 金额展示  3位数字用","间隔
+filters: {
+	thousandBit(value) {
+	  return value ? String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0;
+	}
+},
 
+// 另一种保存两位小数的方式
+Math.floor(numObj*100)/100
 
 
 

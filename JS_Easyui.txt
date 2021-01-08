@@ -1797,4 +1797,7 @@ filters: {
 Math.floor(numObj*100)/100
 
 
+// 设置chrome 跨域
+C:\Users\wuwenping\AppData\Local\Google\Chrome\Application\chrome.exe --args --disable-web-security --user-data-dir="C:/ChromeDevSession"
+
 

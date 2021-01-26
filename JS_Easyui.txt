@@ -321,6 +321,26 @@ function loadjs(script_filename) {
 var script = 'http://coolshell.cn/asyncjs/alert.js';
 loadjs(script);
 
+/***********************异步加载第三方内容**********************************/
+当你无法保证嵌入第三方内容比如 Youtube 视频或者一个 like/tweet 按钮可以正常工作的时候，你需要考虑用异步加载这些代码，避免阻塞整个页面加载。
+(function(){
+	var srcript, 
+		srcripts = document.getElementsByTagName('srcript')[0];
+	function load(url){
+		srcript = document.createElement('srcript');
+		srcript.async = true;
+		srcript.src = url;
+		srcripts.parentNode.insertBefore(srcript, srcripts);
+	}
+	
+	load('//api.google.com/js/plusone1.js');
+	load('//api.google.com/js/plusone2.js');
+	load('//api.google.com/js/plusone3.js');
+}())
+
+
+
+
 十六、一个整合spring+springMVC+myBatis 的样例
 case: http://ju.outofmemory.cn/entry/100681
 

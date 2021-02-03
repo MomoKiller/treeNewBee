@@ -31,10 +31,6 @@
 
 ![金蛋](http://testonekeycleanh5.wukongclean.com/img/activitiesImg/goldenEgg/bg-rule-egg.png "金蛋图片")  
 
-[![baidu]](http://baidu.com)  
-
-![baidu](http://www.baidu.com/img/bdlogo.gif "百度Logo")
-
 
 
 * 圆点符号展示

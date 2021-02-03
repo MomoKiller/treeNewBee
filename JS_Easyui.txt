@@ -1703,7 +1703,7 @@ document.addEventListener('scroll', (e) => {
 
 
 
-// 节流 | 防抖
+// 节流 | 时间间隔内会执行一次 
 var isUsed = false;
 if(!isUsed) {
 	doSomething();			// 第一次执行代码
@@ -1712,7 +1712,7 @@ if(!isUsed) {
 	}, 400);
 }
 
-// 防抖
+// 防抖 | 最后一次执行
 var timer = null;
 if(timer){
 	clearTimer(timer);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>socket</title>
+	<script src="jquery-1.8.0.min.js"></script>
+	<script src="socket.io.js"></script>
+</head>
+<body>
+
+<script>
+$(document).ready(function(){
+var socket = io.connect('http://192.168.1.181:9092',{query:{tonken:
+'Bearer eyJhbGciOiJIUzUxMiJ9.eyJsYXN0TG9naW5UaW1lIjoiMTU4MTQ3Mzc2NjQzMyIsInN1YiI6IjBkODZmNWVjLWM1YzgtNGJiYy05NDU5LTBhMzJiODQzMGIzOSIsImxvZ2luQ2hhbm5lbCI6IlBDIiwiaXNzIjoic3VueFRyYWRlIiwiZXhwIjoxNTgxNTQ1NzY2LCJpYXQiOjE1ODE0NzM3NjYsImxhc3RMb2dpbklwIjoiIn0.XN6rWTpJp1uetbgzVKN5-q6Zsl_GC9Fc2RrxQrKlU63uIpXtRPwBvRpt2-6XOp6jWPA057NmXV0Mbe3QQ0d9Yw'
+},secure: true});
+
+	socket.on("connect", function() {
+		console.log("connect");
+		setTimeout(function(){		 
+			socket.emit("load-produt",['ALL']);
+		},3000);
+	});
+
+	console.log(socket);
+
+	socket.on("connect", function() {
+		console.log("connect");
+		var priceSubscribe = {
+			"counterOrgId":'adeb51b3-1b02-4f50-9a6e-54c30c79dbc2', // 柜台代码
+			"tradeMode":1, // 交易模式@TradeModeEnum
+			"commodityType":0, // 品种类型@CommodityTypeEnum
+			"marketCode":'HUOBI', // 市场代码
+			"commodityCode":'BTC_看跌', // 品种代码
+			"contractCode":'BTC_看跌', // 合约代码
+
+			"modelType":0, // 数据模型类型（行情数据结构）0=ALL，1=moblie1，1=moblie2
+			"delay":false, // 是否延迟推送模式
+
+			/**
+			 * binary round
+			 */
+			"roundTemplateId":'965789f0a7c84f94b654bfee6f89ab6b', // 场次模板ID
+			"roundStartTime":1582037160, // 单场开始时间
+			"roundEndTime":1582039560, // 单场结束时间
+
+			"price":true, // 是否订阅行情
+			"round":true, // tradeMode = TradeModeEnum.BINARY时，是否订阅场次数据
+			"roundOrder":true // tradeMode = TradeModeEnum.BINARY时，是否订阅场次交易订单
+		};
+
+
+		setTimeout(function(){
+			// socket.emit("subscribe-price",["9b2824ce-fe1f-4b4a-a839-1d7d2021425c"]);
+			socket.emit("price-subscribe",[priceSubscribe]);
+			
+		},3000);
+		setTimeout(function(){
+			socket.emit("price-unsubscribe",[priceSubscribe]);
+		},300000);
+	});
+
+	socket.on("all-rooms", function() {
+		console.log("all-rooms");
+	});
+	
+	
+	var productList = [];
+	socket.on("price-subscribe-error",function(data){
+		console.log("price-subscribe-error",data);
+	});
+	socket.on("price-subscribe-success",function(data){
+		console.log("price-subscribe-success",data);
+	});
+	socket.on("price-unsubscribe-error",function(data){
+		console.log("price-unsubscribe-error",data);
+	});
+	socket.on("price-unsubscribe-success",function(data){
+		console.log("price-unsubscribe-success",data);
+	});
+	socket.on("lvl-0",function(data){
+		console.log("lvl-0",data);
+	});
+	socket.on("publish-price",function(data){
+		console.log("publish-price",data);
+	});
+	socket.on("publish-price-mb1",function(data){
+		console.log("publish-price-mb1",data);
+	});
+	socket.on("publish-price-mb2",function(data){
+		console.log("publish-price-mb2",data);
+	});
+	socket.on("publish-binary-round-data",function(data){
+		console.log("publish-binary-round-data",data);
+	});
+	socket.on("publish-binary-order-detail",function(data){
+		console.log("publish-binary-order-detail",data);
+	});
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+
+
+
+
+
+
+
+#
+#### 最终效果图
+![在这里插入图片描述](https://img-blog.csdnimg.cn/606ef0974e5442daa30c9c911679a503.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5ZOI6YeM55qu54m555eS,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center)
+
+
+### 1 页面实现 html
+```html
+<!-- 时间轴 -->
+<section class="content_bx">
+
+<div class="time-line">
+  <div class="scroll-wrap">
+    <ul class="year-box">
+      <li class="flex" 
+        v-for="(item, index) in developmentObj" 
+        :key="item.year"
+      >
+        <div 
+          class="cur-year"
+          :class="{ active: index == developmentYearIndex }"
+          @click="developSwitch(index, item.events[0].id, 0)"
+        >{{ item.year }}</div>
+        <ul class="month-box flex">
+          <li 
+            v-for="(subItem, subIndex) in item.events" 
+            :key="subItem.id"
+            :class="{ active: subItem.id == developmentMonthIndex }"
+            @click="developSwitch(index, subItem.id, subIndex)"
+            :ref="`refs${subItem.id}`"
+          >{{ subItem.month }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- 证书描述 -->
+<div class="zhenshu-wrap flex-between">
+  <div class="img-wrap">
+    <img :src="curDevelopObj.imgUrl" alt="">
+  </div>
+  <div class="img-desc">
+    <p class="title">
+      {{ curDevelopObj.title }}
+    </p>
+    <p class="desc">
+      {{ curDevelopObj.desc }}
+    </p>
+  </div>
+</div>
+
+</section>
+```
+
+### 2 less 及 兼容
+#### 2.1 页面实现 less
+```less
+.time-line {
+  width: 100%;
+  height: 120px;
+  position: relative;
+  margin: 30px 0;
+  .scroll-wrap {
+    width: 1600px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 150px;
+    &::before {
+      content: '';
+      width: 150px;
+      height: 120px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url(../../assets/img/shadow.png) no-repeat;
+      z-index: 2;
+    }
+    &::after {
+      content: '';
+      width: 150px;
+      height: 120px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: url(../../assets/img/shadow.png) no-repeat;
+      transform: rotate(180deg);
+      z-index: 2;
+    }
+  }
+
+  .year-box {
+    display: flex;
+    flex-wrap: nowrap;
+    clear: both;
+    flex-direction: row;
+    width: max-content;
+    min-width: 1600px;
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      width: calc(100% + 300px);
+      height: 8px;
+      background: url(../../assets/img/aboutUs/timeline-bg.png) no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      top: 55px;
+      z-index: -1;
+      left: -150px;
+    }
+    > li {
+      overflow: hidden;
+      margin-right: 65px;
+    }
+    .cur-year {
+      width: 120px;
+      height: 120px;
+      line-height: 118px;
+      text-align: center;
+      overflow: hidden;
+      font-size: 32px;
+      font-weight: 800;
+      color: #333333;
+      background: #FFFFFF;
+      border: 1px solid #CDCDCD;
+      border-radius: 50%;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        background: #0C84FF;
+        color: #fff;
+        border: none;
+      }
+    }
+  }
+  .month-box {
+    overflow: hidden;
+    margin-top: 52px;
+    li {
+      width: 55px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #333333;
+      text-align: center;
+      margin-left: 65px;
+      cursor: pointer;
+      &:hover::before {
+        background: url(../../assets/img/aboutUs/point-active.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      &::before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: url(../../assets/img/aboutUs/point.png) no-repeat;
+        background-size: 100% 100%;
+        margin: 0 auto 15px;
+      }
+      &.active::before {
+        background: url(../../assets/img/aboutUs/point-active.png) no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+  }
+}
+
+.zhenshu-wrap {
+  width: 1200px;
+  height: 340px;
+  margin: 60px auto 80px;
+  background-color: #fff;
+  padding: 30px;
+  .img-wrap {
+    width: 570px;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 4px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .img-desc {
+    width: 510px;
+    .title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #333333;
+      line-height: 48px;
+      margin-top: 15px;
+    }
+    .desc {
+      font-size: 18px;
+      font-weight: 400;
+      color: #9C9C9C;
+      line-height: 30px;
+      margin-top: 30px;
+    }
+  }
+}
+```
+
+#### 2.2 less 兼容不同分辨率
+```less
+@media (max-width: 1600px) {
+  .time-line {
+    margin: 0;
+    &::before {
+      top: 46px;
+    }
+    .scroll-wrap {
+      width: 1300px;
+      height: 100px;
+      
+    }
+    .year-box {
+      .cur-year {
+        width: 100px;
+        height: 100px;
+        line-height: 98px;
+        font-size: 28px;
+      }
+    }
+    .month-box {
+      margin-top: 42px;
+      li {
+        font-size: 18px;
+        &::before {
+          margin: 0 auto 12px;
+        }
+      }
+    }
+  }
+  .zhenshu-wrap {
+    margin: 50px 0 67px;
+    .img-desc .title {
+      font-size: 28px;
+    }
+    .img-desc .desc {
+      font-size: 15px;
+    }
+  }
+}
+
+```
+#### 2.3 补充公共样式部分
+```css 
+body,
+button,
+dd,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+input,
+legend,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul,
+div,
+section {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 1200px;
+  font-family: "PingFang SC", "Microsoft YaHei", "微软雅黑", "sans-serif";
+  color: #333;
+}
+ol,
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+a:hover,
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+legend {
+  color: #000;
+}
+
+.flex {
+  display: flex;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+.flex-middle {
+  display: flex;
+  align-items: center;
+}
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+.flex-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-middle-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* 小屏版心 */
+@media (max-width: 1600px) {
+  .content_bx {
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}
+/* 1700以上版心大小 */
+@media (min-width: 1600px) {
+  .content_bx {
+    width: 1600px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}
+```
+
+#### 2.4 图片
+![在这里插入图片描述](https://img-blog.csdnimg.cn/a32aa19c52724f6eb31c57468f94b845.png#pic_left)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/f9676d5ed0ed49f992a7b5b8f54453ad.png#pic_left)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/bbe14c5b3b854611987468e85683e9e7.png#pic_left)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/aace3d59ff4c4b1d947282a807850b96.png#pic_center)
+
+
+
+
+### 3 js 功能实现点击切换效果
+
+#### 3.1 model 对象
+```javascript
+  data() {
+    return {
+      developmentObj: [],
+      developmentYearIndex: 0,
+      developmentMonthIndex: 0,
+      curDevelopObj: {},
+    }
+  }
+```
+
+#### 3.2 点击切换方法
+```javascript
+
+    /**
+     * 切换 
+     * @param {*} yearIndex  年分索引
+     * @param {*} monthIndex 月份索引
+     */
+    async developSwitch(yearIndex, monthIndex, subIndex) {
+      this.developmentYearIndex = yearIndex;
+      this.developmentMonthIndex = monthIndex;
+      this.curDevelopObj = this.developmentObj[yearIndex].events.find(item => item.id == monthIndex);
+
+      const scroDom = document.getElementsByClassName('scroll-wrap')[0];
+      const ulDom = document.getElementsByClassName('year-box')[0];
+      const liDom = this.$refs[`refs${monthIndex}`][0];
+      
+      const objAllLen = this.developmentObj.reduce((num, item) => {
+        num += item.events.length + 1.5;
+        return num;
+      }, 0)
+
+      let allLen = 0;
+      for(let i=0; i<yearIndex; i++) {
+        allLen += this.developmentObj[i].events.length+1.5;
+      }
+
+      const seletedLen = subIndex+allLen+1;
+      // 再第五个和倒数第五个之前切换效果
+      if(
+        seletedLen > 4
+        && 
+        seletedLen < objAllLen - 5
+      ) {
+        const animation = ulDom.animate({ marginLeft: `${(scroDom.offsetWidth/2 - 250) - seletedLen*120}px` }, 500)
+        await animation.finished;
+        ulDom.style.marginLeft = `${(scroDom.offsetWidth/2 - 250) - seletedLen*120}px`;
+      }
+      // 前四个时间点击恢复
+      if(seletedLen <= 4) {
+        const animation = ulDom.animate({ marginLeft: '0px' }, 500)
+        await animation.finished;
+        ulDom.style.marginLeft = '0px';
+      }
+      // 后五个时间点击恢复
+      if(seletedLen >= objAllLen - 5){
+        const animation = ulDom.animate({ marginLeft: `${(scroDom.offsetWidth/2 - 250) - (objAllLen - 6)*120}px` }, 500)
+        await animation.finished;
+        ulDom.style.marginLeft = `${(scroDom.offsetWidth/2 - 250) - (objAllLen - 6)*120}px`;
+      }
+    },
+```
+#### 3.3 this.developmentObj 参靠对象
+```JSON
+[{"year":"2022","events":[{"id":174,"month":"03月","title":"测试时间轴","desc":"测试时间轴","imgUrl":"http://7cec.com:8151/uploads/2022/03/622fefa02dc39.png"},{"id":176,"month":"02月","title":"测试时间轴","desc":"测试时间轴","imgUrl":"http://7cec.com:8151/uploads/2022/03/622fefc4e3bcd.png"},{"id":177,"month":"01月","title":"测试时间轴","desc":"测试时间轴","imgUrl":"http://7cec.com:8151/uploads/2022/03/622fefd2ba271.png"}]},{"year":"2021","events":[{"id":44,"month":"08月","title":"网络入列2021上海百强企业榜单","desc":"2021上海百强企业榜以企业营业收入为入围标准，考核企业的盈利能力与企业发展潜力","imgUrl":"http://7cec.com:8151/uploads/2021/11/619c5867be889.png"},{"id":45,"month":"07月","title":"网络与华为签署全面合作协议","desc":"此次合作，将助推业务生态重塑和企业的数字化转型","imgUrl":"http://7cec.com:8151/uploads/2021/11/619c58607ed3f.png"},{"id":46,"month":"04月","title":"网络获2021上海市双软认证企业","desc":"“双软认证”是衡量一个企业软件研发能力和整体技术实力的重要指标","imgUrl":"http://7cec.com:8151/uploads/2021/11/619c5859c7935.png"},{"id":47,"month":"01月","title":"网络获评中国公益节“2020年度公益践行奖”","desc":"疫情之下，网络结合自身优势积极践行公益理念，成为公益探索的新兴力量","imgUrl":"http://7cec.com:8151/uploads/2021/11/619c5852e3f8e.png"}]},{"year":"2020","events":[{"id":134,"month":"12月","title":"游戏版块业务获行业奖项认可","desc":"疯狂猜成语获“2020最佳功能性游戏”\n阳光养猪场获“2020最佳休闲游戏”","imgUrl":"http://7cec.com:8151/uploads/2021/11/619d988303021.png"},{"id":133,"month":"11月","title":"公司综合实力获上海市辖区认可","desc":"分别获2020上海软件核心竞争力企业、2020上海软件和信息技术服务业百强、2020年度民营企业总部","imgUrl":"http://7cec.com:8151/uploads/2021/11/619d98678164f.png"},{"id":132,"month":"05月","title":"步多多获“2020最具创新工具类产品”","desc":"全网累计2亿+下载量，在快速累积用户的爆炸式增长中覆盖多元用户群体","imgUrl":"http://7cec.com:8151/uploads/2021/11/619d9842ca1eb.png"}]}]
+```
+
+### 参考资料
+
+- [Web Animations](https://drafts.csswg.org/web-animations-1/#the-animatable-interface) (EXAMPLE 15)
+- [Uncaught ReferenceError: regeneratorRuntime is not defined](https://www.jianshu.com/p/d91b87b42b21)

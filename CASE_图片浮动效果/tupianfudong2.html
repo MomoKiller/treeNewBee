@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>浮动广告实例</title>
+<script type="text/javascript">
+    var pos = 10;
+    function toueme() {
+        document.getElementById("toubiao").style.display = "none";
+    }
+    function initArray() {
+        this.length = initArray.arguments.length;
+        for (var i = 0; i < this.length; i++) {
+            this[i] = initArray.arguments[i];
+        }
+    }
+    var col = new initArray("4b", "5b", "8b", "8b");
+    col[0] = "yellow";
+    col[1] = "coral";
+    col[2] = "orange";
+    col[3] = "red";
+    col[4] = "greenyellow";
+    col[5] = "lime";
+    col[6] = "turquoise";
+    col[7] = "coral";
+    col[8] = "blueviolet";
+    col[9] = "violet";
+    function chgCol() {
+        pos++;
+        if (pos < 0 || pos > 9) {
+            pos = 0;
+        }
+        document.bgColor = col[pos];
+        setTimeout("chgCol()", 1000);
+    }
+</script>
+</head>
+<body bgColor="#ffffff" onload="chgCol();pingpong();">
+<DIV id=img1
+     style="Z-INDEX: 100;
+     LEFT: 12px;
+     WIDTH: 159px;
+     POSITION: absolute;
+     TOP: 143px;
+     HEIGHT: 161px;
+ visibility: visible;">
+ <div id=toubiao>
+     <a style="CURSOR: hand" onClick=toueme()>
+    <img
+      src="./close.png"
+      width=84 height=11 hspace="6" border=0></a>
+ </div>
+ <a href="#" target="_blank">
+ <img src="./9.jpg" width="280" height="280" border="0">
+ </a>
+ </DIV>
+<SCRIPT>
+var xPos = 0;
+var yPos = 0;
+var step = 3;
+var delay = 100;
+var height = 0;
+var Hoffset = 0;
+var Woffset = 0;
+var yon = 0;
+var xon = 0;
+var pause = true;
+var interval;
+img1.style.top = yPos;
+function changePos()
+{
+    width = document.body.clientWidth; //获取浏览器的宽度
+    height = document.body.clientHeight; //获取浏览器的高度
+	Hoffset = img1.offsetHeight;
+	Woffset = img1.offsetWidth;
+	img1.style.left = xPos + document.body.scrollLeft;
+	img1.style.top = yPos + document.body.scrollTop;
+	if (yon)
+	{yPos = yPos + step;}
+	else
+	{yPos = yPos - step;}
+	if (yPos < 0)
+	{yon = 1;yPos = 0;}
+	if (yPos >= (height - Hoffset))
+	{yon = 0;yPos = (height - Hoffset);}
+	if (xon)
+	{xPos = xPos + step;}
+	else
+	{xPos = xPos - step;}
+	if (xPos < 0)
+	{xon = 1;xPos = 0;}
+	if (xPos >= (width - Woffset))
+	{xon = 0;xPos = (width - Woffset);   }
+}
+function start()
+{
+	img1.visibility = "visible";
+	interval = setInterval('changePos()', delay);
+	//interval = setTimeout("changePos()", delay);
+}
+function pause_resume()
+{
+	if(pause)
+	{
+		clearInterval(interval);
+		pause = false;}
+	else
+	{
+		interval = setInterval('changePos()',delay);
+		pause = true;
+	}
+}
+start();
+</SCRIPT>
+</body>
+</html>

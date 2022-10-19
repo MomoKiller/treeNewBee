@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>多物体复杂动画</title>
+<style type="text/css">
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,tr,td {margin:0;padding:0; font-size:12px;} 
+table {border-collapse:collapse;border-spacing:0;} 
+fieldset,img {border:0} 
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal} 
+ol,ul {list-style:none} 
+caption,th,td{text-align:center} 
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal} 
+q:before,q:after {content:''} 
+abbr,acronym { border:0}
+.odiv{position:relative;}
+.odiv ul li{width:200px; height:100px; background:yellow; margin-bottom:20px; border:2px solid #000;}
+</style>
+</head>
+<body>
+<div id="odiv" class="odiv">
+ <ul>
+  <li id="li1"></li>
+  <li id="li2"></li>
+ </ul>
+</div>
+</body>
+</html>
+<script language="javascript">
+window.onload = function(){
+ var li1 = document.getElementById('li1');
+ var li2 = document.getElementById('li2');
+ li1.onmouseover = function(){
+  startMov(this,400,'width');
+ };
+ li1.onmouseout = function(){
+  startMov(this,200,'width');
+ };
+ li2.onmouseover = function(){
+  startMov(this,200,'height');
+ };
+ li2.onmouseout = function(){
+  startMov(this,100,'height');
+ };
+ function startMov(obj,itarget,attr){
+  clearInterval(obj.timer);//执行动画之前清除动画
+  obj.timer = setInterval(function(){
+   var icur = parseInt(getStyle(obj,attr));
+   var speed =0;
+   speed = (itarget - icur)/8;
+   speed = speed>0?Math.ceil(speed):Math.floor(speed);
+   if(icur == itarget){
+   clearInterval(obj.timer);
+   }
+   else{
+   obj.style[attr] = icur+speed+'px';
+   }
+  },30);
+ }
+ function getStyle(obj,attr)
+ {
+  if(obj.currentStyle){
+  return obj.currentStyle[attr];
+  }
+  else{
+  return getComputedStyle(obj,false)[attr];
+  }
+ }
+}
+//offsetWidth获取的是元素实际的宽度（包括边框和内边距）
+//只要是多物体运动，所有的属性都不能共用
+</script>

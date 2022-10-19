@@ -1,0 +1,103 @@
+
+
+
+<canvas id="myCanvas" width="400" height="200">
+你的浏览器不支持canvas!
+</canvas>
+
+<div id="container"></div>
+
+
+<script>
+
+// 将图片加载完成	
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+var image = new Image();
+image.src = "./Img/pkq.png";
+image.onload = function(){
+	canvas.width = image.width;
+	canvas.height = image.height;
+
+	ctx.drawImage(image,0,0);
+
+	
+}
+
+
+
+setTimeout(() => {
+	afterImgLoaded();
+},400);
+
+
+// 
+function afterImgLoaded() {
+
+	// 图片替换成点阵 
+	var imageData = ctx.getImageData(0,0,image.width,image.height).data;
+	ctx.fillStyle = "#ffffff";
+	ctx.fillRect(0,0,image.width,image.height);
+
+	var gap = 6;
+
+	for (var h = 0; h < image.height; h+=gap) {
+		for(var w = 0; w < image.width; w+=gap){
+			var position = (image.width * h + w) * 4;
+			var r = imageData[position], 
+					g = imageData[position + 1], 
+					b = imageData[position + 2];
+			// 取rgb 为黑色的点阵
+			if(r+g+b==0){
+				ctx.fillStyle = "#000";
+				ctx.fillRect(w,h,4,4);
+			}
+		}
+	}
+
+
+	// 点阵替换成泡泡
+	var dragonContainer = document.getElementById("container");
+	var dragonScale = 2;
+
+	for (var h = 0; h < image.height; h+=gap) {
+		for(var w = 0; w < image.width; w+=gap){
+			var position = (image.width * h + w) * 4;
+			var r = imageData[position], g = imageData[position + 1], b = imageData[position + 2];
+
+			if(r+g+b==0){
+				var bubble = document.createElement("img");
+				bubble.src = "./Img/babel.png";
+				bubble.setAttribute("class","bubble");
+
+				var bubbleSize = Math.random()*10+20;
+				bubble.style.left = (w*dragonScale-bubbleSize/2) + "px";
+				bubble.style.top = (h*dragonScale-bubbleSize/2) + "px";
+				bubble.style.width = bubble.style.height = bubbleSize+"px";
+				bubble.style.animationDuration = Math.random()*6+4 + "s";
+
+				dragonContainer.appendChild(bubble);
+			}
+		}
+	}
+
+
+}
+
+
+
+
+</script>
+
+<style>
+	#myCanvas {
+		display: none;
+	}
+	#container {
+		position: relative;
+	}
+	.bubble {
+		position: absolute;
+	}
+</style>

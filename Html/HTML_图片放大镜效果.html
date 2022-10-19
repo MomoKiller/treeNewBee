@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>放大镜的实现</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        a>img {
+            border: 0;
+            display: block;
+            height: 300px;
+            width: 300px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #product {
+            width: 430px;
+            height: 520px;
+            margin: 50px;
+        }
+
+        #product .p_header {
+            width: 430px;
+            height: 430px;
+        }
+
+        #p_h_a {
+            display: block;
+            position: relative;
+        }
+
+        #cover {
+            width: 50%;
+            height: 50%;
+            /* background-image: url(images/scanbg.png); */
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            cursor: move;
+            background-color: #feeaef;
+
+            opacity: 0.6;
+        }
+
+        #bigImg {
+            width: 100%;
+            height: 100%;
+            background-image: url(//pic1.ulecdn.com/item/user_0102/desc20180925/d11d1be2c27c446e_-1x-1.jpg);
+            position: absolute;
+            top: 0;
+            left: 102%;
+            box-shadow: 2px 5px 10px #333;
+            padding: 10px;
+            display: none;
+        }
+
+        #tab {
+            padding: 10px 20px;
+        }
+
+        #pro li {
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin: 0 7px;
+            border: 2px solid transparent;
+            transition: border-color .5s linear;
+            cursor: pointer;
+        }
+        #pro li img{
+            height: 60px;
+            width: 60px;
+        }
+
+        #pro li:hover {
+            border-color: #f60;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="abc" style="height:300px;"></div> -->
+    <div id="product">
+        <div class="p_header">
+            <a href="javascript:void(0);" id="p_h_a">
+                <img src="//pic1.ulecdn.com/item/user_0102/desc20180925/d11d1be2c27c446e_-1x-1.jpg" id="mImg" />
+                <span id="cover"></span>
+                <div id="bigImg"></div>
+            </a>
+        </div>
+        <!--底部方格-->
+        <div id="tab">
+            <ul id="pro">
+                <li>
+                    <img src="//pic1.ulecdn.com/item/user_0102/desc20180925/d11d1be2c27c446e_-1x-1.jpg" />
+                </li>
+                <li>
+                    <img src="//pic.ule.com/pic/user_800115383/product/prd20180801/6ab0509b8557f125_p790x840_xl.jpg" />
+                </li>
+                <li>
+                    <img src="//pic1.ulecdn.com/item/user_0102/desc20180925/d11d1be2c27c446e_-1x-1.jpg" />
+                </li>
+                <li>
+                    <img src="//pic1.ulecdn.com/item/user_0102/desc20180925/d11d1be2c27c446e_-1x-1.jpg" />
+                </li>
+                <li>
+                    <img src="//pic1.ulecdn.com/item/user_0102/desc20180925/d11d1be2c27c446e_-1x-1.jpg" />
+                </li>
+            </ul>
+        </div>  
+    </div>
+    <script type="text/javascript">	
+        window.onload = function () {
+            function $(id) { return document.getElementById(id); };
+            //找到pro下方的所有li元素		
+            var pChilds = $("pro").children;
+            var mImgDom = $("mImg");
+            var bImgDom = $("bigImg");
+            var aDom = $("p_h_a");
+            var coverDom = $("cover");
+            for (var i = 0; i < pChilds.length; i++) {
+                //鼠标移入li元素			
+                pChilds[i].onmouseover = function () {
+                    //获取当前li元素的第一个孩子img的src地址				
+                    var sImgSrc = this.children[0].src;
+                    //将sImgSrc替换成中等图片和大图片的src				
+                    var mImgSrc = sImgSrc.replace("images/s_", "images/m_");
+                    var bImgSrc = sImgSrc.replace("images/s_", "images/b_");
+                    //设置中等图片的路径				
+                    mImgDom.src = mImgSrc;
+                    //设置大等图片的路径				
+                    bImgDom.style.backgroundImage = "url(" + bImgSrc + ")";
+                };
+            }
+            //鼠标在a链接移动的时候		
+            aDom.onmousemove = function (e) {
+                e = e || window.event;
+                var sTop = document.body.scrollTop || document.documentElement.scrollTop;
+                var sLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+                var x = e.pageX ? e.pageX : e.clientX + sLeft;
+                var y = e.pageY ? e.pageY : e.clientY + sTop;
+                var curX = x - this.offsetLeft - coverDom.offsetWidth / 2;
+                var curY = y - this.offsetTop - coverDom.offsetHeight / 2;
+                var maxWidth = this.offsetWidth - coverDom.offsetWidth;
+                var maxHeight = this.offsetHeight - coverDom.offsetHeight;
+                //判断边界			
+                if (curX < 0) {
+                    curX = 0;
+                } else if (curX >= maxWidth) {
+                    curX = maxWidth;
+                }
+                curY = curY < 0 ? curY = 0 : curY >= maxHeight ? maxHeight : curY;
+                coverDom.style.left = curX + "px";
+                coverDom.style.top = curY + "px";
+                //计算比率			
+                var px = curX / (this.offsetWidth / 2) * 100 + "%";
+                var py = curY / (this.offsetHeight / 2) * 100 + "%";
+                bImgDom.style.backgroundPosition = "" + px + " " + py + "";
+            };
+            //鼠标移入a连接的时候 onmouseover  onmouseenter		
+            aDom.onmouseenter = function () {
+                //拖拽层显示			
+                coverDom.style.display = "block";
+                //大图片显示			
+                bImgDom.style.display = "block";
+            };
+            //鼠标移出a连接的时候 onmouseout  onmouseleave		
+            aDom.onmouseleave = function () {
+                //拖拽层显示			
+                coverDom.style.display = "none";
+                //大图片显示			
+                bImgDom.style.display = "none";
+            };
+            //解决bug问题		
+            bImgDom.onmousemove = function () {
+                //拖拽层显示			
+                coverDom.style.display = "none";
+                //大图片显示			
+                bImgDom.style.display = "none";
+            };
+        };  
+    </script>
+</body>
+
+</html>

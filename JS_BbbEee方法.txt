@@ -1,0 +1,50 @@
+
+function  findChildren(dancingBrigade){
+    var chaLen = dancingBrigade.length;
+
+    var aArray = [];
+    for(var i=0;i<chaLen;i++){
+        aArray.push(dancingBrigade.charAt(i));
+    }
+    var bArry = selectionSort(aArray);
+
+    //var bStr = selectionSort(aArray).join(',');
+    var bStr = '';
+    for(var j=0;j<chaLen;j++){
+        bStr += bArry[j];
+    }
+    console.log(bStr);
+}
+findChildren("beeeEBb");
+findChildren("uwwWUueEe");
+
+function comple(a,b){
+    if(('a'<=a && a<='z'&& 'a'<=b && b<='z')||('A'<=a && a<='Z'&& 'A'<=b && b<='Z')){
+        return (a > b) ? 1 :0;
+    }else if('A'<=a && a<='Z'&& 'a'<=b && b<='z'){
+        return (a.toLowerCase()> b) ? 1 : 0;
+    }else if ('a'<=a && a<='z'&& 'A'<=b && b<='Z'){
+        return (a >= b.toLowerCase()) ? 1 : 0;
+    }
+
+}
+//
+function selectionSort(arr){
+    var len = arr.length;
+    var minIndex, temp;
+    for(var i = 0;i < len - 1;i++){
+        minIndex = i;
+        for(var j = i+1;j<len;j++){
+            if(comple(arr[minIndex],arr[j])){
+                minIndex = j;
+            }
+        }
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+    return arr;
+}
+
+//Test.expect("BbbEeee" == findChildren("beeeEBb") );
+//Test.expect("EeeUuuWww" == findChildren("uwwWUueEe"));

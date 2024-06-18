@@ -34,7 +34,8 @@ git log
 git log --pretty=oneline
 
 
-
+# remote 
+git remote add origin <远程Git仓库地址>
 
 
 

@@ -38,4 +38,10 @@ git log --pretty=oneline
 git remote add origin <远程Git仓库地址>
 
 
+# 切换分支 
+git check -b [new branch]
+
+## 等价于
+git branch [new branch]
+git check [new branch]
 

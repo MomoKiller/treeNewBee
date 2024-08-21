@@ -45,3 +45,6 @@ git check -b [new branch]
 git branch [new branch]
 git check [new branch]
 
+# 使用兼容方式安装依赖
+npm i fibers@5.0.0 --ignore-scripts --legacy-peer-deps
+

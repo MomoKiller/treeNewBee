@@ -767,5 +767,20 @@ c: table 奇数行偶数行
 	world-break: break-all; // 或者其它参数
 	
 	
+// 浮动与清除浮动
+.fl {float: left;}
+.fr {float: right;}
+.fix {*zoom: 1;}
+.fix:after{display:table; content:''; clear:both;}
 
+
+// 按钮禁用状态
+.disabled{
+	outline:0 none; 
+	cursor:default!important; 
+	opacity:.4; 
+	filter:alpha(opacity=40); 
+	-ms-pointer-events:none; 
+	pointer-events:none;
+}
 	

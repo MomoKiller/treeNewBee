@@ -19,18 +19,12 @@ image.src = "./Img/pkq.png";
 image.onload = function(){
 	canvas.width = image.width;
 	canvas.height = image.height;
-
 	ctx.drawImage(image,0,0);
-
-	
 }
-
-
 
 setTimeout(() => {
 	afterImgLoaded();
 },400);
-
 
 // 
 function afterImgLoaded() {
@@ -81,8 +75,6 @@ function afterImgLoaded() {
 			}
 		}
 	}
-
-
 }
 
 

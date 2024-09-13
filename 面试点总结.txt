@@ -1,38 +1,15 @@
 
 
 
-// 20220406
-px rem em vw vh,css单位的区别
+
+px rem em vw vh 的区别
 
 
 
-节流防抖函数
+# 节流防抖函数
 
-
-
-
-宏任务和微任务有哪些
- 
-
-
-
-
-http 状态码
-
-
-
-gitFlow
-
-
-
-
-
-
-
-// 防抖 
-
+# 防抖 
 防抖函数，事件被触发后n秒后执行。如果n秒内再次触发，最后只执行最后一次
-
 const debounce = (fn, delay) => {
 	let timer = null;
 	return (...args) => {
@@ -44,22 +21,9 @@ const debounce = (fn, delay) => {
 }
 
 
-// 使用
-
-function testConsole() {
-	consoe.log('helle debounce');
-}
-
-const funA = debounce(testConsole, 500);
-// 不断的去触发 funA 函数
-funA()
-window.resize = debounce(testConsole, 500);
 
 
-
-
-
-// 节流函数
+# 节流函数
 const throttle = (fn, delay=500) => {
 	let flag = true;
 	return (...args) => {

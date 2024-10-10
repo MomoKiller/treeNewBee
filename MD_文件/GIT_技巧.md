@@ -84,3 +84,24 @@ git check [new branch]
 ```git
 npm i fibers@5.0.0 --ignore-scripts --legacy-peer-deps
 ```
+
+
+
+
+
+
+
+
+# 忽略报错提交
+```git
+git commit -m "message" --no-verify
+or
+git config --unset core.hooksPath 
+```
+
+# reset
+git config core.hooksPath hooks
+git config core.hooksPath .git/hooks
+
+
+
